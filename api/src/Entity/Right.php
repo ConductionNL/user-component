@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,6 +27,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RightRepository")
+ * @ORM\Table(name="rightTable")
  */
 class Right
 {
@@ -86,7 +88,7 @@ class Right
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="rights")
      *
-     * @MaxDepth()
+     * @MaxDepth(1)
      */
     private $roles;
 

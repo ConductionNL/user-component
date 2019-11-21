@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -85,6 +86,8 @@ class Role
      *
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="roles")
+     *
+     * @MaxDepth(1)
      */
     private $users;
 
@@ -94,6 +97,8 @@ class Role
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @MaxDepth(1)
      */
     private $administrator;
 
@@ -102,7 +107,7 @@ class Role
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Right", mappedBy="roles")
      *
-     * @MaxDepth()
+     * @MaxDepth(1)
      */
     private $rights;
 

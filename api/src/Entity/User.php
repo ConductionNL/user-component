@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,7 +29,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
- *
+ * @ORM\Table(name="userTable")
  */
 class User
 {
@@ -55,6 +56,7 @@ class User
      *
      * @Assert\NotBlank
      * @Assert\Uuid
+     *
      *
      */
     private $id;
@@ -159,7 +161,7 @@ class User
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
      *
-     * @MaxDepth()
+     * @MaxDepth(1)
      */
     private $roles;
 
