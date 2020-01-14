@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * All properties that the entity User holds.
@@ -20,8 +20,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *
  * @author Barry Brands <barry@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -56,13 +56,12 @@ class User
      *
      * @Assert\NotBlank
      * @Assert\Uuid
-     *
-     *
      */
     private $id;
 
     /**
-     * @var string $name Name of a User
+     * @var string Name of a User
+     *
      * @example Hans Vliet
      *
      * @ApiProperty(
@@ -86,7 +85,8 @@ class User
     private $name;
 
     /**
-     * @var string $password Password of a User
+     * @var string Password of a User
+     *
      * @example abc123
      *
      * @ApiProperty(
@@ -110,7 +110,8 @@ class User
     private $password;
 
     /**
-     * @var string $email Email of a User
+     * @var string Email of a User
+     *
      * @example name@provider.com
      *
      * @ApiProperty(
@@ -135,7 +136,8 @@ class User
     private $email;
 
     /**
-     * @var DateTime $registrationDate Registration date of a User
+     * @var DateTime Registration date of a User
+     *
      * @example 01-01-2000
      *
      * @ApiProperty(
@@ -157,7 +159,7 @@ class User
     private $registrationDate;
 
     /**
-     * @var Role $roles Roles of a User
+     * @var Role Roles of a User
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
      *
