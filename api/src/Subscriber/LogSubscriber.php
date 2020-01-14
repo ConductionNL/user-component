@@ -30,7 +30,7 @@ class LogSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-                KernelEvents::VIEW => ['Log', EventPriorities::PRE_SERIALIZE],
+            KernelEvents::VIEW => ['Log', EventPriorities::PRE_SERIALIZE],
         ];
     }
 

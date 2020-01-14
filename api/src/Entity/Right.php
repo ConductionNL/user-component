@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * All properties that the entity Right holds.
@@ -19,8 +19,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *
  * @author Barry Brands <barry@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -58,7 +58,8 @@ class Right
     private $id;
 
     /**
-     * @var string $name Name of a Right
+     * @var string Name of a Right
+     *
      * @example canViewOtherUsers
      *
      * @ApiProperty(
@@ -83,7 +84,7 @@ class Right
     private $name;
 
     /**
-     * @var Role $roles Roles of a Right
+     * @var Role Roles of a Right
      *
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="rights")

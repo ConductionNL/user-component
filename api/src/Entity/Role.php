@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * All properties that the entity Role holds.
@@ -19,8 +19,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *
  * @author Barry Brands <barry@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -57,7 +57,8 @@ class Role
     private $id;
 
     /**
-     * @var string $name Name of a Role
+     * @var string Name of a Role
+     *
      * @example board member
      *
      * @ApiProperty(
@@ -82,7 +83,7 @@ class Role
     private $name;
 
     /**
-     * @var User $users Users of a Role
+     * @var User Users of a Role
      *
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="roles")
@@ -92,8 +93,7 @@ class Role
     private $users;
 
     /**
-     * @var User $administrator Administrator of a Role
-
+     * @var User Administrator of a Role
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
@@ -103,7 +103,7 @@ class Role
     private $administrator;
 
     /**
-     * @var Right $rights Rights of a Role
+     * @var Right Rights of a Role
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Right", mappedBy="roles")
      *
