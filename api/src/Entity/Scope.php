@@ -18,8 +18,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * All properties that the entity User holds.
  *
- * Entity User exists of an id, a name, a password, a email and has zero or more roles.
- *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
  * @category Entity
@@ -29,24 +27,22 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- *
- * @ORM\Table(name="userTable")
+ * @ORM\Entity(repositoryClass="App\Repository\ScopeRepository")
  */
-class User implements UserInterface
+class Scope
 {
-    /**
-     * @var UuidInterface
-     *
-     * @Groups({"read"})
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     *
-     * @Assert\NotBlank
-     * @Assert\Uuid
-     */
+	/**
+	 * @var UuidInterface
+	 *
+	 * @Groups({"read"})
+	 * @ORM\Id
+	 * @ORM\Column(type="uuid", unique=true)
+	 * @ORM\GeneratedValue(strategy="CUSTOM")
+	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Uuid
+	 */
 	private $id;
 	
 	/**
@@ -65,35 +61,45 @@ class User implements UserInterface
 	private $organization;
 	
 	/**
-	 * @var string $person A contact component person 
+	 * @var string The name of this menu
 	 *
-	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
+	 * @example webshop menu
 	 *
-	 * @Assert\Url
+	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      max = 255
 	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255, nullable=true)
+	 * @Groups({"read","write"})
+	 * @ORM\Column(type="string", length=255)
 	 */
-	private $person;
+	private $name;
+	
+	/**
+	 * @var string The description of this page.
+	 *
+	 * @example This page holds info about this application
+	 *
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *     max = 255
+	 * )
+	 * @Groups({"read","write"})
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $description;
 
     /**
-     * @ORM\Column(type="json")
+	 * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $roles = [];
+    private $application;
 
     /**
-     * @var string The hashed password
-     * 
-     * @Groups({"write"})
-     * @ORM\Column(type="string")
-     */
-    private $password;
-    
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
+	 * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
      */
     private $userGroups;
     
@@ -115,20 +121,14 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
-     */
-    private $tokens;
-
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
-        $this->tokens = new ArrayCollection();
     }
 
     public function getId()
     {
-    	return $this->id;
+        return $this->id;
     }
     
     public function getOrganization(): ?string
@@ -142,80 +142,43 @@ class User implements UserInterface
     	
     	return $this;
     }
-    
-    public function getPerson(): ?string
+
+    public function getName(): ?string
     {
-    	return $this->person;
-    }
-    
-    public function setPerson(?string $person): self
-    {
-    	$this->person = $person;
-    	
-    	return $this;
-    }
-    
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->id;
+        return $this->name;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function setName(string $name): self
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
+        $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getDescription(): ?string
     {
-        return (string) $this->password;
+        return $this->description;
     }
 
-    public function setPassword(string $password): self
+    public function setDescription(string $description): self
     {
-        $this->password = $password;
+        $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
+    public function getApplication(): ?Application
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return $this->application;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function setApplication(?Application $application): self
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->application = $application;
+
+        return $this;
     }
-    
+
     /**
      * @return Collection|Group[]
      */
@@ -228,7 +191,7 @@ class User implements UserInterface
     {
         if (!$this->userGroups->contains($userGroup)) {
             $this->userGroups[] = $userGroup;
-            $userGroup->addUser($this);
+            $userGroup->addScope($this);
         }
 
         return $this;
@@ -238,7 +201,7 @@ class User implements UserInterface
     {
         if ($this->userGroups->contains($userGroup)) {
             $this->userGroups->removeElement($userGroup);
-            $userGroup->removeUser($this);
+            $userGroup->removeScope($this);
         }
 
         return $this;
@@ -266,36 +229,5 @@ class User implements UserInterface
     	$this->updatedAt = $updatedAt;
     	
     	return $this;
-    }
-
-    /**
-     * @return Collection|Token[]
-     */
-    public function getTokens(): Collection
-    {
-        return $this->tokens;
-    }
-
-    public function addToken(Token $token): self
-    {
-        if (!$this->tokens->contains($token)) {
-            $this->tokens[] = $token;
-            $token->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeToken(Token $token): self
-    {
-        if ($this->tokens->contains($token)) {
-            $this->tokens->removeElement($token);
-            // set the owning side to null (unless already changed)
-            if ($token->getUser() === $this) {
-                $token->setUser(null);
-            }
-        }
-
-        return $this;
     }
 }
