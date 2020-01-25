@@ -1171,6 +1171,584 @@ paths:
             schema:
               $ref: '#/components/schemas/Group-write'
         description: 'The updated Group resource'
+  /providers:
+    get:
+      tags:
+        - Provider
+      operationId: getProviderCollection
+      summary: 'Retrieves the collection of Provider resources.'
+      responses:
+        200:
+          description: 'Provider collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Provider:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Provider
+      operationId: postProviderCollection
+      summary: 'Creates a Provider resource.'
+      responses:
+        201:
+          description: 'Provider resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Provider:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+          links:
+            GetProviderItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getProviderItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /providers/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Provider:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+        description: 'The new Provider resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/providers/{id}':
+    get:
+      tags:
+        - Provider
+      operationId: getProviderItem
+      summary: 'Retrieves a Provider resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Provider resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Provider:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Provider
+      operationId: deleteProviderItem
+      summary: 'Removes the Provider resource.'
+      responses:
+        204:
+          description: 'Provider resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Provider
+      operationId: putProviderItem
+      summary: 'Replaces the Provider resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Provider resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Provider:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Provider:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+        description: 'The updated Provider resource'
+    patch:
+      tags:
+        - Provider
+      operationId: patchProviderItem
+      summary: 'Updates the Provider resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Provider resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Provider:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Provider-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+        description: 'The updated Provider resource'
   /scopes:
     get:
       tags:
@@ -1749,6 +2327,584 @@ paths:
             schema:
               $ref: '#/components/schemas/Scope-write'
         description: 'The updated Scope resource'
+  /tokens:
+    get:
+      tags:
+        - Token
+      operationId: getTokenCollection
+      summary: 'Retrieves the collection of Token resources.'
+      responses:
+        200:
+          description: 'Token collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Token:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Token
+      operationId: postTokenCollection
+      summary: 'Creates a Token resource.'
+      responses:
+        201:
+          description: 'Token resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Token:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+          links:
+            GetTokenItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getTokenItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /tokens/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Token:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+        description: 'The new Token resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/tokens/{id}':
+    get:
+      tags:
+        - Token
+      operationId: getTokenItem
+      summary: 'Retrieves a Token resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Token resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Token:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Token
+      operationId: deleteTokenItem
+      summary: 'Removes the Token resource.'
+      responses:
+        204:
+          description: 'Token resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Token
+      operationId: putTokenItem
+      summary: 'Replaces the Token resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Token resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Token:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Token:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+        description: 'The updated Token resource'
+    patch:
+      tags:
+        - Token
+      operationId: patchTokenItem
+      summary: 'Updates the Token resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Token resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Token:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Token-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+        description: 'The updated Token resource'
   /users:
     get:
       tags:
@@ -1890,6 +3046,107 @@ paths:
       tags:
         - User
       operationId: postUserCollection
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+          links:
+            GetUserItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getUserItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-write'
+        description: 'The new User resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  /users/login:
+    post:
+      tags:
+        - User
+      operationId: loginUserCollection
       summary: 'Creates a User resource.'
       responses:
         201:
@@ -2609,6 +3866,122 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-write'
+    Provider-read:
+      type: object
+      description: 'An external identity provider (like facebook)'
+      properties:
+        id:
+          readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that owns this product'
+          type: string
+        name:
+          description: 'The name of this menu'
+          type: string
+        description:
+          description: 'The description of this page.'
+          type: string
+        createdAt:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          description: 'The last time this resource was changed'
+          type: string
+          format: date-time
+      required:
+        - organization
+        - name
+        - description
+    Provider-write:
+      type: object
+      description: 'An external identity provider (like facebook)'
+      required:
+        - organization
+        - name
+        - description
+      properties:
+        organization:
+          description: 'The RSIN of the organization that owns this product'
+          type: string
+        name:
+          description: 'The name of this menu'
+          type: string
+        description:
+          description: 'The description of this page.'
+          type: string
+    'Provider:jsonld-read':
+      type: object
+      description: 'An external identity provider (like facebook)'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that owns this product'
+          type: string
+        name:
+          description: 'The name of this menu'
+          type: string
+        description:
+          description: 'The description of this page.'
+          type: string
+        createdAt:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          description: 'The last time this resource was changed'
+          type: string
+          format: date-time
+      required:
+        - organization
+        - name
+        - description
+    'Provider:jsonld-write':
+      type: object
+      description: 'An external identity provider (like facebook)'
+      required:
+        - organization
+        - name
+        - description
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        organization:
+          description: 'The RSIN of the organization that owns this product'
+          type: string
+        name:
+          description: 'The name of this menu'
+          type: string
+        description:
+          description: 'The description of this page.'
+          type: string
     Scope-read:
       type: object
       description: 'All properties that the entity User holds.'
@@ -2749,6 +4122,104 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
+    Token-read:
+      type: object
+      description: 'A token from an external identity proficer (like facebook).'
+      properties:
+        id:
+          readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        user:
+          $ref: '#/components/schemas/User-read'
+        provider:
+          $ref: '#/components/schemas/Provider-read'
+        token:
+          type: string
+        validTill:
+          readOnly: true
+          description: 'The moment this token expirec'
+          type: string
+          format: date-time
+        createdAt:
+          readOnly: true
+          description: 'The moment this token was created'
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          description: 'The last time this token was changed'
+          type: string
+          format: date-time
+    Token-write:
+      type: object
+      description: 'A token from an external identity proficer (like facebook).'
+      properties:
+        user:
+          $ref: '#/components/schemas/User-write'
+        provider:
+          $ref: '#/components/schemas/Provider-write'
+        token:
+          type: string
+    'Token:jsonld-read':
+      type: object
+      description: 'A token from an external identity proficer (like facebook).'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        user:
+          $ref: '#/components/schemas/User:jsonld-read'
+        provider:
+          $ref: '#/components/schemas/Provider:jsonld-read'
+        token:
+          type: string
+        validTill:
+          readOnly: true
+          description: 'The moment this token expirec'
+          type: string
+          format: date-time
+        createdAt:
+          readOnly: true
+          description: 'The moment this token was created'
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          description: 'The last time this token was changed'
+          type: string
+          format: date-time
+    'Token:jsonld-write':
+      type: object
+      description: 'A token from an external identity proficer (like facebook).'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        user:
+          $ref: '#/components/schemas/User:jsonld-write'
+        provider:
+          $ref: '#/components/schemas/Provider:jsonld-write'
+        token:
+          type: string
     User-read:
       type: object
       description: 'All properties that the entity User holds.'
@@ -2760,6 +4231,9 @@ components:
           type: string
         organization:
           description: 'The RSIN of the organization that owns this product'
+          type: string
+        username:
+          description: 'A unique visual identifier that represents this user.'
           type: string
         person:
           description: 'A contact component person'
@@ -2778,14 +4252,19 @@ components:
           format: date-time
       required:
         - organization
+        - username
     User-write:
       type: object
       description: 'All properties that the entity User holds.'
       required:
         - organization
+        - username
       properties:
         organization:
           description: 'The RSIN of the organization that owns this product'
+          type: string
+        username:
+          description: 'A unique visual identifier that represents this user.'
           type: string
         person:
           description: 'A contact component person'
@@ -2817,6 +4296,9 @@ components:
         organization:
           description: 'The RSIN of the organization that owns this product'
           type: string
+        username:
+          description: 'A unique visual identifier that represents this user.'
+          type: string
         person:
           description: 'A contact component person'
           externalDocs:
@@ -2834,11 +4316,13 @@ components:
           format: date-time
       required:
         - organization
+        - username
     'User:jsonld-write':
       type: object
       description: 'All properties that the entity User holds.'
       required:
         - organization
+        - username
       properties:
         '@context':
           readOnly: true
@@ -2851,6 +4335,9 @@ components:
           type: string
         organization:
           description: 'The RSIN of the organization that owns this product'
+          type: string
+        username:
+          description: 'A unique visual identifier that represents this user.'
           type: string
         person:
           description: 'A contact component person'
@@ -2976,6 +4463,60 @@ definitions:
       - organization
       - name
       - description
+  Provider-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        format: uuid
+      organization:
+        description: 'The RSIN of the organization that owns this product'
+        type: string
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        description: 'The name of this menu'
+        type: string
+        example: 'webshop menu'
+        maxLength: 255
+      description:
+        description: 'The description of this page.'
+        type: string
+        example: 'This page holds info about this application'
+        maxLength: 255
+      createdAt:
+        description: 'The moment this resource was created'
+        type: \DateTime
+      updatedAt:
+        description: 'The last time this resource was changed'
+        type: \DateTime
+    required:
+      - organization
+      - name
+      - description
+  Provider-write:
+    properties:
+      organization:
+        description: 'The RSIN of the organization that owns this product'
+        type: string
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        description: 'The name of this menu'
+        type: string
+        example: 'webshop menu'
+        maxLength: 255
+      description:
+        description: 'The description of this page.'
+        type: string
+        example: 'This page holds info about this application'
+        maxLength: 255
+    required:
+      - organization
+      - name
+      - description
   Scope-read:
     properties:
       id:
@@ -3034,6 +4575,31 @@ definitions:
       - organization
       - name
       - description
+  Token-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        format: uuid
+      token: []
+      validTill:
+        description: 'The moment this token expirec'
+        type: \DateTime
+      createdAt:
+        description: 'The moment this token was created'
+        type: \DateTime
+      updatedAt:
+        description: 'The last time this token was changed'
+        type: \DateTime
+      user: []
+      provider: []
+    required: []
+  Token-write:
+    properties:
+      token: []
+      user: []
+      provider: []
+    required: []
   User-read:
     properties:
       id:
@@ -3045,6 +4611,12 @@ definitions:
         type: string
         example: '002851234'
         maxLength: 11
+        minLength: 8
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
         minLength: 8
       person:
         description: 'A contact component person'
@@ -3060,6 +4632,7 @@ definitions:
         type: \DateTime
     required:
       - organization
+      - username
   User-write:
     properties:
       organization:
@@ -3067,6 +4640,12 @@ definitions:
         type: string
         example: '002851234'
         maxLength: 11
+        minLength: 8
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
         minLength: 8
       person:
         description: 'A contact component person'
@@ -3079,6 +4658,7 @@ definitions:
         type: string
     required:
       - organization
+      - username
 tags:
   -
     name: Application
@@ -3093,9 +4673,21 @@ tags:
       
       
   -
+    name: Provider
+    description: |
+      An external identity provider (like facebook)
+      
+      
+  -
     name: Scope
     description: |
       All properties that the entity User holds.
+      
+      
+  -
+    name: Token
+    description: |
+      A token from an external identity proficer (like facebook).
       
       
   -

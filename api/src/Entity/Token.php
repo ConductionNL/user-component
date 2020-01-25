@@ -31,26 +31,36 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Token
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @var UuidInterface
+	 *
+	 * @Groups({"read"})
+	 * @ORM\Id
+	 * @ORM\Column(type="uuid", unique=true)
+	 * @ORM\GeneratedValue(strategy="CUSTOM")
+	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Uuid
+	 */
+	private $id;
 
     /**
+	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
+	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provider;
 
     /**
+	 * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $token;

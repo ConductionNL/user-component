@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+use App\Controller\DefaultController;
 /**
  * All properties that the entity User holds.
  *
@@ -25,7 +26,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @category Entity
  * @package user-component
  *
- * @ApiResource(
+ * @ApiResource(collectionOperations={
+ * 	   "get",
+ * 	   "post",
+ *     "login"={
+ *         "method"="post",
+ *         "path"="users/login",
+ *         "controller"=DefaultController::class,
+ *         "read"=false
+ *     		}
+ * 		},
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
@@ -44,7 +54,6 @@ class User implements UserInterface
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
-     * @Assert\NotBlank
      * @Assert\Uuid
      */
 	private $id;
@@ -63,6 +72,21 @@ class User implements UserInterface
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $organization;
+	
+	/**
+	 * @var string  $username A unique visual identifier that represents this user.
+	 *
+	 * @example 002851234
+	 *
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *      min = 8,
+	 *      max = 255
+	 * )
+	 * @Groups({"read", "write"})
+	 * @ORM\Column(type="string", length=255, unique = true)
+	 */
+	private $username;
 	
 	/**
 	 * @var string $person A contact component person 
@@ -162,7 +186,14 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->id;
+        return $this->username;
+    }
+    
+    public function setUsername(?string $username): self
+    {
+    	$this->username = $username;
+    	
+    	return $this;
     }
 
     /**
