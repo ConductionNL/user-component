@@ -31,7 +31,7 @@ class CreateUserSubscriber implements EventSubscriberInterface
 	public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
         $this->params = $params;
-        $this->em = $em;
+        $this->em = $em; 
         $this->encoder = $encoder;
         $this->request = Request::createFromGlobals();
     }
