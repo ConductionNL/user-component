@@ -46,7 +46,9 @@ use App\Controller\DefaultController;
 class User implements UserInterface
 {
     /**
-     * @var UuidInterface
+     * @var UuidInterface  The (uu)id of this group
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
      * @ORM\Id
@@ -59,7 +61,7 @@ class User implements UserInterface
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this product
+	 * @var string The RSIN of the organization that owns this user
 	 *
 	 * @example 002851234
 	 *
@@ -117,11 +119,15 @@ class User implements UserInterface
     
 
     /**
+     * @var array A list of groups to wichs this user belongs
+     * 
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
      */
     private $userGroups;
     
     /**
+     * @var array A list of tokens created for this user
+     * 
      * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
      */
     private $tokens;
@@ -129,6 +135,7 @@ class User implements UserInterface
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
@@ -138,6 +145,7 @@ class User implements UserInterface
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)

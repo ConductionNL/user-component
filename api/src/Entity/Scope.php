@@ -32,7 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Scope
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface $id The (uu)id of this scope
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -46,7 +48,7 @@ class Scope
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this product
+	 * @var string The RSIN of the organization that owns this scope
 	 *
 	 * @example 002851234
 	 *
@@ -61,9 +63,9 @@ class Scope
 	private $organization;
 	
 	/**
-	 * @var string The name of this menu
+	 * @var string The name of this scope
 	 *
-	 * @example webshop menu
+	 * @example contact.write
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -75,9 +77,9 @@ class Scope
 	private $name;
 	
 	/**
-	 * @var string The description of this page.
+	 * @var string The description of this scope.
 	 *
-	 * @example This page holds info about this application
+	 * @example This scope allows users to change contact objects
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -89,6 +91,8 @@ class Scope
 	private $description;
 
     /**
+	 * @var Application[] $application The application that this scope belongs to.
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
@@ -97,6 +101,8 @@ class Scope
     private $application;
 
     /**
+	 * @var Group[] $userGroups User groups that give this scope.
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
@@ -106,6 +112,7 @@ class Scope
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
@@ -115,6 +122,7 @@ class Scope
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)

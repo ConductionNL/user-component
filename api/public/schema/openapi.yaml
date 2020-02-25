@@ -589,7 +589,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Application:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Application-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Application-write'
         description: 'The updated Application resource'
@@ -1167,7 +1191,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Group:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Group-write'
         description: 'The updated Group resource'
@@ -1745,7 +1793,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Provider:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Provider-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Provider-write'
         description: 'The updated Provider resource'
@@ -2323,7 +2395,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Scope:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Scope-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Scope-write'
         description: 'The updated Scope resource'
@@ -2901,7 +2997,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Token:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Token-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Token-write'
         description: 'The updated Token resource'
@@ -3580,7 +3700,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/User-write'
         description: 'The updated User resource'
@@ -3592,7 +3736,6 @@ components:
       properties:
         id:
           readOnly: true
-          description: 'The id of this entity'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -3725,7 +3868,6 @@ components:
       properties:
         id:
           readOnly: true
-          description: 'The id of this entity'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string

@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * A token from an external identity proficer (like facebook).
+ * A token from an external identity profider (like facebook).
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
@@ -32,7 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Token
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface The (uu)id of this token
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -46,20 +48,28 @@ class Token
 	private $id;
 
     /**
+	 * @var User The user that this token belongs to.
+	 * 
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
-    /**
+    /** 
+	 * @var Provider The provider that this scope belongs to.
+	 * 
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provider;
 
-    /**
+    /**     
+	 * @var string The actual token.
+	 * 
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
+	 * 
 	 * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -68,6 +78,7 @@ class Token
     /**
      * @var DateTime The moment this token expirec
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -76,6 +87,7 @@ class Token
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
@@ -85,6 +97,7 @@ class Token
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)

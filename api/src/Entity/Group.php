@@ -32,7 +32,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Group
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface $id The (uu)id of this group
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -46,7 +46,7 @@ class Group
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this product
+	 * @var string $organization The RSIN of the organization that owns this group
 	 *
 	 * @example 002851234
 	 *
@@ -61,9 +61,9 @@ class Group
 	private $organization;
 	
 	/**
-	 * @var string The name of this menu
+	 * @var string $name The name of this group
 	 *
-	 * @example webshop menu
+	 * @example Admin
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -75,9 +75,9 @@ class Group
 	private $name;
 	
 	/**
-	 * @var string The description of this page.
+	 * @var string $description The description of this group.
 	 *
-	 * @example This page holds info about this application
+	 * @example This group holds all the Admin members
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -89,13 +89,17 @@ class Group
 	private $description;
 
     /**
+	 * @var Scope[] $scopes The scopes that members of this group have
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups")
      */
     private $scopes;
 
-    /**
+    /**     
+	 * @var User[] $users The users that belong to this group
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userGroups")
@@ -105,6 +109,7 @@ class Group
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
@@ -114,6 +119,7 @@ class Group
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)

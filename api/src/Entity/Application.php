@@ -32,7 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Application
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface  The (uu)id of this application
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -46,7 +48,7 @@ class Application
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this product
+	 * @var string The RSIN of the organization that owns this application
 	 *
 	 * @example 002851234
 	 *
@@ -61,9 +63,9 @@ class Application
 	private $organization;
 	
 	/**
-	 * @var string The name of this menu
+	 * @var string The name of this application
 	 *
-	 * @example webshop menu
+	 * @example Dashboard
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -75,9 +77,9 @@ class Application
 	private $name;
 	
 	/**
-	 * @var string The description of this page.
+	 * @var string The description of this application.
 	 *
-	 * @example This page holds info about this application
+	 * @example This application allows users to manage data in several components
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -89,6 +91,8 @@ class Application
 	private $description;
 
     /**
+	 * @var Scope[] A list of scopes that are posible on this application.
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity="App\Entity\Scope", mappedBy="application", orphanRemoval=true)
@@ -98,6 +102,7 @@ class Application
 	/**
 	 * @var Datetime $dateCreated The moment this request was created
 	 *
+     * @Assert\DateTime
 	 * @Groups({"read"})
 	 * @Gedmo\Timestampable(on="create")
 	 * @ORM\Column(type="datetime", nullable=true)
@@ -107,6 +112,7 @@ class Application
 	/**
 	 * @var Datetime $dateModified  The moment this request last Modified
 	 *
+     * @Assert\DateTime
 	 * @Groups({"read"})
 	 * @Gedmo\Timestampable(on="create")
 	 * @ORM\Column(type="datetime", nullable=true)
