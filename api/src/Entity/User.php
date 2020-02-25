@@ -122,27 +122,27 @@ class User implements UserInterface
     private $userGroups;
     
     /**
-     * @var DateTime The moment this resource was created
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
+     */
+    private $tokens;
+    
+    /**
+     * @var Datetime $dateCreated The moment this request was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createdAt;
+    private $dateCreated;
     
     /**
-     * @var DateTime The last time this resource was changed
+     * @var Datetime $dateModified  The moment this request last Modified
      *
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
-     */
-    private $tokens;
+    private $dateModified;
 
     public function __construct()
     {
@@ -274,30 +274,6 @@ class User implements UserInterface
 
         return $this;
     }
-    
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-    	return $this->createdAt;
-    }
-    
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-    	$this->createdAt = $createdAt;
-    	
-    	return $this;
-    }
-    
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-    	return $this->updatedAt;
-    }
-    
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-    	$this->updatedAt = $updatedAt;
-    	
-    	return $this;
-    }
 
     /**
      * @return Collection|Token[]
@@ -328,5 +304,29 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+    
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+    	return $this->dateCreated;
+    }
+    
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+    	$this->dateCreated= $dateCreated;
+    	
+    	return $this;
+    }
+    
+    public function getDateModified(): ?\DateTimeInterface
+    {
+    	return $this->dateModified;
+    }
+    
+    public function setDateModified(\DateTimeInterface $dateModified): self
+    {
+    	$this->dateModified = $dateModified;
+    	
+    	return $this;
     }
 }

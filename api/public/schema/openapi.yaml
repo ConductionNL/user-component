@@ -3608,14 +3608,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Scope-read'
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -3674,14 +3674,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Scope:jsonld-read'
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -3744,14 +3744,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User-read'
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -3818,14 +3818,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-read'
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -3884,14 +3884,14 @@ components:
         description:
           description: 'The description of this page.'
           type: string
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -3942,14 +3942,14 @@ components:
         description:
           description: 'The description of this page.'
           type: string
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -4006,14 +4006,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group-read'
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -4076,14 +4076,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-read'
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -4142,14 +4142,14 @@ components:
           description: 'The moment this token expirec'
           type: string
           format: date-time
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this token was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this token was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
     Token-write:
@@ -4191,14 +4191,14 @@ components:
           description: 'The moment this token expirec'
           type: string
           format: date-time
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this token was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this token was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
     'Token:jsonld-write':
@@ -4240,14 +4240,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -4304,14 +4304,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        createdAt:
+        dateCreated:
           readOnly: true
-          description: 'The moment this resource was created'
+          description: 'The moment this request was created'
           type: string
           format: date-time
-        updatedAt:
+        dateModified:
           readOnly: true
-          description: 'The last time this resource was changed'
+          description: 'The moment this request last Modified'
           type: string
           format: date-time
       required:
@@ -4371,12 +4371,12 @@ definitions:
         type: string
         example: 'This page holds info about this application'
         maxLength: 255
-      createdAt:
-        description: 'The moment this resource was created'
-        type: \DateTime
-      updatedAt:
-        description: 'The last time this resource was changed'
-        type: \DateTime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
       scopes: []
     required:
       - organization
@@ -4427,12 +4427,12 @@ definitions:
         type: string
         example: 'This page holds info about this application'
         maxLength: 255
-      createdAt:
-        description: 'The moment this resource was created'
-        type: \DateTime
-      updatedAt:
-        description: 'The last time this resource was changed'
-        type: \DateTime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
       scopes: []
       users: []
     required:
@@ -4485,12 +4485,12 @@ definitions:
         type: string
         example: 'This page holds info about this application'
         maxLength: 255
-      createdAt:
-        description: 'The moment this resource was created'
-        type: \DateTime
-      updatedAt:
-        description: 'The last time this resource was changed'
-        type: \DateTime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
     required:
       - organization
       - name
@@ -4539,12 +4539,12 @@ definitions:
         type: string
         example: 'This page holds info about this application'
         maxLength: 255
-      createdAt:
-        description: 'The moment this resource was created'
-        type: \DateTime
-      updatedAt:
-        description: 'The last time this resource was changed'
-        type: \DateTime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
       application: []
       userGroups: []
     required:
@@ -4585,12 +4585,12 @@ definitions:
       validTill:
         description: 'The moment this token expirec'
         type: \DateTime
-      createdAt:
-        description: 'The moment this token was created'
-        type: \DateTime
-      updatedAt:
-        description: 'The last time this token was changed'
-        type: \DateTime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
       user: []
       provider: []
     required: []
@@ -4624,12 +4624,12 @@ definitions:
         example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
         format: url
         maxLength: 255
-      createdAt:
-        description: 'The moment this resource was created'
-        type: \DateTime
-      updatedAt:
-        description: 'The last time this resource was changed'
-        type: \DateTime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
     required:
       - organization
       - username
