@@ -3592,6 +3592,7 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The id of this entity'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -3724,6 +3725,7 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The id of this entity'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
