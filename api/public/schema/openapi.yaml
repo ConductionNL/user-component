@@ -1219,6 +1219,107 @@ paths:
             schema:
               $ref: '#/components/schemas/Group-write'
         description: 'The updated Group resource'
+  /login:
+    post:
+      tags:
+        - User
+      operationId: loginUserCollection
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+          links:
+            GetUserItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getUserItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-write'
+        description: 'The new User resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   /providers:
     get:
       tags:
@@ -3262,107 +3363,6 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
-  /users/login:
-    post:
-      tags:
-        - User
-      operationId: loginUserCollection
-      summary: 'Creates a User resource.'
-      responses:
-        201:
-          description: 'User resource created'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/User-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/User:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/User-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/User-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/User-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/User-read'
-          links:
-            GetUserItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getUserItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/User-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/User:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/User-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/User-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/User-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/User-write'
-        description: 'The new User resource'
-      parameters:
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
   '/users/{id}':
     get:
       tags:
@@ -3736,30 +3736,36 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The (uu)id of this application'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this application'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this application'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this application.'
           type: string
         scopes:
+          description: 'A list of scopes that are posible on this application.'
           type: array
           items:
             $ref: '#/components/schemas/Scope-read'
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -3775,15 +3781,16 @@ components:
         - description
       properties:
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this application'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this application'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this application.'
           type: string
         scopes:
+          description: 'A list of scopes that are posible on this application.'
           type: array
           items:
             $ref: '#/components/schemas/Scope-write'
@@ -3802,30 +3809,36 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The (uu)id of this application'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this application'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this application'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this application.'
           type: string
         scopes:
+          description: 'A list of scopes that are posible on this application.'
           type: array
           items:
             $ref: '#/components/schemas/Scope:jsonld-read'
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -3850,15 +3863,16 @@ components:
           readOnly: true
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this application'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this application'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this application.'
           type: string
         scopes:
+          description: 'A list of scopes that are posible on this application.'
           type: array
           items:
             $ref: '#/components/schemas/Scope:jsonld-write'
@@ -3868,34 +3882,41 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The (uu)id of this group'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this group'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this group'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this group.'
           type: string
         scopes:
+          description: 'The scopes that members of this group have'
           type: array
           items:
             $ref: '#/components/schemas/Scope-read'
         users:
+          description: 'The users that belong to this group'
           type: array
           items:
             $ref: '#/components/schemas/User-read'
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -3911,19 +3932,21 @@ components:
         - description
       properties:
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this group'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this group'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this group.'
           type: string
         scopes:
+          description: 'The scopes that members of this group have'
           type: array
           items:
             $ref: '#/components/schemas/Scope-write'
         users:
+          description: 'The users that belong to this group'
           type: array
           items:
             $ref: '#/components/schemas/User-write'
@@ -3942,34 +3965,41 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The (uu)id of this group'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this group'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this group'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this group.'
           type: string
         scopes:
+          description: 'The scopes that members of this group have'
           type: array
           items:
             $ref: '#/components/schemas/Scope:jsonld-read'
         users:
+          description: 'The users that belong to this group'
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-read'
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -3994,19 +4024,21 @@ components:
           readOnly: true
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this group'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this group'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this group.'
           type: string
         scopes:
+          description: 'The scopes that members of this group have'
           type: array
           items:
             $ref: '#/components/schemas/Scope:jsonld-write'
         users:
+          description: 'The users that belong to this group'
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-write'
@@ -4016,6 +4048,7 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The (uu)id of this profider'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -4023,19 +4056,23 @@ components:
           description: 'The RSIN of the organization that owns this product'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this Provider'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this provider.'
           type: string
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -4054,10 +4091,10 @@ components:
           description: 'The RSIN of the organization that owns this product'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this Provider'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this provider.'
           type: string
     'Provider:jsonld-read':
       type: object
@@ -4074,6 +4111,7 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The (uu)id of this profider'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -4081,19 +4119,23 @@ components:
           description: 'The RSIN of the organization that owns this product'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this Provider'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this provider.'
           type: string
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -4121,10 +4163,10 @@ components:
           description: 'The RSIN of the organization that owns this product'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this Provider'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this provider.'
           type: string
     Scope-read:
       type: object
@@ -4132,32 +4174,39 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The (uu)id of this scope'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this scope'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this scope'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this scope.'
           type: string
         application:
+          description: 'The application that this scope belongs to.'
           $ref: '#/components/schemas/Application-read'
         userGroups:
+          description: 'User groups that give this scope.'
           type: array
           items:
             $ref: '#/components/schemas/Group-read'
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -4173,17 +4222,19 @@ components:
         - description
       properties:
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this scope'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this scope'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this scope.'
           type: string
         application:
+          description: 'The application that this scope belongs to.'
           $ref: '#/components/schemas/Application-write'
         userGroups:
+          description: 'User groups that give this scope.'
           type: array
           items:
             $ref: '#/components/schemas/Group-write'
@@ -4202,32 +4253,39 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The (uu)id of this scope'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this scope'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this scope'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this scope.'
           type: string
         application:
+          description: 'The application that this scope belongs to.'
           $ref: '#/components/schemas/Application:jsonld-read'
         userGroups:
+          description: 'User groups that give this scope.'
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-read'
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -4252,63 +4310,78 @@ components:
           readOnly: true
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this scope'
           type: string
         name:
-          description: 'The name of this menu'
+          description: 'The name of this scope'
           type: string
         description:
-          description: 'The description of this page.'
+          description: 'The description of this scope.'
           type: string
         application:
+          description: 'The application that this scope belongs to.'
           $ref: '#/components/schemas/Application:jsonld-write'
         userGroups:
+          description: 'User groups that give this scope.'
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
     Token-read:
       type: object
-      description: 'A token from an external identity proficer (like facebook).'
+      description: 'A token from an external identity profider (like facebook).'
       properties:
         id:
           readOnly: true
+          description: 'The (uu)id of this token'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         user:
+          description: 'The user that this token belongs to.'
           $ref: '#/components/schemas/User-read'
         provider:
+          description: 'The provider that this scope belongs to.'
           $ref: '#/components/schemas/Provider-read'
         token:
+          description: 'The actual token.'
           type: string
         validTill:
           readOnly: true
           description: 'The moment this token expirec'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
     Token-write:
       type: object
-      description: 'A token from an external identity proficer (like facebook).'
+      description: 'A token from an external identity profider (like facebook).'
       properties:
         user:
+          description: 'The user that this token belongs to.'
           $ref: '#/components/schemas/User-write'
         provider:
+          description: 'The provider that this scope belongs to.'
           $ref: '#/components/schemas/Provider-write'
         token:
+          description: 'The actual token.'
           type: string
     'Token:jsonld-read':
       type: object
-      description: 'A token from an external identity proficer (like facebook).'
+      description: 'A token from an external identity profider (like facebook).'
       properties:
         '@context':
           readOnly: true
@@ -4321,33 +4394,43 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The (uu)id of this token'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         user:
+          description: 'The user that this token belongs to.'
           $ref: '#/components/schemas/User:jsonld-read'
         provider:
+          description: 'The provider that this scope belongs to.'
           $ref: '#/components/schemas/Provider:jsonld-read'
         token:
+          description: 'The actual token.'
           type: string
         validTill:
           readOnly: true
           description: 'The moment this token expirec'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
     'Token:jsonld-write':
       type: object
-      description: 'A token from an external identity proficer (like facebook).'
+      description: 'A token from an external identity profider (like facebook).'
       properties:
         '@context':
           readOnly: true
@@ -4359,10 +4442,13 @@ components:
           readOnly: true
           type: string
         user:
+          description: 'The user that this token belongs to.'
           $ref: '#/components/schemas/User:jsonld-write'
         provider:
+          description: 'The provider that this scope belongs to.'
           $ref: '#/components/schemas/Provider:jsonld-write'
         token:
+          description: 'The actual token.'
           type: string
     User-read:
       type: object
@@ -4370,11 +4456,12 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The (uu)id of this group'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this user'
           type: string
         username:
           description: 'A unique visual identifier that represents this user.'
@@ -4387,11 +4474,15 @@ components:
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -4405,7 +4496,7 @@ components:
         - username
       properties:
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this user'
           type: string
         username:
           description: 'A unique visual identifier that represents this user.'
@@ -4434,11 +4525,12 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The (uu)id of this group'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this user'
           type: string
         username:
           description: 'A unique visual identifier that represents this user.'
@@ -4451,11 +4543,15 @@ components:
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
       required:
@@ -4478,7 +4574,7 @@ components:
           readOnly: true
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this product'
+          description: 'The RSIN of the organization that owns this user'
           type: string
         username:
           description: 'A unique visual identifier that represents this user.'
@@ -4496,32 +4592,40 @@ definitions:
   Application-read:
     properties:
       id:
-        description: ''
+        description: 'The (uu)id of this application'
         type: string
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
         format: uuid
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this application'
         type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this application'
         type: string
-        example: 'webshop menu'
+        example: Dashboard
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this application.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'This application allows users to manage data in several components'
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateModified:
         description: 'The moment this request last Modified'
-        type: \Datetime
-      scopes: []
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
+      scopes:
+        description: 'A list of scopes that are posible on this application.'
+        type: object
+        format: Scope
     required:
       - organization
       - name
@@ -4529,22 +4633,25 @@ definitions:
   Application-write:
     properties:
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this application'
         type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this application'
         type: string
-        example: 'webshop menu'
+        example: Dashboard
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this application.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'This application allows users to manage data in several components'
         maxLength: 255
-      scopes: []
+      scopes:
+        description: 'A list of scopes that are posible on this application.'
+        type: object
+        format: Scope
     required:
       - organization
       - name
@@ -4552,33 +4659,44 @@ definitions:
   Group-read:
     properties:
       id:
-        description: ''
+        description: 'The (uu)id of this group'
         type: string
         format: uuid
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this group'
         type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this group'
         type: string
-        example: 'webshop menu'
+        example: Admin
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this group.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'This group holds all the Admin members'
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateModified:
         description: 'The moment this request last Modified'
-        type: \Datetime
-      scopes: []
-      users: []
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
+      scopes:
+        description: 'The scopes that members of this group have'
+        type: object
+        format: Scope
+      users:
+        description: 'The users that belong to this group'
+        type: object
+        format: User
     required:
       - organization
       - name
@@ -4586,23 +4704,29 @@ definitions:
   Group-write:
     properties:
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this group'
         type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this group'
         type: string
-        example: 'webshop menu'
+        example: Admin
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this group.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'This group holds all the Admin members'
         maxLength: 255
-      scopes: []
-      users: []
+      scopes:
+        description: 'The scopes that members of this group have'
+        type: object
+        format: Scope
+      users:
+        description: 'The users that belong to this group'
+        type: object
+        format: User
     required:
       - organization
       - name
@@ -4610,8 +4734,9 @@ definitions:
   Provider-read:
     properties:
       id:
-        description: ''
+        description: 'The (uu)id of this profider'
         type: string
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
         format: uuid
       organization:
         description: 'The RSIN of the organization that owns this product'
@@ -4620,21 +4745,25 @@ definitions:
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this Provider'
         type: string
-        example: 'webshop menu'
+        example: Facebook
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this provider.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'The facebook provider allows users to login with facebook'
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateModified:
         description: 'The moment this request last Modified'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
     required:
       - organization
       - name
@@ -4648,14 +4777,14 @@ definitions:
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this Provider'
         type: string
-        example: 'webshop menu'
+        example: Facebook
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this provider.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'The facebook provider allows users to login with facebook'
         maxLength: 255
     required:
       - organization
@@ -4664,33 +4793,44 @@ definitions:
   Scope-read:
     properties:
       id:
-        description: ''
+        description: 'The (uu)id of this scope'
         type: string
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
         format: uuid
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this scope'
         type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this scope'
         type: string
-        example: 'webshop menu'
+        example: contact.write
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this scope.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'This scope allows users to change contact objects'
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateModified:
         description: 'The moment this request last Modified'
-        type: \Datetime
-      application: []
-      userGroups: []
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
+      application:
+        description: 'The application that this scope belongs to.'
+        type: object
+        format: Application
+      userGroups:
+        description: 'User groups that give this scope.'
+        type: object
+        format: Group
     required:
       - organization
       - name
@@ -4698,23 +4838,29 @@ definitions:
   Scope-write:
     properties:
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this scope'
         type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
       name:
-        description: 'The name of this menu'
+        description: 'The name of this scope'
         type: string
-        example: 'webshop menu'
+        example: contact.write
         maxLength: 255
       description:
-        description: 'The description of this page.'
+        description: 'The description of this scope.'
         type: string
-        example: 'This page holds info about this application'
+        example: 'This scope allows users to change contact objects'
         maxLength: 255
-      application: []
-      userGroups: []
+      application:
+        description: 'The application that this scope belongs to.'
+        type: object
+        format: Application
+      userGroups:
+        description: 'User groups that give this scope.'
+        type: object
+        format: Group
     required:
       - organization
       - name
@@ -4722,36 +4868,62 @@ definitions:
   Token-read:
     properties:
       id:
-        description: ''
+        description: 'The (uu)id of this token'
         type: string
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
         format: uuid
-      token: []
+      token:
+        description: 'The actual token.'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
       validTill:
         description: 'The moment this token expirec'
-        type: \DateTime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateCreated:
         description: 'The moment this request was created'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateModified:
         description: 'The moment this request last Modified'
-        type: \Datetime
-      user: []
-      provider: []
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
+      user:
+        description: 'The user that this token belongs to.'
+        type: object
+        format: User
+      provider:
+        description: 'The provider that this scope belongs to.'
+        type: object
+        format: Provider
     required: []
   Token-write:
     properties:
-      token: []
-      user: []
-      provider: []
+      token:
+        description: 'The actual token.'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+      user:
+        description: 'The user that this token belongs to.'
+        type: object
+        format: User
+      provider:
+        description: 'The provider that this scope belongs to.'
+        type: object
+        format: Provider
     required: []
   User-read:
     properties:
       id:
-        description: ''
+        description: 'The (uu)id of this group'
         type: string
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
         format: uuid
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this user'
         type: string
         example: '002851234'
         maxLength: 11
@@ -4770,17 +4942,21 @@ definitions:
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
       dateModified:
         description: 'The moment this request last Modified'
-        type: \Datetime
+        type: string
+        format: date-time
+        example: '2020-02-26T08:28:53+00:00'
     required:
       - organization
       - username
   User-write:
     properties:
       organization:
-        description: 'The RSIN of the organization that owns this product'
+        description: 'The RSIN of the organization that owns this user'
         type: string
         example: '002851234'
         maxLength: 11
@@ -4831,7 +5007,7 @@ tags:
   -
     name: Token
     description: |
-      A token from an external identity proficer (like facebook).
+      A token from an external identity profider (like facebook).
       
       
   -

@@ -31,7 +31,7 @@ use App\Controller\DefaultController;
  * 	   "post",
  *     "login"={
  *         "method"="post",
- *         "path"="users/login",
+ *         "path"="login",
  *         "controller"=DefaultController::class,
  *         "read"=false
  *     		}
