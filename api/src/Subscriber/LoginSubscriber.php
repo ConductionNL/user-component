@@ -93,6 +93,7 @@ class LoginSubscriber implements EventSubscriberInterface
     				$contentType = 'application/json';
     				$renderType = 'json';
     		}
+    		
     		// now we need to overide the normal subscriber
     		$json = $this->serializer->serialize(
     			$user,

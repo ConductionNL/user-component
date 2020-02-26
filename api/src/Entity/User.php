@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,6 +44,7 @@ use App\Controller\DefaultController;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
  * @ORM\Table(name="userTable")
+ * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "exact", "person": "exact"})
  */
 class User implements UserInterface
 {
