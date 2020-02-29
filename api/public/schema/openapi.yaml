@@ -4594,14 +4594,9 @@ definitions:
       id:
         description: 'The (uu)id of this application'
         type: string
-        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
+        eaxample: '#/components/schemas/RamseyUuidUuidInterface-read'
         format: uuid
-      organization:
-        description: 'The RSIN of the organization that owns this application'
-        type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
+        example: 9b9eea1a-ef04-427d-b8bd-7f5c24801874
       name:
         description: 'The name of this application'
         type: string
