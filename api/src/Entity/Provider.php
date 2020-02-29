@@ -32,7 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Provider
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface  The (uu)id of this profider
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -61,9 +63,9 @@ class Provider
 	private $organization;
 	
 	/**
-	 * @var string The name of this menu
+	 * @var string The name of this Provider
 	 *
-	 * @example webshop menu
+	 * @example Facebook
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -75,9 +77,9 @@ class Provider
 	private $name;
 	
 	/**
-	 * @var string The description of this page.
+	 * @var string The description of this provider.
 	 *
-	 * @example This page holds info about this application
+	 * @example The facebook provider allows users to login with facebook
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -89,27 +91,31 @@ class Provider
 	private $description;
 
     /**
+     * @var array A list of tokens that belong to this provider
+	 * 
      * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="provider", orphanRemoval=true)
      */
 	private $tokens;
 	
 	/**
-	 * @var DateTime The moment this resource was created
+	 * @var Datetime $dateCreated The moment this request was created
 	 *
+     * @Assert\DateTime
 	 * @Groups({"read"})
 	 * @Gedmo\Timestampable(on="create")
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
-	private $createdAt;
+	private $dateCreated;
 	
 	/**
-	 * @var DateTime The last time this resource was changed
+	 * @var Datetime $dateModified  The moment this request last Modified
 	 *
+     * @Assert\DateTime
 	 * @Groups({"read"})
-	 * @Gedmo\Timestampable(on="update")
+	 * @Gedmo\Timestampable(on="create")
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
-	private $updatedAt;
+	private $dateModified;
 
     public function __construct()
     {
@@ -189,26 +195,26 @@ class Provider
         return $this;
     }
     
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->createdAt;
+    	return $this->dateCreated;
     }
     
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->createdAt = $createdAt;
+    	$this->dateCreated= $dateCreated;
     	
     	return $this;
     }
     
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->updatedAt;
+    	return $this->dateModified;
     }
     
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->updatedAt = $updatedAt;
+    	$this->dateModified = $dateModified;
     	
     	return $this;
     }

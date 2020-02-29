@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * A token from an external identity proficer (like facebook).
+ * A token from an external identity profider (like facebook).
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
@@ -32,7 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Token
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface The (uu)id of this token
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -46,20 +48,28 @@ class Token
 	private $id;
 
     /**
+	 * @var User The user that this token belongs to.
+	 * 
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
-    /**
+    /** 
+	 * @var Provider The provider that this scope belongs to.
+	 * 
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provider;
 
-    /**
+    /**     
+	 * @var string The actual token.
+	 * 
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
+	 * 
 	 * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -68,28 +78,31 @@ class Token
     /**
      * @var DateTime The moment this token expirec
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $validTill;
     
     /**
-     * @var DateTime The moment this token was created
+     * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createdAt;
+    private $dateCreated;
     
     /**
-     * @var DateTime The last time this token was changed
+     * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private $dateModified;
 
     public function getId()
     {
@@ -144,26 +157,26 @@ class Token
     	return $this;
     }
     
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->createdAt;
+    	return $this->dateCreated;
     }
     
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->createdAt = $createdAt;
+    	$this->dateCreated= $dateCreated;
     	
     	return $this;
     }
     
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->updatedAt;
+    	return $this->dateModified;
     }
     
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->updatedAt = $updatedAt;
+    	$this->dateModified = $dateModified;
     	
     	return $this;
     }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,7 +33,7 @@ use App\Controller\DefaultController;
  * 	   "post",
  *     "login"={
  *         "method"="post",
- *         "path"="users/login",
+ *         "path"="login",
  *         "controller"=DefaultController::class,
  *         "read"=false
  *     		}
@@ -42,11 +44,14 @@ use App\Controller\DefaultController;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
  * @ORM\Table(name="userTable")
+ * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "exact", "person": "exact"})
  */
 class User implements UserInterface
 {
     /**
-     * @var UuidInterface
+     * @var UuidInterface  The (uu)id of this group
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
      * @ORM\Id
@@ -59,7 +64,7 @@ class User implements UserInterface
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this product
+	 * @var string The RSIN of the organization that owns this user
 	 *
 	 * @example 002851234
 	 *
@@ -117,32 +122,38 @@ class User implements UserInterface
     
 
     /**
+     * @var array A list of groups to wichs this user belongs
+     * 
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
      */
     private $userGroups;
     
     /**
-     * @var DateTime The moment this resource was created
+     * @var array A list of tokens created for this user
+     * 
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
+     */
+    private $tokens;
+    
+    /**
+     * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createdAt;
+    private $dateCreated;
     
     /**
-     * @var DateTime The last time this resource was changed
+     * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
-     */
-    private $tokens;
+    private $dateModified;
 
     public function __construct()
     {
@@ -274,30 +285,6 @@ class User implements UserInterface
 
         return $this;
     }
-    
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-    	return $this->createdAt;
-    }
-    
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-    	$this->createdAt = $createdAt;
-    	
-    	return $this;
-    }
-    
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-    	return $this->updatedAt;
-    }
-    
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-    	$this->updatedAt = $updatedAt;
-    	
-    	return $this;
-    }
 
     /**
      * @return Collection|Token[]
@@ -328,5 +315,29 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+    
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+    	return $this->dateCreated;
+    }
+    
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+    	$this->dateCreated= $dateCreated;
+    	
+    	return $this;
+    }
+    
+    public function getDateModified(): ?\DateTimeInterface
+    {
+    	return $this->dateModified;
+    }
+    
+    public function setDateModified(\DateTimeInterface $dateModified): self
+    {
+    	$this->dateModified = $dateModified;
+    	
+    	return $this;
     }
 }

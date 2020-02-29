@@ -32,7 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Scope
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface $id The (uu)id of this scope
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
 	 * @Groups({"read"})
 	 * @ORM\Id
@@ -46,7 +48,7 @@ class Scope
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this product
+	 * @var string The RSIN of the organization that owns this scope
 	 *
 	 * @example 002851234
 	 *
@@ -61,9 +63,9 @@ class Scope
 	private $organization;
 	
 	/**
-	 * @var string The name of this menu
+	 * @var string The name of this scope
 	 *
-	 * @example webshop menu
+	 * @example contact.write
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -75,9 +77,9 @@ class Scope
 	private $name;
 	
 	/**
-	 * @var string The description of this page.
+	 * @var string The description of this scope.
 	 *
-	 * @example This page holds info about this application
+	 * @example This scope allows users to change contact objects
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -89,6 +91,8 @@ class Scope
 	private $description;
 
     /**
+	 * @var Application[] $application The application that this scope belongs to.
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
@@ -97,6 +101,8 @@ class Scope
     private $application;
 
     /**
+	 * @var Group[] $userGroups User groups that give this scope.
+	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
@@ -104,22 +110,24 @@ class Scope
     private $userGroups;
     
     /**
-     * @var DateTime The moment this resource was created
+     * @var Datetime $dateCreated The moment this request was created
      *
+     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createdAt;
+    private $dateCreated;
     
     /**
-     * @var DateTime The last time this resource was changed
+     * @var Datetime $dateModified  The moment this request last Modified
      *
+     * @Assert\DateTime
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private $dateModified;
 
     public function __construct()
     {
@@ -207,26 +215,26 @@ class Scope
         return $this;
     }
     
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->createdAt;
+    	return $this->dateCreated;
     }
     
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->createdAt = $createdAt;
+    	$this->dateCreated= $dateCreated;
     	
     	return $this;
     }
     
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->updatedAt;
+    	return $this->dateModified;
     }
     
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->updatedAt = $updatedAt;
+    	$this->dateModified = $dateModified;
     	
     	return $this;
     }
