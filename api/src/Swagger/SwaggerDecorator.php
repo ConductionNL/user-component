@@ -443,7 +443,7 @@ final class SwaggerDecorator implements NormalizerInterface
                         $clean = str_replace($strip,'', $atributes['type']);
                         if("\\" == $chr && !in_array($clean,$skip)){      
                         	// We have an object
-                        	//$atributes['$ref'] = '#/components/schemas/'.$clean.'-read'; 
+                        	$atributes['eaxample'] = '#/components/schemas/'.$clean.'-read'; 
                         	$atributes['type'] = 'object';
                         	$atributes['format'] = $clean;
                         }
