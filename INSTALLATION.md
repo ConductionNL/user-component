@@ -104,14 +104,14 @@ $ helm dependency update ./api/helm
 ```
 If you want to create a new instance
 ```CLI
-$ helm install --name uc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
-$ helm install --name uc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
-$ helm install --name uc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0
+$ helm install --name uc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig-digi.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
+$ helm install --name uc-stag ./api/helm --kubeconfig="api/helm/kubeconfig-digi.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
+$ helm install --name uc-prod ./api/helm --kubeconfig="api/helm/kubeconfig-digi.yaml" --namespace=prod --set settings.env=prod,settings.debug=0
 ```
 
 Or update if you want to update an existing one
 ```CLI
-$ helm upgrade uc-dev ./api/helm  --kubeconfig="api/helm/kubeconfigv.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
+$ helm upgrade uc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig-digi.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
 $ helm upgrade uc-stag ./api/helm --kubeconfig="api/helm/kubeconfig-digi.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
 $ helm upgrade uc-prod ./api/helm --kubeconfig="api/helm/kubeconfig-digi.yaml" --namespace=prod --set settings.env=prod,settings.debug=0
 ```

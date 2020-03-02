@@ -64,15 +64,12 @@ class User implements UserInterface
 	private $id;
 	
 	/**
-	 * @var string The RSIN of the organization that owns this user
+	 * @var string The WRC resource of the organization that owns this user
 	 *
-	 * @example 002851234
+	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
 	 *
 	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      min = 8,
-	 *      max = 11
-	 * )
+	 * @Assert\Url
 	 * @Groups({"read", "write"})
 	 * @ORM\Column(type="string", length=255)
 	 */
