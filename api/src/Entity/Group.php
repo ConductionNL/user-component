@@ -87,6 +87,24 @@ class Group
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $description;
+	
+	/**
+	 * @var Product The groupd that this group is part of
+	 *
+	 * @MaxDepth(1)
+	 * @Groups({"write"})
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="children")
+	 */
+	private $parent;
+	
+	/**
+	 * @var ArrayCollection Groups that are a part of this group
+	 *
+	 * @MaxDepth(1)
+	 * @Groups({"read"})
+	 * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="parent")
+	 */
+	private $children;
 
     /**
 	 * @var Scope[] $scopes The scopes that members of this group have
