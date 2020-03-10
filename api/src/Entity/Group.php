@@ -121,11 +121,11 @@ class Group
 	private $description;
 	
 	/**
-	 * @var Product The groupd that this group is part of
+	 * @var $parent Group The group that this group is part of
 	 *
 	 * @MaxDepth(1)
 	 * @Groups({"write"})
-	 * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="children")
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="children")
 	 */
 	private $parent;
 	
@@ -134,7 +134,7 @@ class Group
 	 *
 	 * @MaxDepth(1)
 	 * @Groups({"read"})
-	 * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="parent")
+	 * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="parent")
 	 */
 	private $children;
 
@@ -221,6 +221,49 @@ class Group
         $this->description = $description;
 
         return $this;
+    }
+    
+    public function getParent(): ?self
+    {
+    	return $this->parent;
+    }
+    
+    public function setParent(?self $parent): self
+    {
+    	$this->parent = $parent;
+    	
+    	return $this;
+    }
+    
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildren(): Collection
+    {
+    	return $this->children;
+    }
+    
+    public function addChild(self $child): self
+    {
+    	if (!$this->children->contains($child)) {
+    		$this->children[] = $child;
+    		$child->setParent($this);
+    	}
+    	
+    	return $this;
+    }
+    
+    public function removeChild(self $child): self
+    {
+    	if ($this->children->contains($child)) {
+    		$this->children->removeElement($child);
+    		// set the owning side to null (unless already changed)
+    		if ($child->getParent() === $this) {
+    			$child->setParent(null);
+    		}
+    	}
+    	
+    	return $this;
     }
 
     /**

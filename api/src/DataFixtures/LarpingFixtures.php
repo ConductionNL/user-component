@@ -4,11 +4,19 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 use App\Entity\Group;
 
-class AppFixtures extends Fixture
+class LarpingFixtures extends Fixture
 {
+	private $params;
+	
+	public function __construct(ParameterBagInterface $params)
+	{
+		$this->params = $params;
+	}
+	
     public function load(ObjectManager $manager)
     {
     	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
@@ -21,56 +29,56 @@ class AppFixtures extends Fixture
     	$users->setName('Users');
     	$users->setDescription('The Users of Vortex Adventures');
     	$users->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$users->persist($users);
+    	$manager->persist($users);
     	
     	$group= new Group();
     	$group->setName('Admin');
     	$group->setDescription('The Adminsrators of Vortex Adventures');
     	$group->setParent($users);    	
     	$group->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$group->persist($group);
+    	$manager->persist($group);
     	
     	$crew= new Group();
     	$crew->setName('Member');
     	$crew->setDescription('The Members of Vortex Adventures');
     	$crew->setParent($users);
     	$crew->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$crew->persist($crew);
+    	$manager->persist($crew);
     	
     	$crew= new Group();
     	$crew->setName('Crew');
     	$crew->setDescription('The Crew members of Vortex Adventures');
     	$crew->setParent($users);
     	$crew->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$crew->persist($crew);
+    	$manager->persist($crew);
     	
     	$group= new Group();
     	$group->setName('Game Masters');
     	$group->setDescription('The Game Masters of Vortex Adventures');
     	$group->setParent($crew);
     	$group->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$group->persist($group);
+    	$manager->persist($group);
     	
     	$group= new Group();
     	$group->setName('Volunteers');
     	$group->setDescription('The Volunteers of Vortex Adventures');
     	$group->setParent($crew);
     	$group->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$group->persist($group);
+    	$manager->persist($group);
     	
     	$group= new Group();
     	$group->setName('Extras');
     	$group->setDescription('The Extra\'s or npc\'s of Vortex Adventures');
     	$group->setParent($crew);
     	$group->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$group->persist($group);
+    	$manager->persist($group);
     	
     	$group= new Group();
     	$group->setName('Board');
     	$group->setDescription('The Board members of Vortex Adventures');
     	$group->setParent($crew);
     	$group->setOrganization('https://wrc.larping.eu/organizations/0972a00f-1893-4e9b-ac13-0e43f225eca5'); //VA
-    	$group->persist($group);
+    	$manager->persist($group);
 
         $manager->flush();
     }
