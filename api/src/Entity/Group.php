@@ -54,6 +54,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  * @ORM\Table(name="userGroup")
  * 
  * @ApiFilter(BooleanFilter::class)
@@ -82,6 +83,7 @@ class Group
 	 *
 	 * @example 002851234
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
@@ -97,6 +99,7 @@ class Group
 	 *
 	 * @example Admin
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      max = 255
@@ -111,6 +114,7 @@ class Group
 	 *
 	 * @example This group holds all the Admin members
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *     max = 255

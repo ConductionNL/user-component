@@ -54,6 +54,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\TokenRepository")
+ * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  * 
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
@@ -81,6 +82,7 @@ class Token
     /**
 	 * @var User The user that this token belongs to.
 	 * 
+     * @Gedmo\Versioned
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
@@ -101,6 +103,7 @@ class Token
 	 * 
      * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 * 
+     * @Gedmo\Versioned
 	 * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -109,6 +112,7 @@ class Token
     /**
      * @var DateTime The moment this token expirec
      *
+     * @Gedmo\Versioned
      * @Assert\DateTime
      * @Groups({"read"})
      * @ORM\Column(type="datetime", nullable=true)

@@ -54,6 +54,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProviderRepository")
+ * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  * 
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
@@ -83,6 +84,7 @@ class Provider
 	 *
 	 * @example 002851234
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
@@ -98,6 +100,7 @@ class Provider
 	 *
 	 * @example Facebook
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      max = 255
@@ -112,6 +115,7 @@ class Provider
 	 *
 	 * @example The facebook provider allows users to login with facebook
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *     max = 255

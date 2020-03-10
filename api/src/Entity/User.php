@@ -69,6 +69,7 @@ use App\Controller\DefaultController;
  * 		}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  *
  * @ORM\Table(name="userTable")
  * 
@@ -99,6 +100,7 @@ class User implements UserInterface
 	 *
 	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Url
 	 * @Groups({"read", "write"})
@@ -111,6 +113,7 @@ class User implements UserInterface
 	 *
 	 * @example 002851234
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
@@ -126,6 +129,7 @@ class User implements UserInterface
 	 *
 	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\Url
 	 * @Assert\Length(
 	 *      max = 255
