@@ -78,27 +78,10 @@ class Scope
 	 * @Assert\Uuid
 	 */
 	private $id;
-	
-	/**
-	 * @var string The RSIN of the organization that owns this scope
-	 *
-	 * @example 002851234
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      min = 8,
-	 *      max = 11
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $organization;
-	
 	/**
 	 * @var string The name of this scope
 	 *
-	 * @example contact.write
+	 * @example Write on contact
 	 *
      * @Gedmo\Versioned
 	 * @Assert\NotNull
@@ -124,16 +107,55 @@ class Scope
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $description;
-
-    /**
-	 * @var Application[] $application The application that this scope belongs to.
-	 * 
+	
+	/**
+	 * @var string $code The code of this scope
+	 *
+	 * @example contact.write
+	 *
+	 * @Gedmo\Versioned
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *      max = 255
+	 * )
 	 * @Groups({"read","write"})
-     * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $application;
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $code;
+	
+	/**
+	 * @var string The RSIN of the organization that owns this scope
+	 *
+	 * @example 002851234
+	 *
+	 * @Gedmo\Versioned
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *      min = 8,
+	 *      max = 11
+	 * )
+	 * @Groups({"read", "write"})
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $organization;
+		
+	
+	/**
+	 * @var string $application The RSIN of the organization that owns this scope
+	 *
+	 * @example 002851234
+	 *
+	 * @Gedmo\Versioned
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *      min = 8,
+	 *      max = 11
+	 * )
+	 * @Groups({"read", "write"})
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $application;
+	
 
     /**
 	 * @var Group[] $userGroups User groups that give this scope.
@@ -209,13 +231,25 @@ class Scope
 
         return $this;
     }
-
-    public function getApplication(): ?Application
+    
+    public function getCode(): ?string
+    {
+    	return $this->code;
+    }
+    
+    public function setCode(string $code): self
+    {
+    	$this->code = $code;
+    	
+    	return $this;
+    }
+    
+    public function getApplication(): ?string
     {
         return $this->application;
     }
 
-    public function setApplication(?Application $application): self
+    public function setApplication(?string $application): self
     {
         $this->application = $application;
 
