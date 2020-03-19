@@ -140,7 +140,7 @@ class User implements UserInterface
 	private $person;
 
     /**
-     * @ORM\Column(type="json")
+	 * @Groups({"read"})
      */
     private $roles = [];
 
@@ -156,7 +156,7 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      * 
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;
     
@@ -244,18 +244,16 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles = ['user'];
+        
+        foreach($this->getUserGroups() as $group ){
+        	$roles[] = 'group.'.$group->getCode();
+        	foreach ($group->getScopes() as $scope) {
+        		$roles[] = 'scope.'.$scope->getCode();        		
+        	}
+        }
 
         return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
     }
 
     /**

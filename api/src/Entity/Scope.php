@@ -114,11 +114,8 @@ class Scope
 	 * @example contact.write
 	 *
 	 * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read","write"})
+     * @Gedmo\Slug(fields={"name"})
+	 * @Groups({"read"})
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $code;

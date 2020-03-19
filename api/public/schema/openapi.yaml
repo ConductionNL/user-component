@@ -3365,6 +3365,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[code]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[dateCreated]'
           in: query
           required: false
@@ -3486,6 +3495,22 @@ paths:
             type: string
         -
           name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'code[]'
           in: query
           required: false
           schema:
@@ -7765,15 +7790,6 @@ paths:
               - asc
               - desc
         -
-          name: 'order[roles]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[password]'
           in: query
           required: false
@@ -8963,6 +8979,10 @@ components:
         description:
           description: 'The description of this group.'
           type: string
+        code:
+          readOnly: true
+          description: 'The code of this scope'
+          type: string
         children:
           readOnly: true
           description: 'Groups that are a part of this group'
@@ -9055,6 +9075,10 @@ components:
           type: string
         description:
           description: 'The description of this group.'
+          type: string
+        code:
+          readOnly: true
+          description: 'The code of this scope'
           type: string
         children:
           readOnly: true
@@ -9273,6 +9297,7 @@ components:
           description: 'The description of this scope.'
           type: string
         code:
+          readOnly: true
           description: 'The code of this scope'
           type: string
         organization:
@@ -9303,7 +9328,6 @@ components:
       required:
         - name
         - description
-        - code
         - organization
         - application
     Scope-write:
@@ -9312,7 +9336,6 @@ components:
       required:
         - name
         - description
-        - code
         - organization
         - application
       properties:
@@ -9321,9 +9344,6 @@ components:
           type: string
         description:
           description: 'The description of this scope.'
-          type: string
-        code:
-          description: 'The code of this scope'
           type: string
         organization:
           description: 'The RSIN of the organization that owns this scope'
@@ -9362,6 +9382,7 @@ components:
           description: 'The description of this scope.'
           type: string
         code:
+          readOnly: true
           description: 'The code of this scope'
           type: string
         organization:
@@ -9392,7 +9413,6 @@ components:
       required:
         - name
         - description
-        - code
         - organization
         - application
     'Scope:jsonld-write':
@@ -9401,7 +9421,6 @@ components:
       required:
         - name
         - description
-        - code
         - organization
         - application
       properties:
@@ -9419,9 +9438,6 @@ components:
           type: string
         description:
           description: 'The description of this scope.'
-          type: string
-        code:
-          description: 'The code of this scope'
           type: string
         organization:
           description: 'The RSIN of the organization that owns this scope'
@@ -9581,6 +9597,11 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        roles:
+          readOnly: true
+          type: array
+          items:
+            type: string
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
@@ -9654,6 +9675,11 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        roles:
+          readOnly: true
+          type: array
+          items:
+            type: string
         dateCreated:
           readOnly: true
           description: 'The moment this request was created'
@@ -9732,12 +9758,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9874,12 +9900,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
     required: []
   AuditTrail-write:
     properties:
@@ -9927,12 +9953,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
     required: []
   ChangeLog-write:
     properties:
@@ -9964,16 +9990,20 @@ definitions:
         type: string
         example: 'This group holds all the Admin members'
         maxLength: 255
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -10045,12 +10075,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
     required:
       - organization
       - name
@@ -10098,7 +10128,6 @@ definitions:
         description: 'The code of this scope'
         type: string
         example: contact.write
-        maxLength: 255
       organization:
         description: 'The RSIN of the organization that owns this scope'
         type: string
@@ -10115,19 +10144,18 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       userGroups:
         description: 'User groups that give this scope.'
         type: '\Group[]'
     required:
       - name
       - description
-      - code
       - organization
       - application
   Scope-write:
@@ -10141,11 +10169,6 @@ definitions:
         description: 'The description of this scope.'
         type: string
         example: 'This scope allows users to change contact objects'
-        maxLength: 255
-      code:
-        description: 'The code of this scope'
-        type: string
-        example: contact.write
         maxLength: 255
       organization:
         description: 'The RSIN of the organization that owns this scope'
@@ -10165,7 +10188,6 @@ definitions:
     required:
       - name
       - description
-      - code
       - organization
       - application
   Token-read:
@@ -10183,17 +10205,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10242,12 +10264,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:35:11'
+        example: '2020-03-19 07:46:33'
     required:
       - organization
       - username

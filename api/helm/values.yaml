@@ -17,8 +17,8 @@ settings:
     - conduction.nl
     - zaakonline.nl
     - huwelijksplanner.online
-    - common-ground.dev
-  domainsJson: ["conduction.nl","zaakonline.nl","huwelijksplanner.online","common-ground.dev"]
+    - larping.eu
+  domainsJson: ["conduction.nl","zaakonline.nl","huwelijksplanner.online","larping.eu"]
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
