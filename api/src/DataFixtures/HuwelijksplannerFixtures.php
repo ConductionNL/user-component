@@ -25,9 +25,9 @@ class HuwelijksplannerFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
     	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
-    	if(!in_array("huwelijksplanner.online",$this->params->get('app_domains'))){
-    		return false;
-    	}
+    	//if(!in_array("huwelijksplanner.online",$this->params->get('app_domains'))){
+    	//	return false;
+    	//}
     	
     	$userTest= New User();
     	$userTest->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
