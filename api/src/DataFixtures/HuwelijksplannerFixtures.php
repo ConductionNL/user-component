@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\User;
 use App\Entity\Group;
@@ -13,41 +14,49 @@ use App\Entity\Scope;
 class HuwelijksplannerFixtures extends Fixture
 {
 	private $params;
+	private $encoder;
 	
-	public function __construct(ParameterBagInterface $params)
+	public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
 	{
 		$this->params = $params;
+		$this->encoder = $encoder;
 	}
 	
     public function load(ObjectManager $manager)
     {
     	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
-    	if(!in_array("huwelijksplanner.online",$this->params->get('app_domains'))){
-    		return false;
-    	}
+    	//if(!in_array("huwelijksplanner.online",$this->params->get('app_domains'))){
+    	//	return false;
+    	//}
+    	
+    	$userTest= New User();
+    	$userTest->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+    	$userTest->setUsername('test@utrecht.nl');
+    	$userTest->setPassword($this->encoder->encodePassword($userTest, 'test1234'));
+    	$manager->persist($userTest);    	
     	
     	$userBalie= New User();
     	$userBalie->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$userBalie->setUsername('balie@utrecht.nl'); 
-    	$userBalie->setPassword('test1234');
+    	$userBalie->setPassword($this->encoder->encodePassword($userBalie, 'test1234')) ;
     	$manager->persist($userBalie);    	
     	
     	$userLocatie = New User();
     	$userLocatie->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$userLocatie->setUsername('locatie@utrecht.nl');
-    	$userLocatie->setPassword('test1234');
+    	$userLocatie->setPassword('test1234' );
     	$manager->persist($userLocatie);    	
     	
     	$usertTrouwambtenaar = New User();
     	$usertTrouwambtenaar->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$usertTrouwambtenaar->setUsername('trouwambtenaar@utrecht.nl');
-    	$usertTrouwambtenaar->setPassword('test1234');
+    	$usertTrouwambtenaar->setPassword($this->encoder->encodePassword($usertTrouwambtenaar, 'test1234'));
     	$manager->persist($usertTrouwambtenaar);
     	
     	$userBeheer = New User();
     	$userBeheer->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$userBeheer->setUsername('beheer@utrecht.nl');
-    	$userBeheer->setPassword('test1234');
+    	$userBeheer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
     	$manager->persist($userBeheer);
     	
     	// Vortex Adventures

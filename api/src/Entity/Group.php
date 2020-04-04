@@ -125,6 +125,18 @@ class Group
 	private $description;
 	
 	/**
+	 * @var string $code The code of this scope
+	 *
+	 * @example contact.write
+	 *
+	 * @Gedmo\Versioned
+	 * @Gedmo\Slug(fields={"name"})
+	 * @Groups({"read"})
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $code;
+	
+	/**
 	 * @var $parent Group The group that this group is part of
 	 *
 	 * @MaxDepth(1)
@@ -147,7 +159,7 @@ class Group
 	 * 
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups", fetch="EAGER")
      */
     private $scopes;
 
@@ -225,6 +237,18 @@ class Group
         $this->description = $description;
 
         return $this;
+    }
+    
+    public function getCode(): ?string
+    {
+    	return $this->code;
+    }
+    
+    public function setCode(string $code): self
+    {
+    	$this->code = $code;
+    	
+    	return $this;
     }
     
     public function getParent(): ?self

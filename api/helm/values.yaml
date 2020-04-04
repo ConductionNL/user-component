@@ -13,20 +13,16 @@ settings:
   demo: uc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/uc-php
   subdomain: pc  
-  domains:
-    - conduction.nl
-    - zaakonline.nl
-    - huwelijksplanner.online
-    - common-ground.dev
-  domainsJson: ["conduction.nl","zaakonline.nl","huwelijksplanner.online","common-ground.dev"]
+  type: component
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
   state: Noord-Holland
   locality: Amsterdam
-  unit: Common-Ground  
+  unit: Common-Ground
   env: dev
   debug: 1
+  cache: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
   trustedHosts: '127.0.0.1$|^(.+\.)?conduction\.nl$|^(.+\.)?huwelijksplanner\.online$|^(.+\.)?larping\.eu$|^(.+\.)?common-ground\.dev$|^(.+\.)?trouwplanner\.online$|^(.+\.)?zaakonline\.nl$|localhost'
