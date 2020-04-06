@@ -29,7 +29,6 @@ class LarpingFixtures extends Fixture
             return false;
         }
 
-
     	$user= New User();
     	$user->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Larping
     	$user->setUsername('test@larping.eu');
