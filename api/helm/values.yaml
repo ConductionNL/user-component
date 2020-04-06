@@ -9,11 +9,12 @@ settings:
   title: User Component
   version: V.0.1
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
-  repro: https://github.com/ConductionNL/user-component
-  demo: uc.zaakonline.nl
-  container: https://hub.docker.com/repository/docker/conduction/uc-php
-  subdomain: pc  
   type: component
+  repro: https://github.com/ConductionNL/Proto-component-commonground
+  demo: pc.zaakonline.nl
+  container: https://hub.docker.com/repository/docker/conduction/uc-php
+  domain: conduction.nl
+  subdomain: pc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
