@@ -43,6 +43,14 @@ class ConductionFixtures extends Fixture
     	$groupUsers->addUser($user);
     	$manager->persist($groupUsers);
 
+        $groupBeheer = new Group();
+        $groupBeheer->setName('Beheerder');
+        $groupBeheer->setDescription('De beheerders die de congiruatie inregelen');
+        $groupBeheer->setParent(v);
+        $groupBeheer->setOrganization('https://wrc.conduction.nl/organizations/organizations/39405560-7859-4d16-943b-042d6c053a0f'); // Utrecht
+        $groupBeheer->addUser($user);
+        $manager->persist($groupBeheer);
+
         $manager->flush();
     }
 }
