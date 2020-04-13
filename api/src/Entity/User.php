@@ -39,7 +39,6 @@ use App\Controller\DefaultController;
  *     itemOperations={
  *          "get",
  *          "put",
- *          "post",
  *          "delete",
  *          "get_change_logs"={
  *              "path"="/users/{id}/change_log",
