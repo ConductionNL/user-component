@@ -7,6 +7,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+use App\Entity\User;
+use App\Entity\Group;
+use App\Entity\Scope;
+
 class AppFixtures extends Fixture
 {
     private $params;
