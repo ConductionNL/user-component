@@ -11,7 +11,7 @@ use App\Entity\User;
 use App\Entity\Group;
 use App\Entity\Scope;
 
-class LarpingFixtures extends Fixture
+class ConductionFixtures extends Fixture
 {
 	private $params;
 	private $encoder;
