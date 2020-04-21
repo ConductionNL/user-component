@@ -8442,6 +8442,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The RSIN of the organization that owns this application'
           type: string
@@ -8515,6 +8516,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The RSIN of the organization that owns this application'
           type: string
@@ -8974,6 +8976,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The RSIN of the organization that owns this group'
           type: string
@@ -9040,7 +9043,7 @@ components:
           type: string
         parent:
           writeOnly: true
-          description: 'Group The group that this group is part of'
+          description: ' The group that this group is part of'
           $ref: '#/components/schemas/Group-write'
         scopes:
           description: 'The scopes that members of this group have'
@@ -9071,6 +9074,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The RSIN of the organization that owns this group'
           type: string
@@ -9146,7 +9150,7 @@ components:
           type: string
         parent:
           writeOnly: true
-          description: 'Group The group that this group is part of'
+          description: ' The group that this group is part of'
           $ref: '#/components/schemas/Group:jsonld-write'
         scopes:
           description: 'The scopes that members of this group have'
@@ -9168,6 +9172,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The RSIN of the organization that owns this product'
           type: string
@@ -9231,6 +9236,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The RSIN of the organization that owns this product'
           type: string
@@ -9294,6 +9300,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         name:
           description: 'The name of this scope'
           type: string
@@ -9379,6 +9386,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         name:
           description: 'The name of this scope'
           type: string
@@ -9464,6 +9472,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         user:
           description: 'The user that this token belongs to.'
           $ref: '#/components/schemas/User-read'
@@ -9526,6 +9535,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         user:
           description: 'The user that this token belongs to.'
           $ref: '#/components/schemas/User:jsonld-read'
@@ -9588,6 +9598,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The WRC resource of the organization that owns this user'
           externalDocs:
@@ -9666,6 +9677,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'The WRC resource of the organization that owns this user'
           externalDocs:
@@ -9762,12 +9774,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9904,12 +9916,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
     required: []
   AuditTrail-write:
     properties:
@@ -9957,12 +9969,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
     required: []
   ChangeLog-write:
     properties:
@@ -10002,12 +10014,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -10040,7 +10052,7 @@ definitions:
         example: 'This group holds all the Admin members'
         maxLength: 255
       parent:
-        description: 'Group The group that this group is part of'
+        description: ' The group that this group is part of'
         type: ''
       scopes:
         description: 'The scopes that members of this group have'
@@ -10079,12 +10091,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
     required:
       - organization
       - name
@@ -10148,12 +10160,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       userGroups:
         description: 'User groups that give this scope.'
         type: '\Group[]'
@@ -10209,17 +10221,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10268,12 +10280,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:38:44'
+        example: '2020-04-21 14:03:00'
     required:
       - organization
       - username
@@ -10370,7 +10382,7 @@ host: irc.zaakonline.nl
 servers:
   -
     name: conduction.nl
-    url: pc.dev.conduction.nl
+    url: uc.dev.conduction.nl
 externalDocs:
   -
     description: 'OAS Documentatie'
