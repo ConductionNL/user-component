@@ -11,11 +11,11 @@ settings:
   id: 
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
   type: component
-  repro: https://github.com/ConductionNL/Proto-component-commonground
+  repro: https://github.com/ConductionNL/user-component
   demo: pc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/uc-php
   domain: conduction.nl
-  subdomain: pc
+  subdomain: uc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
@@ -27,7 +27,7 @@ settings:
   cache: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
-  trustedHosts: '^localhost$|^127.0.0.1$|^(.+\.)?conduction\.nl$'
+  trustedHosts: '^localhost$|^127.0.0.1$|^(.+\.)?conduction\.nl$|^(.+\.)?huwelijksplanner\.online$'
   pullPolicy: Always
   # You will need these proxies on kubernetes
   trustedProxies:
