@@ -41,7 +41,7 @@ use App\Controller\DefaultController;
  *          "put",
  *          "delete",
  *          "get_change_logs"={
- *              "path"="/adresses/{id}/change_log",
+ *              "path"="/users/{id}/change_log",
  *              "method"="get",
  *              "swagger_context" = {
  *                  "summary"="Changelogs",
@@ -49,7 +49,7 @@ use App\Controller\DefaultController;
  *              }
  *          },
  *          "get_audit_trail"={
- *              "path"="/adresses/{id}/audit_trail",
+ *              "path"="/users/{id}/audit_trail",
  *              "method"="get",
  *              "swagger_context" = {
  *                  "summary"="Audittrail",
@@ -72,7 +72,7 @@ use App\Controller\DefaultController;
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  *
  * @ORM\Table(name="userTable")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -94,7 +94,7 @@ class User implements UserInterface
      * @Assert\Uuid
      */
 	private $id;
-	
+
 	/**
 	 * @var string The WRC resource of the organization that owns this user
 	 *
@@ -107,7 +107,7 @@ class User implements UserInterface
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $organization;
-	
+
 	/**
 	 * @var string  $username A unique visual identifier that represents this user.
 	 *
@@ -123,9 +123,9 @@ class User implements UserInterface
 	 * @ORM\Column(type="string", length=255, unique = true)
 	 */
 	private $username;
-	
+
 	/**
-	 * @var string $person A contact component person 
+	 * @var string $person A contact component person
 	 *
 	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
 	 *
@@ -146,27 +146,27 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * 
+     *
      * @Groups({"write"})
      * @ORM\Column(type="string")
      */
     private $password;
-    
+
 
     /**
      * @var array A list of groups to wichs this user belongs
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;
-    
+
     /**
      * @var array A list of tokens created for this user
-     * 
+     *
      * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
      */
     private $tokens;
-    
+
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
@@ -176,7 +176,7 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
-    
+
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
@@ -197,31 +197,31 @@ class User implements UserInterface
     {
     	return $this->id;
     }
-    
+
     public function getOrganization(): ?string
     {
     	return $this->organization;
     }
-    
+
     public function setOrganization(?string $organization): self
     {
     	$this->organization = $organization;
-    	
+
     	return $this;
     }
-    
+
     public function getPerson(): ?string
     {
     	return $this->person;
     }
-    
+
     public function setPerson(?string $person): self
     {
     	$this->person = $person;
-    	
+
     	return $this;
     }
-    
+
     /**
      * A visual identifier that represents this user.
      *
@@ -231,11 +231,11 @@ class User implements UserInterface
     {
         return $this->username;
     }
-    
+
     public function setUsername(?string $username): self
     {
     	$this->username = $username;
-    	
+
     	return $this;
     }
 
@@ -245,11 +245,11 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = ['user'];
-        
+
         foreach($this->getUserGroups() as $group ){
         	$roles[] = 'group.'.$group->getCode();
         	foreach ($group->getScopes() as $scope) {
-        		$roles[] = 'scope.'.$scope->getCode();        		
+        		$roles[] = 'scope.'.$scope->getCode();
         	}
         }
 
@@ -261,7 +261,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password; 
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -287,7 +287,7 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-    
+
     /**
      * @return Collection|Group[]
      */
@@ -346,28 +346,28 @@ class User implements UserInterface
 
         return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }

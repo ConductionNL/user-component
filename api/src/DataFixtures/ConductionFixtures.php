@@ -11,7 +11,7 @@ use App\Entity\User;
 use App\Entity\Group;
 use App\Entity\Scope;
 
-class LarpingFixtures extends Fixture
+class ConductionFixtures extends Fixture
 {
 	private $params;
 	private $encoder;
@@ -24,8 +24,8 @@ class LarpingFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-    	// Lets make sure we only run these fixtures on larping enviroment
-        if (strpos($this->params->get('app_domain'), "conduction.nl") == false) {
+        // Lets make sure we only run these fixtures on larping enviroment
+        if ($this->params->get('app_domain') != "conduction.nl" && strpos($this->params->get('app_domain'), "conduction.nl") == false) {
             return false;
         }
 
@@ -42,6 +42,14 @@ class LarpingFixtures extends Fixture
     	$groupUsers->setOrganization('https://wrc.conduction.nl/organizations/organizations/39405560-7859-4d16-943b-042d6c053a0f'); // Larping
     	$groupUsers->addUser($user);
     	$manager->persist($groupUsers);
+
+        $groupBeheer = new Group();
+        $groupBeheer->setName('Beheerders');
+        $groupBeheer->setDescription('De beheerders die de congiruatie inregelen');
+        $groupBeheer->setParent($groupUsers);
+        $groupBeheer->setOrganization('https://wrc.conduction.nl/organizations/organizations/39405560-7859-4d16-943b-042d6c053a0f'); // Utrecht
+        $groupBeheer->addUser($user);
+        $manager->persist($groupBeheer);
 
         $manager->flush();
     }
