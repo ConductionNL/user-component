@@ -8,7 +8,7 @@ info:
     - Reference: uc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/Proto-component-commonground) / [zip](https://github.com/ConductionNL/Proto-component-commonground/archive/master.zip)
+    - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/uc-php) 
     - Datamodel: [postman](/schema/uc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
@@ -9774,12 +9774,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:28'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9916,12 +9916,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:0
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-13 11:43:10'
+        example: '2020-04-21 20:37:29'
     required: []
   AuditTrail-write:
     properties:
@@ -9969,12 +9969,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
     required: []
   ChangeLog-write:
     properties:
@@ -10014,12 +10014,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -10091,12 +10091,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
     required:
       - organization
       - name
@@ -10160,12 +10160,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:0
+        example: '2020-04-21 20:37:29'
       userGroups:
         description: 'User groups that give this scope.'
         type: '\Group[]'
@@ -10221,17 +10221,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10280,12 +10280,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 14:03:00'
+        example: '2020-04-21 20:37:29'
     required:
       - organization
       - username
