@@ -68,6 +68,7 @@ class HuwelijksplannerFixtures extends Fixture
     	$groupUsers->addUser($userLocatie);
     	$groupUsers->addUser($usertTrouwambtenaar);
     	$groupUsers->addUser($userBeheer);
+    	$groupUsers->addUser($userTest);
     	$manager->persist($groupUsers);
 
     	$groupBalie = new Group();
@@ -76,6 +77,7 @@ class HuwelijksplannerFixtures extends Fixture
     	$groupBalie->setParent($groupUsers);
     	$groupBalie->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$groupBalie->addUser($userBalie);
+        $groupBalie->addUser($userTest);
     	$manager->persist($groupBalie);
 
     	$groupLocatie= new Group();
@@ -84,6 +86,7 @@ class HuwelijksplannerFixtures extends Fixture
     	$groupLocatie->setParent($groupUsers);
     	$groupLocatie->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$groupLocatie->addUser($userLocatie);
+        $groupLocatie->addUser($userTest);
     	$manager->persist($groupLocatie);
 
     	$groupTrouwambtenaar= new Group();
@@ -92,6 +95,7 @@ class HuwelijksplannerFixtures extends Fixture
     	$groupTrouwambtenaar->setParent($groupUsers);
     	$groupTrouwambtenaar->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$groupTrouwambtenaar->addUser($usertTrouwambtenaar);
+        $groupTrouwambtenaar->addUser($userTest);
     	$manager->persist($groupTrouwambtenaar);
 
     	$groupBeheer = new Group();
@@ -110,6 +114,72 @@ class HuwelijksplannerFixtures extends Fixture
     	$scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$scope->addUserGroup($groupBeheer);
     	$manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Medewerkers bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('mrc.employees.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Locaties bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('lc.accommodations.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $scope->addUserGroup($groupLocatie);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Plekken bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('lc.places.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $scope->addUserGroup($groupLocatie);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Medewerkers bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('irc.assents.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $scope->addUserGroup($groupBalie);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Medewerkers bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('uc.users.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Medewerkers bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('uc.groups.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('Medewerkers bewerken');
+        $scope->setDescription('Kunnen schrijven op een verzoek');
+        $scope->setCode('uc.scopes.write');
+        $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
+        $scope->addUserGroup($groupBeheer);
+        $manager->persist($scope);
 
         $manager->flush();
     }
