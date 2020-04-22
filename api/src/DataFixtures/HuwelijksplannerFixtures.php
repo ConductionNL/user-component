@@ -26,7 +26,7 @@ class HuwelijksplannerFixtures extends Fixture
     {
     	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
         if (strpos($this->params->get('app_domain'), "huwelijksplanner.online") == false) {
-            return false;
+            //return false;
         }
 
     	$userTest= New User();
