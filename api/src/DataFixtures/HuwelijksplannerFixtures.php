@@ -104,6 +104,7 @@ class HuwelijksplannerFixtures extends Fixture
     	$groupBeheer->setParent($groupUsers);
     	$groupBeheer->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$groupBeheer->addUser($userBeheer);
+        $groupTrouwambtenaar->addUser($userTest);
     	$manager->persist($groupBeheer);
 
     	$scope = new Scope();
