@@ -56,7 +56,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  * @ORM\Table(name="userGroup")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -77,7 +77,7 @@ class Group
 	 * @Assert\Uuid
 	 */
 	private $id;
-	
+
 	/**
 	 * @var string $organization The RSIN of the organization that owns this group
 	 *
@@ -93,7 +93,7 @@ class Group
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $organization;
-	
+
 	/**
 	 * @var string $name The name of this group
 	 *
@@ -108,7 +108,7 @@ class Group
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
-	
+
 	/**
 	 * @var string $description The description of this group.
 	 *
@@ -123,7 +123,7 @@ class Group
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $description;
-	
+
 	/**
 	 * @var string $code The code of this scope
 	 *
@@ -135,7 +135,7 @@ class Group
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $code;
-	
+
 	/**
 	 * @var $parent Group The group that this group is part of
 	 *
@@ -144,7 +144,7 @@ class Group
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="children")
 	 */
 	private $parent;
-	
+
 	/**
 	 * @var ArrayCollection Groups that are a part of this group
 	 *
@@ -156,22 +156,22 @@ class Group
 
     /**
 	 * @var Scope[] $scopes The scopes that members of this group have
-	 * 
+	 *
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups", fetch="EAGER")
      */
     private $scopes;
 
-    /**     
+    /**
 	 * @var User[] $users The users that belong to this group
-	 * 
+	 *
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userGroups")
      */
     private $users;
-    
+
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
@@ -181,13 +181,13 @@ class Group
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
-    
+
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
      * @Assert\DateTime
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="create")
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
@@ -202,16 +202,16 @@ class Group
     {
         return $this->id;
     }
-    
+
     public function getOrganization(): ?string
     {
     	return $this->organization;
     }
-    
+
     public function setOrganization(?string $organization): self
     {
     	$this->organization = $organization;
-    	
+
     	return $this;
     }
 
@@ -238,31 +238,31 @@ class Group
 
         return $this;
     }
-    
+
     public function getCode(): ?string
     {
     	return $this->code;
     }
-    
+
     public function setCode(string $code): self
     {
     	$this->code = $code;
-    	
+
     	return $this;
     }
-    
+
     public function getParent(): ?self
     {
     	return $this->parent;
     }
-    
+
     public function setParent(?self $parent): self
     {
     	$this->parent = $parent;
-    	
+
     	return $this;
     }
-    
+
     /**
      * @return Collection|self[]
      */
@@ -270,17 +270,17 @@ class Group
     {
     	return $this->children;
     }
-    
+
     public function addChild(self $child): self
     {
     	if (!$this->children->contains($child)) {
     		$this->children[] = $child;
     		$child->setParent($this);
     	}
-    	
+
     	return $this;
     }
-    
+
     public function removeChild(self $child): self
     {
     	if ($this->children->contains($child)) {
@@ -290,7 +290,7 @@ class Group
     			$child->setParent(null);
     		}
     	}
-    	
+
     	return $this;
     }
 
@@ -345,28 +345,28 @@ class Group
 
         return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }
