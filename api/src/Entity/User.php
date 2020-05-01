@@ -182,7 +182,7 @@ class User implements UserInterface
      *
      * @Assert\DateTime
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="create")
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;

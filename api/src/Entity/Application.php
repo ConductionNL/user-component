@@ -55,7 +55,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ApplicationRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -78,7 +78,7 @@ class Application
 	 * @Assert\Uuid
 	 */
 	private $id;
-	
+
 	/**
 	 * @var string The RSIN of the organization that owns this application
 	 *
@@ -94,7 +94,7 @@ class Application
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $organization;
-	
+
 	/**
 	 * @var string The name of this application
 	 *
@@ -109,7 +109,7 @@ class Application
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
-	
+
 	/**
 	 * @var string The description of this application.
 	 *
@@ -127,13 +127,13 @@ class Application
 
     /**
 	 * @var Scope[] A list of scopes that are posible on this application.
-	 * 
+	 *
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity="App\Entity\Scope", mappedBy="application", orphanRemoval=true)
      */
 	private $scopes;
-	
+
 	/**
 	 * @var Datetime $dateCreated The moment this request was created
 	 *
@@ -143,13 +143,13 @@ class Application
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	private $dateCreated;
-	
+
 	/**
 	 * @var Datetime $dateModified  The moment this request last Modified
 	 *
      * @Assert\DateTime
 	 * @Groups({"read"})
-	 * @Gedmo\Timestampable(on="create")
+	 * @Gedmo\Timestampable(on="update")
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	private $dateModified;
@@ -163,16 +163,16 @@ class Application
     {
         return $this->id;
     }
-    
+
     public function getOrganization(): ?string
     {
     	return $this->organization;
     }
-    
+
     public function setOrganization(?string $organization): self
     {
     	$this->organization = $organization;
-    	
+
     	return $this;
     }
 
@@ -230,28 +230,28 @@ class Application
 
         return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }
