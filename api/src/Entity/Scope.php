@@ -55,7 +55,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ScopeRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -92,22 +92,21 @@ class Scope
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
-	
+
 	/**
 	 * @var string The description of this scope.
 	 *
 	 * @example This scope allows users to change contact objects
 	 *
      * @Gedmo\Versioned
-	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *     max = 255
 	 * )
 	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $description;
-	
+
 	/**
 	 * @var string $code The code of this scope
 	 *
@@ -119,50 +118,48 @@ class Scope
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $code;
-	
+
 	/**
 	 * @var string The RSIN of the organization that owns this scope
 	 *
 	 * @example 002851234
 	 *
 	 * @Gedmo\Versioned
-	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 11
 	 * )
 	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $organization;
-		
-	
+
+
 	/**
 	 * @var string $application The RSIN of the organization that owns this scope
 	 *
 	 * @example 002851234
 	 *
 	 * @Gedmo\Versioned
-	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 11
 	 * )
 	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $application;
-	
+
 
     /**
 	 * @var Group[] $userGroups User groups that give this scope.
-	 * 
+	 *
 	 * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
      */
     private $userGroups;
-    
+
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
@@ -172,7 +169,7 @@ class Scope
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
-    
+
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
@@ -192,16 +189,16 @@ class Scope
     {
         return $this->id;
     }
-    
+
     public function getOrganization(): ?string
     {
     	return $this->organization;
     }
-    
+
     public function setOrganization(?string $organization): self
     {
     	$this->organization = $organization;
-    	
+
     	return $this;
     }
 
@@ -228,19 +225,19 @@ class Scope
 
         return $this;
     }
-    
+
     public function getCode(): ?string
     {
     	return $this->code;
     }
-    
+
     public function setCode(string $code): self
     {
     	$this->code = $code;
-    	
+
     	return $this;
     }
-    
+
     public function getApplication(): ?string
     {
         return $this->application;
@@ -280,28 +277,28 @@ class Scope
 
         return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }
