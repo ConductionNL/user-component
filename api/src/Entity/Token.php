@@ -55,7 +55,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\TokenRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -81,7 +81,7 @@ class Token
 
     /**
 	 * @var User The user that this token belongs to.
-	 * 
+	 *
      * @Gedmo\Versioned
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
@@ -89,26 +89,26 @@ class Token
      */
     private $user;
 
-    /** 
+    /**
 	 * @var Provider The provider that this scope belongs to.
-	 * 
+	 *
 	 * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provider;
 
-    /**     
+    /**
 	 * @var string The actual token.
-	 * 
+	 *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 * 
+	 *
      * @Gedmo\Versioned
 	 * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $token;
-    
+
     /**
      * @var DateTime The moment this token expirec
      *
@@ -118,7 +118,7 @@ class Token
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $validTill;
-    
+
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
@@ -128,13 +128,13 @@ class Token
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
-    
+
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
      * @Assert\DateTime
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="create")
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
@@ -179,40 +179,40 @@ class Token
 
         return $this;
     }
-    
+
     public function getValidTill(): ?\DateTimeInterface
     {
     	return $this->validTill;
     }
-    
+
     public function setValidTill(\DateTimeInterface $validTill): self
     {
     	$this->validTill = $validTill;
-    	
+
     	return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }

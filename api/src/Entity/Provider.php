@@ -55,7 +55,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProviderRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -78,7 +78,7 @@ class Provider
 	 * @Assert\Uuid
 	 */
 	private $id;
-	
+
 	/**
 	 * @var string The RSIN of the organization that owns this product
 	 *
@@ -94,7 +94,7 @@ class Provider
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $organization;
-	
+
 	/**
 	 * @var string The name of this Provider
 	 *
@@ -109,7 +109,7 @@ class Provider
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
-	
+
 	/**
 	 * @var string The description of this provider.
 	 *
@@ -127,11 +127,11 @@ class Provider
 
     /**
      * @var array A list of tokens that belong to this provider
-	 * 
+	 *
      * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="provider", orphanRemoval=true)
      */
 	private $tokens;
-	
+
 	/**
 	 * @var Datetime $dateCreated The moment this request was created
 	 *
@@ -141,13 +141,13 @@ class Provider
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	private $dateCreated;
-	
+
 	/**
 	 * @var Datetime $dateModified  The moment this request last Modified
 	 *
      * @Assert\DateTime
 	 * @Groups({"read"})
-	 * @Gedmo\Timestampable(on="create")
+	 * @Gedmo\Timestampable(on="update")
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	private $dateModified;
@@ -161,43 +161,43 @@ class Provider
     {
         return $this->id;
     }
-    
+
     public function getOrganization(): ?string
     {
     	return $this->organization;
     }
-    
+
     public function setOrganization(?string $organization): self
     {
     	$this->organization = $organization;
-    	
+
     	return $this;
     }
-    
+
     public function getName(): ?string
     {
     	return $this->name;
     }
-    
+
     public function setName(string $name): self
     {
     	$this->name = $name;
-    	
+
     	return $this;
     }
-    
+
     public function getDescription(): ?string
     {
     	return $this->description;
     }
-    
+
     public function setDescription(?string $description): self
     {
     	$this->description = $description;
-    	
+
     	return $this;
     }
-    
+
 
     /**
      * @return Collection|Token[]
@@ -229,28 +229,28 @@ class Provider
 
         return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }
