@@ -99,12 +99,11 @@ class Scope
 	 * @example This scope allows users to change contact objects
 	 *
      * @Gedmo\Versioned
-	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *     max = 255
 	 * )
 	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $description;
 
@@ -126,13 +125,12 @@ class Scope
 	 * @example 002851234
 	 *
 	 * @Gedmo\Versioned
-	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 11
 	 * )
 	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $organization;
 
@@ -143,13 +141,12 @@ class Scope
 	 * @example 002851234
 	 *
 	 * @Gedmo\Versioned
-	 * @Assert\NotNull
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 11
 	 * )
 	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $application;
 

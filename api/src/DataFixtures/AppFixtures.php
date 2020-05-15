@@ -26,8 +26,32 @@ class AppFixtures extends Fixture
     {
         // Lets make sure we only run these fixtures on larping enviroment
         if (strpos($this->params->get('app_domain'), "conduction.nl") == false) {
-            return false;
+           // return false;
         }
+
+        $componentList = [
+            "vrc" => ["requests", "submitters"],
+            "vtc" => ["requestTypes", "properties"],
+        ];
+
+        $scopes = ['create','read','update','delete'];
+
+        foreach($componentList as $code=> $resources){
+            // N tot 2 @todo better formuleren
+            foreach($resources as $resource){
+                // N tot 3 noooooooo
+                foreach($scopes as $scope){
+
+                    $scope = new Scope();
+                    $scope->setName($scope.' '.$resources);
+                    $scope->setCode($code.'.'.$resource.'.'.$scope);
+                    $manager->persist($scope);
+                }
+
+            }
+
+        }
+
 
         $manager->flush();
     }
