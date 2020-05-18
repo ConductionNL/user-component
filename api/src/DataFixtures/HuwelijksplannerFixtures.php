@@ -25,8 +25,8 @@ class HuwelijksplannerFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
     	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
-        if (strpos($this->params->get('app_domain'), "huwelijksplanner.online") == false) {
-            //return false;
+        if (strpos($this->params->get('app_domain'), "huwelijksplanner.online") == false && $this->params->get('app_domain') != "huwelijksplanner.online" ) {
+            return false;
         }
 
     	$userTest= New User();
@@ -104,16 +104,9 @@ class HuwelijksplannerFixtures extends Fixture
     	$groupBeheer->setParent($groupUsers);
     	$groupBeheer->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
     	$groupBeheer->addUser($userBeheer);
+        $groupBeheer->addUser($userTest);
     	$manager->persist($groupBeheer);
 
-    	$scope = new Scope();
-    	$scope->setName('Verzoek schrijven');
-    	$scope->setDescription('Kunnen schrijven op een verzoek');
-    	$scope->setCode('vrc.request.write');
-    	$scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
-    	$scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
-    	$scope->addUserGroup($groupBeheer);
-    	$manager->persist($scope);
 
         $scope = new Scope();
         $scope->setName('Medewerkers bewerken');
@@ -121,7 +114,6 @@ class HuwelijksplannerFixtures extends Fixture
         $scope->setCode('mrc.employees.write');
         $scope->setOrganization('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
         $scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
-        $scope->addUserGroup($groupBeheer);
         $manager->persist($scope);
 
         $scope = new Scope();
