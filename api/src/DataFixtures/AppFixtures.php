@@ -30,8 +30,33 @@ class AppFixtures extends Fixture
         }
 
         $componentList = [
-            "vrc" => ["requests", "submitters"],
+            "vrc" => ["requests", "submitters", "roles"],
             "vtc" => ["requestTypes", "properties"],
+            "ptc" => ["processTypes", "stages"],
+            "wtc" => ["images", "menus", "menuItems", "organizations", "slugs", "styles", "templates", "templateGroups"],
+            "que" => ["tasks"],
+            "dps" => ["apiDocs"],
+            "memo" => ["memos"],
+            "orc" => ["orders", "orderItems", "organizations", "taxes"],
+            "arc" => ["calendars", "alarms", "events", "freeBussies", "journals", "resources", "schedules", "todos"],
+            "stuf" => ["stufInterfaces"],
+            "tc" => ["tasks"],
+            "pfc" => ["activities", "evaluations", "formalRecognitions" ,"products", "reflections", "results"],
+            "mrc" => ["applications", "competences", "contracts", "employees", "goals", "interests", "jobFunctions", "jobPostings", "skills"],
+            "bc" => ["invoices", "invoiceItems", "organizations", "payments", "services", "taxes"],
+            "chrc" => ["challenges", "pitches"],
+            "cmc" => ["contactMoments"],
+            "evc" => ["clusters", "components", "domains", "environments", "installations"],
+            "irc" => ["assents"],
+            "as" => ["addresses"],
+            "pdc" => ["catalogues" , "customerTypes", "groups", "offers", "products", "propertyValues", "suppliers", "taxes"],
+            "lc" => ["accommodations", "places"],
+            "cc" => ["addresses", "contactLists", "emails", "organizations", "persons", "telephones"],
+            "bs" => ["messages", "services"],
+            "ltc" => ["rsin", "tabel32", "tabel33", "tabel34", "tabel36", "tabel37", "tabel38", "tabel39", "tabel41", "tabel48", "tabel49", "tabel55", "tabel56"],
+            "brp" => [],
+            "rc" => ["aspects", "likes", "ratings", "reviews"],
+            "cgrc" => ["components", "componentFiles"]
         ];
 
         $scopes = ['create','read','update','delete'];
