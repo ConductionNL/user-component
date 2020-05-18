@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
         }
 
         $componentList = [
-            "vrc" => ["requests", "submitters", "roles"],
+            "vrc" => ["requests", "submitters", "roles", "labels"],
             "vtc" => ["requestTypes", "properties"],
             "ptc" => ["processTypes", "stages"],
             "wtc" => ["images", "menus", "menuItems", "organizations", "slugs", "styles", "templates", "templateGroups"],
