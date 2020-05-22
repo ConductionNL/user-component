@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
             "irc" => ["assents"],
             "as" => ["addresses"],
             "pdc" => ["catalogues" , "customerTypes", "groups", "offers", "products", "propertyValues", "suppliers", "taxes"],
-            "lc" => ["accommodations", "places"],
+            "lc" => ["accommodations", "places", "properties"],
             "cc" => ["addresses", "contactLists", "emails", "organizations", "persons", "telephones"],
             "bs" => ["messages", "services"],
             "ltc" => ["rsin", "tabel32", "tabel33", "tabel34", "tabel36", "tabel37", "tabel38", "tabel39", "tabel41", "tabel48", "tabel49", "tabel55", "tabel56"],
