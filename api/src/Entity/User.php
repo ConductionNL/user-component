@@ -69,7 +69,7 @@ use App\Controller\DefaultController;
  * 		}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
+ * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  *
  * @ORM\Table(name="userTable")
  *
