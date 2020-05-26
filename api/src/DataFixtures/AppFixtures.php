@@ -65,11 +65,10 @@ class AppFixtures extends Fixture
             // N tot 2 @todo better formuleren
             foreach($resources as $resource){
                 // N tot 3 noooooooo
-                foreach($scopes as $scope){
-
+                foreach($scopes as $scopeString){
                     $scope = new Scope();
-                    $scope->setName($scope.' '.$resources);
-                    $scope->setCode($code.'.'.$resource.'.'.$scope);
+                    $scope->setName($scopeString.' '.$resource);
+                    $scope->setCode($code.'.'.$resource.'.'.$scopeString);
                     $manager->persist($scope);
                 }
 
