@@ -5380,15 +5380,6 @@ paths:
               - asc
               - desc
         -
-          name: 'order[application]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[dateCreated]'
           in: query
           required: false
@@ -5526,22 +5517,6 @@ paths:
             type: string
         -
           name: 'organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: application
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'application[]'
           in: query
           required: false
           schema:
@@ -9308,9 +9283,10 @@ components:
           type: string
           nullable: true
         application:
-          description: 'The RSIN of the organization that owns this scope'
-          type: string
           nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Application-read'
         userGroups:
           description: 'User groups that give this scope.'
           type: array
@@ -9350,9 +9326,10 @@ components:
           type: string
           nullable: true
         application:
-          description: 'The RSIN of the organization that owns this scope'
-          type: string
           nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Application-write'
         userGroups:
           description: 'User groups that give this scope.'
           type: array
@@ -9393,9 +9370,10 @@ components:
           type: string
           nullable: true
         application:
-          description: 'The RSIN of the organization that owns this scope'
-          type: string
           nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Application:jsonld-read'
         userGroups:
           description: 'User groups that give this scope.'
           type: array
@@ -9444,9 +9422,10 @@ components:
           type: string
           nullable: true
         application:
-          description: 'The RSIN of the organization that owns this scope'
-          type: string
           nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Application:jsonld-write'
         userGroups:
           description: 'User groups that give this scope.'
           type: array
@@ -9766,12 +9745,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9834,12 +9813,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9911,12 +9890,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
     required:
       - organization
       - name
@@ -9970,22 +9949,17 @@ definitions:
         example: '002851234'
         maxLength: 11
         minLength: 8
-      application:
-        description: 'The RSIN of the organization that owns this scope'
-        type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
+      application: []
       userGroups:
         description: 'User groups that give this scope.'
         type: '\Group[]'
@@ -10009,12 +9983,7 @@ definitions:
         example: '002851234'
         maxLength: 11
         minLength: 8
-      application:
-        description: 'The RSIN of the organization that owns this scope'
-        type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
+      application: []
       userGroups:
         description: 'User groups that give this scope.'
         type: '\Group[]'
@@ -10035,17 +10004,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10094,12 +10063,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
     required:
       - organization
       - username
@@ -10232,12 +10201,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
     required: []
   AuditTrail-write:
     properties:
@@ -10285,12 +10254,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-26 14:26:10'
+        example: '2020-05-26 15:19:39'
     required: []
   ChangeLog-write:
     properties:

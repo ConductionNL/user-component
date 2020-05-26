@@ -74,7 +74,7 @@ class Application
 	 * @ORM\GeneratedValue(strategy="CUSTOM")
 	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
 	 *
-	 * @Assert\NotBlank
+	 *
 	 * @Assert\Uuid
 	 */
 	private $id;
