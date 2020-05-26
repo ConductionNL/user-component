@@ -50,13 +50,16 @@ class AppFixtures extends Fixture
             "irc" => ["assents"],
             "as" => ["addresses"],
             "pdc" => ["catalogues" , "customerTypes", "groups", "offers", "products", "propertyValues", "suppliers", "taxes"],
-            "lc" => ["accommodations", "places", "properties"],
+            "lc" => ["accommodations", "places", "properties", "placeProperties", "accommodationProperties"],
             "cc" => ["addresses", "contactLists", "emails", "organizations", "persons", "telephones"],
             "bs" => ["messages", "services"],
             "ltc" => ["rsin", "tabel32", "tabel33", "tabel34", "tabel36", "tabel37", "tabel38", "tabel39", "tabel41", "tabel48", "tabel49", "tabel55", "tabel56"],
             "brp" => [],
             "rc" => ["aspects", "likes", "ratings", "reviews"],
-            "cgrc" => ["components", "componentFiles"]
+            "cgrc" => ["components", "componentFiles", "apis", "organisations"],
+            "uc" => ["applications", "groups", "providers", "scopes", "tokens", "users"],
+            "brc" => ["contacts", "users"],
+            "wrc" => ["applications", "configurations", "images", "menus", "menuItems", "organizations", "slugs", "styles", "templates", "templateGroups"]
         ];
 
         $scopes = ['create','read','update','delete'];
