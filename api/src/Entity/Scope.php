@@ -138,21 +138,6 @@ class Scope
     private $application;
 
     /**
-     * @var string The RSIN of the organization that owns this scope
-     *
-     * @example 002851234
-     *
-     * @Gedmo\Versioned
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 11
-     * )
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $application;
-
-    /**
      * @var Group[] User groups that give this scope.
      *
      * @Groups({"read","write"})
