@@ -62,16 +62,16 @@ class Token
      * @var UuidInterface The (uu)id of this token
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 *
-	 * @Groups({"read"})
-	 * @ORM\Id
-	 * @ORM\Column(type="uuid", unique=true)
-	 * @ORM\GeneratedValue(strategy="CUSTOM")
-	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-	 *
-	 * @Assert\Uuid
-	 */
-	private $id;
+     *
+     * @Groups({"read"})
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Assert\Uuid
+     */
+    private $id;
 
     /**
      * @var User The user that this token belongs to.
