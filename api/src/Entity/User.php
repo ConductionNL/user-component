@@ -2,26 +2,22 @@
 
 namespace App\Entity;
 
-
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
+use App\Controller\DefaultController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
-
-use App\Controller\DefaultController;
+use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * All properties that the entity User holds.
@@ -30,8 +26,8 @@ use App\Controller\DefaultController;
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -81,7 +77,7 @@ use App\Controller\DefaultController;
 class User implements UserInterface
 {
     /**
-     * @var UuidInterface  The (uu)id of this group
+     * @var UuidInterface The (uu)id of this group
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
@@ -93,54 +89,54 @@ class User implements UserInterface
      *
      * @Assert\Uuid
      */
-	private $id;
-
-	/**
-	 * @var string The WRC resource of the organization that owns this user
-	 *
-	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Url
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $organization;
-
-	/**
-	 * @var string  $username A unique visual identifier that represents this user.
-	 *
-	 * @example 002851234
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      min = 8,
-	 *      max = 255
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255, unique = true)
-	 */
-	private $username;
-
-	/**
-	 * @var string $person A contact component person
-	 *
-	 * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\Url
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $person;
+    private $id;
 
     /**
-	 * @Groups({"read"})
+     * @var string The WRC resource of the organization that owns this user
+     *
+     * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Url
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $organization;
+
+    /**
+     * @var string A unique visual identifier that represents this user.
+     *
+     * @example 002851234
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, unique = true)
+     */
+    private $username;
+
+    /**
+     * @var string A contact component person
+     *
+     * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
+     *
+     * @Gedmo\Versioned
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $person;
+
+    /**
+     * @Groups({"read"})
      */
     private $roles = [];
 
@@ -151,7 +147,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
 
     /**
      * @var array A list of groups to wichs this user belongs
@@ -168,7 +163,7 @@ class User implements UserInterface
     private $tokens;
 
     /**
-     * @var Datetime $dateCreated The moment this request was created
+     * @var Datetime The moment this request was created
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -178,7 +173,7 @@ class User implements UserInterface
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this request last Modified
+     * @var Datetime The moment this request last Modified
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -195,31 +190,31 @@ class User implements UserInterface
 
     public function getId()
     {
-    	return $this->id;
+        return $this->id;
     }
 
     public function getOrganization(): ?string
     {
-    	return $this->organization;
+        return $this->organization;
     }
 
     public function setOrganization(?string $organization): self
     {
-    	$this->organization = $organization;
+        $this->organization = $organization;
 
-    	return $this;
+        return $this;
     }
 
     public function getPerson(): ?string
     {
-    	return $this->person;
+        return $this->person;
     }
 
     public function setPerson(?string $person): self
     {
-    	$this->person = $person;
+        $this->person = $person;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -234,9 +229,9 @@ class User implements UserInterface
 
     public function setUsername(?string $username): self
     {
-    	$this->username = $username;
+        $this->username = $username;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -246,11 +241,11 @@ class User implements UserInterface
     {
         $roles = ['user'];
 
-        foreach($this->getUserGroups() as $group ){
-        	$roles[] = 'group.'.$group->getCode();
-        	foreach ($group->getScopes() as $scope) {
-        		$roles[] = 'scope.'.$scope->getCode();
-        	}
+        foreach ($this->getUserGroups() as $group) {
+            $roles[] = 'group.'.$group->getCode();
+            foreach ($group->getScopes() as $scope) {
+                $roles[] = 'scope.'.$scope->getCode();
+            }
         }
 
         return array_unique($roles);
@@ -349,25 +344,25 @@ class User implements UserInterface
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 }
