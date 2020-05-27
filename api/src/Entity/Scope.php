@@ -72,7 +72,6 @@ class Scope
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      *
-     * @Assert\NotBlank
      * @Assert\Uuid
      */
     private $id;
@@ -131,6 +130,12 @@ class Scope
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $organization;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
+     */
+    private $application;
 
     /**
      * @var string The RSIN of the organization that owns this scope
@@ -234,12 +239,12 @@ class Scope
         return $this;
     }
 
-    public function getApplication(): ?string
+    public function getApplication(): ?Application
     {
         return $this->application;
     }
 
-    public function setApplication(?string $application): self
+    public function setApplication(?Application $application): self
     {
         $this->application = $application;
 
