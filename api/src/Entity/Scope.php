@@ -2,31 +2,29 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * All properties that the entity User holds.
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -63,8 +61,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Scope
 {
-	/**
-	 * @var UuidInterface $id The (uu)id of this scope
+    /**
+     * @var UuidInterface The (uu)id of this scope
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
@@ -83,35 +81,35 @@ class Scope
 	 * @example Write on contact
 	 *
      * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $name;
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
-	/**
-	 * @var string The description of this scope.
-	 *
-	 * @example This scope allows users to change contact objects
-	 *
+    /**
+     * @var string The description of this scope.
+     *
+     * @example This scope allows users to change contact objects
+     *
      * @Gedmo\Versioned
-	 * @Assert\Length(
-	 *     max = 255
-	 * )
-	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $description;
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
 
-	/**
-	 * @var string $code The code of this scope
-	 *
-	 * @example contact.write
-	 *
-	 * @Gedmo\Versioned
+    /**
+     * @var string The code of this scope
+     *
+     * @example contact.write
+     *
+     * @Gedmo\Versioned
      * @Gedmo\Slug(fields={"name"})
 	 * @Groups({"read"})
 	 * @ORM\Column(type="string", length=255)
@@ -140,18 +138,32 @@ class Scope
      */
     private $application;
 
+    /**
+     * @var string The RSIN of the organization that owns this scope
+     *
+     * @example 002851234
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 11
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $application;
 
     /**
-	 * @var Group[] $userGroups User groups that give this scope.
-	 *
-	 * @Groups({"read","write"})
+     * @var Group[] User groups that give this scope.
+     *
+     * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
      */
     private $userGroups;
 
     /**
-     * @var Datetime $dateCreated The moment this request was created
+     * @var Datetime The moment this request was created
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -161,7 +173,7 @@ class Scope
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this request last Modified
+     * @var Datetime The moment this request last Modified
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -182,14 +194,14 @@ class Scope
 
     public function getOrganization(): ?string
     {
-    	return $this->organization;
+        return $this->organization;
     }
 
     public function setOrganization(?string $organization): self
     {
-    	$this->organization = $organization;
+        $this->organization = $organization;
 
-    	return $this;
+        return $this;
     }
 
     public function getName(): ?string
@@ -218,14 +230,14 @@ class Scope
 
     public function getCode(): ?string
     {
-    	return $this->code;
+        return $this->code;
     }
 
     public function setCode(string $code): self
     {
-    	$this->code = $code;
+        $this->code = $code;
 
-    	return $this;
+        return $this;
     }
 
     public function getApplication(): ?Application
@@ -270,25 +282,25 @@ class Scope
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 }

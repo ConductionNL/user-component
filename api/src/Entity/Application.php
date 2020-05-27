@@ -2,31 +2,29 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * All properties that the entity Application holds.
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -63,8 +61,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Application
 {
-	/**
-	 * @var UuidInterface  The (uu)id of this application
+    /**
+     * @var UuidInterface The (uu)id of this application
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
@@ -78,81 +76,80 @@ class Application
 	 * @Assert\Uuid
 	 */
 	private $id;
-
-	/**
-	 * @var string The RSIN of the organization that owns this application
-	 *
-	 * @example 002851234
-	 *
+    /**
+     * @var string The RSIN of the organization that owns this application
+     *
+     * @example 002851234
+     *
      * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      min = 8,
-	 *      max = 11
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $organization;
-
-	/**
-	 * @var string The name of this application
-	 *
-	 * @example Dashboard
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $name;
-
-	/**
-	 * @var string The description of this application.
-	 *
-	 * @example This application allows users to manage data in several components
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *     max = 255
-	 * )
-	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $description;
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 11
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $organization;
 
     /**
-	 * @var Scope[] A list of scopes that are posible on this application.
-	 *
-	 * @Groups({"read","write"})
+     * @var string The name of this application
+     *
+     * @example Dashboard
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string The description of this application.
+     *
+     * @example This application allows users to manage data in several components
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @var Scope[] A list of scopes that are posible on this application.
+     *
+     * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity="App\Entity\Scope", mappedBy="application", orphanRemoval=true)
      */
-	private $scopes;
+    private $scopes;
 
-	/**
-	 * @var Datetime $dateCreated The moment this request was created
-	 *
+    /**
+     * @var Datetime The moment this request was created
+     *
      * @Assert\DateTime
-	 * @Groups({"read"})
-	 * @Gedmo\Timestampable(on="create")
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $dateCreated;
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreated;
 
-	/**
-	 * @var Datetime $dateModified  The moment this request last Modified
-	 *
+    /**
+     * @var Datetime The moment this request last Modified
+     *
      * @Assert\DateTime
-	 * @Groups({"read"})
-	 * @Gedmo\Timestampable(on="update")
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $dateModified;
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateModified;
 
     public function __construct()
     {
@@ -166,14 +163,14 @@ class Application
 
     public function getOrganization(): ?string
     {
-    	return $this->organization;
+        return $this->organization;
     }
 
     public function setOrganization(?string $organization): self
     {
-    	$this->organization = $organization;
+        $this->organization = $organization;
 
-    	return $this;
+        return $this;
     }
 
     public function getName(): ?string
@@ -233,25 +230,25 @@ class Application
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 }

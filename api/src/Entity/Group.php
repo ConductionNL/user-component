@@ -2,31 +2,29 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
-use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * A user Group.
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -84,96 +82,96 @@ class Group
 	 * @example 002851234
 	 *
      * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      min = 8,
-	 *      max = 11
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $organization;
-
-	/**
-	 * @var string $name The name of this group
-	 *
-	 * @example Admin
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $name;
-
-	/**
-	 * @var string $description The description of this group.
-	 *
-	 * @example This group holds all the Admin members
-	 *
-     * @Gedmo\Versioned
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *     max = 255
-	 * )
-	 * @Groups({"read","write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $description;
-
-	/**
-	 * @var string $code The code of this scope
-	 *
-	 * @example contact.write
-	 *
-	 * @Gedmo\Versioned
-	 * @Gedmo\Slug(fields={"name"})
-	 * @Groups({"read"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $code;
-
-	/**
-	 * @var $parent Group The group that this group is part of
-	 *
-	 * @MaxDepth(1)
-	 * @Groups({"write"})
-	 * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="children")
-	 */
-	private $parent;
-
-	/**
-	 * @var ArrayCollection Groups that are a part of this group
-	 *
-	 * @MaxDepth(1)
-	 * @Groups({"read"})
-	 * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="parent")
-	 */
-	private $children;
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 11
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $organization;
 
     /**
-	 * @var Scope[] $scopes The scopes that members of this group have
-	 *
-	 * @Groups({"read","write"})
+     * @var string The name of this group
+     *
+     * @example Admin
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string The description of this group.
+     *
+     * @example This group holds all the Admin members
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @var string The code of this scope
+     *
+     * @example contact.write
+     *
+     * @Gedmo\Versioned
+     * @Gedmo\Slug(fields={"name"})
+     * @Groups({"read"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $code;
+
+    /**
+     * @var Group The group that this group is part of
+     *
+     * @MaxDepth(1)
+     * @Groups({"write"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="children")
+     */
+    private $parent;
+
+    /**
+     * @var ArrayCollection Groups that are a part of this group
+     *
+     * @MaxDepth(1)
+     * @Groups({"read"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @var Scope[] The scopes that members of this group have
+     *
+     * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups", fetch="EAGER")
      */
     private $scopes;
 
     /**
-	 * @var User[] $users The users that belong to this group
-	 *
-	 * @Groups({"read","write"})
+     * @var User[] The users that belong to this group
+     *
+     * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userGroups")
      */
     private $users;
 
     /**
-     * @var Datetime $dateCreated The moment this request was created
+     * @var Datetime The moment this request was created
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -183,7 +181,7 @@ class Group
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this request last Modified
+     * @var Datetime The moment this request last Modified
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -205,14 +203,14 @@ class Group
 
     public function getOrganization(): ?string
     {
-    	return $this->organization;
+        return $this->organization;
     }
 
     public function setOrganization(?string $organization): self
     {
-    	$this->organization = $organization;
+        $this->organization = $organization;
 
-    	return $this;
+        return $this;
     }
 
     public function getName(): ?string
@@ -241,26 +239,26 @@ class Group
 
     public function getCode(): ?string
     {
-    	return $this->code;
+        return $this->code;
     }
 
     public function setCode(string $code): self
     {
-    	$this->code = $code;
+        $this->code = $code;
 
-    	return $this;
+        return $this;
     }
 
     public function getParent(): ?self
     {
-    	return $this->parent;
+        return $this->parent;
     }
 
     public function setParent(?self $parent): self
     {
-    	$this->parent = $parent;
+        $this->parent = $parent;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -268,30 +266,30 @@ class Group
      */
     public function getChildren(): Collection
     {
-    	return $this->children;
+        return $this->children;
     }
 
     public function addChild(self $child): self
     {
-    	if (!$this->children->contains($child)) {
-    		$this->children[] = $child;
-    		$child->setParent($this);
-    	}
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
 
-    	return $this;
+        return $this;
     }
 
     public function removeChild(self $child): self
     {
-    	if ($this->children->contains($child)) {
-    		$this->children->removeElement($child);
-    		// set the owning side to null (unless already changed)
-    		if ($child->getParent() === $this) {
-    			$child->setParent(null);
-    		}
-    	}
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
+        }
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -348,25 +346,25 @@ class Group
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 }
