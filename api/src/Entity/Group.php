@@ -62,25 +62,25 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class Group
 {
-	/**
-	 * @var UuidInterface $id The (uu)id of this group
-	 *
-	 * @Groups({"read"})
-	 * @ORM\Id
-	 * @ORM\Column(type="uuid", unique=true)
-	 * @ORM\GeneratedValue(strategy="CUSTOM")
-	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-	 *
-	 *
-	 * @Assert\Uuid
-	 */
-	private $id;
+    /**
+     * @var UuidInterface The (uu)id of this group
+     *
+     * @Groups({"read"})
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     *
+     * @Assert\Uuid
+     */
+    private $id;
 
-	/**
-	 * @var string $organization The RSIN of the organization that owns this group
-	 *
-	 * @example 002851234
-	 *
+    /**
+     * @var string The RSIN of the organization that owns this group
+     *
+     * @example 002851234
+     *
      * @Gedmo\Versioned
      * @Assert\NotNull
      * @Assert\Length(

@@ -65,21 +65,21 @@ class Scope
      * @var UuidInterface The (uu)id of this scope
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 *
-	 * @Groups({"read"})
-	 * @ORM\Id
-	 * @ORM\Column(type="uuid", unique=true)
-	 * @ORM\GeneratedValue(strategy="CUSTOM")
-	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-	 *
-	 * @Assert\Uuid
-	 */
-	private $id;
-	/**
-	 * @var string The name of this scope
-	 *
-	 * @example Write on contact
-	 *
+     *
+     * @Groups({"read"})
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Assert\Uuid
+     */
+    private $id;
+    /**
+     * @var string The name of this scope
+     *
+     * @example Write on contact
+     *
      * @Gedmo\Versioned
      * @Assert\NotNull
      * @Assert\Length(
@@ -111,26 +111,25 @@ class Scope
      *
      * @Gedmo\Versioned
      * @Gedmo\Slug(fields={"name"})
-	 * @Groups({"read"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $code;
+     * @Groups({"read"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $code;
 
-	/**
-	 * @var string The RSIN of the organization that owns this scope
-	 *
-	 * @example 002851234
-	 *
-	 * @Gedmo\Versioned
-	 * @Assert\Length(
-	 *      min = 8,
-	 *      max = 11
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $organization;
-
+    /**
+     * @var string The RSIN of the organization that owns this scope
+     *
+     * @example 002851234
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 11
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $organization;
 
     /**
      * @Groups({"read","write"})
