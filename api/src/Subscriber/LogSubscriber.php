@@ -30,7 +30,7 @@ class LogSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-                KernelEvents::VIEW => ['Log', EventPriorities::PRE_SERIALIZE],
+            KernelEvents::VIEW => ['Log', EventPriorities::PRE_SERIALIZE],
         ];
     }
 
@@ -62,14 +62,15 @@ class LogSubscriber implements EventSubscriberInterface
         // now we need to overide the normal subscriber
         $json = $this->serializer->serialize(
             $logs,
-            'jsonhal', ['enable_max_depth' => true]
+            'jsonhal',
+            ['enable_max_depth' => true]
         );
 
         $response = new Response(
-                $json,
-                Response::HTTP_OK,
-                ['content-type' => 'application/json+hal']
-                );
+            $json,
+            Response::HTTP_OK,
+            ['content-type' => 'application/json+hal']
+        );
 
         $event->setResponse($response);
     }

@@ -2,31 +2,26 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Gedmo\Mapping\Annotation as Gedmo;
-
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * A token from an external identity profider (like facebook).
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
  * @license EUPL <https://github.com/ConductionNL/user-component/blob/master/LICENSE.md>
+ *
  * @category Entity
- * @package user-component
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -63,48 +58,47 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Token
 {
-	/**
-	 * @var UuidInterface The (uu)id of this token
+    /**
+     * @var UuidInterface The (uu)id of this token
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 *
-	 * @Groups({"read"})
-	 * @ORM\Id
-	 * @ORM\Column(type="uuid", unique=true)
-	 * @ORM\GeneratedValue(strategy="CUSTOM")
-	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-	 *
-	 * @Assert\NotBlank
-	 * @Assert\Uuid
-	 */
-	private $id;
+     *
+     * @Groups({"read"})
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @Assert\Uuid
+     */
+    private $id;
 
     /**
-	 * @var User The user that this token belongs to.
-	 *
+     * @var User The user that this token belongs to.
+     *
      * @Gedmo\Versioned
-	 * @Groups({"read", "write"})
+     * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-	 * @var Provider The provider that this scope belongs to.
-	 *
-	 * @Groups({"read", "write"})
+     * @var Provider The provider that this scope belongs to.
+     *
+     * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provider;
 
     /**
-	 * @var string The actual token.
-	 *
+     * @var string The actual token.
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 *
+     *
      * @Gedmo\Versioned
-	 * @Groups({"read", "write"})
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $token;
@@ -120,7 +114,7 @@ class Token
     private $validTill;
 
     /**
-     * @var Datetime $dateCreated The moment this request was created
+     * @var Datetime The moment this request was created
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -130,7 +124,7 @@ class Token
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this request last Modified
+     * @var Datetime The moment this request last Modified
      *
      * @Assert\DateTime
      * @Groups({"read"})
@@ -182,37 +176,37 @@ class Token
 
     public function getValidTill(): ?\DateTimeInterface
     {
-    	return $this->validTill;
+        return $this->validTill;
     }
 
     public function setValidTill(\DateTimeInterface $validTill): self
     {
-    	$this->validTill = $validTill;
+        $this->validTill = $validTill;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 }
