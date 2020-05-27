@@ -9007,7 +9007,7 @@ components:
           description: 'The description of this group.'
           type: string
         parent:
-          description: ' The group that this group is part of'
+          description: 'The group that this group is part of'
           nullable: true
           anyOf:
             -
@@ -9114,7 +9114,7 @@ components:
           description: 'The description of this group.'
           type: string
         parent:
-          description: ' The group that this group is part of'
+          description: 'The group that this group is part of'
           nullable: true
           anyOf:
             -
@@ -9131,7 +9131,7 @@ components:
             $ref: '#/components/schemas/User:jsonld-write'
     Provider-read:
       type: object
-      description: 'An external identity provider (like facebook)'
+      description: 'An external identity provider (like facebook).'
       properties:
         id:
           readOnly: true
@@ -9169,7 +9169,7 @@ components:
         - description
     Provider-write:
       type: object
-      description: 'An external identity provider (like facebook)'
+      description: 'An external identity provider (like facebook).'
       required:
         - organization
         - name
@@ -9186,7 +9186,7 @@ components:
           type: string
     'Provider:jsonld-read':
       type: object
-      description: 'An external identity provider (like facebook)'
+      description: 'An external identity provider (like facebook).'
       properties:
         '@context':
           readOnly: true
@@ -9233,7 +9233,7 @@ components:
         - description
     'Provider:jsonld-write':
       type: object
-      description: 'An external identity provider (like facebook)'
+      description: 'An external identity provider (like facebook).'
       required:
         - organization
         - name
@@ -9745,12 +9745,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9779,6 +9779,145 @@ definitions:
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
+    required:
+      - organization
+      - name
+      - description
+  Group-read:
+    properties:
+      id:
+        description: 'The (uu)id of this group'
+        type: string
+        format: uuid
+      organization:
+        description: 'The RSIN of the organization that owns this group'
+        type: string
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        description: 'The name of this group'
+        type: string
+        example: Admin
+        maxLength: 255
+      description:
+        description: 'The description of this group.'
+        type: string
+        example: 'This group holds all the Admin members'
+        maxLength: 255
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-05-27 11:56:31'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-05-27 11:56:31'
+      children:
+        description: 'Groups that are a part of this group'
+        type: \ArrayCollection
+      scopes:
+        description: 'The scopes that members of this group have'
+        type: '\Scope[]'
+      users:
+        description: 'The users that belong to this group'
+        type: '\User[]'
+    required:
+      - organization
+      - name
+      - description
+  Group-write:
+    properties:
+      organization:
+        description: 'The RSIN of the organization that owns this group'
+        type: string
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        description: 'The name of this group'
+        type: string
+        example: Admin
+        maxLength: 255
+      description:
+        description: 'The description of this group.'
+        type: string
+        example: 'This group holds all the Admin members'
+        maxLength: 255
+      parent:
+        description: 'The group that this group is part of'
+        type: \Group
+      scopes:
+        description: 'The scopes that members of this group have'
+        type: '\Scope[]'
+      users:
+        description: 'The users that belong to this group'
+        type: '\User[]'
+    required:
+      - organization
+      - name
+      - description
+  Provider-read:
+    properties:
+      id:
+        description: 'The (uu)id of this profider'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      organization:
+        description: 'The RSIN of the organization that owns this product'
+        type: string
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        description: 'The name of this Provider'
+        type: string
+        example: Facebook
+        maxLength: 255
+      description:
+        description: 'The description of this provider.'
+        type: string
+        example: 'The facebook provider allows users to login with facebook'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-05-27 11:56:31'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-05-27 11:56:31'
+    required:
+      - organization
+      - name
+      - description
+  Provider-write:
+    properties:
+      organization:
+        description: 'The RSIN of the organization that owns this product'
+        type: string
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        description: 'The name of this Provider'
+        type: string
+        example: Facebook
+        maxLength: 255
+      description:
+        description: 'The description of this provider.'
+        type: string
+        example: 'The facebook provider allows users to login with facebook'
+        maxLength: 255
     required:
       - organization
       - name
@@ -9814,12 +9953,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -9850,86 +9989,52 @@ definitions:
         type: '\Group[]'
     required:
       - name
-  Group-read:
+  Token-read:
     properties:
       id:
-        description: 'The (uu)id of this group'
+        description: 'The (uu)id of this token'
         type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      organization:
-        description: 'The RSIN of the organization that owns this group'
+      token:
+        description: 'The actual token.'
         type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
-      name:
-        description: 'The name of this group'
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+      validTill:
+        description: 'The moment this token expirec'
         type: string
-        example: Admin
-        maxLength: 255
-      description:
-        description: 'The description of this group.'
-        type: string
-        example: 'This group holds all the Admin members'
-        maxLength: 255
-      code:
-        description: 'The code of this scope'
-        type: string
-        example: contact.write
+        format: date-time
+        example: '2020-05-27 11:56:31'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
-      children:
-        description: 'Groups that are a part of this group'
-        type: \ArrayCollection
-      scopes:
-        description: 'The scopes that members of this group have'
-        type: '\Scope[]'
-      users:
-        description: 'The users that belong to this group'
-        type: '\User[]'
-    required:
-      - organization
-      - name
-      - description
-  Group-write:
+        example: '2020-05-27 11:56:31'
+      user:
+        description: 'The user that this token belongs to.'
+        type: \User
+      provider:
+        description: 'The provider that this scope belongs to.'
+        type: \Provider
+    required: []
+  Token-write:
     properties:
-      organization:
-        description: 'The RSIN of the organization that owns this group'
+      token:
+        description: 'The actual token.'
         type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
-      name:
-        description: 'The name of this group'
-        type: string
-        example: Admin
-        maxLength: 255
-      description:
-        description: 'The description of this group.'
-        type: string
-        example: 'This group holds all the Admin members'
-        maxLength: 255
-      parent:
-        description: ' The group that this group is part of'
-        type: ''
-      scopes:
-        description: 'The scopes that members of this group have'
-        type: '\Scope[]'
-      users:
-        description: 'The users that belong to this group'
-        type: '\User[]'
-    required:
-      - organization
-      - name
-      - description
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+      user:
+        description: 'The user that this token belongs to.'
+        type: \User
+      provider:
+        description: 'The provider that this scope belongs to.'
+        type: \Provider
+    required: []
   User-read:
     properties:
       id:
@@ -9958,12 +10063,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
     required:
       - organization
       - username
@@ -9992,164 +10097,6 @@ definitions:
     required:
       - organization
       - username
-  Provider-read:
-    properties:
-      id:
-        description: 'The (uu)id of this profider'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      organization:
-        description: 'The RSIN of the organization that owns this product'
-        type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
-      name:
-        description: 'The name of this Provider'
-        type: string
-        example: Facebook
-        maxLength: 255
-      description:
-        description: 'The description of this provider.'
-        type: string
-        example: 'The facebook provider allows users to login with facebook'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-    required:
-      - organization
-      - name
-      - description
-  Provider-write:
-    properties:
-      organization:
-        description: 'The RSIN of the organization that owns this product'
-        type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
-      name:
-        description: 'The name of this Provider'
-        type: string
-        example: Facebook
-        maxLength: 255
-      description:
-        description: 'The description of this provider.'
-        type: string
-        example: 'The facebook provider allows users to login with facebook'
-        maxLength: 255
-    required:
-      - organization
-      - name
-      - description
-  Token-read:
-    properties:
-      id:
-        description: 'The (uu)id of this token'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      token:
-        description: 'The actual token.'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-      validTill:
-        description: 'The moment this token expirec'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-      user:
-        description: 'The user that this token belongs to.'
-        type: \User
-      provider:
-        description: 'The provider that this scope belongs to.'
-        type: \Provider
-    required: []
-  Token-write:
-    properties:
-      token:
-        description: 'The actual token.'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-      user:
-        description: 'The user that this token belongs to.'
-        type: \User
-      provider:
-        description: 'The provider that this scope belongs to.'
-        type: \Provider
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-05-27 06:01:37'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
   AuditTrail-read:
     properties:
       id:
@@ -10254,12 +10201,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-27 06:01:37'
+        example: '2020-05-27 11:56:31'
     required: []
   AuditTrail-write:
     properties:
@@ -10267,6 +10214,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-05-27 11:56:31'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-05-27 11:56:31'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -10277,27 +10277,21 @@ tags:
       
       
   -
-    name: Scope
-    description: |
-      All properties that the entity User holds.
-      
-      
-  -
     name: Group
     description: |
       A user Group.
       
       
   -
-    name: User
-    description: |
-      All properties that the entity User holds.
-      
-      Entity User exists of an id, a name, a password, a email and has zero or more roles.
-  -
     name: Provider
     description: |
-      An external identity provider (like facebook)
+      An external identity provider (like facebook).
+      
+      
+  -
+    name: Scope
+    description: |
+      All properties that the entity User holds.
       
       
   -
@@ -10307,13 +10301,19 @@ tags:
       
       
   -
-    name: ChangeLog
+    name: User
+    description: |
+      All properties that the entity User holds.
+      
+      Entity User exists of an id, a name, a password, a email and has zero or more roles.
+  -
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -10324,15 +10324,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
