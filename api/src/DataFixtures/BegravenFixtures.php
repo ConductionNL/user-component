@@ -25,6 +25,7 @@ class BegravenFixtures extends Fixture
     {
     	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
         if (strpos($this->params->get('app_domain'), "westfriesland.commonground.nu") == false) {
+
             return false;
         }
 
