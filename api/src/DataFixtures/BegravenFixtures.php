@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Application;
 use App\Entity\Group;
 use App\Entity\Scope;
 use App\Entity\User;
@@ -32,6 +33,12 @@ class BegravenFixtures extends Fixture
         ) {
             return false;
         }
+
+        $application = new Application();
+        $application->setName("Begrafenisplanner");
+        $application->setDescription("De Westfriesland Begravenapplication");
+        $application->setOrganization('http://wrc.dev.westfriesland.commonground.nu/organizations/d280c4d3-6310-46db-9934-5285ec7d0d5e');
+        $manager->persist($application);
 
         $userTest = new User();
         $userTest->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
@@ -111,7 +118,7 @@ class BegravenFixtures extends Fixture
         $scope->setDescription('Kunnen schrijven op een verzoek');
         $scope->setCode('vrc.request.write');
         $scope->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
-        $scope->setApplication('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $scope->setApplication($application); // Hoorn
         $scope->addUserGroup($groupBeheer);
         $manager->persist($scope);
 
