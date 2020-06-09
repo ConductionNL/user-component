@@ -2,15 +2,14 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Group;
+use App\Entity\Scope;
+use App\Entity\User;
+use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Conduction\CommonGroundBundle\Service\CommonGroundService;
-
-use App\Entity\User;
-use App\Entity\Group;
-use App\Entity\Scope;
 
 class MijnClusterFixtures extends Fixture
 {
@@ -28,18 +27,18 @@ class MijnClusterFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Lets make sure we only run these fixtures on larping enviroment
-        if ($this->params->get('app_domain') != "mijncluster.nl" && strpos($this->params->get('app_domain'), "mijncluster.nl") == false) {
+        if ($this->params->get('app_domain') != 'mijncluster.nl' && strpos($this->params->get('app_domain'), 'mijncluster.nl') == false) {
             return false;
         }
 
-        $user = New User();
+        $user = new User();
         $user->setOrganization("{$this->commonGroundService->getComponent('wrc')['location']}/organizations/cc935415-a674-4235-b99d-0c7bfce5c7aa"); // Pink Rocade
         $user->setUsername('beheer@pinkroccade.nl');
         $user->setPassword($this->encoder->encodePassword($userBeheer, '$user'));
         $manager->persist($user);
 
         // Pink Rocade
-        $groupUsers= new Group();
+        $groupUsers = new Group();
         $groupUsers->setName('Users');
         $groupUsers->setDescription('Alle gebruikers');
         $groupUsers->setOrganization("{$this->commonGroundService->getComponent('wrc')['location']}/organizations/cc935415-a674-4235-b99d-0c7bfce5c7aa"); // Pink Rocade
@@ -53,7 +52,6 @@ class MijnClusterFixtures extends Fixture
         $groupBeheer->setOrganization("{$this->commonGroundService->getComponent('wrc')['location']}/organizations/cc935415-a674-4235-b99d-0c7bfce5c7aa"); // Pink Rocade
         $groupBeheer->addUser($user);
         $manager->persist($groupBeheer);
-
 
         $scope = new Scope();
         $scope->setName('Medewerkers bewerken');
