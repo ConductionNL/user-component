@@ -18,7 +18,7 @@ class MijnClusterFixtures extends Fixture
     private $params;
     private $encoder;
 
-    public function __construct((CommonGroundService $commonGroundService, ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    public function __construct(CommonGroundService $commonGroundService, ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
     {
         $this->commonGroundService = $commonGroundService;
         $this->params = $params;
