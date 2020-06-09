@@ -24,7 +24,7 @@ class SHertogenboschFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-    	// Lets make sure we only run these fixtures on huwelijksplanner enviroments
+        // Lets make sure we only run these fixtures on huwelijksplanner enviroments
         if (
             $this->params->get('app_domain') != 'shertogenbosch.commonground.nu' &&
             strpos($this->params->get('app_domain'), 'shertogenbosch.commonground.nu') == false &&
@@ -35,8 +35,8 @@ class SHertogenboschFixtures extends Fixture
         }
 
         $application = new Application();
-        $application->setName("Begrafenisplanner");
-        $application->setDescription("De Westfriesland Begravenapplication");
+        $application->setName('Begrafenisplanner');
+        $application->setDescription('De Westfriesland Begravenapplication');
         $application->setOrganization('http://wrc.dev.westfriesland.commonground.nu/organizations/d280c4d3-6310-46db-9934-5285ec7d0d5e');
         $manager->persist($application);
 
