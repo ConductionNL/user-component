@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Conduction\CommonGroundBundle\Service\CommonGroundService;
 
 use App\Entity\User;
 use App\Entity\Group;
@@ -13,11 +14,13 @@ use App\Entity\Scope;
 
 class MijnClusterFixtures extends Fixture
 {
+    private $commonGroundService;
     private $params;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    public function __construct((CommonGroundService $commonGroundService, ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
     {
+        $this->commonGroundService = $commonGroundService;
         $this->params = $params;
         $this->encoder = $encoder;
     }
