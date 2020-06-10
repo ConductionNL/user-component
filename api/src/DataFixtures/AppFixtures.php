@@ -53,6 +53,7 @@ class AppFixtures extends Fixture
             'uc'   => ['applications', 'groups', 'providers', 'scopes', 'tokens', 'users'],
             'brc'  => ['contacts', 'users'],
             'wrc'  => ['applications', 'configurations', 'images', 'menus', 'menuItems', 'organizations', 'slugs', 'styles', 'templates', 'templateGroups'],
+            'ec'   => ['exports'],
         ];
 
         $scopes = ['create', 'read', 'update', 'delete'];
