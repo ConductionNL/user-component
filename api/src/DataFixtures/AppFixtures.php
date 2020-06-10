@@ -21,11 +21,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Lets make sure we only run these fixtures on larping enviroment
-        if (strpos($this->params->get('app_domain'), 'conduction.nl') == false) {
-            return false;
-        }
-
+        // The fixtures will always be loaded
         $componentList = [
             'vrc'  => ['requests', 'submitters', 'roles', 'labels'],
             'vtc'  => ['requestTypes', 'properties'],
@@ -57,6 +53,7 @@ class AppFixtures extends Fixture
             'uc'   => ['applications', 'groups', 'providers', 'scopes', 'tokens', 'users'],
             'brc'  => ['contacts', 'users'],
             'wrc'  => ['applications', 'configurations', 'images', 'menus', 'menuItems', 'organizations', 'slugs', 'styles', 'templates', 'templateGroups'],
+            'ec'   => ['exports'],
         ];
 
         $scopes = ['create', 'read', 'update', 'delete'];
