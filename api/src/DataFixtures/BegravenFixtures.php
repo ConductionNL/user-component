@@ -55,7 +55,7 @@ class BegravenFixtures extends Fixture
         $manager->persist($userBalie);
 
         $userLocatie = new User();
-        $userLocatie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384']));; // Hoorn
+        $userLocatie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $userLocatie->setUsername('locatie@hoorn.nl');
         $userLocatie->setPassword('test1234');
         $manager->persist($userLocatie);
