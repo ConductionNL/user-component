@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b298544afba6f4757399357295d94171",
+    "content-hash": "df92304a72d25f08704a83498f004379",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -474,12 +474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ConductionNL/CommonGroundBundle.git",
-                "reference": "594bb0da5e6359ea1d12e1b8329b0e067100636e"
+                "reference": "8339d98e01c23591526ef22bfbc6a52a2964b017"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ConductionNL/CommonGroundBundle/zipball/594bb0da5e6359ea1d12e1b8329b0e067100636e",
-                "reference": "594bb0da5e6359ea1d12e1b8329b0e067100636e",
+                "url": "https://api.github.com/repos/ConductionNL/CommonGroundBundle/zipball/8339d98e01c23591526ef22bfbc6a52a2964b017",
+                "reference": "8339d98e01c23591526ef22bfbc6a52a2964b017",
                 "shasum": ""
             },
             "require": {
@@ -557,7 +557,7 @@
                 "postcode",
                 "rsin"
             ],
-            "time": "2020-07-08T14:54:34+00:00"
+            "time": "2020-07-16T14:04:42+00:00"
         },
         {
             "name": "doctrine/annotations",

@@ -6,6 +6,7 @@ use App\Entity\Application;
 use App\Entity\Group;
 use App\Entity\Scope;
 use App\Entity\User;
+use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -16,10 +17,11 @@ class BegravenFixtures extends Fixture
     private $params;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder, CommonGroundService $commonGroundService)
     {
         $this->params = $params;
         $this->encoder = $encoder;
+        $this->commonGroundService = $commonGroundService;
     }
 
     public function load(ObjectManager $manager)
@@ -37,35 +39,35 @@ class BegravenFixtures extends Fixture
         $application = new Application();
         $application->setName('Begrafenisplanner');
         $application->setDescription('De Westfriesland Begravenapplication');
-        $application->setOrganization('http://wrc.dev.westfriesland.commonground.nu/organizations/d280c4d3-6310-46db-9934-5285ec7d0d5e');
+        $application->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d280c4d3-6310-46db-9934-5285ec7d0d5e']));
         $manager->persist($application);
 
         $userTest = new User();
-        $userTest->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $userTest->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $userTest->setUsername('test@hoorn.nl');
         $userTest->setPassword($this->encoder->encodePassword($userTest, 'test1234'));
         $manager->persist($userTest);
 
         $userBalie = new User();
-        $userBalie->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $userBalie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $userBalie->setUsername('balie@hoorn.nl');
         $userBalie->setPassword($this->encoder->encodePassword($userBalie, 'test1234'));
         $manager->persist($userBalie);
 
         $userLocatie = new User();
-        $userLocatie->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $userLocatie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $userLocatie->setUsername('locatie@hoorn.nl');
         $userLocatie->setPassword('test1234');
         $manager->persist($userLocatie);
 
         $usertTrouwambtenaar = new User();
-        $usertTrouwambtenaar->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $usertTrouwambtenaar->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $usertTrouwambtenaar->setUsername('trouwambtenaar@hoorn.nl');
         $usertTrouwambtenaar->setPassword($this->encoder->encodePassword($usertTrouwambtenaar, 'test1234'));
         $manager->persist($usertTrouwambtenaar);
 
         $userBeheer = new User();
-        $userBeheer->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $userBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $userBeheer->setUsername('beheer@hoorn.nl');
         $userBeheer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
         $manager->persist($userBeheer);
@@ -74,7 +76,7 @@ class BegravenFixtures extends Fixture
         $groupUsers = new Group();
         $groupUsers->setName('Users');
         $groupUsers->setDescription('Alle gebruikers');
-        $groupUsers->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $groupUsers->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupUsers->addUser($userBalie);
         $groupUsers->addUser($userLocatie);
         $groupUsers->addUser($usertTrouwambtenaar);
@@ -85,7 +87,7 @@ class BegravenFixtures extends Fixture
         $groupBalie->setName('Balie Medewerkers');
         $groupBalie->setDescription('De balliemedewerkers');
         $groupBalie->setParent($groupUsers);
-        $groupBalie->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $groupBalie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupBalie->addUser($userBalie);
         $manager->persist($groupBalie);
 
@@ -93,7 +95,7 @@ class BegravenFixtures extends Fixture
         $groupLocatie->setName('Locatie beheerders');
         $groupLocatie->setDescription('De hbeheerders van een of meerdere locaties');
         $groupLocatie->setParent($groupUsers);
-        $groupLocatie->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $groupLocatie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupLocatie->addUser($userLocatie);
         $manager->persist($groupLocatie);
 
@@ -101,7 +103,7 @@ class BegravenFixtures extends Fixture
         $groupTrouwambtenaar->setName('Trouw Ambtenaar');
         $groupTrouwambtenaar->setDescription('De ambtenaren die het huwelijk voltrekken');
         $groupTrouwambtenaar->setParent($groupUsers);
-        $groupTrouwambtenaar->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $groupTrouwambtenaar->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupTrouwambtenaar->addUser($usertTrouwambtenaar);
         $manager->persist($groupTrouwambtenaar);
 
@@ -109,7 +111,7 @@ class BegravenFixtures extends Fixture
         $groupBeheer->setName('Beheerder');
         $groupBeheer->setDescription('De beheerders die de congiruatie inregelen');
         $groupBeheer->setParent($groupUsers);
-        $groupBeheer->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $groupBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupBeheer->addUser($userBeheer);
         $manager->persist($groupBeheer);
 
@@ -117,7 +119,7 @@ class BegravenFixtures extends Fixture
         $scope->setName('Verzoek schrijven');
         $scope->setDescription('Kunnen schrijven op een verzoek');
         $scope->setCode('vrc.request.write');
-        $scope->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $scope->setApplication($application); // Hoorn
         $scope->addUserGroup($groupBeheer);
         $manager->persist($scope);
