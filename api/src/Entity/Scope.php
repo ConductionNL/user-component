@@ -117,15 +117,12 @@ class Scope
     private $code;
 
     /**
-     * @var string The RSIN of the organization that owns this scope
+     * @var string A specific commonground organization
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @example 002851234
-     *
+     * @Assert\NotNull
+     * @Assert\Url
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 11
-     * )
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */

@@ -77,18 +77,14 @@ class Provider
     private $id;
 
     /**
-     * @var string The RSIN of the organization that owns this product
+     * @var string A specific commonground organization
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @example 002851234
-     *
-     * @Gedmo\Versioned
      * @Assert\NotNull
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 11
-     * )
+     * @Assert\Url
+     * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $organization;
 
