@@ -92,15 +92,15 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @var string The WRC resource of the organization that owns this user
+     * @var string A specific commonground organization
      *
-     * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @Gedmo\Versioned
      * @Assert\NotNull
      * @Assert\Url
+     * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $organization;
 

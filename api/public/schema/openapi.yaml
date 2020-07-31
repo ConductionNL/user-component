@@ -9655,10 +9655,9 @@ components:
           type: string
           nullable: true
         roles:
-          readOnly: true
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/User-read'
         dateCreated:
           description: 'The moment this request was created'
           externalDocs:
@@ -9697,6 +9696,10 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/User-write'
         password:
           description: 'The hashed password'
           type: string
@@ -9735,10 +9738,9 @@ components:
           type: string
           nullable: true
         roles:
-          readOnly: true
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/User:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
           externalDocs:
@@ -9786,6 +9788,10 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/User:jsonld-write'
         password:
           description: 'The hashed password'
           type: string
@@ -9817,12 +9823,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9885,12 +9891,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9962,12 +9968,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
     required:
       - organization
       - name
@@ -10025,12 +10031,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -10076,17 +10082,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10135,12 +10141,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
     required:
       - organization
       - username
@@ -10273,12 +10279,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
     required: []
   AuditTrail-write:
     properties:
@@ -10326,12 +10332,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-21 09:12:17'
+        example: '2020-07-30 11:46:07'
     required: []
   ChangeLog-write:
     properties:
