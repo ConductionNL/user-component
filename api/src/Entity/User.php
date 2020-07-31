@@ -93,6 +93,7 @@ class User implements UserInterface
 
     /**
      * @var string A specific commonground organization
+     *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
      * @Assert\NotNull
