@@ -64,6 +64,8 @@ class ConductionFixtures extends Fixture
         $groupStudenten = new Group();
         $groupStudenten->setName('Studenten');
         $groupStudenten->setDescription('Alle studenten');
+        $groupStudenten->setTitle('Student');
+        $groupStudenten->setCanBeRegisteredFor(true);
         $groupStudenten->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
         $groupStudenten->addUser($testStudent);
         $manager->persist($groupStudenten);
@@ -79,6 +81,8 @@ class ConductionFixtures extends Fixture
         $groupBedrijven = new Group();
         $groupBedrijven->setName('Bedrijven');
         $groupBedrijven->setDescription('Alle bedrijven');
+        $groupBedrijven->setTitle('Bedrijf');
+        $groupBedrijven->setCanBeRegisteredFor(true);
         $groupBedrijven->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
         $groupBedrijven->addUser($testBedrijf);
         $manager->persist($groupBedrijven);
