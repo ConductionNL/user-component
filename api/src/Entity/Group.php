@@ -58,7 +58,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"organization":"exact"})
  */
 class Group
 {
@@ -133,6 +133,15 @@ class Group
      * @ORM\Column(type="string", length=255)
      */
     private $code;
+
+    /**
+     * @var bool Whether or not new users can be registered for this group
+     *
+     * @example true
+     *
+     * @Groups({"read"})
+     */
+    private $canBeRegisteredFor = false;
 
     /**
      * @var Group The group that this group is part of
@@ -247,6 +256,11 @@ class Group
         $this->code = $code;
 
         return $this;
+    }
+
+    public function getCanBeRegisteredFor(): ?bool
+    {
+        return $this->canBeRegisteredFor;
     }
 
     public function getParent(): ?self
