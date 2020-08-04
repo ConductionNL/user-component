@@ -95,7 +95,7 @@ class Group
     /**
      * @var string The name of this group
      *
-     * @example Admin
+     * @example Admins
      *
      * @Gedmo\Versioned
      * @Assert\NotNull
@@ -123,6 +123,20 @@ class Group
     private $description;
 
     /**
+     * @var string The title of this group
+     *
+     * @example Admin
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
      * @var string The code of this scope
      *
      * @example contact.write
@@ -139,7 +153,7 @@ class Group
      *
      * @example true
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      */
     private $canBeRegisteredFor = false;
 
@@ -246,6 +260,18 @@ class Group
         return $this;
     }
 
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
     public function getCode(): ?string
     {
         return $this->code;
@@ -261,6 +287,13 @@ class Group
     public function getCanBeRegisteredFor(): ?bool
     {
         return $this->canBeRegisteredFor;
+    }
+
+    public function setCanBeRegisteredFor(?bool $canBeRegisteredFor): self
+    {
+        $this->canBeRegisteredFor = $canBeRegisteredFor;
+
+        return $this;
     }
 
     public function getParent(): ?self
