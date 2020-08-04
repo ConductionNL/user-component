@@ -3094,6 +3094,12 @@ paths:
                   $ref: '#/components/schemas/Group-read'
       parameters:
         -
+          name: canBeRegisteredFor
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'order[id]'
           in: query
           required: false
@@ -3140,6 +3146,15 @@ paths:
               - desc
         -
           name: 'order[code]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[canBeRegisteredFor]'
           in: query
           required: false
           schema:
@@ -9794,12 +9809,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9863,16 +9878,20 @@ definitions:
         description: 'The code of this scope'
         type: string
         example: contact.write
+      canBeRegisteredFor:
+        description: 'Whether or not new users can be registered for this group'
+        type: bool
+        example: 'true'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9909,6 +9928,10 @@ definitions:
         type: string
         example: Admin
         maxLength: 255
+      canBeRegisteredFor:
+        description: 'Whether or not new users can be registered for this group'
+        type: bool
+        example: 'true'
       parent:
         description: 'The group that this group is part of'
         type: \Group
@@ -9948,12 +9971,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
     required:
       - organization
       - name
@@ -10009,12 +10032,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -10061,17 +10084,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10120,12 +10143,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
     required:
       - organization
       - username
@@ -10258,12 +10281,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
     required: []
   AuditTrail-write:
     properties:
@@ -10311,12 +10334,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:30:10'
+        example: '2020-08-04 13:50:40'
     required: []
   ChangeLog-write:
     properties:
