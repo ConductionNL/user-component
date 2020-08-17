@@ -72,6 +72,36 @@ class BegravenFixtures extends Fixture
         $userBeheer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
         $manager->persist($userBeheer);
 
+        $userWestfriesland = new User();
+        $userWestfriesland->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d280c4d3-6310-46db-9934-5285ec7d0d5e'])); // Westfriesland
+        $userWestfriesland->setUsername('medewerker@westfriesland.nl');
+        $userWestfriesland->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
+        $manager->persist($userWestfriesland);
+
+        $userOpmeer = new User();
+        $userOpmeer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'16fd1092-c4d3-4011-8998-0e15e13239cf'])); // Opmeer
+        $userOpmeer->setUsername('medewerker@opmeer.nl');
+        $userOpmeer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
+        $manager->persist($userOpmeer);
+
+        $userMedemblik = new User();
+        $userMedemblik->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'429e66ef-4411-4ddb-8b83-c637b37e88b5'])); // Medemblik
+        $userMedemblik->setUsername('medewerker@medemblik.nl');
+        $userMedemblik->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
+        $manager->persist($userMedemblik);
+
+        $userSed = new User();
+        $userSed->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'7033eeb4-5c77-4d88-9f40-303b538f176f'])); // SED
+        $userSed->setUsername('medewerker@sed.nl');
+        $userSed->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
+        $manager->persist($userSed);
+
+        $userKoggenland = new User();
+        $userKoggenland->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'f050292c-973d-46ab-97ae-9d8830a59d15'])); // SED
+        $userKoggenland->setUsername('medewerker@koggenland.nl');
+        $userKoggenland->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
+        $manager->persist($userKoggenland);
+
         // Vortex Adventures
         $groupUsers = new Group();
         $groupUsers->setName('Users');
@@ -81,6 +111,12 @@ class BegravenFixtures extends Fixture
         $groupUsers->addUser($userLocatie);
         $groupUsers->addUser($usertTrouwambtenaar);
         $groupUsers->addUser($userBeheer);
+        $groupUsers->addUser($userWestfriesland);
+        $groupUsers->addUser($userOpmeer);
+        $groupUsers->addUser($userMedemblik);
+        $groupUsers->addUser($userSed);
+        $groupUsers->addUser($userKoggenland);
+
         $manager->persist($groupUsers);
 
         $groupBalie = new Group();
@@ -113,6 +149,14 @@ class BegravenFixtures extends Fixture
         $groupBeheer->setParent($groupUsers);
         $groupBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupBeheer->addUser($userBeheer);
+        $manager->persist($groupBeheer);
+
+        $groupBeheer = new Group();
+        $groupBeheer->setName('Beheerder');
+        $groupBeheer->setDescription('De beheerders die de congiruatie inregelen');
+        $groupBeheer->setParent($groupUsers);
+        $groupBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d280c4d3-6310-46db-9934-5285ec7d0d5e'])); // Westfriesland
+        $groupBeheer->addUser($userWestfriesland);
         $manager->persist($groupBeheer);
 
         $scope = new Scope();
