@@ -154,7 +154,7 @@ class Group
      * @example true
      *
      * @Groups({"read", "write"})
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $canBeRegisteredFor = false;
 
