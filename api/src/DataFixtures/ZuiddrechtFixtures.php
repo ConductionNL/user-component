@@ -130,7 +130,7 @@ class ZuiddrechtFixtures extends Fixture
         $provider->setDescription('idin provider');
         $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $manager->persist($provider);
-        
+
         $manager->flush();
     }
 }
