@@ -110,8 +110,7 @@ class Scope
      * @example contact.write
      *
      * @Gedmo\Versioned
-     * @Gedmo\Slug(fields={"name"})
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $code;
