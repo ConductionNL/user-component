@@ -179,9 +179,9 @@ class ZuiddrechtFixtures extends Fixture
 
         //idinGroup
         $scope = new Scope();
-        $scope->setName('evenementen bekijken');
-        $scope->setDescription('Kunnen bekijken van een evenement');
-        $scope->setCode('irc.assents.read');
+        $scope->setName('check-ins bekijken');
+        $scope->setDescription('Kunnen bekijken van een check-in');
+        $scope->setCode('chin.checkins.read');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $scope->addUserGroup($groupIdin);
         $manager->persist($scope);
