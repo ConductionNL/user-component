@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Group;
+use App\Entity\Provider;
 use App\Entity\Scope;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
@@ -61,6 +62,17 @@ class ZuiddrechtFixtures extends Fixture
         $groupBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $groupBeheer->addUser($userBeheer);
         $manager->persist($groupBeheer);
+
+        $id = '3ae959d7-01e2-4939-8442-0be4ca8e2898';
+        $groupIdin = new Group();
+        $groupIdin->setName('Idin');
+        $groupIdin->setDescription('Idin gebruikers');
+        $groupIdin->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $manager->persist($groupIdin);
+        $groupIdin->setId($id);
+        $manager->persist($groupIdin);
+        $manager->flush();
+        $groupIdin = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         $scope = new Scope();
         $scope->setName('Medewerkers bewerken');
@@ -123,6 +135,68 @@ class ZuiddrechtFixtures extends Fixture
         //$scope->setApplication('https://wrc.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Utrecht
         $scope->addUserGroup($groupBeheer);
         $manager->persist($scope);
+
+        //userGroup scopes
+        $scope = new Scope();
+        $scope->setName('verzoeken bekijken');
+        $scope->setDescription('Kunnen bekijken van een verzoek');
+        $scope->setCode('vrc.requests.read');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($groupUsers);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('orders bekijken');
+        $scope->setDescription('Kunnen bekijken van een order');
+        $scope->setCode('orc.orders.read');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($groupUsers);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('facturen bekijken');
+        $scope->setDescription('Kunnen bekijken van een factuur');
+        $scope->setCode('bc.invoices.read');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($groupUsers);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('instemmingen bekijken');
+        $scope->setDescription('Kunnen bekijken van een instemming');
+        $scope->setCode('irc.assents.read');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($groupUsers);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('evenementen bekijken');
+        $scope->setDescription('Kunnen bekijken van een evenement');
+        $scope->setCode('irc.assents.read');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($groupUsers);
+        $manager->persist($scope);
+
+        //idinGroup
+        $scope = new Scope();
+        $scope->setName('check-ins bekijken');
+        $scope->setDescription('Kunnen bekijken van een check-in');
+        $scope->setCode('chin.checkins.read');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($groupIdin);
+        $manager->persist($scope);
+
+        $provider = new Provider();
+        $provider->setName('idin');
+        $provider->setDescription('idin provider');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('facebook');
+        $provider->setDescription('facebook provider');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $manager->persist($provider);
 
         $manager->flush();
     }
