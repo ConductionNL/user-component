@@ -127,7 +127,6 @@ class Provider
     private $tokens;
 
     /**
-     *
      * @var array A list of configurations that apply to this provider
      *
      * @Gedmo\Versioned
