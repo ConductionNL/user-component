@@ -50,7 +50,7 @@ class ZuiddrechtFixtures extends Fixture
         $userCheckin = new User();
         $userCheckin->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $userCheckin->setUsername('jan@zwarteraaf.nl');
-        $userCheckin->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'person', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
+        $userCheckin->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
         $userCheckin->setPassword($this->encoder->encodePassword($userCheckin, 'test1234'));
         $manager->persist($userCheckin);
 
