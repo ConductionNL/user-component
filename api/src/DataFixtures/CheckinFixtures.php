@@ -36,15 +36,31 @@ class CheckinFixtures extends Fixture
         }
 
         $group = new Group();
-        $group->setName('Ondernemers');
-        $group->setDescription('De ondernemers op het platform');
+        $group->setName('admin');
+        $group->setDescription('Kunnen beheren van een onderneming');
         $group->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $manager->persist($group);
 
         $scope = new Scope();
         $scope->setName('admin');
-        $scope->setDescription('Kunnen beheren van een onderneming');
-        $scope->setCode('checkin.admin');
+        $scope->setDescription('Kunnen beheren van een organizatie');
+        $scope->setCode('wrc.organization');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($group);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('nodes');
+        $scope->setDescription('Kunnen beheren van nodes');
+        $scope->setCode('chin.node');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $scope->addUserGroup($group);
+        $manager->persist($scope);
+
+        $scope = new Scope();
+        $scope->setName('places');
+        $scope->setDescription('Kunnen beheren van een plaatsen');
+        $scope->setCode('lc.place');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $scope->addUserGroup($group);
         $manager->persist($scope);
@@ -78,7 +94,6 @@ class CheckinFixtures extends Fixture
 
         $group->addUser($user);
         $manager->persist($group);
-
 
         $manager->flush();
     }
