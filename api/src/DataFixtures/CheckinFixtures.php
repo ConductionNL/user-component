@@ -44,7 +44,7 @@ class CheckinFixtures extends Fixture
         $scope = new Scope();
         $scope->setName('admin');
         $scope->setDescription('Kunnen beheren van een organizatie');
-        $scope->setCode('wrc.organization');
+        $scope->setCode('wrc.organization.write');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $scope->addUserGroup($group);
         $manager->persist($scope);
@@ -52,7 +52,7 @@ class CheckinFixtures extends Fixture
         $scope = new Scope();
         $scope->setName('nodes');
         $scope->setDescription('Kunnen beheren van nodes');
-        $scope->setCode('chin.node');
+        $scope->setCode('chin.node.write');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $scope->addUserGroup($group);
         $manager->persist($scope);
@@ -60,7 +60,7 @@ class CheckinFixtures extends Fixture
         $scope = new Scope();
         $scope->setName('places');
         $scope->setDescription('Kunnen beheren van een plaatsen');
-        $scope->setCode('lc.place');
+        $scope->setCode('lc.place.write');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $scope->addUserGroup($group);
         $manager->persist($scope);
