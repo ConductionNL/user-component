@@ -47,7 +47,6 @@ class ZuiddrechtFixtures extends Fixture
         $userBeheer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
         $manager->persist($userBeheer);
 
-
         $groupUsers = new Group();
         $groupUsers->setName('Users');
         $groupUsers->setDescription('Alle gebruikers');
