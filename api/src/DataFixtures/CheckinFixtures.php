@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Group;
-use App\Entity\Provider;
 use App\Entity\Scope;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
