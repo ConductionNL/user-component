@@ -127,6 +127,15 @@ class Provider
     private $tokens;
 
     /**
+     * @var array A list of configurations that apply to this provider
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json")
+     */
+    private $configuration = [];
+
+    /**
      * @var Datetime The moment this request was created
      *
      * @Assert\DateTime
@@ -188,6 +197,18 @@ class Provider
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getConfiguration(): ?array
+    {
+        return $this->configuration;
+    }
+
+    public function setConfiguration(array $configuration): self
+    {
+        $this->configuration = $configuration;
 
         return $this;
     }
