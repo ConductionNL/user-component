@@ -96,7 +96,6 @@ class BegravenFixtures extends Fixture
         $userKoggenland->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
         $manager->persist($userKoggenland);
 
-
         // Vortex Adventures
         $groupUsers = new Group();
         $groupUsers->setName('Users');
@@ -156,7 +155,6 @@ class BegravenFixtures extends Fixture
 
         $manager->flush();
 
-
         // Viava la users
 
         //  Koggenland
@@ -195,7 +193,6 @@ class BegravenFixtures extends Fixture
         $groupUsers->addUser($user);
         $groupBalie->addUser($user);
 
-
         ///  SED | Peter Bax
 
         $user = new User();
@@ -228,6 +225,5 @@ class BegravenFixtures extends Fixture
         $manager->persist($groupBalie);
 
         $manager->flush();
-
     }
 }
