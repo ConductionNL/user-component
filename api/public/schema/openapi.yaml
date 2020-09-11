@@ -4287,6 +4287,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[configuration]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[dateCreated]'
           in: query
           required: false
@@ -4408,6 +4417,22 @@ paths:
             type: string
         -
           name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: configuration
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'configuration[]'
           in: query
           required: false
           schema:
@@ -6523,13 +6548,13 @@ paths:
           schema:
             type: string
         -
-          name: id
+          name: provider.name
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'id[]'
+          name: 'provider.name[]'
           in: query
           required: false
           schema:
@@ -6538,58 +6563,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: token
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'token[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: validTill
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'validTill[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -8953,7 +8926,9 @@ components:
           type: string
           format: uuid
         organization:
-          description: 'The RSIN of the organization that owns this group'
+          description: 'A specific commonground organization'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         name:
           description: 'The name of this group'
@@ -9013,7 +8988,9 @@ components:
         - description
       properties:
         organization:
-          description: 'The RSIN of the organization that owns this group'
+          description: 'A specific commonground organization'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         name:
           description: 'The name of this group'
@@ -9065,7 +9042,9 @@ components:
           type: string
           format: uuid
         organization:
-          description: 'The RSIN of the organization that owns this group'
+          description: 'A specific commonground organization'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         name:
           description: 'The name of this group'
@@ -9134,7 +9113,9 @@ components:
           readOnly: true
           type: string
         organization:
-          description: 'The RSIN of the organization that owns this group'
+          description: 'A specific commonground organization'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         name:
           description: 'The name of this group'
@@ -9188,6 +9169,11 @@ components:
         description:
           description: 'The description of this provider.'
           type: string
+        configuration:
+          description: 'A list of configurations that apply to this provider'
+          type: array
+          items:
+            type: string
         dateCreated:
           description: 'The moment this request was created'
           externalDocs:
@@ -9226,6 +9212,11 @@ components:
         description:
           description: 'The description of this provider.'
           type: string
+        configuration:
+          description: 'A list of configurations that apply to this provider'
+          type: array
+          items:
+            type: string
     'Provider:jsonld-read':
       type: object
       description: 'An external identity provider (like facebook).'
@@ -9258,6 +9249,11 @@ components:
         description:
           description: 'The description of this provider.'
           type: string
+        configuration:
+          description: 'A list of configurations that apply to this provider'
+          type: array
+          items:
+            type: string
         dateCreated:
           description: 'The moment this request was created'
           externalDocs:
@@ -9305,6 +9301,11 @@ components:
         description:
           description: 'The description of this provider.'
           type: string
+        configuration:
+          description: 'A list of configurations that apply to this provider'
+          type: array
+          items:
+            type: string
     Scope-read:
       type: object
       description: 'All properties that the entity User holds.'
@@ -9373,6 +9374,9 @@ components:
           description: 'The description of this scope.'
           type: string
           nullable: true
+        code:
+          description: 'The code of this scope'
+          type: string
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -9475,6 +9479,9 @@ components:
           description: 'The description of this scope.'
           type: string
           nullable: true
+        code:
+          description: 'The code of this scope'
+          type: string
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -9809,12 +9816,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9854,11 +9861,10 @@ definitions:
         type: string
         format: uuid
       organization:
-        description: 'The RSIN of the organization that owns this group'
+        description: 'A specific commonground organization'
         type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
       name:
         description: 'The name of this group'
         type: string
@@ -9886,12 +9892,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9908,11 +9914,10 @@ definitions:
   Group-write:
     properties:
       organization:
-        description: 'The RSIN of the organization that owns this group'
+        description: 'A specific commonground organization'
         type: string
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
       name:
         description: 'The name of this group'
         type: string
@@ -9967,16 +9972,19 @@ definitions:
         type: string
         example: 'The facebook provider allows users to login with facebook'
         maxLength: 255
+      configuration:
+        description: 'A list of configurations that apply to this provider'
+        type: array
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
     required:
       - organization
       - name
@@ -9998,6 +10006,9 @@ definitions:
         type: string
         example: 'The facebook provider allows users to login with facebook'
         maxLength: 255
+      configuration:
+        description: 'A list of configurations that apply to this provider'
+        type: array
     required:
       - organization
       - name
@@ -10032,12 +10043,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -10057,6 +10068,10 @@ definitions:
         type: string
         example: 'This scope allows users to change contact objects'
         maxLength: 255
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
       organization:
         description: 'A specific commonground organization'
         type: string
@@ -10084,17 +10099,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10143,12 +10158,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
     required:
       - organization
       - username
@@ -10281,12 +10296,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
     required: []
   AuditTrail-write:
     properties:
@@ -10334,12 +10349,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-04 13:50:40'
+        example: '2020-09-03 06:34:20'
     required: []
   ChangeLog-write:
     properties:
