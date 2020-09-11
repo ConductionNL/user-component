@@ -34,11 +34,16 @@ class CheckinFixtures extends Fixture
             return false;
         }
 
+        $id = '4085d475-063b-47ed-98eb-0a7d8b01f3b7';
         $group = new Group();
         $group->setName('admin');
         $group->setDescription('Kunnen beheren van een onderneming');
         $group->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $manager->persist($group);
+        $group->setId($id);
+        $manager->persist($group);
+        $manager->flush();
+        $group = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         $scope = new Scope();
         $scope->setName('admin');
