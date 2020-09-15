@@ -1,18 +1,18 @@
 openapi: 3.0.2
 info:
   title: 'User Component'
-  version: V.0.1
+  version: V1.0
   description: |
     API Details
     - Component: User Component
     - Reference: uc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/uc-php) 
     - Datamodel: [postman](/schema/uc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
+    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
 paths:
   /applications:
@@ -9816,12 +9816,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9854,6 +9854,77 @@ definitions:
       - organization
       - name
       - description
+  Scope-read:
+    properties:
+      id:
+        description: 'The (uu)id of this scope'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this scope'
+        type: string
+        example: 'Write on contact'
+        maxLength: 255
+      description:
+        description: 'The description of this scope.'
+        type: string
+        example: 'This scope allows users to change contact objects'
+        maxLength: 255
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-09-15 10:24:08'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-09-15 10:24:08'
+      application: []
+      userGroups:
+        description: 'User groups that give this scope.'
+        type: '\Group[]'
+    required:
+      - name
+      - organization
+  Scope-write:
+    properties:
+      name:
+        description: 'The name of this scope'
+        type: string
+        example: 'Write on contact'
+        maxLength: 255
+      description:
+        description: 'The description of this scope.'
+        type: string
+        example: 'This scope allows users to change contact objects'
+        maxLength: 255
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      application: []
+      userGroups:
+        description: 'User groups that give this scope.'
+        type: '\Group[]'
+    required:
+      - name
+      - organization
   Group-read:
     properties:
       id:
@@ -9892,12 +9963,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9950,6 +10021,68 @@ definitions:
       - organization
       - name
       - description
+  User-read:
+    properties:
+      id:
+        description: 'The (uu)id of this group'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-09-15 10:24:08'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-09-15 10:24:08'
+    required:
+      - organization
+      - username
+  User-write:
+    properties:
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
+      password:
+        description: 'The hashed password'
+        type: string
+    required:
+      - organization
+      - username
   Provider-read:
     properties:
       id:
@@ -9979,12 +10112,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
     required:
       - organization
       - name
@@ -10013,77 +10146,6 @@ definitions:
       - organization
       - name
       - description
-  Scope-read:
-    properties:
-      id:
-        description: 'The (uu)id of this scope'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'The name of this scope'
-        type: string
-        example: 'Write on contact'
-        maxLength: 255
-      description:
-        description: 'The description of this scope.'
-        type: string
-        example: 'This scope allows users to change contact objects'
-        maxLength: 255
-      code:
-        description: 'The code of this scope'
-        type: string
-        example: contact.write
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-11 11:36:21'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-11 11:36:21'
-      application: []
-      userGroups:
-        description: 'User groups that give this scope.'
-        type: '\Group[]'
-    required:
-      - name
-      - organization
-  Scope-write:
-    properties:
-      name:
-        description: 'The name of this scope'
-        type: string
-        example: 'Write on contact'
-        maxLength: 255
-      description:
-        description: 'The description of this scope.'
-        type: string
-        example: 'This scope allows users to change contact objects'
-        maxLength: 255
-      code:
-        description: 'The code of this scope'
-        type: string
-        example: contact.write
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      application: []
-      userGroups:
-        description: 'User groups that give this scope.'
-        type: '\Group[]'
-    required:
-      - name
-      - organization
   Token-read:
     properties:
       id:
@@ -10099,17 +10161,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10130,68 +10192,59 @@ definitions:
         description: 'The provider that this scope belongs to.'
         type: \Provider
     required: []
-  User-read:
+  ChangeLog-read:
     properties:
       id:
-        description: 'The (uu)id of this group'
+        description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      organization:
-        description: 'A specific commonground organization'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
       username:
-        description: 'A unique visual identifier that represents this user.'
+        description: ''
         type: string
-        example: '002851234'
-        maxLength: 255
-        minLength: 8
-      person:
-        description: 'A contact component person'
+      session:
+        description: 'The moment this request was created'
         type: string
-        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
-        format: url
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
-    required:
-      - organization
-      - username
-  User-write:
+        example: '2020-09-15 10:24:08'
+    required: []
+  ChangeLog-write:
     properties:
-      organization:
-        description: 'A specific commonground organization'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      username:
-        description: 'A unique visual identifier that represents this user.'
-        type: string
-        example: '002851234'
-        maxLength: 255
-        minLength: 8
-      person:
-        description: 'A contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
-        format: url
-        maxLength: 255
-      password:
-        description: 'The hashed password'
-        type: string
-    required:
-      - organization
-      - username
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -10296,12 +10349,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-11 11:36:21'
+        example: '2020-09-15 10:24:08'
     required: []
   AuditTrail-write:
     properties:
@@ -10309,59 +10362,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-11 11:36:21'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-11 11:36:21'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -10372,27 +10372,15 @@ tags:
       
       
   -
-    name: Group
-    description: |
-      A user Group.
-      
-      
-  -
-    name: Provider
-    description: |
-      An external identity provider (like facebook).
-      
-      
-  -
     name: Scope
     description: |
       All properties that the entity User holds.
       
       
   -
-    name: Token
+    name: Group
     description: |
-      A token from an external identity profider (like facebook).
+      A user Group.
       
       
   -
@@ -10402,13 +10390,25 @@ tags:
       
       Entity User exists of an id, a name, a password, a email and has zero or more roles.
   -
-    name: AuditTrail
+    name: Provider
+    description: |
+      An external identity provider (like facebook).
+      
+      
+  -
+    name: Token
+    description: |
+      A token from an external identity profider (like facebook).
+      
+      
+  -
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -10419,15 +10419,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
