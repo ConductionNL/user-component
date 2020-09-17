@@ -34,11 +34,16 @@ class CheckinFixtures extends Fixture
             return false;
         }
 
+        $id = '4085d475-063b-47ed-98eb-0a7d8b01f3b7';
         $group = new Group();
         $group->setName('admin');
         $group->setDescription('Kunnen beheren van een onderneming');
         $group->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $manager->persist($group);
+        $group->setId($id);
+        $manager->persist($group);
+        $manager->flush();
+        $group = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         $scope = new Scope();
         $scope->setName('admin');
@@ -67,7 +72,7 @@ class CheckinFixtures extends Fixture
         $user = new User();
         $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'2106575d-50f3-4f2b-8f0f-a2d6bc188222']));
         $user->setUsername('jan@zwarteraaf.nl');
-        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
+        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6']));
         $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
         $manager->persist($user);
 
@@ -77,7 +82,7 @@ class CheckinFixtures extends Fixture
         $user = new User();
         $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'a9398c45-7497-4dbd-8dd1-1be4f3384ed7']));
         $user->setUsername('bob@goudlust.nl');
-        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
+        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
         $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
         $manager->persist($user);
 

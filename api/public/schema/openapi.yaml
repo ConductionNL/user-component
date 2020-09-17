@@ -1,13 +1,13 @@
 openapi: 3.0.2
 info:
   title: 'User Component'
-  version: V.0.1
+  version: V1.0
   description: |
     API Details
     - Component: User Component
     - Reference: uc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/uc-php) 
     - Datamodel: [postman](/schema/uc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
@@ -9697,6 +9697,11 @@ components:
         password:
           description: 'The hashed password'
           type: string
+        userGroups:
+          description: 'A list of groups to wichs this user belongs'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-write'
     'User:jsonld-read':
       type: object
       description: 'All properties that the entity User holds.'
@@ -9788,6 +9793,11 @@ components:
         password:
           description: 'The hashed password'
           type: string
+        userGroups:
+          description: 'A list of groups to wichs this user belongs'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-write'
 definitions:
   Application-read:
     properties:
@@ -9816,12 +9826,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9892,12 +9902,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9979,12 +9989,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
     required:
       - organization
       - name
@@ -10043,12 +10053,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -10099,17 +10109,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10158,12 +10168,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
     required:
       - organization
       - username
@@ -10189,6 +10199,9 @@ definitions:
       password:
         description: 'The hashed password'
         type: string
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
     required:
       - organization
       - username
@@ -10296,12 +10309,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
     required: []
   AuditTrail-write:
     properties:
@@ -10349,12 +10362,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-03 06:34:20'
+        example: '2020-09-15 11:37:35'
     required: []
   ChangeLog-write:
     properties:
