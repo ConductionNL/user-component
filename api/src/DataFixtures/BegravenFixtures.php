@@ -120,11 +120,12 @@ class BegravenFixtures extends Fixture
         $groupBalie->setDescription('De balliemedewerkers');
         $groupBalie->setParent($groupUsers);
         $groupBalie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
-        $groupBalie->addUser($userBalie);
+        $manager->persist($groupBalie);
         $groupBalie->setId($id);
         $manager->persist($groupBalie);
         $manager->flush();
         $groupBalie = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
+        $groupBalie->addUser($userBalie);
 
         $groupLocatie = new Group();
         $groupLocatie->setName('Locatie beheerders');
