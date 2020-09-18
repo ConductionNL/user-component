@@ -41,6 +41,17 @@ parameters:
 
     env(APP_CONTAINER): ""
     env(APP_REPRO): ""
+    
+    # UC specific stuff
+    env(FACEBOOK_ID): ""
+    env(FACEBOOK_SECRET): ""
+    env(GMAIL_ID): ""
+    env(GMAIL_SECRET): ""
+
+    facebook_id: "%env(FACEBOOK_ID)%"
+    facebook_secret: "%env(FACEBOOK_SECRET)%"
+    gmail_id: "%env(GMAIL_ID)%"
+    gmail_secret: "%env(GMAIL_SECRET)%"
   
     app_env: "%env(APP_ENV)%"
     app_debug: "%env(APP_DEBUG)%"
