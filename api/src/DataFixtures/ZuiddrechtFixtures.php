@@ -193,16 +193,22 @@ class ZuiddrechtFixtures extends Fixture
         $manager->persist($provider);
 
         $provider = new Provider();
-        $provider->setName('facebook');
-        $provider->setDescription('facebook provider');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $manager->persist($provider);
+        $provider->setName('facebook');
+        $provider->setDescription('facebook');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setConfiguration(['app_id'=>$this->params->get('facebook_id'),'secret'=>$this->params->get('facebook_secret')]);
+        $provider->setConfiguration([]);
+        $manager->flush();
 
         $provider = new Provider();
-        $provider->setName('gmail');
-        $provider->setDescription('gmail provider');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $manager->persist($provider);
+        $provider->setName('gmail');
+        $provider->setDescription('gmail');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setConfiguration(['app_id'=>$this->params->get('gmail_id'),'secret'=>$this->params->get('gmail_secret')]);
+        $manager->flush();
+
 
         $manager->flush();
     }

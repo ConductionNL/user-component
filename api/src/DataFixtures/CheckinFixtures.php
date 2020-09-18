@@ -35,24 +35,6 @@ class CheckinFixtures extends Fixture
             return false;
         }
 
-        $provider = new Provider();
-        $manager->persist($provider);
-        $provider->setName('facebook');
-        $provider->setDescription('facebook');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $provider->setConfiguration(['app_id'=>$this->params->get('facebook_id'),'secret'=>$this->params->get('facebook_secret')]);
-        $provider->setConfiguration([]);
-        $manager->flush();
-
-        $provider = new Provider();
-        $manager->persist($provider);
-        $provider->setName('gmail');
-        $provider->setDescription('gmail');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $provider->setConfiguration(['app_id'=>$this->params->get('gmail_id'),'secret'=>$this->params->get('gmail_secret')]);
-        $manager->flush();
-
-
         $id = '4085d475-063b-47ed-98eb-0a7d8b01f3b7';
         $group = new Group();
         $group->setName('admin');
