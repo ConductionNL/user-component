@@ -5276,7 +5276,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Write on contact\",\n    \"description\": \"This scope allows users to change contact objects\",\n    \"code\": \"contact.write\",\n    \"organization\": \"002851234\",\n    \"application\": \"/applications/{{application}}\"\n}"
+							"raw": "{\n    \"name\": \"Write on contact\",\n    \"description\": \"This scope allows users to change contact objects\",\n    \"code\": \"contact.write\",\n    \"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\n    \"application\": \"/applications/{{application}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/scopes",
@@ -5857,7 +5857,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Write on contact\",\n    \"description\": \"This scope allows users to change contact objects\",\n    \"code\": \"contact.write\",\n    \"organization\": \"002851234\",\n    \"application\": \"/applications/{{application}}\"\n}"
+							"raw": "{\n    \"name\": \"Write on contact\",\n    \"description\": \"This scope allows users to change contact objects\",\n    \"code\": \"contact.write\",\n    \"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\n    \"application\": \"/applications/{{application}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/scopes/{{scope}}",
@@ -6485,7 +6485,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"token\": \"e2984465-190a-4562-829e-a8cca81aa35d\",\n    \"validTill\": \"2020-05-22 13:52:25\",\n    \"user\": \"/users/{{user}}\",\n    \"provider\": \"/providers/{{provider}}\"\n}"
+							"raw": "{\n    \"token\": \"e2984465-190a-44123562-829e-a8cca81aa35d\",\n    \"validTill\": \"2020-05-22 13:52:25\",\n    \"user\": \"/users/{{user}}\",\n    \"provider\": \"/providers/{{provider}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/tokens",
@@ -7066,7 +7066,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"token\": \"e2984465-190a-4562-829e-a8cca81aa35d\",\n    \"validTill\": \"2020-05-22 13:52:25\",\n    \"user\": \"/users/{{user}}\",\n    \"provider\": \"/providers/{{provider}}\"\n}"
+							"raw": "{\n    \"token\": \"e2984465-190a-4562-829e-a8cca81aa354124123d\",\n    \"validTill\": \"2020-05-22 13:52:25\",\n    \"user\": \"/users/{{user}}\",\n    \"provider\": \"/providers/{{provider}}\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/tokens/{{token}}",
@@ -8604,12 +8604,12 @@
 	],
 	"variable": [
 		{
-			"id": "78adf922-2183-46a7-a1ca-d03ab38f21a2",
+			"id": "d7b4d603-260b-4092-a34e-6d011a9fc799",
 			"key": "baseUrl",
 			"value": "localhost"
 		},
 		{
-			"id": "97687363-6b1a-4852-9b65-2b61d4de50b1",
+			"id": "36d97b72-f20a-4f82-84ed-79912966ba35",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		}

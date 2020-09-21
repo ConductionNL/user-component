@@ -4287,6 +4287,24 @@ paths:
               - asc
               - desc
         -
+          name: 'order[type]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[application]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[configuration]'
           in: query
           required: false
@@ -4362,38 +4380,6 @@ paths:
           schema:
             type: string
         -
-          name: id
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: organization
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: name
           in: query
           required: false
@@ -4410,13 +4396,13 @@ paths:
           style: form
           explode: true
         -
-          name: description
+          name: type
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'description[]'
+          name: 'type[]'
           in: query
           required: false
           schema:
@@ -4426,13 +4412,13 @@ paths:
           style: form
           explode: true
         -
-          name: configuration
+          name: application
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'configuration[]'
+          name: 'application[]'
           in: query
           required: false
           schema:
@@ -4441,30 +4427,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -6564,6 +6526,22 @@ paths:
           style: form
           explode: true
         -
+          name: token
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'token[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -7458,6 +7436,15 @@ paths:
               - desc
         -
           name: 'order[username]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[locale]'
           in: query
           required: false
           schema:
@@ -8946,6 +8933,7 @@ components:
         canBeRegisteredFor:
           description: 'Whether or not new users can be registered for this group'
           type: boolean
+          nullable: true
         children:
           description: 'Groups that are a part of this group'
           type: array
@@ -9005,6 +8993,7 @@ components:
         canBeRegisteredFor:
           description: 'Whether or not new users can be registered for this group'
           type: boolean
+          nullable: true
         parent:
           description: 'The group that this group is part of'
           nullable: true
@@ -9062,6 +9051,7 @@ components:
         canBeRegisteredFor:
           description: 'Whether or not new users can be registered for this group'
           type: boolean
+          nullable: true
         children:
           description: 'Groups that are a part of this group'
           type: array
@@ -9130,6 +9120,7 @@ components:
         canBeRegisteredFor:
           description: 'Whether or not new users can be registered for this group'
           type: boolean
+          nullable: true
         parent:
           description: 'The group that this group is part of'
           nullable: true
@@ -9169,6 +9160,14 @@ components:
         description:
           description: 'The description of this provider.'
           type: string
+        type:
+          description: 'The type of this Provider'
+          type: string
+        application:
+          description: 'The Uri of the application this provider supports'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         configuration:
           description: 'A list of configurations that apply to this provider'
           type: array
@@ -9192,6 +9191,8 @@ components:
         - organization
         - name
         - description
+        - type
+        - application
     Provider-write:
       type: object
       description: 'An external identity provider (like facebook).'
@@ -9199,6 +9200,8 @@ components:
         - organization
         - name
         - description
+        - type
+        - application
       properties:
         organization:
           description: 'A specific commonground organization'
@@ -9211,6 +9214,14 @@ components:
           type: string
         description:
           description: 'The description of this provider.'
+          type: string
+        type:
+          description: 'The type of this Provider'
+          type: string
+        application:
+          description: 'The Uri of the application this provider supports'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         configuration:
           description: 'A list of configurations that apply to this provider'
@@ -9249,6 +9260,14 @@ components:
         description:
           description: 'The description of this provider.'
           type: string
+        type:
+          description: 'The type of this Provider'
+          type: string
+        application:
+          description: 'The Uri of the application this provider supports'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         configuration:
           description: 'A list of configurations that apply to this provider'
           type: array
@@ -9272,6 +9291,8 @@ components:
         - organization
         - name
         - description
+        - type
+        - application
     'Provider:jsonld-write':
       type: object
       description: 'An external identity provider (like facebook).'
@@ -9279,6 +9300,8 @@ components:
         - organization
         - name
         - description
+        - type
+        - application
       properties:
         '@context':
           readOnly: true
@@ -9300,6 +9323,14 @@ components:
           type: string
         description:
           description: 'The description of this provider.'
+          type: string
+        type:
+          description: 'The type of this Provider'
+          type: string
+        application:
+          description: 'The Uri of the application this provider supports'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         configuration:
           description: 'A list of configurations that apply to this provider'
@@ -9644,6 +9675,9 @@ components:
         username:
           description: 'A unique visual identifier that represents this user.'
           type: string
+        locale:
+          description: 'A iso code reprecenting theusers language'
+          type: string
         person:
           description: 'A contact component person'
           externalDocs:
@@ -9672,12 +9706,14 @@ components:
       required:
         - organization
         - username
+        - locale
     User-write:
       type: object
       description: 'All properties that the entity User holds.'
       required:
         - organization
         - username
+        - locale
       properties:
         organization:
           description: 'A specific commonground organization'
@@ -9687,6 +9723,9 @@ components:
           nullable: true
         username:
           description: 'A unique visual identifier that represents this user.'
+          type: string
+        locale:
+          description: 'A iso code reprecenting theusers language'
           type: string
         person:
           description: 'A contact component person'
@@ -9731,6 +9770,9 @@ components:
         username:
           description: 'A unique visual identifier that represents this user.'
           type: string
+        locale:
+          description: 'A iso code reprecenting theusers language'
+          type: string
         person:
           description: 'A contact component person'
           externalDocs:
@@ -9759,12 +9801,14 @@ components:
       required:
         - organization
         - username
+        - locale
     'User:jsonld-write':
       type: object
       description: 'All properties that the entity User holds.'
       required:
         - organization
         - username
+        - locale
       properties:
         '@context':
           readOnly: true
@@ -9783,6 +9827,9 @@ components:
           nullable: true
         username:
           description: 'A unique visual identifier that represents this user.'
+          type: string
+        locale:
+          description: 'A iso code reprecenting theusers language'
           type: string
         person:
           description: 'A contact component person'
@@ -9826,12 +9873,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9902,12 +9949,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -9982,6 +10029,17 @@ definitions:
         type: string
         example: 'The facebook provider allows users to login with facebook'
         maxLength: 255
+      type:
+        description: 'The type of this Provider'
+        type: string
+        example: Facebook
+        maxLength: 255
+      application:
+        description: 'The Uri of the application this provider supports'
+        type: string
+        example: wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc
+        format: url
+        maxLength: 255
       configuration:
         description: 'A list of configurations that apply to this provider'
         type: array
@@ -9989,16 +10047,18 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
     required:
       - organization
       - name
       - description
+      - type
+      - application
   Provider-write:
     properties:
       organization:
@@ -10016,6 +10076,17 @@ definitions:
         type: string
         example: 'The facebook provider allows users to login with facebook'
         maxLength: 255
+      type:
+        description: 'The type of this Provider'
+        type: string
+        example: Facebook
+        maxLength: 255
+      application:
+        description: 'The Uri of the application this provider supports'
+        type: string
+        example: wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc
+        format: url
+        maxLength: 255
       configuration:
         description: 'A list of configurations that apply to this provider'
         type: array
@@ -10023,6 +10094,8 @@ definitions:
       - organization
       - name
       - description
+      - type
+      - application
   Scope-read:
     properties:
       id:
@@ -10053,12 +10126,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -10109,17 +10182,17 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateCreated:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10158,6 +10231,10 @@ definitions:
         example: '002851234'
         maxLength: 255
         minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
       person:
         description: 'A contact component person'
         type: string
@@ -10168,15 +10245,16 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
     required:
       - organization
       - username
+      - locale
   User-write:
     properties:
       organization:
@@ -10190,6 +10268,10 @@ definitions:
         example: '002851234'
         maxLength: 255
         minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
       person:
         description: 'A contact component person'
         type: string
@@ -10205,6 +10287,7 @@ definitions:
     required:
       - organization
       - username
+      - locale
   AuditTrail-read:
     properties:
       id:
@@ -10309,12 +10392,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
     required: []
   AuditTrail-write:
     properties:
@@ -10362,12 +10445,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-15 11:37:35'
+        example: '2020-09-21 12:46:26'
     required: []
   ChangeLog-write:
     properties:
