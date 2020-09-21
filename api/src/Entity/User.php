@@ -141,12 +141,28 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string The users languague in iso code
      *
      * @Groups({"write"})
      * @ORM\Column(type="string")
      */
-    private $password;
+    private $locale;
+
+    /**
+     * @var string A unique visual identifier that represents this user.
+     *
+     * @example 002851234
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, unique = true)
+     */
+    private $username;
 
     /**
      * @var array A list of groups to wichs this user belongs
@@ -263,6 +279,22 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+
+    /**
+     * A visual identifier that represents this users language.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }
