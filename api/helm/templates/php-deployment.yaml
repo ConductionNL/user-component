@@ -180,6 +180,11 @@ spec:
                 configMapKeyRef:
                   name: {{ template "fullname" . }}
                   key: app-web
+            - name: APP_SUBPATH_ROUTING
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: app-subpath-routing
             
             # bla bla      
             - name: CORS_ALLOW_ORIGIN
@@ -234,6 +239,26 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: app_user_key
+            - name: FACEBOOK_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: facebook_id
+            - name: FACEBOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: facebook_secret
+            - name: GMAIL_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: gmail_id
+            - name: GMAIL_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: gmail_secret
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}

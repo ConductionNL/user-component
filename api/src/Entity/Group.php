@@ -58,7 +58,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"organization":"exact"})
  */
 class Group
 {
@@ -77,16 +77,13 @@ class Group
     private $id;
 
     /**
-     * @var string The RSIN of the organization that owns this group
+     * @var string A specific commonground organization
      *
-     * @example 002851234
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @Gedmo\Versioned
      * @Assert\NotNull
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 11
-     * )
+     * @Assert\Url
+     * @Gedmo\Versioned
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -95,7 +92,7 @@ class Group
     /**
      * @var string The name of this group
      *
-     * @example Admin
+     * @example Admins
      *
      * @Gedmo\Versioned
      * @Assert\NotNull
@@ -123,6 +120,20 @@ class Group
     private $description;
 
     /**
+     * @var string The title of this group
+     *
+     * @example Admin
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
      * @var string The code of this scope
      *
      * @example contact.write
@@ -133,6 +144,16 @@ class Group
      * @ORM\Column(type="string", length=255)
      */
     private $code;
+
+    /**
+     * @var bool Whether or not new users can be registered for this group
+     *
+     * @example true
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $canBeRegisteredFor = false;
 
     /**
      * @var Group The group that this group is part of
@@ -201,6 +222,13 @@ class Group
         return $this->id;
     }
 
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getOrganization(): ?string
     {
         return $this->organization;
@@ -237,6 +265,18 @@ class Group
         return $this;
     }
 
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
     public function getCode(): ?string
     {
         return $this->code;
@@ -245,6 +285,18 @@ class Group
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getCanBeRegisteredFor(): ?bool
+    {
+        return $this->canBeRegisteredFor;
+    }
+
+    public function setCanBeRegisteredFor(?bool $canBeRegisteredFor): self
+    {
+        $this->canBeRegisteredFor = $canBeRegisteredFor;
 
         return $this;
     }

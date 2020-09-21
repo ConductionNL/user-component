@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Group;
 use App\Entity\User;
+use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -12,11 +13,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ConductionFixtures extends Fixture
 {
     private $params;
+    private $commonGroundService;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordEncoderInterface $encoder)
     {
         $this->params = $params;
+        $this->commonGroundService = $commonGroundService;
         $this->encoder = $encoder;
     }
 
@@ -43,11 +46,46 @@ class ConductionFixtures extends Fixture
 
         $groupBeheer = new Group();
         $groupBeheer->setName('Beheerders');
-        $groupBeheer->setDescription('De beheerders die de congiruatie inregelen');
+        $groupBeheer->setDescription('De beheerders die de configuratie inregelen');
         $groupBeheer->setParent($groupUsers);
         $groupBeheer->setOrganization('https://wrc.conduction.nl/organizations/organizations/39405560-7859-4d16-943b-042d6c053a0f'); // Utrecht
         $groupBeheer->addUser($user);
         $manager->persist($groupBeheer);
+
+        //Stage
+        //Test Student User
+        $testStudent = new User();
+        $testStudent->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
+        $testStudent->setUsername('testStudent');
+        $testStudent->setPassword($this->encoder->encodePassword($testStudent, 'test1234'));
+        $manager->persist($testStudent);
+
+        //Group Studenten
+        $groupStudenten = new Group();
+        $groupStudenten->setName('Studenten');
+        $groupStudenten->setDescription('Alle studenten');
+        $groupStudenten->setTitle('Student');
+        $groupStudenten->setCanBeRegisteredFor(true);
+        $groupStudenten->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
+        $groupStudenten->addUser($testStudent);
+        $manager->persist($groupStudenten);
+
+        //Test Bedrijf User
+        $testBedrijf = new User();
+        $testBedrijf->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
+        $testBedrijf->setUsername('testBedrijf');
+        $testBedrijf->setPassword($this->encoder->encodePassword($testBedrijf, 'test1234'));
+        $manager->persist($testBedrijf);
+
+        //Group Bedrijven
+        $groupBedrijven = new Group();
+        $groupBedrijven->setName('Bedrijven');
+        $groupBedrijven->setDescription('Alle bedrijven');
+        $groupBedrijven->setTitle('Bedrijf');
+        $groupBedrijven->setCanBeRegisteredFor(true);
+        $groupBedrijven->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
+        $groupBedrijven->addUser($testBedrijf);
+        $manager->persist($groupBedrijven);
 
         $manager->flush();
     }

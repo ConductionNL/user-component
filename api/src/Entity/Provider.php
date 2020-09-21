@@ -78,6 +78,7 @@ class Provider
 
     /**
      * @var string A specific commonground organization
+     *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
      * @Assert\NotNull
@@ -124,6 +125,15 @@ class Provider
      * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="provider", orphanRemoval=true)
      */
     private $tokens;
+
+    /**
+     * @var array A list of configurations that apply to this provider
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json")
+     */
+    private $configuration = [];
 
     /**
      * @var Datetime The moment this request was created
@@ -187,6 +197,18 @@ class Provider
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getConfiguration(): ?array
+    {
+        return $this->configuration;
+    }
+
+    public function setConfiguration(array $configuration): self
+    {
+        $this->configuration = $configuration;
 
         return $this;
     }

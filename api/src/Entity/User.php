@@ -93,6 +93,7 @@ class User implements UserInterface
 
     /**
      * @var string A specific commonground organization
+     *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
      * @Assert\NotNull
@@ -118,6 +119,19 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, unique = true)
      */
     private $username;
+
+    /**
+     * @var string A iso code reprecenting theusers language
+     *
+     * @example en
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Language
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=7)
+     */
+    private $locale = 'en';
 
     /**
      * @var string A contact component person
@@ -150,6 +164,7 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
+     * @Groups({"write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;
@@ -229,6 +244,23 @@ class User implements UserInterface
     public function setUsername(?string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+
+
+    /**
+     * A visual identifier that represents this users langauge.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }
