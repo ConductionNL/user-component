@@ -194,14 +194,16 @@ class ZuiddrechtFixtures extends Fixture
 
         $provider = new Provider();
         $provider->setName('facebook');
-        $provider->setDescription('facebook provider');
+        $provider->setDescription('facebook');
         $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setConfiguration(['app_id'=>str_replace('\'','',$this->params->get('facebook_id')),'secret'=>$this->params->get('facebook_secret')]);
         $manager->persist($provider);
 
         $provider = new Provider();
         $provider->setName('gmail');
-        $provider->setDescription('gmail provider');
+        $provider->setDescription('gmail');
         $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setConfiguration(['app_id'=>$this->params->get('gmail_id'),'secret'=>$this->params->get('gmail_secret')]);
         $manager->persist($provider);
 
         $manager->flush();

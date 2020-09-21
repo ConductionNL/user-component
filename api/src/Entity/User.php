@@ -121,6 +121,19 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @var string A iso code reprecenting theusers language
+     *
+     * @example en
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Language
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=7)
+     */
+    private $locale = 'en';
+
+    /**
      * @var string A contact component person
      *
      * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
@@ -231,6 +244,23 @@ class User implements UserInterface
     public function setUsername(?string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+
+
+    /**
+     * A visual identifier that represents this users langauge.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }
