@@ -1629,7 +1629,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"organization\": \"002851234\",\n    \"name\": \"Admin\",\n    \"description\": \"This group holds all the Admin members\",\n    \"code\": \"contact.write\"\n}"
+							"raw": "{\n    \"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\n    \"name\": \"Admin\",\n    \"description\": \"This group holds all the Admin members\",\n    \"code\": \"contact.write\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/groups",
@@ -2210,7 +2210,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"organization\": \"002851234\",\n    \"name\": \"Admin\",\n    \"description\": \"This group holds all the Admin users\",\n    \"code\": \"contact.write\"\n}"
+							"raw": "{\n    \"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\n    \"name\": \"Admin\",\n    \"description\": \"This group holds all the Admin users\",\n    \"code\": \"contact.write\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/groups/{{group}}",
@@ -2842,7 +2842,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"organization\": \"002851234\",\n    \"name\": \"Facebook\",\n    \"description\": \"The facebook provider allows users to login with facebook\",\n    \"type\": \"facebook\",\n    \"application\": \"https://wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc\"\n}"
+							"raw": "{\n    \"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\n    \"name\": \"Facebook\",\n    \"description\": \"The facebook provider allows users to login with facebook\",\n    \"type\": \"facebook\",\n    \"application\": \"https://wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/providers",
@@ -3423,7 +3423,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"organization\": \"002851234\",\n    \"name\": \"Facebooks\",\n    \"description\": \"The facebook provider allows users to login with facebook\",\n    \"type\": \"facebooks\",\n    \"application\": \"https://wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc\"\n}"
+							"raw": "{\n    \"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\n    \"name\": \"Facebooks\",\n    \"description\": \"The facebook provider allows users to login with facebook\",\n    \"type\": \"facebooks\",\n    \"application\": \"https://wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/providers/{{provider}}",
@@ -8604,12 +8604,12 @@
 	],
 	"variable": [
 		{
-			"id": "c5821fe5-ef27-4657-964d-7fbfd4a7556f",
+			"id": "78adf922-2183-46a7-a1ca-d03ab38f21a2",
 			"key": "baseUrl",
 			"value": "localhost"
 		},
 		{
-			"id": "93194dc1-3cab-402f-b9d5-f46ccb0b5f81",
+			"id": "97687363-6b1a-4852-9b65-2b61d4de50b1",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		}
