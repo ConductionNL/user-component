@@ -8604,12 +8604,12 @@
 	],
 	"variable": [
 		{
-			"id": "404f5bad-849c-4994-a1f3-2252012eadb0",
+			"id": "c5821fe5-ef27-4657-964d-7fbfd4a7556f",
 			"key": "baseUrl",
-			"value": "uc.dev.zuid-drecht.nl"
+			"value": "localhost"
 		},
 		{
-			"id": "4737e8eb-b659-4e6b-af30-efe2b6f60ce8",
+			"id": "93194dc1-3cab-402f-b9d5-f46ccb0b5f81",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		}
