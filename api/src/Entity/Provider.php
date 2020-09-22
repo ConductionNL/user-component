@@ -56,7 +56,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"name":"exact", "type":"exact", "application":"exact"})
+ * @ApiFilter(SearchFilter::class, properties={"name":"partial", "type":"partial", "application":"partial"})
  */
 class Provider
 {
