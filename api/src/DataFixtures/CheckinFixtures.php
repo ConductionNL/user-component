@@ -127,6 +127,14 @@ class CheckinFixtures extends Fixture
         $provider->setConfiguration(['app_id'=>$this->params->get('gmail_id'), 'secret'=>$this->params->get('gmail_secret')]);
         $manager->persist($provider);
 
+        $provider = new Provider();
+        $provider->setName('reset');
+        $provider->setDescription('provider for resetting password');
+        $provider->setType('reset');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $manager->persist($provider);
+
         $manager->flush();
     }
 }
