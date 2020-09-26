@@ -72,7 +72,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "exact", "person": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "partial", "person": "partial"})
  */
 class User implements UserInterface
 {
@@ -121,6 +121,19 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @var string A iso code reprecenting theusers language
+     *
+     * @example en
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Language
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=7)
+     */
+    private $locale = 'en';
+
+    /**
      * @var string A contact component person
      *
      * @example https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7
@@ -151,6 +164,7 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
+     * @Groups({"write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;
@@ -230,6 +244,21 @@ class User implements UserInterface
     public function setUsername(?string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this users langauge.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }

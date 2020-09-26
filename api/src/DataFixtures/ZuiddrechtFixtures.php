@@ -186,18 +186,6 @@ class ZuiddrechtFixtures extends Fixture
         $scope->addUserGroup($groupIdin);
         $manager->persist($scope);
 
-        $provider = new Provider();
-        $provider->setName('idin');
-        $provider->setDescription('idin provider');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $manager->persist($provider);
-
-        $provider = new Provider();
-        $provider->setName('facebook');
-        $provider->setDescription('facebook provider');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $manager->persist($provider);
-
         $manager->flush();
     }
 }
