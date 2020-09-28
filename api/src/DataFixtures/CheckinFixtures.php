@@ -30,7 +30,8 @@ class CheckinFixtures extends Fixture
         // Lets make sure we only run these fixtures on huwelijksplanner enviroments
         if (
             ($this->params->get('app_domain') != 'zuiddrecht.nl' && strpos($this->params->get('app_domain'), 'zuiddrecht.nl') == false) &&
-            ($this->params->get('app_domain') != 'zuid-drecht.nl' && strpos($this->params->get('app_domain'), 'zuid-drecht.nl') == false)
+            ($this->params->get('app_domain') != 'zuid-drecht.nl' && strpos($this->params->get('app_domain'), 'zuid-drecht.nl') == false) &&
+            ($this->params->get('app_domain') != 'checking.nu' && strpos($this->params->get('app_domain'), 'checking.nu') == false)
         ) {
             return false;
         }
@@ -99,6 +100,33 @@ class CheckinFixtures extends Fixture
 
         $group->addUser($user);
         $manager->persist($group);
+
+        //Providers
+        $provider = new Provider();
+        $provider->setName('idin');
+        $provider->setDescription('idin provider');
+        $provider->setType('idin');
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('facebook');
+        $provider->setDescription('facebook');
+        $provider->setType('facebook');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setConfiguration(['app_id'=>str_replace('\'', '', $this->params->get('facebook_id')), 'secret'=>$this->params->get('facebook_secret')]);
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('gmail');
+        $provider->setDescription('gmail');
+        $provider->setType('gmail');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setConfiguration(['app_id'=>$this->params->get('gmail_id'), 'secret'=>$this->params->get('gmail_secret')]);
+        $manager->persist($provider);
 
         $provider = new Provider();
         $provider->setName('reset');
