@@ -49,6 +49,7 @@ parameters:
     env(GMAIL_SECRET): ""
     env(IDIN_ID): ""
     env(IDIN_SECRET): ""
+    env(IDIN_ENDPOINT): ""
 
     facebook_id: "%env(FACEBOOK_ID)%"
     facebook_secret: "%env(FACEBOOK_SECRET)%"
@@ -56,6 +57,7 @@ parameters:
     gmail_secret: "%env(GMAIL_SECRET)%"
     idin_id: "%env(IDIN_ID)%"
     idin_secret: "%env(IDIN_SECRET)%"
+    idin_endpoint: "%env(IDIN_ENDPOINT)%"
   
     app_env: "%env(APP_ENV)%"
     app_debug: "%env(APP_DEBUG)%"
