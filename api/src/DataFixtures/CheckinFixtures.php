@@ -75,9 +75,14 @@ class CheckinFixtures extends Fixture
         $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'2106575d-50f3-4f2b-8f0f-a2d6bc188222']));
         $user->setUsername('jan@zwarteraaf.nl');
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6']));
-        $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
-        $manager->persist($user);
 
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
         $group->addUser($user);
         $manager->persist($group);
 
@@ -85,9 +90,14 @@ class CheckinFixtures extends Fixture
         $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'a9398c45-7497-4dbd-8dd1-1be4f3384ed7']));
         $user->setUsername('bob@goudlust.nl');
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
-        $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
-        $manager->persist($user);
 
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
         $group->addUser($user);
         $manager->persist($group);
 
@@ -95,9 +105,14 @@ class CheckinFixtures extends Fixture
         $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'8812dc58-6bbe-4028-8e36-96f402bf63dd']));
         $user->setUsername('mark@dijkzicht.nl');
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
-        $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
-        $manager->persist($user);
 
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
         $group->addUser($user);
         $manager->persist($group);
 
