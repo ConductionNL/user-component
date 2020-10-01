@@ -64,13 +64,13 @@ class LoginSubscriber implements EventSubscriberInterface
         $post = json_decode($this->request->getContent(), true);
 
         // Lets see if we can find the user
-        if (!$user = $this->em->getRepository(User::class)->get($post['username'])) {
-            throw new NotFoundHttpException('The user could not be found');
+        if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
+            throw new NotFoundHttpException('The username/password combination is invalid');
         }
 
         // Then lets check the pasword
         if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
-            throw new NotFoundHttpException('Invalid password');
+            throw new NotFoundHttpException('The username/password combination is invalid');
         } else {
             // Everything is okey, so lets return the user
 
