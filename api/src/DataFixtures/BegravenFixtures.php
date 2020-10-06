@@ -9,6 +9,7 @@ use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -60,12 +61,6 @@ class BegravenFixtures extends Fixture
         $userLocatie->setPassword('test1234');
         $manager->persist($userLocatie);
 
-        $usertTrouwambtenaar = new User();
-        $usertTrouwambtenaar->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
-        $usertTrouwambtenaar->setUsername('trouwambtenaar@hoorn.nl');
-        $usertTrouwambtenaar->setPassword($this->encoder->encodePassword($usertTrouwambtenaar, 'test1234'));
-        $manager->persist($usertTrouwambtenaar);
-
         $userBeheer = new User();
         $userBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $userBeheer->setUsername('beheer@hoorn.nl');
@@ -103,13 +98,13 @@ class BegravenFixtures extends Fixture
         $manager->persist($userKoggenland);
 
         // Vortex Adventures
+
         $groupUsers = new Group();
         $groupUsers->setName('Users');
         $groupUsers->setDescription('Alle gebruikers');
         $groupUsers->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupUsers->addUser($userBalie);
         $groupUsers->addUser($userLocatie);
-        $groupUsers->addUser($usertTrouwambtenaar);
         $groupUsers->addUser($userBeheer);
         $groupUsers->addUser($userWestfriesland);
         $groupUsers->addUser($userOpmeer);
@@ -119,29 +114,26 @@ class BegravenFixtures extends Fixture
 
         $manager->persist($groupUsers);
 
+        $id = Uuid::fromString('e71a21e5-2bfe-4515-8d65-c3d99a9fd893');
         $groupBalie = new Group();
-        $groupBalie->setName('Balie Medewerkers');
+        $groupBalie->setName('Begraafplaats Beheerder');
         $groupBalie->setDescription('De balliemedewerkers');
         $groupBalie->setParent($groupUsers);
         $groupBalie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
-        $groupBalie->addUser($userBalie);
         $manager->persist($groupBalie);
+        $groupBalie->setId($id);
+        $manager->persist($groupBalie);
+        $manager->flush();
+        $groupBalie = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
+        $groupBalie->addUser($userBalie);
 
         $groupLocatie = new Group();
         $groupLocatie->setName('Locatie beheerders');
-        $groupLocatie->setDescription('De hbeheerders van een of meerdere locaties');
+        $groupLocatie->setDescription('De beheerders van een of meerdere locaties');
         $groupLocatie->setParent($groupUsers);
         $groupLocatie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $groupLocatie->addUser($userLocatie);
         $manager->persist($groupLocatie);
-
-        $groupTrouwambtenaar = new Group();
-        $groupTrouwambtenaar->setName('Trouw Ambtenaar');
-        $groupTrouwambtenaar->setDescription('De ambtenaren die het huwelijk voltrekken');
-        $groupTrouwambtenaar->setParent($groupUsers);
-        $groupTrouwambtenaar->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
-        $groupTrouwambtenaar->addUser($usertTrouwambtenaar);
-        $manager->persist($groupTrouwambtenaar);
 
         $groupBeheer = new Group();
         $groupBeheer->setName('Beheerder');
@@ -167,6 +159,77 @@ class BegravenFixtures extends Fixture
         $scope->setApplication($application); // Hoorn
         $scope->addUserGroup($groupBeheer);
         $manager->persist($scope);
+
+        $manager->flush();
+
+        // Viava la users
+
+        //  Koggenland
+        ///Lydia Braas
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'f050292c-973d-46ab-97ae-9d8830a59d15'])); // SED
+        $user->setUsername('l.braas@koggenland.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        ///  opmeer | Mark Dekker
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'16fd1092-c4d3-4011-8998-0e15e13239cf'])); // Opmeer
+        $user->setUsername('mdekker@opmeer.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        ///  Medemblik | Paula Aker | Truus Bruinsma-Stapel
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'429e66ef-4411-4ddb-8b83-c637b37e88b5'])); // Medemblik
+        $user->setUsername('paula.aker@medemblik.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'429e66ef-4411-4ddb-8b83-c637b37e88b5'])); // Medemblik
+        $user->setUsername('truus.bruinsma@medemblik.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        ///  SED | Peter Bax
+
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'7033eeb4-5c77-4d88-9f40-303b538f176f'])); // SED
+        $user->setUsername('peter.bax@sed-wf.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        ///  Hoorn | Sjerps, Cees | Esther  Kaag - Oud
+
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
+        $user->setUsername('c.sjerps@hoorn.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
+        $user->setUsername('e.kaag@hoorn.nl');
+        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        $manager->persist($user);
+        $groupUsers->addUser($user);
+        $groupBalie->addUser($user);
+
+        $manager->persist($groupUsers);
+        $manager->persist($groupBalie);
 
         $manager->flush();
     }
