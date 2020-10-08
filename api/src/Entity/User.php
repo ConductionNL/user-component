@@ -72,7 +72,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "exact", "person": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "partial", "person": "partial"})
  */
 class User implements UserInterface
 {
@@ -119,6 +119,19 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, unique = true)
      */
     private $username;
+
+    /**
+     * @var string A iso code reprecenting theusers language
+     *
+     * @example en
+     *
+     * @Gedmo\Versioned
+     * @Assert\NotNull
+     * @Assert\Language
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=7)
+     */
+    private $locale = 'en';
 
     /**
      * @var string A contact component person
@@ -231,6 +244,21 @@ class User implements UserInterface
     public function setUsername(?string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this users langauge.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }

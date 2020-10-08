@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Group;
+use App\Entity\Provider;
 use App\Entity\Scope;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
@@ -29,7 +30,8 @@ class CheckinFixtures extends Fixture
         // Lets make sure we only run these fixtures on huwelijksplanner enviroments
         if (
             ($this->params->get('app_domain') != 'zuiddrecht.nl' && strpos($this->params->get('app_domain'), 'zuiddrecht.nl') == false) &&
-            ($this->params->get('app_domain') != 'zuid-drecht.nl' && strpos($this->params->get('app_domain'), 'zuid-drecht.nl') == false)
+            ($this->params->get('app_domain') != 'zuid-drecht.nl' && strpos($this->params->get('app_domain'), 'zuid-drecht.nl') == false) &&
+            ($this->params->get('app_domain') != 'checking.nu' && strpos($this->params->get('app_domain'), 'checking.nu') == false)
         ) {
             return false;
         }
@@ -70,34 +72,92 @@ class CheckinFixtures extends Fixture
         $manager->persist($scope);
 
         $user = new User();
-        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'2106575d-50f3-4f2b-8f0f-a2d6bc188222']));
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'8b3f28c4-4163-47f1-9242-a4050bc26ede']));
         $user->setUsername('jan@zwarteraaf.nl');
-        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
-        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
-        $manager->persist($user);
+        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6']));
 
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
         $group->addUser($user);
         $manager->persist($group);
 
         $user = new User();
-        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'a9398c45-7497-4dbd-8dd1-1be4f3384ed7']));
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'a3c5906a-5cd2-4a51-82a6-5833bfa094e1']));
         $user->setUsername('bob@goudlust.nl');
-        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
-        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
-        $manager->persist($user);
+        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
 
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
         $group->addUser($user);
         $manager->persist($group);
 
         $user = new User();
-        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'8812dc58-6bbe-4028-8e36-96f402bf63dd']));
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'f302b75e-a233-4ddf-95b5-f8603f2e80e9']));
         $user->setUsername('mark@dijkzicht.nl');
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
-        $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
-        $manager->persist($user);
 
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
         $group->addUser($user);
         $manager->persist($group);
+
+        //Providers
+        $provider = new Provider();
+        $provider->setName('idin');
+        $provider->setDescription('idin provider');
+        $provider->setType('idin');
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('facebook');
+        $provider->setDescription('facebook');
+        $provider->setType('facebook');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setConfiguration(['app_id'=>str_replace('\'', '', $this->params->get('facebook_id')), 'secret'=>$this->params->get('facebook_secret')]);
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('gmail');
+        $provider->setDescription('gmail');
+        $provider->setType('gmail');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setConfiguration(['app_id'=>$this->params->get('gmail_id'), 'secret'=>$this->params->get('gmail_secret')]);
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('token');
+        $provider->setDescription('provider for one time tokens');
+        $provider->setType('token');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('irma');
+        $provider->setDescription('Irma provider');
+        $provider->setType('irma');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $manager->persist($provider);
 
         $manager->flush();
     }

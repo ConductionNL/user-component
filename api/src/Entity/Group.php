@@ -58,7 +58,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"organization":"exact"})
+ * @ApiFilter(SearchFilter::class, properties={"organization":"partial"})
  */
 class Group
 {
@@ -151,7 +151,7 @@ class Group
      * @example true
      *
      * @Groups({"read", "write"})
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $canBeRegisteredFor = false;
 

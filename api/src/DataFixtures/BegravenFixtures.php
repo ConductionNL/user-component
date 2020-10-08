@@ -9,6 +9,7 @@ use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -97,6 +98,7 @@ class BegravenFixtures extends Fixture
         $manager->persist($userKoggenland);
 
         // Vortex Adventures
+
         $groupUsers = new Group();
         $groupUsers->setName('Users');
         $groupUsers->setDescription('Alle gebruikers');
@@ -112,13 +114,18 @@ class BegravenFixtures extends Fixture
 
         $manager->persist($groupUsers);
 
+        $id = Uuid::fromString('e71a21e5-2bfe-4515-8d65-c3d99a9fd893');
         $groupBalie = new Group();
         $groupBalie->setName('Begraafplaats Beheerder');
         $groupBalie->setDescription('De balliemedewerkers');
         $groupBalie->setParent($groupUsers);
         $groupBalie->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
-        $groupBalie->addUser($userBalie);
         $manager->persist($groupBalie);
+        $groupBalie->setId($id);
+        $manager->persist($groupBalie);
+        $manager->flush();
+        $groupBalie = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
+        $groupBalie->addUser($userBalie);
 
         $groupLocatie = new Group();
         $groupLocatie->setName('Locatie beheerders');
@@ -148,6 +155,17 @@ class BegravenFixtures extends Fixture
         $scope->setName('Verzoek schrijven');
         $scope->setDescription('Kunnen schrijven op een verzoek');
         $scope->setCode('vrc.request.write');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
+        $scope->setApplication($application); // Hoorn
+        $scope->addUserGroup($groupBeheer);
+        $manager->persist($scope);
+
+        $manager->flush();
+
+        $scope = new Scope();
+        $scope->setName('Gebruikers schrijven');
+        $scope->setDescription('Kunnen schrijven op gebruikers');
+        $scope->setCode('uc.users.write');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $scope->setApplication($application); // Hoorn
         $scope->addUserGroup($groupBeheer);
