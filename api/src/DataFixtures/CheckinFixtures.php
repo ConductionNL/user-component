@@ -87,6 +87,21 @@ class CheckinFixtures extends Fixture
         $manager->persist($group);
 
         $user = new User();
+        $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'62bff497-cb91-443e-9da9-21a0b38cd536']));
+        $user->setUsername('creative@grounds.nl');
+        $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
+
+        if ($this->params->get('app_env') == 'prod') {
+            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+        } else {
+            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+        }
+
+        $manager->persist($user);
+        $group->addUser($user);
+        $manager->persist($group);
+
+        $user = new User();
         $user->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'a3c5906a-5cd2-4a51-82a6-5833bfa094e1']));
         $user->setUsername('bob@goudlust.nl');
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
