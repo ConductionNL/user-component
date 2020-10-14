@@ -259,6 +259,21 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: gmail_secret
+            - name: IDIN_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: idin_id
+            - name: IDIN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: idin_secret
+            - name: IDIN_ENDPOINT
+              valueFrom:
+                  secretKeyRef:
+                      name: {{ template "fullname" . }}
+                      key: idin_endpoint
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
