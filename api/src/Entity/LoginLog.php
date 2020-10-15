@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\LoginLogRepository;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Repository\LoginLogRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -65,7 +65,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(SearchFilter::class, properties={ "address": "exact", "method": "exact", "status": "exact" })
  */
 class LoginLog
-
 {
     /**
      * @var UuidInterface The UUID identifier of this object
