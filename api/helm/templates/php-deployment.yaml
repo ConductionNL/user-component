@@ -258,6 +258,7 @@ spec:
               {{- else }}
               value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
               {{- end }}
+            {{ if and .Values.security.facebookId .Values.security.facebookSecret }}
             - name: FACEBOOK_ID
               valueFrom:
                 secretKeyRef:
@@ -268,6 +269,8 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: facebook_secret
+            {{ end }}
+            {{ if and .Values.security.gmailId .Values.security.gmailSecret }}
             - name: GMAIL_ID
               valueFrom:
                 secretKeyRef:
@@ -278,6 +281,8 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: gmail_secret
+            {{ end }}
+            {{ if and .Values.security.idinId .Values.security.idinSecret .Values.security.idinEndpoint }}
             - name: IDIN_ID
               valueFrom:
                 secretKeyRef:
@@ -293,6 +298,7 @@ spec:
                   secretKeyRef:
                       name: {{ template "fullname" . }}
                       key: idin_endpoint
+            {{ end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
