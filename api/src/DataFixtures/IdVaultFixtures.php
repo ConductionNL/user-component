@@ -5,11 +5,11 @@ namespace App\DataFixtures;
 use App\Entity\Provider;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class CheckinFixtures extends Fixture
+class IdVaultFixtures extends Fixture
 {
     private $params;
     private $commonGroundService;
