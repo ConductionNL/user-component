@@ -36,13 +36,13 @@ class ZuiddrechtFixtures extends Fixture
 
         $userTest = new User();
         $userTest->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $userTest->setUsername('test');
+        $userTest->setUsername('test@zuid-drecht.nl');
         $userTest->setPassword($this->encoder->encodePassword($userTest, 'test1234'));
         $manager->persist($userTest);
 
         $userBeheer = new User();
         $userBeheer->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $userBeheer->setUsername('beheer');
+        $userBeheer->setUsername('beheer@zuiddrecht.nl');
         $userBeheer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
         $manager->persist($userBeheer);
 
