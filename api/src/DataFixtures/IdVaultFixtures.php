@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Group;
 use App\Entity\Provider;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -32,6 +33,17 @@ class IdVaultFixtures extends Fixture
         ) {
             return false;
         }
+
+        $id = 'c3c463b9-8d39-4cc0-b62c-826d8f5b7d8c';
+        $group = new Group();
+        $group->setName('developer');
+        $group->setDescription('developer');
+        $group->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
+        $manager->persist($group);
+        $group->setId($id);
+        $manager->persist($group);
+        $manager->flush();
+        $group = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         //Providers
         $provider = new Provider();
