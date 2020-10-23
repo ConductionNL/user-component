@@ -135,7 +135,6 @@ class Application
     /**
      * @var Datetime The moment this request was created
      *
-     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
@@ -145,7 +144,6 @@ class Application
     /**
      * @var Datetime The moment this request last Modified
      *
-     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
