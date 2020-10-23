@@ -3,14 +3,14 @@ entries:
   uc:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-10-20T10:26:56.5760482Z"
+    created: "2020-10-23T09:07:25.782938Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: f485e387b8cbe23e5309c121fa9f67c83961c21acd7fb81cbe8dd4ebfe6eef2b
+    digest: e8cbef97ca2f1891958c4f3a7d854a1501b11b104b022f8a714923d30f92c5ea
     home: uc.zaakonline.nl
     icon: uc.zaakonline.nl
     name: uc
     urls:
     - uc-0.1.0.tgz
     version: 0.1.0
-generated: "2020-10-20T10:26:56.5727112Z"
+generated: "2020-10-23T09:07:25.7662654Z"
