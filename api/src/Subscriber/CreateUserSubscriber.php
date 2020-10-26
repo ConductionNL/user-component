@@ -46,12 +46,10 @@ class CreateUserSubscriber implements EventSubscriberInterface
             return;
         }
 
-
-        if($event->getRequest()->get('previous_data')->getPassword() !== $event->getRequest()->get('data')->getPassword()) {
+        if ($event->getRequest()->get('previous_data')->getPassword() !== $event->getRequest()->get('data')->getPassword()) {
             $encoded = $this->encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
         }
-
 
         return $user;
     }
