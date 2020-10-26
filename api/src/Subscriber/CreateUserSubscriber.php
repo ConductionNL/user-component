@@ -45,11 +45,13 @@ class CreateUserSubscriber implements EventSubscriberInterface
         if (($route != 'api_users_post_collection' && $route != 'api_users_put_item') || (Request::METHOD_POST !== $method && Request::METHOD_PUT !== $method)) {
             return;
         }
-        $password = $event->getRequest()->get('password');
-        if ($password !== null){
+
+
+        if($event->getRequest()->get('previous_data')->getPassword() !== $event->getRequest()->get('data')->getPassword()) {
             $encoded = $this->encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
         }
+
 
         return $user;
     }

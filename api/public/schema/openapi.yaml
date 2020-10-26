@@ -10819,6 +10819,9 @@ components:
           type: array
           items:
             type: string
+        password:
+          description: 'The hashed password'
+          type: string
         userGroups:
           description: 'A list of groups to wichs this user belongs'
           type: array
@@ -10915,6 +10918,9 @@ components:
           type: array
           items:
             type: string
+        password:
+          description: 'The hashed password'
+          type: string
         userGroups:
           description: 'A list of groups to wichs this user belongs'
           type: array
@@ -11367,7 +11373,7 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-26 14:20:10'
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -11422,6 +11428,9 @@ definitions:
         example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
         format: url
         maxLength: 255
+      password:
+        description: 'The hashed password'
+        type: string
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -11572,12 +11581,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-26 14:20:10'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-26 14:20:10'
     required: []
   AuditTrail-write:
     properties:
@@ -11625,12 +11634,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-26 14:20:10'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-26 14:20:10'
     required: []
   ChangeLog-write:
     properties:
