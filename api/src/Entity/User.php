@@ -164,7 +164,7 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
-     * @Groups({"write"})
+     * @Groups({"read", "write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;

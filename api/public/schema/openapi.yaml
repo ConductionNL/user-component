@@ -10819,6 +10819,11 @@ components:
           type: array
           items:
             type: string
+        userGroups:
+          description: 'A list of groups to wichs this user belongs'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-read'
         dateCreated:
           description: 'The moment this request was created'
           type: string
@@ -10910,6 +10915,11 @@ components:
           type: array
           items:
             type: string
+        userGroups:
+          description: 'A list of groups to wichs this user belongs'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
           type: string
@@ -11357,7 +11367,7 @@ definitions:
         description: 'The moment this token expirec'
         type: string
         format: date-time
-        example: '2020-10-23 09:13:52'
+        example: '2020-10-26 09:41:04'
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -11418,6 +11428,9 @@ definitions:
       dateModified:
         description: 'The moment this request last Modified'
         type: \Datetime
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
     required:
       - organization
       - username
@@ -11559,12 +11572,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-23 09:13:52'
+        example: '2020-10-26 09:41:04'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-23 09:13:52'
+        example: '2020-10-26 09:41:04'
     required: []
   AuditTrail-write:
     properties:
@@ -11612,12 +11625,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-23 09:13:52'
+        example: '2020-10-26 09:41:04'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-23 09:13:52'
+        example: '2020-10-26 09:41:04'
     required: []
   ChangeLog-write:
     properties:
