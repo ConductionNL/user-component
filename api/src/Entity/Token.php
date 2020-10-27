@@ -157,7 +157,6 @@ class Token
         return $this;
     }
 
-
     /**
      *  @ORM\PrePersist
      *  @ORM\PreUpdate
@@ -168,13 +167,11 @@ class Token
         $date = new DateTime('now');
         $duration = $this->getDuration();
 
-
         if (isset($duration)) {
             $date->add(new DateInterval('PT'.$duration.'M'));
         }
 
         $this->setValidTill($date);
-
     }
 
     public function getId()
