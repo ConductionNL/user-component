@@ -112,7 +112,7 @@ class Token
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $duration;
+    private $duration = 600;
 
     /**
      * @var DateTime The moment this token expires
