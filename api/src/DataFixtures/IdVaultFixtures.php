@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Group;
 use App\Entity\Provider;
-use App\Entity\Scope;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -35,19 +34,6 @@ class IdVaultFixtures extends Fixture
             return false;
         }
 
-        // TODO:dit veranderen naar een nieuw soort entiteit, scopes die de gebruiker zelf mag beinvloeden.
-//        $id = 'ff0a0468-3b92-4222-9bca-201df1ab0f42';
-//        $scope = new Scope();
-//        $scope->setName('developer view');
-//        $scope->setDescription('developer opties willen kunnen zien en gebruiken');
-//        $scope->setCode('developer.view');
-//        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
-//        $manager->persist($scope);
-//        $scope->setId($id);
-//        $manager->persist($scope);
-//        $manager->flush();
-//        $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
-
         $id = 'c3c463b9-8d39-4cc0-b62c-826d8f5b7d8c';
         $group = new Group();
         $group->setName('developer');
@@ -56,6 +42,17 @@ class IdVaultFixtures extends Fixture
         $manager->persist($group);
         $group->setId($id);
         $manager->persist($group);
+        $manager->flush();
+        $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
+
+        $id = 'ff0a0468-3b92-4222-9bca-201df1ab0f42';
+        $scope = new Group();
+        $scope->setName('developer.view');
+        $scope->setDescription('developer opties willen kunnen zien en gebruiken');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
+        $manager->persist($scope);
+        $scope->setId($id);
+        $manager->persist($scope);
         $manager->flush();
         $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
