@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Group;
 use App\Entity\Provider;
-use App\Entity\Scope;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
