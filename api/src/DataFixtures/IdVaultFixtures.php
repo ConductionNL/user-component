@@ -38,7 +38,6 @@ class IdVaultFixtures extends Fixture
         $group = new Group();
         $group->setName('developer');
         $group->setDescription('developer opties mogen zien en gebruiken');
-        $group->setCode('developer.view');
         $group->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
         $manager->persist($group);
         $group->setId($id);
@@ -50,6 +49,7 @@ class IdVaultFixtures extends Fixture
         $scope = new Group();
         $scope->setName('developer.view');
         $scope->setDescription('developer opties willen kunnen zien en gebruiken');
+        $group->setCode('developer.view');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
         $manager->persist($scope);
         $scope->setId($id);
