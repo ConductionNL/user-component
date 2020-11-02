@@ -7421,6 +7421,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[duration]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[validTill]'
           in: query
           required: false
@@ -10687,8 +10696,11 @@ components:
         token:
           description: 'The actual token.'
           type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
+          type: string
         validTill:
-          description: 'The moment this token expirec'
+          description: 'The moment this token expires'
           externalDocs:
             url: 'http://schema.org/DateTime'
           type: string
@@ -10716,6 +10728,9 @@ components:
           $ref: '#/components/schemas/Provider-write'
         token:
           description: 'The actual token.'
+          type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
           type: string
     'Token:jsonld-read':
       type: object
@@ -10746,8 +10761,11 @@ components:
         token:
           description: 'The actual token.'
           type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
+          type: string
         validTill:
-          description: 'The moment this token expirec'
+          description: 'The moment this token expires'
           externalDocs:
             url: 'http://schema.org/DateTime'
           type: string
@@ -10784,6 +10802,9 @@ components:
           $ref: '#/components/schemas/Provider:jsonld-write'
         token:
           description: 'The actual token.'
+          type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
           type: string
     User-read:
       type: object
@@ -11363,11 +11384,15 @@ definitions:
         description: 'The actual token.'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
+      duration:
+        description: 'Duration the token is active for in minutes'
+        type: string
+        example: '4'
       validTill:
-        description: 'The moment this token expirec'
+        description: 'The moment this token expires'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-27 16:44:46'
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -11387,6 +11412,10 @@ definitions:
         description: 'The actual token.'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
+      duration:
+        description: 'Duration the token is active for in minutes'
+        type: string
+        example: '4'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -11572,12 +11601,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-27 16:44:46'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-27 16:44:46'
     required: []
   AuditTrail-write:
     properties:
@@ -11625,12 +11654,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-27 16:44:46'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-26 09:41:04'
+        example: '2020-10-27 16:44:46'
     required: []
   ChangeLog-write:
     properties:

@@ -4,16 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use DateInterval;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * A token from an external identity profider (like facebook).
@@ -50,8 +51,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\TokenRepository")
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
- *
- * @ApiFilter(BooleanFilter::class)
+ * @ORM\HasLifecycleCallbacks
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class, properties={"provider.name": "exact","provider.type": "exact","provider.application": "partial", "token": "exact"})
@@ -104,17 +104,29 @@ class Token
     private $token;
 
     /**
-     * @var DateTime The moment this token expirec
+     * @var string Duration the token is active for in minutes
+     *
+     * @example 4
      *
      * @Gedmo\Versioned
-     * @Assert\DateTime
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $duration = 600;
+
+    /**
+     * @var DateTime The moment this token expires
+     *
+     * @Gedmo\Versioned
      * @Groups({"read"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $validTill;
 
     /**
-     * @var Datetime The moment this request was created
+     * @var DateTime The moment this request was created by the submitter
+     *
+     * @example 20190101
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -123,13 +135,44 @@ class Token
     private $dateCreated;
 
     /**
-     * @var Datetime The moment this request last Modified
+     * @var DateTime The moment this request was created by the submitter
+     *
+     * @example 20190101
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
+
+    public function getValidTill(): ?\DateTimeInterface
+    {
+        return $this->validTill;
+    }
+
+    public function setValidTill(DateTimeInterface $validTill): self
+    {
+        $this->validTill = $validTill;
+
+        return $this;
+    }
+
+    /**
+     *  @ORM\PrePersist
+     *  @ORM\PreUpdate
+     *
+     *  */
+    public function prePersist()
+    {
+        $date = new DateTime('now');
+        $duration = $this->getDuration();
+
+        if (isset($duration)) {
+            $date->add(new DateInterval('PT'.$duration.'M'));
+        }
+
+        $this->setValidTill($date);
+    }
 
     public function getId()
     {
@@ -172,14 +215,14 @@ class Token
         return $this;
     }
 
-    public function getValidTill(): ?\DateTimeInterface
+    public function getDuration(): ?string
     {
-        return $this->validTill;
+        return $this->duration;
     }
 
-    public function setValidTill(\DateTimeInterface $validTill): self
+    public function setDuration(string $duration): self
     {
-        $this->validTill = $validTill;
+        $this->duration = $duration;
 
         return $this;
     }

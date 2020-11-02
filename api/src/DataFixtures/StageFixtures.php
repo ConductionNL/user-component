@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Group;
+use App\Entity\Provider;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -69,6 +70,16 @@ class StageFixtures extends Fixture
 
         $manager->persist($groupUsers);
         $manager->persist($groupBedrijf);
+
+        $manager->flush();
+
+        $provider = new Provider();
+        $provider->setName('id-vault');
+        $provider->setDescription('id-vault provider');
+        $provider->setType('id-vault');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'5265828b-85fb-4ad5-acd5-ade4da3fc593']));
+        $manager->persist($provider);
 
         $manager->flush();
     }
