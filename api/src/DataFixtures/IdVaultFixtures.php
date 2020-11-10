@@ -28,6 +28,7 @@ class IdVaultFixtures extends Fixture
     {
         // Lets make sure we only run these fixtures on huwelijksplanner enviroments
         if (
+            !$this->params->get('app_build_all_fixtures') &&
             ($this->params->get('app_domain') != 'zuiddrecht.nl' && strpos($this->params->get('app_domain'), 'zuiddrecht.nl') == false) &&
             ($this->params->get('app_domain') != 'zuid-drecht.nl' && strpos($this->params->get('app_domain'), 'zuid-drecht.nl') == false) &&
             ($this->params->get('app_domain') != 'id-vault.com' && strpos($this->params->get('app_domain'), 'id-vault.com') == false)
@@ -140,7 +141,7 @@ class IdVaultFixtures extends Fixture
         $group->setId($id);
         $manager->persist($group);
         $manager->flush();
-        $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
+        $group = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         $group->addUser($ruben);
         $group->addUser($matthias);
@@ -163,7 +164,7 @@ class IdVaultFixtures extends Fixture
         $scope->setId($id);
         $manager->persist($scope);
         $manager->flush();
-        $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
+        $scope = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         $scope->addUser($ruben);
         $scope->addUser($matthias);
@@ -185,7 +186,7 @@ class IdVaultFixtures extends Fixture
         $group->setId($id);
         $manager->persist($group);
         $manager->flush();
-        $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
+        $group = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
         $group->addUser($ruben);
         $group->addUser($matthias);
