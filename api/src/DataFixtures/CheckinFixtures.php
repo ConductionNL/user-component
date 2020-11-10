@@ -180,7 +180,7 @@ class CheckinFixtures extends Fixture
         $provider->setType('id-vault');
         $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
-        $provider->setConfiguration(['app_id'=>'1fd19369-a947-42c4-95da-4fbe143237e1','secret'=>'kjdIDAkj98733hasdnbdDASD84Os2Q']);
+        $provider->setConfiguration(['app_id'=>'1fd19369-a947-42c4-95da-4fbe143237e1', 'secret'=>'kjdIDAkj98733hasdnbdDASD84Os2Q']);
         $manager->persist($provider);
 
         $manager->flush();
