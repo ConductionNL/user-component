@@ -31,15 +31,7 @@ class CommongroundFixtures extends Fixture
             return false;
         }
 
-        $provider = new Provider();
-        $provider->setName('id-vault');
-        $provider->setDescription('id-vault provider');
-        $provider->setType('id-vault');
-        $provider->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '4d1eded3-fbdf-438f-9536-8747dd8ab591']));
-        $provider->setApplication($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => 'c1f6b98b-9e37-42c0-9b22-17a738a52f8e']));
-        $provider->setConfiguration(['app_id'=>'62817d5c-0ba5-4aaa-81f2-ad0e5a763cdd','secret'=>'kjdIDAkj49283hasdnbdDASD84Os2Q']);
-        $manager->persist($provider);
-
+        // Commonground nu provider
         $provider = new Provider();
         $provider->setName('id-vault');
         $provider->setDescription('id-vault provider');
