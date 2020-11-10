@@ -77,7 +77,7 @@ class StageFixtures extends Fixture
         $provider->setType('id-vault');
         $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'5265828b-85fb-4ad5-acd5-ade4da3fc593']));
-        $provider->setConfiguration(['app_id'=>'62817d5c-0ba5-4aaa-81f2-ad0e5a763cdd','secret'=>'kjdIDAkj49283hasdnbdDASD84Os2Q']);
+        $provider->setConfiguration(['app_id'=>'62817d5c-0ba5-4aaa-81f2-ad0e5a763cdd', 'secret'=>'kjdIDAkj49283hasdnbdDASD84Os2Q']);
         $manager->persist($provider);
 
         $manager->flush();
