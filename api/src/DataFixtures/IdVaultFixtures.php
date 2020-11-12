@@ -154,27 +154,28 @@ class IdVaultFixtures extends Fixture
         $manager->persist($group);
         $manager->flush();
 
+        // Dit is een Group wat eigenlijk een Scope is die users zelf kunnen beïnvloeden door middel van een switch
         $id = 'ff0a0468-3b92-4222-9bca-201df1ab0f42';
-        $scope = new Group();
-        $scope->setName('developer.view');
-        $scope->setDescription('developer opties willen kunnen zien en gebruiken');
-        $group->setCode('developer.view');
-        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
-        $manager->persist($scope);
-        $scope->setId($id);
-        $manager->persist($scope);
+        $scopeGroup = new Group();
+        $scopeGroup->setName('developer.view');
+        $scopeGroup->setDescription('developer opties willen kunnen zien en gebruiken');
+        $scopeGroup->setCode('developer.view');
+        $scopeGroup->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'360e17fb-1a98-48b7-a2a8-212c79a5f51a']));
+        $manager->persist($scopeGroup);
+        $scopeGroup->setId($id);
+        $manager->persist($scopeGroup);
         $manager->flush();
-        $scope = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
+        $scopeGroup = $manager->getRepository('App:Group')->findOneBy(['id' => $id]);
 
-        $scope->addUser($ruben);
-        $scope->addUser($matthias);
-        $scope->addUser($marleen);
-        $scope->addUser($barry);
-        $scope->addUser($robert);
-        $scope->addUser($gino);
-        $scope->addUser($wilco);
-        $scope->addUser($yorick);
-        $manager->persist($group);
+        $scopeGroup->addUser($ruben);
+        $scopeGroup->addUser($matthias);
+        $scopeGroup->addUser($marleen);
+        $scopeGroup->addUser($barry);
+        $scopeGroup->addUser($robert);
+        $scopeGroup->addUser($gino);
+        $scopeGroup->addUser($wilco);
+        $scopeGroup->addUser($yorick);
+        $manager->persist($scopeGroup);
         $manager->flush();
 
         $id = 'f4c3964f-c0a1-482f-a218-080688337c99';
