@@ -8,7 +8,7 @@ use App\Entity\Scope;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -172,6 +172,15 @@ class CheckinFixtures extends Fixture
         $provider->setType('irma');
         $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $manager->persist($provider);
+
+        $provider = new Provider();
+        $provider->setName('id-vault checkings');
+        $provider->setDescription('id-vault provider');
+        $provider->setType('id-vault');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'31a2ad29-ee03-4aa9-be81-abf1fda7bbcc']));
+        $provider->setConfiguration(['app_id'=>'1fd19369-a947-42c4-95da-4fbe143237e1', 'secret'=>'kjdIDAkj98733hasdnbdDASD84Os2Q']);
         $manager->persist($provider);
 
         $manager->flush();
