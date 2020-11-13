@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -42,7 +42,7 @@ class LoginSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function login(GetResponseForControllerResultEvent $event)
+    public function login(ViewEvent $event)
     {
         $result = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
@@ -64,13 +64,13 @@ class LoginSubscriber implements EventSubscriberInterface
         $post = json_decode($this->request->getContent(), true);
 
         // Lets see if we can find the user
-        if (!$user = $this->em->getRepository(User::class)->get($post['username'])) {
-            throw new NotFoundHttpException('The user could not be found');
+        if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
+            throw new NotFoundHttpException('The username/password combination is invalid');
         }
 
         // Then lets check the pasword
         if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
-            throw new NotFoundHttpException('Invalid password');
+            throw new NotFoundHttpException('The username/password combination is invalid');
         } else {
             // Everything is okey, so lets return the user
 

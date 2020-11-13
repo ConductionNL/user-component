@@ -3235,7 +3235,13 @@ paths:
           schema:
             type: string
         -
-          name: 'organization[]'
+          name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'code[]'
           in: query
           required: false
           schema:
@@ -4164,6 +4170,1040 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+  /login_logs:
+    get:
+      tags:
+        - LoginLog
+      operationId: getLoginLogCollection
+      summary: 'Retrieves the collection of LoginLog resources.'
+      responses:
+        200:
+          description: 'LoginLog collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/LoginLog:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/LoginLog:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginLog-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[address]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[method]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[application]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[status]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: address
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'address[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: method
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'method[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'status[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - LoginLog
+      operationId: postLoginLogCollection
+      summary: 'Creates a LoginLog resource.'
+      responses:
+        201:
+          description: 'LoginLog resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+          links:
+            GetLoginLogItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getLoginLogItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /login_logs/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/LoginLog:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+        description: 'The new LoginLog resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/login_logs/{id}':
+    get:
+      tags:
+        - LoginLog
+      operationId: getLoginLogItem
+      summary: 'Retrieves a LoginLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'LoginLog resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    put:
+      tags:
+        - LoginLog
+      operationId: putLoginLogItem
+      summary: 'Replaces the LoginLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'LoginLog resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/LoginLog:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/LoginLog-write'
+        description: 'The updated LoginLog resource'
+    delete:
+      tags:
+        - LoginLog
+      operationId: deleteLoginLogItem
+      summary: 'Removes the LoginLog resource.'
+      responses:
+        204:
+          description: 'LoginLog resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/login_logs/{id}/audit_trail':
+    get:
+      tags:
+        - LoginLog
+      operationId: get_audit_trailLoginLogItem
+      summary: 'Retrieves a LoginLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'LoginLog resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/login_logs/{id}/change_log':
+    get:
+      tags:
+        - LoginLog
+      operationId: get_change_logsLoginLogItem
+      summary: 'Retrieves a LoginLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'LoginLog resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/LoginLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/LoginLog-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
   /providers:
     get:
       tags:
@@ -4386,47 +5426,17 @@ paths:
           schema:
             type: string
         -
-          name: 'name[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: type
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'type[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: application
           in: query
           required: false
           schema:
             type: string
-        -
-          name: 'application[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
         -
           name: page
           in: query
@@ -6411,6 +7421,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[duration]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[validTill]'
           in: query
           required: false
@@ -6525,6 +7544,28 @@ paths:
               type: string
           style: form
           explode: true
+        -
+          name: provider.type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'provider.type[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: provider.application
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: token
           in: query
@@ -7559,31 +8600,11 @@ paths:
           schema:
             type: string
         -
-          name: 'organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: person
           in: query
           required: false
           schema:
             type: string
-        -
-          name: 'person[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
         -
           name: page
           in: query
@@ -8402,15 +9423,11 @@ components:
             $ref: '#/components/schemas/Scope-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8476,15 +9493,11 @@ components:
             $ref: '#/components/schemas/Scope:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8584,18 +9597,23 @@ components:
         route:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         endpoint:
           description: 'The endpoint that the request was made to'
           type: string
+          nullable: true
         method:
           description: 'The method that was used'
           type: string
+          nullable: true
         accept:
           description: 'The contentType that was reqousted'
           type: string
+          nullable: true
         contentType:
           description: 'The contentType that was suplieds'
           type: string
+          nullable: true
         content:
           description: 'The moment this request was created'
           type: string
@@ -8603,6 +9621,7 @@ components:
         ip:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         session:
           description: 'The moment this request was created'
           type: string
@@ -8714,18 +9733,23 @@ components:
         route:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         endpoint:
           description: 'The endpoint that the request was made to'
           type: string
+          nullable: true
         method:
           description: 'The method that was used'
           type: string
+          nullable: true
         accept:
           description: 'The contentType that was reqousted'
           type: string
+          nullable: true
         contentType:
           description: 'The contentType that was suplieds'
           type: string
+          nullable: true
         content:
           description: 'The moment this request was created'
           type: string
@@ -8733,6 +9757,7 @@ components:
         ip:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         session:
           description: 'The moment this request was created'
           type: string
@@ -8951,15 +9976,11 @@ components:
             $ref: '#/components/schemas/User-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9069,15 +10090,11 @@ components:
             $ref: '#/components/schemas/User:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9137,6 +10154,152 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-write'
+    LoginLog-read:
+      type: object
+      description: 'An entity representing an login log.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        address:
+          description: 'The ip address of the login'
+          type: string
+        method:
+          description: 'The method of the login'
+          type: string
+        application:
+          description: 'The application uri used for this login'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        status:
+          description: 'the status code of the login'
+          type: string
+        dateCreated:
+          writeOnly: true
+          description: 'The moment this login was made'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this login was updated'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - address
+        - method
+        - application
+        - status
+    LoginLog-write:
+      type: object
+      description: 'An entity representing an login log.'
+      required:
+        - address
+        - method
+        - application
+        - status
+      properties:
+        address:
+          description: 'The ip address of the login'
+          type: string
+        method:
+          description: 'The method of the login'
+          type: string
+        application:
+          description: 'The application uri used for this login'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        status:
+          description: 'the status code of the login'
+          type: string
+    'LoginLog:jsonld-read':
+      type: object
+      description: 'An entity representing an login log.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        address:
+          description: 'The ip address of the login'
+          type: string
+        method:
+          description: 'The method of the login'
+          type: string
+        application:
+          description: 'The application uri used for this login'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        status:
+          description: 'the status code of the login'
+          type: string
+        dateCreated:
+          writeOnly: true
+          description: 'The moment this login was made'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this login was updated'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - address
+        - method
+        - application
+        - status
+    'LoginLog:jsonld-write':
+      type: object
+      description: 'An entity representing an login log.'
+      required:
+        - address
+        - method
+        - application
+        - status
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        address:
+          description: 'The ip address of the login'
+          type: string
+        method:
+          description: 'The method of the login'
+          type: string
+        application:
+          description: 'The application uri used for this login'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        status:
+          description: 'the status code of the login'
+          type: string
     Provider-read:
       type: object
       description: 'An external identity provider (like facebook).'
@@ -9175,15 +10338,11 @@ components:
             type: string
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9275,15 +10434,11 @@ components:
             type: string
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9376,15 +10531,11 @@ components:
             $ref: '#/components/schemas/Group-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9472,15 +10623,11 @@ components:
             $ref: '#/components/schemas/Group:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9549,24 +10696,21 @@ components:
         token:
           description: 'The actual token.'
           type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
+          type: string
         validTill:
-          description: 'The moment this token expirec'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
+          description: 'The moment this token expires'
           type: string
           format: date-time
           nullable: true
         dateCreated:
-          description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
+          description: 'The moment this request was created by the submitter'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
+          description: 'The moment this request was created by the submitter'
           type: string
           format: date-time
           nullable: true
@@ -9582,6 +10726,9 @@ components:
           $ref: '#/components/schemas/Provider-write'
         token:
           description: 'The actual token.'
+          type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
           type: string
     'Token:jsonld-read':
       type: object
@@ -9612,24 +10759,21 @@ components:
         token:
           description: 'The actual token.'
           type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
+          type: string
         validTill:
-          description: 'The moment this token expirec'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
+          description: 'The moment this token expires'
           type: string
           format: date-time
           nullable: true
         dateCreated:
-          description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
+          description: 'The moment this request was created by the submitter'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
+          description: 'The moment this request was created by the submitter'
           type: string
           format: date-time
           nullable: true
@@ -9654,6 +10798,9 @@ components:
           $ref: '#/components/schemas/Provider:jsonld-write'
         token:
           description: 'The actual token.'
+          type: string
+        duration:
+          description: 'Duration the token is active for in minutes'
           type: string
     User-read:
       type: object
@@ -9689,31 +10836,27 @@ components:
           type: array
           items:
             type: string
+        userGroups:
+          description: 'A list of groups to wichs this user belongs'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
       required:
-        - organization
         - username
         - locale
     User-write:
       type: object
       description: 'All properties that the entity User holds.'
-      required:
-        - organization
-        - username
-        - locale
       properties:
         organization:
           description: 'A specific commonground organization'
@@ -9741,6 +10884,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group-write'
+      required:
+        - username
+        - locale
     'User:jsonld-read':
       type: object
       description: 'All properties that the entity User holds.'
@@ -9784,31 +10930,27 @@ components:
           type: array
           items:
             type: string
+        userGroups:
+          description: 'A list of groups to wichs this user belongs'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         dateModified:
           description: 'The moment this request last Modified'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
       required:
-        - organization
         - username
         - locale
     'User:jsonld-write':
       type: object
       description: 'All properties that the entity User holds.'
-      required:
-        - organization
-        - username
-        - locale
       properties:
         '@context':
           readOnly: true
@@ -9845,6 +10987,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
+      required:
+        - username
+        - locale
 definitions:
   Application-read:
     properties:
@@ -9871,14 +11016,10 @@ definitions:
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
@@ -9947,14 +11088,10 @@ definitions:
         example: 'true'
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       children:
         description: 'Groups that are a part of this group'
         type: \ArrayCollection
@@ -10007,6 +11144,75 @@ definitions:
       - organization
       - name
       - description
+  LoginLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      address:
+        description: 'The ip address of the login'
+        type: string
+        example: 12.12.12.123
+        maxLength: 50
+      method:
+        description: 'The method of the login'
+        type: string
+        example: facebook
+        maxLength: 255
+      application:
+        description: 'The application uri used for this login'
+        type: string
+        example: facebook
+        format: url
+        maxLength: 255
+      status:
+        description: 'the status code of the login'
+        type: string
+        example: '200'
+        maxLength: 3
+      dateCreated:
+        description: 'The moment this login was made'
+        type: \DateTime
+        example: '20190101'
+      dateModified:
+        description: 'The moment this login was updated'
+        type: \DateTime
+        example: '20190101'
+    required:
+      - address
+      - method
+      - application
+      - status
+  LoginLog-write:
+    properties:
+      address:
+        description: 'The ip address of the login'
+        type: string
+        example: 12.12.12.123
+        maxLength: 50
+      method:
+        description: 'The method of the login'
+        type: string
+        example: facebook
+        maxLength: 255
+      application:
+        description: 'The application uri used for this login'
+        type: string
+        example: facebook
+        format: url
+        maxLength: 255
+      status:
+        description: 'the status code of the login'
+        type: string
+        example: '200'
+        maxLength: 3
+    required:
+      - address
+      - method
+      - application
+      - status
   Provider-read:
     properties:
       id:
@@ -10045,14 +11251,10 @@ definitions:
         type: array
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
     required:
       - organization
       - name
@@ -10124,14 +11326,10 @@ definitions:
         format: url
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       application: []
       userGroups:
         description: 'User groups that give this scope.'
@@ -10178,21 +11376,21 @@ definitions:
         description: 'The actual token.'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
+      duration:
+        description: 'Duration the token is active for in minutes'
+        type: string
+        example: '4'
       validTill:
-        description: 'The moment this token expirec'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        description: 'The moment this token expires'
+        type: \DateTime
       dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
       dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10206,6 +11404,10 @@ definitions:
         description: 'The actual token.'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
+      duration:
+        description: 'Duration the token is active for in minutes'
+        type: string
+        example: '4'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -10243,16 +11445,14 @@ definitions:
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-09-21 19:11:45'
+        type: \Datetime
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
     required:
-      - organization
       - username
       - locale
   User-write:
@@ -10285,7 +11485,6 @@ definitions:
         description: 'A list of groups to wichs this user belongs'
         type: array
     required:
-      - organization
       - username
       - locale
   AuditTrail-read:
@@ -10392,12 +11591,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-21 19:11:45'
+        example: '2020-11-12 09:35:53'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-21 19:11:45'
+        example: '2020-11-12 09:35:53'
     required: []
   AuditTrail-write:
     properties:
@@ -10445,12 +11644,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-09-21 19:11:45'
+        example: '2020-11-12 09:35:53'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-09-21 19:11:45'
+        example: '2020-11-12 09:35:53'
     required: []
   ChangeLog-write:
     properties:
@@ -10473,6 +11672,12 @@ tags:
       A user Group.
       
       
+  -
+    name: LoginLog
+    description: |
+      An entity representing an login log.
+      
+      This entity logs all the login attempts
   -
     name: Provider
     description: |

@@ -8,7 +8,7 @@ use App\Entity\Scope;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -155,6 +155,17 @@ class BegravenFixtures extends Fixture
         $scope->setName('Verzoek schrijven');
         $scope->setDescription('Kunnen schrijven op een verzoek');
         $scope->setCode('vrc.request.write');
+        $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
+        $scope->setApplication($application); // Hoorn
+        $scope->addUserGroup($groupBeheer);
+        $manager->persist($scope);
+
+        $manager->flush();
+
+        $scope = new Scope();
+        $scope->setName('Gebruikers schrijven');
+        $scope->setDescription('Kunnen schrijven op gebruikers');
+        $scope->setCode('uc.users.write');
         $scope->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'d736013f-ad6d-4885-b816-ce72ac3e1384'])); // Hoorn
         $scope->setApplication($application); // Hoorn
         $scope->addUserGroup($groupBeheer);

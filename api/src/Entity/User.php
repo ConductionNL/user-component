@@ -96,7 +96,6 @@ class User implements UserInterface
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @Assert\NotNull
      * @Assert\Url
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
@@ -164,7 +163,7 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
-     * @Groups({"write"})
+     * @Groups({"read", "write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;
@@ -179,7 +178,6 @@ class User implements UserInterface
     /**
      * @var Datetime The moment this request was created
      *
-     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
@@ -189,7 +187,6 @@ class User implements UserInterface
     /**
      * @var Datetime The moment this request last Modified
      *
-     * @Assert\DateTime
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
