@@ -3,7 +3,7 @@ entries:
   postgresql:
   - apiVersion: v1
     appVersion: 11.7.0
-    created: "2020-11-13T10:40:56.8370407Z"
+    created: "2020-11-23T13:25:32.0020852Z"
     deprecated: true
     description: DEPRECATED Chart for PostgreSQL, an object-relational database management
       system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
@@ -26,14 +26,14 @@ entries:
   uc:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-11-13T10:40:56.8227588Z"
+    created: "2020-11-23T13:25:31.9281179Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 68e434717d18930276f8fc55a79066c716a3b2ad78f2bf6deef0dc795fd357f4
+    digest: da88eedb14ce00202266c4a135af9881c18762bb26c9b6d0fea8d64426293181
     home: uc.zaakonline.nl
     icon: uc.zaakonline.nl
     name: uc
     urls:
     - uc-0.1.0.tgz
     version: 0.1.0
-generated: "2020-11-13T10:40:56.8091829Z"
+generated: "2020-11-23T13:25:31.9228237Z"
