@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Group;
 use App\Entity\Provider;
 use App\Entity\User;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
@@ -54,6 +53,5 @@ class LarpingFixtures extends Fixture
         $manager->persist($user);
 
         $manager->flush();
-
     }
 }
