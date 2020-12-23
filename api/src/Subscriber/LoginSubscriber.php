@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -66,12 +65,12 @@ class LoginSubscriber implements EventSubscriberInterface
 
         // Lets see if we can find the user
         if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
-            Throw new AccessDeniedHttpException('The username/password combination is invalid');
+            throw new AccessDeniedHttpException('The username/password combination is invalid');
         }
 
         // Then lets check the pasword
         if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
-            Throw new AccessDeniedHttpException('The username/password combination is invalid');
+            throw new AccessDeniedHttpException('The username/password combination is invalid');
         } else {
             // Everything is okey, so lets return the user
 
