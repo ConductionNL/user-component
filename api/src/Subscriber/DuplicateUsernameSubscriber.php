@@ -49,7 +49,8 @@ class DuplicateUsernameSubscriber implements EventSubscriberInterface
         }
 
         if ($newUser = $this->em->getRepository(User::class)->findOneBy(['username' => $user->getUsername()])) {
-            throw new HttpException(500, 'Username is unavailable');
+            var_dump('test');
+            throw new HttpException(409, 'Username is unavailable');
         }
 
         return $user;
