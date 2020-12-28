@@ -129,6 +129,9 @@ class Scope
     private $organization;
 
     /**
+     *
+     * @var Application application this scope belongs to.
+     *
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
      */

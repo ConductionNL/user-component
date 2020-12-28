@@ -77,6 +77,7 @@ class Token
      * @var User The user that this token belongs to.
      *
      * @Gedmo\Versioned
+     * @Assert\NotNull()
      * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
@@ -87,6 +88,7 @@ class Token
      * @var Provider The provider that this scope belongs to.
      *
      * @Groups({"read", "write"})
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="tokens")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -97,6 +99,7 @@ class Token
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
+     * @Assert\NotNull
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
