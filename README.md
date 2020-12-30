@@ -49,6 +49,22 @@ Your computer should now start up your local development environment. Don't worr
 
 Open your browser type [<http://localhost/>](https://localhost) as address and hit enter, you should now see your common ground component up and running.
 
+#### Additional Calls
+
+This component also provides the /login endpoint.
+
+If you post an JSON object with a username and password these credentials will be checked.
+
+```json
+{
+  "username": "test@user.nl",
+  "password": "password"
+}
+```
+
+If they are correct you wil get the user object as a response.
+
+Otherwise you will receive a 403 access denied response.
 
 Credits
 ----
