@@ -236,6 +236,14 @@ class IdVaultFixtures extends Fixture
         $manager->persist($provider);
 
         $provider = new Provider();
+        $provider->setName('linkedIn');
+        $provider->setDescription('linkedIn provider');
+        $provider->setType('linkedIn');
+        $provider->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $provider->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'22888b97-d12b-4505-9a20-ee9cc148d442']));
+        $manager->persist($provider);
+
+        $provider = new Provider();
         $provider->setName('oauth');
         $provider->setDescription('oauth provider');
         $provider->setType('oauth');
