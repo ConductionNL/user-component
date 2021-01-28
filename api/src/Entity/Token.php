@@ -127,6 +127,16 @@ class Token
     private $validTill;
 
     /**
+     * @var DateTime The moment the invite was accepted by the user
+     *
+     * @example 20190101
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateAccepted;
+
+    /**
      * @var DateTime The moment this request was created by the submitter
      *
      * @example 20190101
@@ -226,6 +236,18 @@ class Token
     public function setDuration(string $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getDateAccepted(): ?\DateTimeInterface
+    {
+        return $this->dateAccepted;
+    }
+
+    public function setDateAccepted(\DateTimeInterface $dateAccepted): self
+    {
+        $this->dateAccepted = $dateAccepted;
 
         return $this;
     }
