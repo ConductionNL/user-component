@@ -72,7 +72,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"username": "exact", "organization": "partial", "person": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"username": "iexact", "organization": "partial", "person": "partial"})
  */
 class User implements UserInterface
 {
