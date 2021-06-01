@@ -53,43 +53,38 @@ class LoginSubscriber implements EventSubscriberInterface
         $post = json_decode($this->request->getContent(), true);
 
         // Lets see if we can find the user
-        if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
-            throw new AccessDeniedHttpException('The username/password combination is invalid');
-        }
+        $user = $this->userCheck($post);
 
-        // Then lets check the pasword
-        if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
-            throw new AccessDeniedHttpException('The username/password combination is invalid');
-        }
+        // Then lets check the password
+        $this->passwordCheck($user, $post);
 
-        switch ($contentType) {
-            case 'application/json':
-                $renderType = 'json';
-                break;
-            case 'application/ld+json':
-                $renderType = 'jsonld';
-                break;
-            case 'application/hal+json':
-                $renderType = 'jsonhal';
-                break;
-            default:
-                $contentType = 'application/json';
-                $renderType = 'json';
-        }
-
-        // now we need to overide the normal subscriber
+        // now we need to override the normal subscriber
         $json = $this->serializer->serialize(
             $user,
-            $renderType,
+            'json',
             ['enable_max_depth' => true]
         );
 
         $response = new Response(
             $json,
             Response::HTTP_OK,
-            ['content-type' => $contentType]
+            ['content-type' => 'application/json']
         );
 
         $event->setResponse($response);
+    }
+
+    public function userCheck($post) {
+        if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
+            throw new AccessDeniedHttpException('The username/password combination is invalid');
+        }
+
+        return $user;
+    }
+
+    public function passwordCheck($user, $post) {
+        if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
+            throw new AccessDeniedHttpException('The username/password combination is invalid');
+        }
     }
 }
