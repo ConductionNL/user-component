@@ -3,28 +3,20 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-//use App\Service\MailService;
-//use App\Service\MessageService;
-
 class CreateUserSubscriber implements EventSubscriberInterface
 {
-    private $params;
-    private $em;
+
     private $encoder;
     private $request;
 
-    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $encoder)
     {
-        $this->params = $params;
-        $this->em = $em;
         $this->encoder = $encoder;
         $this->request = Request::createFromGlobals();
     }
