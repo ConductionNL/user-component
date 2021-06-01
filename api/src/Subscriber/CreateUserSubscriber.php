@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateUserSubscriber implements EventSubscriberInterface
 {
-
     private $encoder;
     private $request;
 
