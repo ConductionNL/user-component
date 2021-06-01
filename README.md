@@ -1,8 +1,14 @@
 # user-component
+[![StyleCI](https://github.styleci.io/repos/222616116/shield?branch=master)](https://github.styleci.io/repos/222616116?branch=master)
+[![Docker Image CI](https://github.com/ConductionNL/user-component/workflows/Docker%20Image%20CI/badge.svg?branch=master)](https://github.com/ConductionNL/user-component/actions?query=workflow%3A"Docker+Image+CI")
+[![Artifacthub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/user-component)](https://artifacthub.io/packages/helm/user-component/user-component)
+[![BCH compliance](https://bettercodehub.com/edge/badge/ConductionNL/user-component?branch=master)](https://bettercodehub.com/)
 
 Description
 ----
-Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.
+Het User Component voert het beheer over gebruikersaccount en hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan een gebruik die behoort tot bepaalde groepen die op hun beurt weer beschikken over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren van wachtwoorden ondersteunt (ten einde inlog mogelijkheden op bijvoorbeeld een dashboard of applicatie te faciliteren) maar in de wat abstracte context ondersteund het ook algemene inlog systematieken.
+
+Zo kan het User Component zelf functioneren als OAuth (2) bron en daarmee de bronhouder zijn voor een OpenID van een gebruike,r maar kan het ook alternatieve inlog stromen zoals AFC en SAML afhandelen (en daarmee DigiD). Als laatste kan het functioneren als ontvangende partij van OAuth inloggen en biedt het daarmee een inloggen met Facebook, Google of GitHub mogelijkheid voor applicaties.
 
 Additional Information
 ----
