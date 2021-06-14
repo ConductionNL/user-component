@@ -1,16 +1,16 @@
 openapi: 3.0.2
 info:
-  title: 'User Component'
+  title: ''
   version: V1.0
   description: |
     API Details
-    - Component: User Component
-    - Reference: uc
+    - Component: 
+    - Reference: user-component
     - Enviroment: dev
     - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/uc-php) 
-    - Datamodel: [postman](schema/uc.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
+    - Docker Image: [online]() 
+    - Datamodel: [postman](schema/user-component.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
     
     Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
@@ -4411,6 +4411,22 @@ paths:
           style: form
           explode: true
         -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -8599,6 +8615,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[dateAccepted]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[dateCreated]'
           in: query
           required: false
@@ -8636,6 +8661,30 @@ paths:
             type: string
         -
           name: 'validTill[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAccepted[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAccepted[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAccepted[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAccepted[strictly_after]'
           in: query
           required: false
           schema:
@@ -8734,6 +8783,22 @@ paths:
             type: string
         -
           name: 'token[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: user.username
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'user.username[]'
           in: query
           required: false
           schema:
@@ -12048,6 +12113,11 @@ components:
           type: string
           format: date-time
           nullable: true
+        dateAccepted:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -12082,6 +12152,11 @@ components:
         duration:
           description: 'Duration the token is active for in minutes'
           type: string
+        dateAccepted:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
     'Token:jsonld-read':
       type: object
       description: 'A token from an external identity profider (like facebook).'
@@ -12116,6 +12191,11 @@ components:
           type: string
         validTill:
           description: 'The moment this token expires'
+          type: string
+          format: date-time
+          nullable: true
+        dateAccepted:
+          description: 'The moment the invite was accepted by the user'
           type: string
           format: date-time
           nullable: true
@@ -12162,6 +12242,11 @@ components:
         duration:
           description: 'Duration the token is active for in minutes'
           type: string
+        dateAccepted:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
     User-read:
       type: object
       description: 'All properties that the entity User holds.'
@@ -12824,6 +12909,10 @@ definitions:
       validTill:
         description: 'The moment this token expires'
         type: \DateTime
+      dateAccepted:
+        description: 'The moment the invite was accepted by the user'
+        type: \DateTime
+        example: '20190101'
       dateCreated:
         description: 'The moment this request was created by the submitter'
         type: \DateTime
@@ -12852,6 +12941,10 @@ definitions:
         description: 'Duration the token is active for in minutes'
         type: string
         example: '4'
+      dateAccepted:
+        description: 'The moment the invite was accepted by the user'
+        type: \DateTime
+        example: '20190101'
       user:
         description: 'The user that this token belongs to.'
         type: \User
@@ -13038,12 +13131,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-04 12:37:37'
+        example: '2021-06-07 09:39:34'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-04 12:37:37'
+        example: '2021-06-07 09:39:34'
     required: []
   AuditTrail-write:
     properties:
@@ -13091,12 +13184,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-04 12:37:37'
+        example: '2021-06-07 09:39:34'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-04 12:37:37'
+        example: '2021-06-07 09:39:34'
     required: []
   ChangeLog-write:
     properties:
@@ -13186,7 +13279,7 @@ host: irc.zaakonline.nl
 servers:
   -
     name: conduction.nl
-    url: uc.dev.conduction.nl
+    url: user-component.dev.conduction.nl
 externalDocs:
   -
     description: 'OAS Documentatie'
