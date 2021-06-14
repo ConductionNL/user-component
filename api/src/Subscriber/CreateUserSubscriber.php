@@ -30,10 +30,9 @@ class CreateUserSubscriber implements EventSubscriberInterface
     public function createUser(ViewEvent $event)
     {
         $user = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
         $route = $event->getRequest()->attributes->get('_route');
 
-        if (($route != 'api_users_post_collection' && $route != 'api_users_put_item') || (Request::METHOD_POST !== $method && Request::METHOD_PUT !== $method)) {
+        if (($route != 'api_users_post_collection' && $route != 'api_users_put_item')) {
             return;
         }
 
