@@ -11,7 +11,7 @@ settings:
   description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
   repro: https://github.com/ConductionNL/user-component
   demo: pc.zaakonline.nl
-  domain: conduction.nl
+  domain: zuid-drecht.nl
   subdomain: user-component
   subpath: user-component
   subpathRouting: true
@@ -61,9 +61,9 @@ redis:
   enabled: false
 commonground:
   eherkenning:
-    location: https://conduction.nl/eherkenning
+    location: https://zuid-drecht.nl/eherkenning
   digispoof:
-    location: https://conduction.nl/digispoof
+    location: https://zuid-drecht.nl/digispoof
 
 nginx:
   repository: docker.io/conduction/protocomponent-nginx
