@@ -36,6 +36,14 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *          "get",
  *          "put",
  *          "delete",
+ *          "get_scopes"={
+ *              "path"="/users/{id}/scopes",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Scopes",
+ *                  "description"="Gets al the scopes linked to this user"
+ *              }
+ *          },
  *          "get_change_logs"={
  *              "path"="/users/{id}/change_log",
  *              "method"="get",

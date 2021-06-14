@@ -354,6 +354,7 @@ class Group
     {
         if (!$this->scopes->contains($scope)) {
             $this->scopes[] = $scope;
+            $scope->addUserGroup($this);
         }
 
         return $this;
@@ -363,6 +364,7 @@ class Group
     {
         if ($this->scopes->contains($scope)) {
             $this->scopes->removeElement($scope);
+            $scope->removeUserGroup($this);
         }
 
         return $this;
