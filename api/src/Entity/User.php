@@ -67,6 +67,8 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *     "login"={
  *         "method"="post",
  *         "path"="login",
+ *         "controller"=DefaultController::class,
+ *         "read"=false
  *     		}
  * 		}
  * )
