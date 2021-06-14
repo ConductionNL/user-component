@@ -6,11 +6,9 @@ use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserScopesSubscriber implements EventSubscriberInterface
 {
@@ -59,8 +57,6 @@ class UserScopesSubscriber implements EventSubscriberInterface
             );
 
             $event->setResponse($response);
-
         }
-
     }
 }

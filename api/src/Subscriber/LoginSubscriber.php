@@ -74,7 +74,8 @@ class LoginSubscriber implements EventSubscriberInterface
         $event->setResponse($response);
     }
 
-    public function userCheck($post) {
+    public function userCheck($post)
+    {
         if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
             throw new AccessDeniedHttpException('The username/password combination is invalid');
         }
@@ -82,7 +83,8 @@ class LoginSubscriber implements EventSubscriberInterface
         return $user;
     }
 
-    public function passwordCheck($user, $post) {
+    public function passwordCheck($user, $post)
+    {
         if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
             throw new AccessDeniedHttpException('The username/password combination is invalid');
         }

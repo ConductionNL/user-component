@@ -8,9 +8,8 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class TaalhuizenFixtures extends Fixture
 {
@@ -2478,6 +2477,5 @@ class TaalhuizenFixtures extends Fixture
         $scope->addUserGroup($admin);
         $manager->persist($scope);
         $manager->flush();
-
     }
 }
