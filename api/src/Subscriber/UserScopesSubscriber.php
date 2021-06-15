@@ -31,9 +31,10 @@ class UserScopesSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
         $route = $event->getRequest()->attributes->get('_route');
 
-        if ($route != 'api_users_get_scopes_item' && $method !== 'GET') {
+        if ($route != 'api_users_get_scopes_item' || $method !== 'GET') {
             return;
         }
+
         $user = $this->em->getRepository('App\Entity\User')->findOneBy(['id' => $event->getRequest()->get('id')]);
 
         if ($user instanceof User) {

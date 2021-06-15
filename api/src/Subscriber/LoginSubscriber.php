@@ -40,11 +40,6 @@ class LoginSubscriber implements EventSubscriberInterface
     {
         $method = $event->getRequest()->getMethod();
         $route = $event->getRequest()->attributes->get('_route');
-        $contentType = $event->getRequest()->headers->get('accept');
-
-        if (!$contentType) {
-            $contentType = $event->getRequest()->headers->get('Accept');
-        }
 
         if ($route != 'api_users_login_collection' || Request::METHOD_POST !== $method) {
             return;
@@ -65,6 +60,8 @@ class LoginSubscriber implements EventSubscriberInterface
             ['enable_max_depth' => true]
         );
 
+        $json = $this->addAtId($json);
+
         $response = new Response(
             $json,
             Response::HTTP_OK,
@@ -74,9 +71,22 @@ class LoginSubscriber implements EventSubscriberInterface
         $event->setResponse($response);
     }
 
+    public function addAtId($json)
+    {
+        $json = json_decode($json, true);
+
+        $json['@id'] = '/users/'.$json['id'];
+
+        return $this->serializer->serialize(
+            $json,
+            'json',
+            ['enable_max_depth' => true]
+        );
+    }
+
     public function userCheck($post)
     {
-        if (!$user = $this->em->getRepository(User::class)->findOneBy(['username' => $post['username']])) {
+        if (!$user = $this->em->getRepository('App\Entity\User')->findOneBy(['username' => $post['username']])) {
             throw new AccessDeniedHttpException('The username/password combination is invalid');
         }
 
