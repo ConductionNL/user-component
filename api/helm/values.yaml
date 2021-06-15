@@ -8,10 +8,10 @@ settings:
   name: user-component
   version: V1.0
   majorVersion: v1
-  description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
+  description: 'Het User Component voert het beheer over een gebruikersaccount en hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld een dashboard of om een applicatie te faciliteren) maar in de wat abstracte context ondersteund het ook algemene inlogs systematieken.'
   repro: https://github.com/ConductionNL/user-component
   demo: pc.zaakonline.nl
-  domain: zuid-drecht.nl
+  domain: conduction.nl
   subdomain: user-component
   subpath: user-component
   subpathRouting: true
@@ -61,9 +61,9 @@ redis:
   enabled: false
 commonground:
   eherkenning:
-    location: https://zuid-drecht.nl/eherkenning
+    location: https://conduction.nl/eherkenning
   digispoof:
-    location: https://zuid-drecht.nl/digispoof
+    location: https://conduction.nl/digispoof
 
 nginx:
   repository: docker.io/conduction/protocomponent-nginx

@@ -1,6 +1,6 @@
 apiVersion: v1
 appVersion: V1.0
-description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
+description: 'Het User Component voert het beheer over een gebruikersaccount en hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld een dashboard of om een applicatie te faciliteren) maar in de wat abstracte context ondersteund het ook algemene inlogs systematieken.'
 name: user-component
 version: 0.1.0
 home: https://www.conduction.nl
