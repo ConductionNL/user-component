@@ -5,7 +5,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-06-15T09:26:42.2994787Z"
+    created: "2021-06-23T09:34:29.166784Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -37,10 +37,15 @@ entries:
   user-component:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-06-15T09:26:42.2671825Z"
-    description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
-      beschikbaar.
-    digest: bf86b6b3329292b610174b4782e19ce8be18a1e3f547bbeae4527e5938304cd8
+    created: "2021-06-23T09:34:29.1565221Z"
+    description: Het User Component voert het beheer over een gebruikersaccount en
+      hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan
+      een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken
+      over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren
+      van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld
+      een dashboard of om een applicatie te faciliteren) maar in de wat abstracte
+      context ondersteund het ook algemene inlogs systematieken.
+    digest: ea818f5b3d82615af9c0c85ec4eadcb8b7a9f0051f27f1e2ccdf42d7d080005e
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -60,4 +65,4 @@ entries:
     urls:
     - user-component-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-15T09:26:42.2390552Z"
+generated: "2021-06-23T09:34:29.1513306Z"
