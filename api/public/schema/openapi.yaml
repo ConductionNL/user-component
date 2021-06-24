@@ -11,9 +11,8 @@ info:
     - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
     - Docker Image: [online]() 
     - Datamodel: [postman](schema/user-component.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
-    
-    Het User Component voert het beheer over een gebruikersaccount en hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld een dashboard of om een applicatie te faciliteren) maar in de wat abstracte context ondersteund het ook algemene inlogs systematieken.         
-    
+
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
 paths:
   /alerts:
     get:
@@ -13199,12 +13198,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-06-23 09:29:48'
+        example: '2021-06-24 08:43:34'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-06-23 09:29:48'
+        example: '2021-06-24 08:43:34'
     required: []
   ChangeLog-write:
     properties:
@@ -13318,12 +13317,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-06-23 09:29:48'
+        example: '2021-06-24 08:43:34'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-06-23 09:29:48'
+        example: '2021-06-24 08:43:34'
     required: []
   AuditTrail-write:
     properties:
@@ -13336,63 +13335,57 @@ definitions:
 tags:
   -
     name: Scope
-    description: |
+    description: |+
       All properties that the entity User holds.
-      
-      
+
   -
     name: Provider
-    description: |
+    description: |+
       An external identity provider (like facebook).
-      
-      
+
   -
     name: Alert
-    description: |
+    description: |+
       All properties that the entity Alert holds.
-      
-      
+
   -
     name: User
-    description: |
+    description: |-
       All properties that the entity User holds.
-      
+
       Entity User exists of an id, a name, a password, a email and has zero or more roles.
   -
     name: Application
-    description: |
+    description: |+
       All properties that the entity Application holds.
-      
-      
+
   -
     name: Token
-    description: |
+    description: |+
       A token from an external identity profider (like facebook).
-      
-      
+
   -
     name: Group
-    description: |
+    description: |+
       A user Group.
-      
-      
+
   -
     name: LoginLog
-    description: |
+    description: |-
       An entity representing an login log.
-      
+
       This entity logs all the login attempts
   -
     name: ChangeLog
-    description: |
+    description: |-
       An resource representing a log line.
-      
+
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
     name: AuditTrail
-    description: |
+    description: |-
       An resource representing a log line.
-      
+
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
 securityDefinitions:
   JWT-Oauth:
