@@ -5,13 +5,12 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-06-24T08:43:04.6831081Z"
+    created: "2021-07-06T19:19:06.1001244+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
       version: 1.x.x
-    description: Chart for PostgreSQL, an object-relational database management system
-      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    description: Chart for PostgreSQL, an object-relational database management system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
     digest: eebe8f456cf98d5927a35666d1d899174dc4d3e09f26788033f761527bc90749
     home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
     icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-110x117.png
@@ -39,16 +38,14 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 6.0.11
-    created: "2021-06-24T08:43:04.7006489Z"
+    created: "2021-07-06T19:19:06.1041217+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
       tags:
       - bitnami-common
       version: 1.x.x
-    description: Open source, advanced key-value store. It is often referred to as
-      a data structure server since keys can contain strings, hashes, lists, sets
-      and sorted sets.
+    description: Open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.
     digest: 2d70861d16fc410ed6d6c818b97f7b0d519031147e5c7b42c5691d4c38742c44
     home: https://github.com/bitnami/charts/tree/master/bitnami/redis
     icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
@@ -73,7 +70,7 @@ entries:
       artifacthub.io/containsSecurityUpdates: "true"
     apiVersion: v2
     appVersion: V1.0
-    created: "2021-06-24T08:43:04.6735124Z"
+    created: "2021-07-06T19:19:06.0970944+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -83,9 +80,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: 12.7.7
-    description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
-      beschikbaar.
-    digest: aba87f60da855a2c1f1bdfd7ca9c1cdb224efe3a864e019b97b5ae94304b6daa
+    description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.
+    digest: 02e4463c705a02ef539be1f052431347ab7d5faee54825f95cc54b9275c12686
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -107,14 +103,8 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-06-24T08:43:04.6638146Z"
-    description: Het User Component voert het beheer over een gebruikersaccount en
-      hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan
-      een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken
-      over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren
-      van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld
-      een dashboard of om een applicatie te faciliteren) maar in de wat abstracte
-      context ondersteund het ook algemene inlogs systematieken.
+    created: "2021-07-06T19:19:06.0891257+02:00"
+    description: Het User Component voert het beheer over een gebruikersaccount en hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld een dashboard of om een applicatie te faciliteren) maar in de wat abstracte context ondersteund het ook algemene inlogs systematieken.
     digest: c8fd0184d8bb02bde9fd38208990b52ea325f56eff456cfa7378d79796851e34
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
@@ -135,4 +125,4 @@ entries:
     urls:
     - user-component-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-24T08:43:04.6558571Z"
+generated: "2021-07-06T19:19:06.085124+02:00"
