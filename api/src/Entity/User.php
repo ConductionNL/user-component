@@ -62,15 +62,36 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *          }
  *     },
  *     collectionOperations={
- * 	   "get",
- * 	   "post",
- *     "login"={
- *         "method"="post",
- *         "path"="login",
- *         "controller"=DefaultController::class,
- *         "read"=false
- *     		}
- * 		}
+ *  	   "get",
+ *  	   "post",
+ *          "login"={
+ *              "summary"="Login a user with a username and password.",
+ *              "description"="Login a user with a username and password.",
+ *              "method"="post",
+ *              "path"="login",
+ *              "controller"=DefaultController::class,
+ *              "read"=false,
+ *              "requestBody" = {
+ *                  "content" = {
+ *                      "application/json" = {
+ *                          "schema" = {
+ *                              "type" = "object",
+ *                              "properties" =
+ *                                  {
+ *                                      "username" = {"type" = "string"},
+ *                                      "password" = {"type" = "string"},
+ *                                  },
+ *                          },
+ *                          "example" = {
+ *                              "username" = "JohnDoe@gmail.com",
+ *                              "password" = "n$5Ssqs]eCDT!$})",
+ *                          },
+ *                      },
+ *                  },
+ *              },
+ *      	}
+ *  	}
+ *
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
