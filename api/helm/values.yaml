@@ -11,9 +11,11 @@ config:
 security:
   applicationKey: "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
   secret: ""
+  privateKey: ""
+  publicKey: ""
   jwt:
-    id:
-    privateKey:
+    id: ""
+    privateKey: ""
 
 php:
   repository: docker.io/conduction/protocomponent-php

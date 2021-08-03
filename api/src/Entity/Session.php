@@ -17,7 +17,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *     itemOperations={
  *          "get",
  *          "put",
- *          "create",
  *          "get_change_logs"={
  *              "path"="/scopes/{id}/change_log",
  *              "method"="get",
