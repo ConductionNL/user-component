@@ -11,9 +11,8 @@ info:
     - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
     - Docker Image: [online]() 
     - Datamodel: [postman](schema/user-component.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
-    
-    Het User Component voert het beheer over een gebruikersaccount en hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken over bepaalde rechten. Waarbij het component tevens het bijhouden en valideren van wachtwoorden ondersteund (ten einde inlog mogelijkheden op bijvoorbeeld een dashboard of om een applicatie te faciliteren) maar in de wat abstracte context ondersteund het ook algemene inlogs systematieken.         
-    
+
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
 paths:
   /alerts:
     get:
@@ -6380,6 +6379,137 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /logout:
+    post:
+      tags:
+        - User
+      operationId: logoutUserCollection
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+          links:
+            GetUserItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getUserItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-write'
+        description: 'The new User resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   /providers:
     get:
       tags:
@@ -8233,9 +8363,9 @@ paths:
   '/scopes/{id}/audit_trail':
     get:
       tags:
-        - Scope
-      operationId: get_audit_trailScopeItem
-      summary: 'Retrieves a Scope resource.'
+        - Session
+      operationId: get_audit_trailSessionItem
+      summary: 'Retrieves a Session resource.'
       parameters:
         -
           name: id
@@ -8316,47 +8446,47 @@ paths:
           in: query
       responses:
         200:
-          description: 'Scope resource response'
+          description: 'Session resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
         404:
           description: 'Resource not found'
       produces:
@@ -8364,9 +8494,9 @@ paths:
   '/scopes/{id}/change_log':
     get:
       tags:
-        - Scope
-      operationId: get_change_logsScopeItem
-      summary: 'Retrieves a Scope resource.'
+        - Session
+      operationId: get_change_logsSessionItem
+      summary: 'Retrieves a Session resource.'
       parameters:
         -
           name: id
@@ -8447,51 +8577,618 @@ paths:
           in: query
       responses:
         200:
-          description: 'Scope resource response'
+          description: 'Session resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
         404:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /sessions:
+    get:
+      tags:
+        - Session
+      operationId: getSessionCollection
+      summary: 'Retrieves the collection of Session resources.'
+      responses:
+        200:
+          description: 'Session collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Session:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Session:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Session
+      operationId: postSessionCollection
+      summary: 'Creates a Session resource.'
+      responses:
+        201:
+          description: 'Session resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+          links:
+            GetSessionItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getSessionItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /sessions/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+        description: 'The new Session resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/sessions/{id}':
+    get:
+      tags:
+        - Session
+      operationId: getSessionItem
+      summary: 'Retrieves a Session resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Session resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    put:
+      tags:
+        - Session
+      operationId: putSessionItem
+      summary: 'Replaces the Session resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Session resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+        description: 'The updated Session resource'
   /tokens:
     get:
       tags:
@@ -12216,6 +12913,104 @@ components:
             $ref: '#/components/schemas/Group:jsonld-write'
       required:
         - name
+    Session-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          type: string
+          format: uuid
+        user:
+          description: 'The identifier of the user in this session'
+          type: string
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
+        dateCreated:
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
+          nullable: true
+    Session-write:
+      type: object
+      description: ''
+      properties:
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
+    'Session:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          type: string
+          format: uuid
+        user:
+          description: 'The identifier of the user in this session'
+          type: string
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
+        dateCreated:
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
+          nullable: true
+    'Session:jsonld-write':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
     Token-read:
       type: object
       description: 'A token from an external identity profider (like facebook).'
@@ -13025,6 +13820,36 @@ definitions:
         type: '\Group[]'
     required:
       - name
+  Session-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: \UuidInterface
+      user:
+        description: 'The identifier of the user in this session'
+        type: string
+      expiry:
+        description: 'The expiration moment for the session'
+        type: \DateTimeInterface
+      valid:
+        description: 'whether or not the session is valid'
+        type: bool
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+    required: []
+  Session-write:
+    properties:
+      expiry:
+        description: 'The expiration moment for the session'
+        type: \DateTimeInterface
+      valid:
+        description: 'whether or not the session is valid'
+        type: bool
+    required: []
   Token-read:
     properties:
       id:
@@ -13123,6 +13948,40 @@ definitions:
       dateModified:
         description: 'The moment this request last Modified'
         type: \Datetime
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
+    required:
+      - username
+      - locale
+  User-login:
+    properties:
+      id:
+        description: 'The (uu)id of this group'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
       userGroups:
         description: 'A list of groups to wichs this user belongs'
         type: array
@@ -13265,12 +14124,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-06-15 09:29:44'
+        example: '2021-08-03 08:42:43'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-06-15 09:29:44'
+        example: '2021-08-03 08:42:43'
     required: []
   AuditTrail-write:
     properties:
@@ -13318,12 +14177,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-06-15 09:29:44'
+        example: '2021-08-03 08:42:43'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-06-15 09:29:44'
+        example: '2021-08-03 08:42:43'
     required: []
   ChangeLog-write:
     properties:
@@ -13336,63 +14195,62 @@ definitions:
 tags:
   -
     name: Alert
-    description: |
+    description: |+
       All properties that the entity Alert holds.
-      
-      
+
   -
     name: Application
-    description: |
+    description: |+
       All properties that the entity Application holds.
-      
-      
+
   -
     name: Group
-    description: |
+    description: |+
       A user Group.
-      
-      
+
   -
     name: LoginLog
-    description: |
+    description: |-
       An entity representing an login log.
-      
+
       This entity logs all the login attempts
   -
     name: Provider
-    description: |
+    description: |+
       An external identity provider (like facebook).
-      
-      
+
   -
     name: Scope
-    description: |
+    description: |+
       All properties that the entity User holds.
-      
-      
+
+  -
+    name: Session
+    description: |+
+
+
   -
     name: Token
-    description: |
+    description: |+
       A token from an external identity profider (like facebook).
-      
-      
+
   -
     name: User
-    description: |
+    description: |-
       All properties that the entity User holds.
-      
+
       Entity User exists of an id, a name, a password, a email and has zero or more roles.
   -
     name: AuditTrail
-    description: |
+    description: |-
       An resource representing a log line.
-      
+
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
     name: ChangeLog
-    description: |
+    description: |-
       An resource representing a log line.
-      
+
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
 securityDefinitions:
   JWT-Oauth:
@@ -13402,6 +14260,7 @@ securityDefinitions:
     scopes:
       read: 'read right to the ChangeLog resource'
       write: 'write right to the ChangeLog resource'
+      login: 'login right to the User resource'
   JWT-Token:
     type: apiKey
     in: header
@@ -13409,6 +14268,7 @@ securityDefinitions:
     scopes:
       read: 'read right to the ChangeLog resource'
       write: 'write right to the ChangeLog resource'
+      login: 'login right to the User resource'
 host: irc.zaakonline.nl
 servers:
   -
