@@ -3,17 +3,14 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
-use App\Entity\User;
 use App\Service\LoginService;
 use Conduction\CommonGroundBundle\Service\SerializerService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class LoginSubscriber implements EventSubscriberInterface
@@ -51,12 +48,12 @@ class LoginSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($route == 'api_users_login_collection'){
+        if ($route == 'api_users_login_collection') {
             $results = $this->loginService->login($event->getRequest()->getContent());
             $this->serializerService->setResponse($results, $event, ['groups' => 'login']);
         }
 
-        if ($route == 'api_users_logout_collection'){
+        if ($route == 'api_users_logout_collection') {
             $this->loginService->logout(json_decode($event->getRequest()->getContent(), true)['jwtToken']) ?
                 $event->setResponse(new Response(null, 202)) :
                 $event->setResponse(new Response(null, 422));

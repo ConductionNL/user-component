@@ -25,8 +25,7 @@ class LoginService
         UserPasswordHasherInterface $encoder,
         JWTService $jwtService,
         ParameterBagInterface $parameterBag
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->encoder = $encoder;
         $this->jwtService = $jwtService;
@@ -36,6 +35,7 @@ class LoginService
     public function getCSRFToken(UuidInterface $id): CsrfToken
     {
         $tokenManager = new CsrfTokenManager();
+
         return $tokenManager->getToken($id->toString());
     }
 
@@ -71,18 +71,18 @@ class LoginService
 //        var_dump($payload);
         $session = $this->entityManager->getRepository('App\Entity\Session')->findOneBy(['id' => $payload['session']]);
 
-        if(!($session instanceof Session)){
+        if (!($session instanceof Session)) {
             return false;
         }
         $session->setValid(false);
         $this->entityManager->persist($session);
         $this->entityManager->flush();
+
         return true;
     }
 
     public function getJWTToken(User $user, Session $session): string
     {
-
         $time = new DateTime();
         $jwtBody = [
             'userId'    => $user->getId(),
@@ -104,10 +104,11 @@ class LoginService
             throw new AccessDeniedHttpException('The username/password combination is invalid');
         }
 
-        if($user instanceof User)
+        if ($user instanceof User) {
             return $user;
-        else
+        } else {
             throw new AccessDeniedHttpException('The username/password combination is invalid');
+        }
     }
 
     public function passwordCheck($user, $data): void
