@@ -6,9 +6,12 @@ use App\Entity\Session;
 use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
 class LoginService
 {
@@ -30,9 +33,10 @@ class LoginService
         $this->parameterBag = $parameterBag;
     }
 
-    public function getCSRFToken(): string
+    public function getCSRFToken(UuidInterface $id): CsrfToken
     {
-        return '';
+        $tokenManager = new CsrfTokenManager();
+        return $tokenManager->getToken($id->toString());
     }
 
     public function login(string $content): User
@@ -43,22 +47,36 @@ class LoginService
         $this->passwordCheck($user, $data);
 
         $expiry = new DateTime('+5 days');
-        $csrfToken = $this->getCSRFToken();
 
         $session = new Session();
-        $session->setUserIdentifier($user->getId());
+        $session->setUser($user->getId());
         $session->setExpiry($expiry);
-        $session->setCSRFToken($csrfToken);
+        $session->setValid(true);
         $this->entityManager->persist($session);
         $this->entityManager->flush();
 
+        $csrfToken = $this->getCSRFToken($session->getId());
+        $session->setCSRFToken($csrfToken);
         $jwtToken = $this->getJWTToken($user, $session);
+
+        $user->setCsrfToken($csrfToken);
+        $user->setJwtToken($jwtToken);
 
         return $user;
     }
 
-    public function logout(string $content): bool
+    public function logout(string $jwtToken): bool
     {
+        $payload = $this->jwtService->verifyJWTToken($jwtToken);
+//        var_dump($payload);
+        $session = $this->entityManager->getRepository('App\Entity\Session')->findOneBy(['id' => $payload['session']]);
+
+        if(!($session instanceof Session)){
+            return false;
+        }
+        $session->setValid(false);
+        $this->entityManager->persist($session);
+        $this->entityManager->flush();
         return true;
     }
 
@@ -69,6 +87,7 @@ class LoginService
         $jwtBody = [
             'userId'    => $user->getId(),
             'username'  => $user->getUsername(),
+            'roles'     => $user->getRoles(),
             'session'   => $session->getId(),
             'csrfToken' => $session->getCSRFToken(),
             'iss'       => $this->parameterBag->get('app_url'),

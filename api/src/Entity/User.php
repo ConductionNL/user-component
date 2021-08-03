@@ -89,6 +89,30 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *                      },
  *                  },
  *              },
+ *           },
+ *          "logout"={
+ *              "summary"="Login a user with a username and password.",
+ *              "description"="Login a user with a username and password.",
+ *              "method"="post",
+ *              "path"="logout",
+ *              "controller"=DefaultController::class,
+ *              "read"=false,
+ *              "requestBody" = {
+ *                  "content" = {
+ *                      "application/json" = {
+ *                          "schema" = {
+ *                              "type" = "object",
+ *                              "properties" =
+ *                                  {
+ *                                      "jwtToken" = {"type" = "string"},
+ *                                  },
+ *                          },
+ *                          "example" = {
+ *                              "jwtToken" = "eyJhbGciOiJSUzUxMiJ9.eyJ1c2VySWQiOiIwNTFiNTM0MS00MzNiLTQ1ODAtYTFiOC03ZWU0NTBjZmZkNDgiLCJ1c2VybmFtZSI6Im1haW4rdGVzdGFkbWluQGNvbmR1Y3Rpb24ubmwiLCJyb2xlcyI6WyJ1c2VyIl0sInNlc3Npb24iOiJhMmY3ZTAzMy00OGRkLTRhMjUtODI1Mi0wOTllNGYzNzFmMmEiLCJjc3JmVG9rZW4iOiJiOGY5YzM0ZDhiMGIxOTQ2ZWUuY1dTMTFKa1BfMHAxdXg3SzVFSjgyaGJrTUdGdldKWXhOZ3FsMU0tQU5OOC5HeWZSb1BoZXIzc045RlNhZ3hJcnRselhXUTRPRy1SbFJWLWRzcERTYnJKRUxkMnM0VmV0R2lYSVR3IiwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0IiwiaWFzIjoxNjI3OTA2ODY2LCJleHAiOjE2MjgzMzg4NjV9.VbdkuKY9C_Ru92iQ7n607sNdwcGdRu61pyUnTe-g4o9DQcYLvfA-NRQIe13s4hALkHG94Wb9JVeETkvfIY9F1zFvcksmocmiU6RkTpFKPz_m9rTH8nlLT4oLNVMvFhU-47Byea4zxNAf8cu_nH_41Ff0L81H2fsJi3XoANy1mP_subxhvxnqNMGwy6EFja1xlOtMBLReDVCLC_6WN3NUAgwvfSCOckxjJ0-bsJUpUV9ZsjYUgkaVepX4ERYDKtRCigrTl98HU5T-lu0VuLd25Kx0qrj4WxIDWutlgQmClfC_6XHRcOItr9bv-H3H_TzdtaAVI2_aIza9Wgea64NkhoD8BfvC0RmUYfclVLcoWMfcfYPDi3XebAjmdL9CuWU2AST9Xp8gFZeVKcleXNy92a7sey0CS5OpfAxCl8K-WOlZ85SdJb5fvPoTKXl4hzbW7YcCzI-ULXhE6CQebrcLL9Ok5NeGSn9R0KMf-Uhc5VGxd9vguBoIwcCbojSPw6EduMMNQGPrOTY-XjyfBA6luvQlC8SyI_Yf4QpylHLoui1NcmGTNamk-nevffWqQO715wy_q6GZQTh9cv5wRUdv8O2hbQTZCGrmlSdZ3E4JobTcdAV-BJodwwn3l_4DYi2BDYVoaefTww842EZHOqzlxix_1f95sIkrpjJPWjH5Zg0",
+ *                          },
+ *                      },
+ *                  },
+ *              },
  *      	}
  *  	}
  *
@@ -110,7 +134,7 @@ class User implements UserInterface
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
-     * @Groups({"read"})
+     * @Groups({"read", "login"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -127,7 +151,7 @@ class User implements UserInterface
      *
      * @Assert\Url
      * @Gedmo\Versioned
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $organization;
@@ -143,7 +167,7 @@ class User implements UserInterface
      *      min = 8,
      *      max = 255
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, unique = true)
      */
     private $username;
@@ -156,7 +180,7 @@ class User implements UserInterface
      * @Gedmo\Versioned
      * @Assert\NotNull
      * @Assert\Language
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=7)
      */
     private $locale = 'en';
@@ -171,13 +195,13 @@ class User implements UserInterface
      * @Assert\Length(
      *      max = 255
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $person;
 
     /**
-     * @Groups({"read"})
+     * @Groups({"read", "login"})
      */
     private $roles = [];
 
@@ -192,7 +216,7 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
      */
     private $userGroups;
@@ -221,6 +245,20 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
+
+    /**
+     * @var string|null The JWT token granted on login
+     *
+     * @Groups({"login"})
+     */
+    private ?string $jwtToken = null;
+
+    /**
+     * @var string|null The CSRF token granted on login
+     *
+     * @Groups({"login"})
+     */
+    private ?string $csrfToken = null;
 
     public function __construct()
     {
@@ -417,6 +455,30 @@ class User implements UserInterface
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getJwtToken(): ?string
+    {
+        return $this->jwtToken;
+    }
+
+    public function setJwtToken(?string $jwtToken): self
+    {
+        $this->jwtToken = $jwtToken;
+
+        return $this;
+    }
+
+    public function getCsrfToken(): ?string
+    {
+        return $this->csrfToken;
+    }
+
+    public function setCsrfToken(?string $csrfToken): self
+    {
+        $this->csrfToken = $csrfToken;
 
         return $this;
     }

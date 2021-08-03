@@ -47,34 +47,20 @@ class LoginSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
         $route = $event->getRequest()->attributes->get('_route');
 
-        if ($route != 'api_users_login_collection' || Request::METHOD_POST !== $method) {
+        if (($route != 'api_users_login_collection' && $route != 'api_users_logout_collection') || Request::METHOD_POST !== $method) {
             return;
         }
 
-        $results = $this->loginService->login($event->getRequest()->getContent());
+        if ($route == 'api_users_login_collection'){
+            $results = $this->loginService->login($event->getRequest()->getContent());
+            $this->serializerService->setResponse($results, $event, ['groups' => 'login']);
+        }
 
-//        $post = json_decode($this->request->getContent(), true);
-
-        // Lets see if we can find the user
-//        $user = $this->userCheck($post);
-//
-//        // Then lets check the password
-//        $this->passwordCheck($user, $post);
-
-        $this->serializerService->setResponse();
-
-        // now we need to override the normal subscriber
-
-
-//        $json = $this->addAtId($json);
-//
-//        $response = new Response(
-//            $json,
-//            Response::HTTP_OK,
-//            ['content-type' => 'application/json']
-//        );
-//
-//        $event->setResponse($response);
+        if ($route == 'api_users_logout_collection'){
+            $this->loginService->logout(json_decode($event->getRequest()->getContent(), true)['jwtToken']) ?
+                $event->setResponse(new Response(null, 202)) :
+                $event->setResponse(new Response(null, 422));
+        }
     }
 
 //    public function addAtId($json)

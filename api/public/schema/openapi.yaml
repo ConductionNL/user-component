@@ -9754,6 +9754,24 @@ paths:
               - asc
               - desc
         -
+          name: 'order[jwtToken]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[csrfToken]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -13128,6 +13146,46 @@ definitions:
     required:
       - username
       - locale
+  User-login:
+    properties:
+      id:
+        description: 'The (uu)id of this group'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
+      jwtToken:
+        description: 'The JWT token granted on login'
+        type: string|null
+      csrfToken:
+        description: 'The CSRF token granted on login'
+        type: string|null
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
+    required:
+      - username
+      - locale
   User-write:
     properties:
       organization:
@@ -13264,12 +13322,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-07-30 12:31:54'
+        example: '2021-08-02 11:54:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-07-30 12:31:54'
+        example: '2021-08-02 11:54:33'
     required: []
   AuditTrail-write:
     properties:
@@ -13317,12 +13375,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-07-30 12:31:54'
+        example: '2021-08-02 11:54:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-07-30 12:31:54'
+        example: '2021-08-02 11:54:33'
     required: []
   ChangeLog-write:
     properties:
@@ -13395,6 +13453,7 @@ securityDefinitions:
     scopes:
       read: 'read right to the ChangeLog resource'
       write: 'write right to the ChangeLog resource'
+      login: 'login right to the User resource'
   JWT-Token:
     type: apiKey
     in: header
@@ -13402,6 +13461,7 @@ securityDefinitions:
     scopes:
       read: 'read right to the ChangeLog resource'
       write: 'write right to the ChangeLog resource'
+      login: 'login right to the User resource'
 host: irc.zaakonline.nl
 servers:
   -
