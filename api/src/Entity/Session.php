@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SessionRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
@@ -55,16 +56,16 @@ class Session
      * @var string The identifier of the user in this session
      *
      * @Groups({"read"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, name="user_identifier")
      */
     private string $user;
 
     /**
-     * @var \DateTimeInterface The expiration moment for the session
+     * @var DateTimeInterface The expiration moment for the session
      * @Groups({"read", "write"})
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $expiry;
+    private DateTimeInterface $expiry;
 
     /**
      * @var string|null The CSRF token belonging to the session
@@ -87,7 +88,7 @@ class Session
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $dateCreated;
+    private ?DateTimeInterface $dateCreated;
 
     /**
      * @var Datetime The moment this request last Modified
@@ -96,7 +97,7 @@ class Session
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $dateModified;
+    private ?DateTimeInterface $dateModified;
 
     public function getId(): ?UuidInterface
     {
@@ -115,12 +116,12 @@ class Session
         return $this;
     }
 
-    public function getExpiry(): ?\DateTimeInterface
+    public function getExpiry(): ?DateTimeInterface
     {
         return $this->expiry;
     }
 
-    public function setExpiry(\DateTimeInterface $expiry): self
+    public function setExpiry(DateTimeInterface $expiry): self
     {
         $this->expiry = $expiry;
 
@@ -151,24 +152,24 @@ class Session
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDateCreated(): ?DateTimeInterface
     {
         return $this->dateCreated;
     }
 
-    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    public function setDateCreated(DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
 
         return $this;
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): ?DateTimeInterface
     {
         return $this->dateModified;
     }
 
-    public function setDateModified(\DateTimeInterface $dateModified): self
+    public function setDateModified(DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
 
