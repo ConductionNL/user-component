@@ -63,8 +63,13 @@ class TokenSubscriber implements EventSubscriberInterface
         $values = json_decode($event->getRequest()->getContent(), true);
         if(!key_exists('token', $values)){
             $event->setResponse(new Response(null, 404));
+            return;
         }
         $token = $this->signingTokenService->validateToken($values['token']);
+        if(!$token){
+            $event->setResponse(new Response(null, 404));
+            return;
+        }
         switch($token->getType()){
             case 'SET_PASSWORD':
                 $result = $this->signingTokenService->setPassword($token, $values['password']);

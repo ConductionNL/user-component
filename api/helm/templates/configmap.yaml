@@ -24,8 +24,8 @@ data:
   redis-port: {{ .Values.redis.redisPort | toString | quote }}
   {{- end }}
   {{- if .Values.config.expirationTime }}
-  expiration-time: {{ .Values.config.expirationTime }}
+  expiration-time: {{ .Values.config.expirationTime | quote }}
   {{- end }}
   {{- if .Values.config.passwordStrength }}
-  password-strength: {{ .Values.config.passwordStrength }}
+  password-strength: {{ .Values.config.passwordStrength | quote }}
   {{- end }}
