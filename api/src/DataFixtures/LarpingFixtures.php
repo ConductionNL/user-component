@@ -8,7 +8,7 @@ use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
 
 class LarpingFixtures extends Fixture
 {
@@ -16,7 +16,7 @@ class LarpingFixtures extends Fixture
     private $encoder;
     private $commonGroundService;
 
-    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder, CommonGroundService $commonGroundService)
+    public function __construct(ParameterBagInterface $params, UserPasswordHasherInterface $encoder, CommonGroundService $commonGroundService)
     {
         $this->params = $params;
         $this->encoder = $encoder;
@@ -49,7 +49,7 @@ class LarpingFixtures extends Fixture
         $user = new User();
         $user->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '7b863976-0fc3-4f49-a4f7-0bf7d2f2f535'])); // Larping
         $user->setUsername('test@larping.eu');
-        $user->setPassword($this->encoder->encodePassword($user, 'bierflesje'));
+        $user->setPassword($this->encoder->hashPassword($user, 'bierflesje'));
         $manager->persist($user);
 
         $manager->flush();

@@ -10,7 +10,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
 
 class StageFixtures extends Fixture
 {
@@ -18,7 +18,7 @@ class StageFixtures extends Fixture
     private $commonGroundService;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordHasherInterface $encoder)
     {
         $this->params = $params;
         $this->commonGroundService = $commonGroundService;
@@ -41,9 +41,9 @@ class StageFixtures extends Fixture
         $userBedrijf->setUsername('bedrijf@test.nl');
         $userBedrijf->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
         if ($this->params->get('app_env') == 'prod') {
-            $userBedrijf->setPassword($this->encoder->encodePassword($userBedrijf, bin2hex(openssl_random_pseudo_bytes(4))));
+            $userBedrijf->setPassword($this->encoder->hashPassword($userBedrijf, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $userBedrijf->setPassword($this->encoder->encodePassword($userBedrijf, 'test1234'));
+            $userBedrijf->setPassword($this->encoder->hashPassword($userBedrijf, 'test1234'));
         }
         $manager->persist($userBedrijf);
 

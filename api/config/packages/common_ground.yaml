@@ -81,7 +81,7 @@ parameters:
     app_demo: "%env(APP_DEMO)%"
     app_web: "%env(APP_WEB)%"
     app_internal: "%env(APP_INTERNAL)%"
-    app_build_all_fixtures: "%env(APP_BUILD_ALL_FIXTURES)%"
+    app_build_all_fixtures: "%env(bool:APP_BUILD_ALL_FIXTURES)%"
     app_chart: "%env(APP_CHART)%"
     app_session_duration: "%env(APP_SESSION_DURATION)%"
     app_type: "%env(APP_TYPE)%"

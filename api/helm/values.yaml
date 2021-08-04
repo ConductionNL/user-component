@@ -3,19 +3,21 @@
 # Declare variables to be passed into your templates.
 
 config:
-  version: V1.0
+  version: V2.0
   debug: 0
   cache: true
   internal: false
+  passwordStrength: 4
+  expirationTime: "1 hour"
 
 security:
   applicationKey: "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
   secret: ""
-  privateKey: ""
   publicKey: ""
+  privateKey: ""
   jwt:
-    id: ""
-    privateKey: ""
+    id:
+    privateKey:
 
 php:
   repository: docker.io/conduction/protocomponent-php

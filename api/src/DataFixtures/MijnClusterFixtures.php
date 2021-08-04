@@ -9,7 +9,7 @@ use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
 
 class MijnClusterFixtures extends Fixture
 {
@@ -17,7 +17,7 @@ class MijnClusterFixtures extends Fixture
     private $params;
     private $encoder;
 
-    public function __construct(CommonGroundService $commonGroundService, ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    public function __construct(CommonGroundService $commonGroundService, ParameterBagInterface $params, UserPasswordHasherInterface $encoder)
     {
         $this->commonGroundService = $commonGroundService;
         $this->params = $params;
@@ -34,7 +34,7 @@ class MijnClusterFixtures extends Fixture
         $user = new User();
         $user->setOrganization("{$this->commonGroundService->getComponent('wrc')['location']}/organizations/cc935415-a674-4235-b99d-0c7bfce5c7aa"); // Pink Rocade
         $user->setUsername('beheer@pinkroccade.nl');
-        $user->setPassword($this->encoder->encodePassword($userBeheer, '$user'));
+        $user->setPassword($this->encoder->hashPassword($userBeheer, '$user'));
         $manager->persist($user);
 
         // Pink Rocade

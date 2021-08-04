@@ -114,6 +114,20 @@ spec:
                 secretKeyRef:
                   key: private_key
                   name: {{ template "fullname" . }}
+            {{- if .Values.config.expirationTime }}
+            - name: EXPIRATION_TIME
+              valueFrom:
+                configMapKeyRef:
+                  key: expiration-time
+                  name: {{ template "fullname" .}}
+            {{- end }}
+            {{- if .Values.config.expirationTime }}
+            - name: PASSWORD_STRENGTH
+              valueFrom:
+                configMapKeyRef:
+                  key: password-strength
+                  name: {{ template "fullname" .}}
+            {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}

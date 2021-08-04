@@ -16,18 +16,18 @@ use Symfony\Component\Security\Csrf\CsrfTokenManager;
 class LoginService
 {
     private EntityManagerInterface $entityManager;
-    private UserPasswordHasherInterface $encoder;
+    private UserPasswordHasherInterface $hasher;
     private JWTService $jwtService;
     private ParameterBagInterface $parameterBag;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $encoder,
+        UserPasswordHasherInterface $hasher,
         JWTService $jwtService,
         ParameterBagInterface $parameterBag
     ) {
         $this->entityManager = $entityManager;
-        $this->encoder = $encoder;
+        $this->hasher = $hasher;
         $this->jwtService = $jwtService;
         $this->parameterBag = $parameterBag;
     }
@@ -46,7 +46,7 @@ class LoginService
         $user = $this->userCheck($data);
         $this->passwordCheck($user, $data);
 
-        $expiry = new DateTime('+5 days');
+        $expiry = new DateTime("+{$this->parameterBag->get('expiration_time')}");
 
         $session = new Session();
         $session->setUser($user->getId());
@@ -86,7 +86,6 @@ class LoginService
         $time = new DateTime();
         $jwtBody = [
             'userId'    => $user->getId(),
-            'username'  => $user->getUsername(),
             'roles'     => $user->getRoles(),
             'session'   => $session->getId(),
             'csrfToken' => $session->getCSRFToken(),
@@ -113,7 +112,7 @@ class LoginService
 
     public function passwordCheck($user, $data): void
     {
-        if ($user && !$this->encoder->isPasswordValid($user, $data['password'])) {
+        if ($user && !$this->hasher->isPasswordValid($user, $data['password'])) {
             throw new AccessDeniedHttpException('The username/password combination is invalid');
         }
     }

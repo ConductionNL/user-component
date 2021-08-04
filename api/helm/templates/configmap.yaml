@@ -22,5 +22,10 @@ data:
   {{- if .Values.redis.enabled }}
   redis-host: {{ printf "%s-headless" $redisServiceName | quote }}
   redis-port: {{ .Values.redis.redisPort | toString | quote }}
-
+  {{- end }}
+  {{- if .Values.config.expirationTime }}
+  expiration-time: {{ .Values.config.expirationTime }}
+  {{- end }}
+  {{- if .Values.config.passwordStrength }}
+  password-strength: {{ .Values.config.passwordStrength }}
   {{- end }}

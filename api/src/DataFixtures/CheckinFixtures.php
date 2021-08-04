@@ -10,7 +10,7 @@ use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
 
 class CheckinFixtures extends Fixture
 {
@@ -18,7 +18,7 @@ class CheckinFixtures extends Fixture
     private $commonGroundService;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordHasherInterface $encoder)
     {
         $this->params = $params;
         $this->commonGroundService = $commonGroundService;
@@ -77,9 +77,9 @@ class CheckinFixtures extends Fixture
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+            $user->setPassword($this->encoder->hashPassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+            $user->setPassword($this->encoder->hashPassword($user, 'test1234'));
         }
 
         $manager->persist($user);
@@ -92,9 +92,9 @@ class CheckinFixtures extends Fixture
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+            $user->setPassword($this->encoder->hashPassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+            $user->setPassword($this->encoder->hashPassword($user, 'test1234'));
         }
 
         $manager->persist($user);
@@ -107,9 +107,9 @@ class CheckinFixtures extends Fixture
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'2bdb2fe0-784d-46a3-949e-7db99d2fc089']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+            $user->setPassword($this->encoder->hashPassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+            $user->setPassword($this->encoder->hashPassword($user, 'test1234'));
         }
 
         $manager->persist($user);
@@ -122,9 +122,9 @@ class CheckinFixtures extends Fixture
         $user->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'25006d28-350a-42e9-b9ed-7afb25d4321d']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $user->setPassword($this->encoder->encodePassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
+            $user->setPassword($this->encoder->hashPassword($user, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $user->setPassword($this->encoder->encodePassword($user, 'test1234'));
+            $user->setPassword($this->encoder->hashPassword($user, 'test1234'));
         }
 
         $manager->persist($user);

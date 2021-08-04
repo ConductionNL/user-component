@@ -1,7 +1,7 @@
 annotations:
     artifacthub.io/containsSecurityUpdates: "true"
 apiVersion: v2
-appVersion: V1.0
+appVersion: V2.0
 description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
 name: user-component
 version: 1.0.0

@@ -9,7 +9,7 @@ use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
 
 class IdVaultFixtures extends Fixture
 {
@@ -17,7 +17,7 @@ class IdVaultFixtures extends Fixture
     private $commonGroundService;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordHasherInterface $encoder)
     {
         $this->params = $params;
         $this->commonGroundService = $commonGroundService;
@@ -41,9 +41,9 @@ class IdVaultFixtures extends Fixture
         $ruben->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'ce49a652-4b0b-4aa7-98a7-ff4a0cc9e33d']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $ruben->setPassword($this->encoder->encodePassword($ruben, bin2hex(openssl_random_pseudo_bytes(4))));
+            $ruben->setPassword($this->encoder->hashPassword($ruben, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $ruben->setPassword($this->encoder->encodePassword($ruben, 'test1234'));
+            $ruben->setPassword($this->encoder->hashPassword($ruben, 'test1234'));
         }
 
         $manager->persist($ruben);
@@ -53,9 +53,9 @@ class IdVaultFixtures extends Fixture
         $matthias->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'8b97830b-b119-4b58-afcc-f4fe37a1abf8']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $matthias->setPassword($this->encoder->encodePassword($matthias, bin2hex(openssl_random_pseudo_bytes(4))));
+            $matthias->setPassword($this->encoder->hashPassword($matthias, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $matthias->setPassword($this->encoder->encodePassword($matthias, 'test1234'));
+            $matthias->setPassword($this->encoder->hashPassword($matthias, 'test1234'));
         }
 
         $manager->persist($matthias);
@@ -65,9 +65,9 @@ class IdVaultFixtures extends Fixture
         $marleen->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'d1ad5cec-5cb1-4d0a-ba44-b5363fb7f2f7']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $marleen->setPassword($this->encoder->encodePassword($marleen, bin2hex(openssl_random_pseudo_bytes(4))));
+            $marleen->setPassword($this->encoder->hashPassword($marleen, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $marleen->setPassword($this->encoder->encodePassword($marleen, 'test1234'));
+            $marleen->setPassword($this->encoder->hashPassword($marleen, 'test1234'));
         }
 
         $manager->persist($marleen);
@@ -77,9 +77,9 @@ class IdVaultFixtures extends Fixture
         $barry->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'1f0bc496-aee3-42f5-8b36-29b119944918']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $barry->setPassword($this->encoder->encodePassword($barry, bin2hex(openssl_random_pseudo_bytes(4))));
+            $barry->setPassword($this->encoder->hashPassword($barry, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $barry->setPassword($this->encoder->encodePassword($barry, 'test1234'));
+            $barry->setPassword($this->encoder->hashPassword($barry, 'test1234'));
         }
 
         $manager->persist($barry);
@@ -89,9 +89,9 @@ class IdVaultFixtures extends Fixture
         $robert->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'0f8883ca-9990-4279-9392-50275398adcf']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $robert->setPassword($this->encoder->encodePassword($robert, bin2hex(openssl_random_pseudo_bytes(4))));
+            $robert->setPassword($this->encoder->hashPassword($robert, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $robert->setPassword($this->encoder->encodePassword($robert, 'test1234'));
+            $robert->setPassword($this->encoder->hashPassword($robert, 'test1234'));
         }
 
         $manager->persist($robert);
@@ -101,9 +101,9 @@ class IdVaultFixtures extends Fixture
         $gino->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'543d52ea-86dc-429b-bb96-2a9e7b90ada3']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $gino->setPassword($this->encoder->encodePassword($gino, bin2hex(openssl_random_pseudo_bytes(4))));
+            $gino->setPassword($this->encoder->hashPassword($gino, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $gino->setPassword($this->encoder->encodePassword($gino, 'test1234'));
+            $gino->setPassword($this->encoder->hashPassword($gino, 'test1234'));
         }
 
         $manager->persist($gino);
@@ -113,9 +113,9 @@ class IdVaultFixtures extends Fixture
         $wilco->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'b2d913f1-9949-4a91-8f6c-e130fc8b243f']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $wilco->setPassword($this->encoder->encodePassword($wilco, bin2hex(openssl_random_pseudo_bytes(4))));
+            $wilco->setPassword($this->encoder->hashPassword($wilco, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $wilco->setPassword($this->encoder->encodePassword($wilco, 'test1234'));
+            $wilco->setPassword($this->encoder->hashPassword($wilco, 'test1234'));
         }
 
         $manager->persist($wilco);
@@ -125,9 +125,9 @@ class IdVaultFixtures extends Fixture
         $yorick->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'5e619ed6-3c44-45af-928b-660a3f75be6b']));
 
         if ($this->params->get('app_env') == 'prod') {
-            $yorick->setPassword($this->encoder->encodePassword($yorick, bin2hex(openssl_random_pseudo_bytes(4))));
+            $yorick->setPassword($this->encoder->hashPassword($yorick, bin2hex(openssl_random_pseudo_bytes(4))));
         } else {
-            $yorick->setPassword($this->encoder->encodePassword($yorick, 'test1234'));
+            $yorick->setPassword($this->encoder->hashPassword($yorick, 'test1234'));
         }
 
         $manager->persist($yorick);

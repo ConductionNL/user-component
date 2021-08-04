@@ -14,10 +14,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\DateTime;
+use DateTime;
 
 /**
  * All properties that the entity User holds.
@@ -44,6 +45,14 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *                  "description"="Gets al the scopes linked to this user"
  *              }
  *          },
+ *          "get_token"={
+ *              "path"="/users/{id}/token",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Token",
+ *                  "description"="Gets a signing token for this user"
+ *              }
+ *          },
  *          "get_change_logs"={
  *              "path"="/users/{id}/change_log",
  *              "method"="get",
@@ -64,6 +73,14 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *     collectionOperations={
  *  	   "get",
  *  	   "post",
+ *          "use_token"={
+ *              "path"="/users/token",
+ *              "method"="post",
+ *              "swagger_context" = {
+ *                  "summary"="Token",
+ *                  "description"="Process a signing token"
+ *              }
+ *          },
  *          "login"={
  *              "summary"="Login a user with a username and password.",
  *              "description"="Login a user with a username and password.",
@@ -127,7 +144,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class, properties={"username": "iexact", "organization": "partial", "person": "partial"})
  */
-class User implements UserInterface
+class User implements PasswordAuthenticatedUserInterface
 {
     /**
      * @var UuidInterface The (uu)id of this group
@@ -259,6 +276,15 @@ class User implements UserInterface
      * @Groups({"login"})
      */
     private ?string $csrfToken = null;
+
+    /**
+     *
+     * @var Datetime|null The moment this user validated their email
+     *
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?DateTime $emailValidated = null;
 
     public function __construct()
     {
@@ -479,6 +505,18 @@ class User implements UserInterface
     public function setCsrfToken(?string $csrfToken): self
     {
         $this->csrfToken = $csrfToken;
+
+        return $this;
+    }
+
+    public function getEmailValidated(): ?\DateTimeInterface
+    {
+        return $this->emailValidated;
+    }
+
+    public function setEmailValidated(?\DateTimeInterface $emailValidated): self
+    {
+        $this->emailValidated = $emailValidated;
 
         return $this;
     }
