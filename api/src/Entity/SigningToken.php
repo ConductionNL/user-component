@@ -28,7 +28,7 @@ class SigningToken
     private $token;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="signingTokens")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

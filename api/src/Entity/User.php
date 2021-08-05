@@ -286,6 +286,13 @@ class User implements PasswordAuthenticatedUserInterface
      */
     private ?DateTime $emailValidated = null;
 
+    /**
+     * @var ArrayCollection Signing Tokens related to this user
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\SigningToken", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")
+     */
+    private ArrayCollection $signingTokens;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
@@ -517,6 +524,37 @@ class User implements PasswordAuthenticatedUserInterface
     public function setEmailValidated(?\DateTimeInterface $emailValidated): self
     {
         $this->emailValidated = $emailValidated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SigningToken[]
+     */
+    public function getSigningTokens(): Collection
+    {
+        return $this->tokens;
+    }
+
+    public function addSigningToken(SigningToken $signingToken): self
+    {
+        if (!$this->signingTokens->contains($signingToken)) {
+            $this->signingTokens[] = $signingToken;
+            $signingToken->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSigningToken(SigningToken $signingToken): self
+    {
+        if ($this->signingTokens->contains($signingToken)) {
+            $this->signingTokens->removeElement($signingToken);
+            // set the owning side to null (unless already changed)
+            if ($signingToken->getUser() === $this) {
+                $signingToken->setUser(null);
+            }
+        }
 
         return $this;
     }
