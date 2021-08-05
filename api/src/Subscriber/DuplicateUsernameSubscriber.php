@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DuplicateUsernameSubscriber implements EventSubscriberInterface
 {

@@ -13,7 +13,6 @@ class DefaultController extends AbstractController
 {
     public function __invoke(User $data): User
     {
-
         return $data;
     }
 

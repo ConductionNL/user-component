@@ -8,7 +8,7 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class HuwelijksplannerFixtures extends Fixture
 {
