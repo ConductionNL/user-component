@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\ORM\EntityManagerInterface;

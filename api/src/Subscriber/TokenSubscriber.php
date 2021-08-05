@@ -3,14 +3,11 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
-use App\Service\LoginService;
 use App\Service\SigningTokenService;
 use Conduction\CommonGroundBundle\Service\SerializerService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -38,7 +35,7 @@ class TokenSubscriber implements EventSubscriberInterface
     {
         $route = $event->getRequest()->attributes->get('_route');
 
-        switch($route){
+        switch ($route) {
             case 'api_users_get_token_item':
                 $this->getToken($event);
                 break;
@@ -59,16 +56,18 @@ class TokenSubscriber implements EventSubscriberInterface
     public function useToken(ViewEvent $event): void
     {
         $values = json_decode($event->getRequest()->getContent(), true);
-        if(!key_exists('token', $values)){
+        if (!key_exists('token', $values)) {
             $event->setResponse(new Response(null, 404));
+
             return;
         }
         $token = $this->signingTokenService->validateToken($values['token']);
-        if(!$token){
+        if (!$token) {
             $event->setResponse(new Response(null, 404));
+
             return;
         }
-        switch($token->getType()){
+        switch ($token->getType()) {
             case 'SET_PASSWORD':
                 $result = $this->signingTokenService->setPassword($token, $values['password']);
                 break;
@@ -79,7 +78,7 @@ class TokenSubscriber implements EventSubscriberInterface
                 $result = true;
                 break;
         }
-        if($result){
+        if ($result) {
             $event->setResponse(new Response(null, 202));
         } else {
             $event->setResponse(new Response(null, 404));
