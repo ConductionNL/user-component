@@ -287,11 +287,11 @@ class User implements PasswordAuthenticatedUserInterface
     private ?DateTime $emailValidated = null;
 
     /**
-     * @var ArrayCollection Signing Tokens related to this user
+     * @var Collection Signing Tokens related to this user
      *
      * @ORM\OneToMany(targetEntity="App\Entity\SigningToken", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
-    private ArrayCollection $signingTokens;
+    private Collection $signingTokens;
 
     public function __construct()
     {
