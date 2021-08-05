@@ -297,6 +297,7 @@ class User implements PasswordAuthenticatedUserInterface
     {
         $this->userGroups = new ArrayCollection();
         $this->tokens = new ArrayCollection();
+        $this->signingTokens = new ArrayCollection();
     }
 
     public function getId()
