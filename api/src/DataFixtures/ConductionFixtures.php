@@ -8,7 +8,7 @@ use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ConductionFixtures extends Fixture
 {
@@ -16,7 +16,7 @@ class ConductionFixtures extends Fixture
     private $commonGroundService;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, CommonGroundService $commonGroundService, UserPasswordHasherInterface $encoder)
     {
         $this->params = $params;
         $this->commonGroundService = $commonGroundService;
@@ -33,7 +33,7 @@ class ConductionFixtures extends Fixture
         $user = new User();
         $user->setOrganization('https://wrc.conduction.nl/organizations/68b64145-0740-46df-a65a-9d3259c2fec8'); // Larping
         $user->setUsername('info@conduction.nl');
-        $user->setPassword($this->encoder->encodePassword($user, 'lampenkap'));
+        $user->setPassword($this->encoder->hashPassword($user, 'lampenkap'));
         $manager->persist($user);
 
         // Larping
@@ -57,7 +57,7 @@ class ConductionFixtures extends Fixture
         $testStudent = new User();
         $testStudent->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
         $testStudent->setUsername('testStudent');
-        $testStudent->setPassword($this->encoder->encodePassword($testStudent, 'test1234'));
+        $testStudent->setPassword($this->encoder->hashPassword($testStudent, 'test1234'));
         $manager->persist($testStudent);
 
         //Group Studenten
@@ -74,7 +74,7 @@ class ConductionFixtures extends Fixture
         $testBedrijf = new User();
         $testBedrijf->setOrganization($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'organizations', 'id'=>'6a001c4c-911b-4b29-877d-122e362f519d'])); // Conduction
         $testBedrijf->setUsername('testBedrijf');
-        $testBedrijf->setPassword($this->encoder->encodePassword($testBedrijf, 'test1234'));
+        $testBedrijf->setPassword($this->encoder->hashPassword($testBedrijf, 'test1234'));
         $manager->persist($testBedrijf);
 
         //Group Bedrijven

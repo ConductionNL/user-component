@@ -3,20 +3,20 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use App\Service\UserService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateUserSubscriber implements EventSubscriberInterface
 {
-    private $encoder;
-    private $request;
+    private UserService $userService;
+    private Request $request;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserService $userService)
     {
-        $this->encoder = $encoder;
+        $this->userService = $userService;
         $this->request = Request::createFromGlobals();
     }
 
@@ -38,12 +38,10 @@ class CreateUserSubscriber implements EventSubscriberInterface
 
         try {
             if ($event->getRequest()->get('previous_data')->getPassword() !== $event->getRequest()->get('data')->getPassword()) {
-                $encoded = $this->encoder->encodePassword($user, $user->getPassword());
-                $user->setPassword($encoded);
+                $user = $this->userService->setPassword($user, $user->getPassword());
             }
         } catch (\Throwable $e) {
-            $encoded = $this->encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($encoded);
+            $user = $this->userService->setPassword($user, $user->getPassword());
         }
 
         return $user;

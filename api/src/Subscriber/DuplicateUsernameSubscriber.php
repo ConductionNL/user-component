@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DuplicateUsernameSubscriber implements EventSubscriberInterface
 {
@@ -18,7 +18,7 @@ class DuplicateUsernameSubscriber implements EventSubscriberInterface
     private $encoder;
     private $request;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
+    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $encoder)
     {
         $this->em = $em;
         $this->encoder = $encoder;
