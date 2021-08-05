@@ -22,8 +22,6 @@ class TokenSubscriber implements EventSubscriberInterface
 
     public function __construct(SigningTokenService $signingTokenService, SerializerInterface $serializer)
     {
-//        $this->em = $em;
-//        $this->encoder = $encoder;
         $this->signingTokenService = $signingTokenService;
         $this->serializer = $serializer;
         $this->serializerService = new SerializerService($serializer);

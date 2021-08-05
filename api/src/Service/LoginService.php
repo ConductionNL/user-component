@@ -68,7 +68,6 @@ class LoginService
     public function logout(string $jwtToken): bool
     {
         $payload = $this->jwtService->verifyJWTToken($jwtToken);
-//        var_dump($payload);
         $session = $this->entityManager->getRepository('App\Entity\Session')->findOneBy(['id' => $payload['session']]);
 
         if (!($session instanceof Session)) {

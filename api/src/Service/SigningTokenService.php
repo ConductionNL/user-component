@@ -68,9 +68,7 @@ class SigningTokenService
 
     public function createToken(Request $request): ?SigningToken
     {
-//        var_dump($request->attributes->all());
         $user = $this->entityManager->getRepository('App\Entity\User')->findOneBy(['id' => $request->attributes->get('id')]);
-//        var_dump($user);
         if(
             !$request->query->has('type') ||
             !($user instanceof User)

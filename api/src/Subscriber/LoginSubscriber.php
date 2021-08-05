@@ -59,33 +59,4 @@ class LoginSubscriber implements EventSubscriberInterface
                 $event->setResponse(new Response(null, 422));
         }
     }
-
-//    public function addAtId($json)
-//    {
-//        $json = json_decode($json, true);
-//
-//        $json['@id'] = '/users/'.$json['id'];
-//
-//        return $this->serializer->serialize(
-//            $json,
-//            'json',
-//            ['enable_max_depth' => true]
-//        );
-//    }
-
-//    public function userCheck($post)
-//    {
-//        if (!$user = $this->em->getRepository('App\Entity\User')->findOneBy(['username' => $post['username']])) {
-//            throw new AccessDeniedHttpException('The username/password combination is invalid');
-//        }
-//
-//        return $user;
-//    }
-//
-//    public function passwordCheck($user, $post)
-//    {
-//        if ($user && !$this->encoder->isPasswordValid($user, $post['password'])) {
-//            throw new AccessDeniedHttpException('The username/password combination is invalid');
-//        }
-//    }
 }
