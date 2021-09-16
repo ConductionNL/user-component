@@ -86,6 +86,9 @@ class Provider
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255
+     * )
      */
     private $organization;
 
@@ -110,12 +113,11 @@ class Provider
      * @example The facebook provider allows users to login with facebook
      *
      * @Gedmo\Versioned
-     * @Assert\NotNull
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2550)
      */
     private $description;
 
@@ -153,7 +155,8 @@ class Provider
     /**
      * @var array A list of tokens that belong to this provider
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="provider", orphanRemoval=true)
+     * @Assert\Valid()
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="provider", orphanRemoval=true, cascade={"persist"})
      */
     private $tokens;
 

@@ -170,6 +170,9 @@ class User implements PasswordAuthenticatedUserInterface
      * @Gedmo\Versioned
      * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255
+     * )
      */
     private $organization;
 
@@ -199,6 +202,9 @@ class User implements PasswordAuthenticatedUserInterface
      * @Assert\Language
      * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=7)
+     * @Assert\Length(
+     *      max = 7
+     * )
      */
     private $locale = 'en';
 
@@ -234,14 +240,15 @@ class User implements PasswordAuthenticatedUserInterface
      * @var array A list of groups to wichs this user belongs
      *
      * @Groups({"read", "write", "login"})
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER", cascade={"persist"})
      */
     private $userGroups;
 
     /**
      * @var array A list of tokens created for this user
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
+     * @Assert\Valid()
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true, cascade={"persist"})
      */
     private $tokens;
 
@@ -287,6 +294,8 @@ class User implements PasswordAuthenticatedUserInterface
 
     /**
      * @var Collection Signing Tokens related to this user
+     *
+     * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="App\Entity\SigningToken", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")
      */

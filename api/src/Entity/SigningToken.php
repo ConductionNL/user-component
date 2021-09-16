@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SigingTokenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=SigingTokenRepository::class)
  */
