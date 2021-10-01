@@ -46,16 +46,17 @@ class UserService
         $userData = [
             $user->getUsername(),
         ];
-        if ($user->getPerson()) {
-            try {
-                $person = $this->commonGroundService->getResource($user->getPerson());
-                $userData[] = $person['name'];
-                foreach ($person['emails'] as $email) {
-                    $userData[] = $email['email'];
-                }
-            } catch (ClientException $exception) {
-            }
-        }
+        //@todo fix this later for getresource
+//        if ($user->getPerson()) {
+//            try {
+//                $person = $this->commonGroundService->getResource($user->getPerson());
+//                $userData[] = $person['name'];
+//                foreach ($person['emails'] as $email) {
+//                    $userData[] = $email['email'];
+//                }
+//            } catch (ClientException $exception) {
+//            }
+//        }
 
         return $userData;
     }

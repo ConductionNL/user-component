@@ -11934,6 +11934,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -11952,14 +11953,12 @@ components:
       required:
         - organization
         - name
-        - description
     Application-write:
       type: object
       description: 'All properties that the entity Application holds.'
       required:
         - organization
         - name
-        - description
       properties:
         organization:
           description: 'The RSIN of the organization that owns this application'
@@ -11970,6 +11969,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -12004,6 +12004,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -12022,14 +12023,12 @@ components:
       required:
         - organization
         - name
-        - description
     'Application:jsonld-write':
       type: object
       description: 'All properties that the entity Application holds.'
       required:
         - organization
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -12049,6 +12048,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -12460,12 +12460,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -12503,28 +12505,24 @@ components:
           format: date-time
           nullable: true
       required:
-        - organization
         - name
-        - description
     Group-write:
       type: object
       description: 'A user Group.'
-      required:
-        - organization
-        - name
-        - description
       properties:
         organization:
           description: 'A specific commonground organization'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -12549,6 +12547,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User-write'
+      required:
+        - name
     'Group:jsonld-read':
       type: object
       description: 'A user Group.'
@@ -12574,12 +12574,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -12617,16 +12619,10 @@ components:
           format: date-time
           nullable: true
       required:
-        - organization
         - name
-        - description
     'Group:jsonld-write':
       type: object
       description: 'A user Group.'
-      required:
-        - organization
-        - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -12642,12 +12638,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -12672,6 +12670,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-write'
+      required:
+        - name
     LoginLog-read:
       type: object
       description: 'An entity representing an login log.'
@@ -12867,7 +12867,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
     Provider-write:
@@ -12876,7 +12875,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
       properties:
@@ -12963,7 +12961,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
     'Provider:jsonld-write':
@@ -12972,7 +12969,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
       properties:
@@ -13031,6 +13027,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -13081,6 +13078,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -13130,6 +13128,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -13189,6 +13188,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -13683,7 +13683,7 @@ definitions:
         description: 'The description of this Alert.'
         type: string
         example: 'This alert is used for warning the user when he is not logged in'
-        maxLength: 255
+        maxLength: 2550
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -13722,7 +13722,7 @@ definitions:
         description: 'The description of this Alert.'
         type: string
         example: 'This alert is used for warning the user when he is not logged in'
-        maxLength: 255
+        maxLength: 2550
       type:
         description: 'The type of this Alert.'
         type: string
@@ -13766,7 +13766,7 @@ definitions:
         description: 'The description of this application.'
         type: string
         example: 'This application allows users to manage data in several components'
-        maxLength: 255
+        maxLength: 2550
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -13779,7 +13779,6 @@ definitions:
     required:
       - organization
       - name
-      - description
   Application-write:
     properties:
       organization:
@@ -13797,14 +13796,13 @@ definitions:
         description: 'The description of this application.'
         type: string
         example: 'This application allows users to manage data in several components'
-        maxLength: 255
+        maxLength: 2550
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
     required:
       - organization
       - name
-      - description
   Group-read:
     properties:
       id:
@@ -13816,6 +13814,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       name:
         description: 'The name of this group'
         type: string
@@ -13825,7 +13824,7 @@ definitions:
         description: 'The description of this group.'
         type: string
         example: 'This group holds all the Admin members'
-        maxLength: 255
+        maxLength: 2550
       title:
         description: 'The title of this group'
         type: string
@@ -13855,9 +13854,7 @@ definitions:
         description: 'The users that belong to this group'
         type: '\User[]'
     required:
-      - organization
       - name
-      - description
   Group-write:
     properties:
       organization:
@@ -13865,6 +13862,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       name:
         description: 'The name of this group'
         type: string
@@ -13874,7 +13872,7 @@ definitions:
         description: 'The description of this group.'
         type: string
         example: 'This group holds all the Admin members'
-        maxLength: 255
+        maxLength: 2550
       title:
         description: 'The title of this group'
         type: string
@@ -13894,9 +13892,7 @@ definitions:
         description: 'The users that belong to this group'
         type: '\User[]'
     required:
-      - organization
       - name
-      - description
   LoginLog-read:
     properties:
       id:
@@ -13978,6 +13974,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       name:
         description: 'The name of this Provider'
         type: string
@@ -13987,7 +13984,7 @@ definitions:
         description: 'The description of this provider.'
         type: string
         example: 'The facebook provider allows users to login with facebook'
-        maxLength: 255
+        maxLength: 2550
       type:
         description: 'The type of this Provider'
         type: string
@@ -14011,7 +14008,6 @@ definitions:
     required:
       - organization
       - name
-      - description
       - type
       - application
   Provider-write:
@@ -14021,6 +14017,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       name:
         description: 'The name of this Provider'
         type: string
@@ -14030,7 +14027,7 @@ definitions:
         description: 'The description of this provider.'
         type: string
         example: 'The facebook provider allows users to login with facebook'
-        maxLength: 255
+        maxLength: 2550
       type:
         description: 'The type of this Provider'
         type: string
@@ -14048,7 +14045,6 @@ definitions:
     required:
       - organization
       - name
-      - description
       - type
       - application
   Scope-read:
@@ -14067,7 +14063,7 @@ definitions:
         description: 'The description of this scope.'
         type: string
         example: 'This scope allows users to change contact objects'
-        maxLength: 255
+        maxLength: 2550
       code:
         description: 'The code of this scope'
         type: string
@@ -14077,6 +14073,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -14107,7 +14104,7 @@ definitions:
         description: 'The description of this scope.'
         type: string
         example: 'This scope allows users to change contact objects'
-        maxLength: 255
+        maxLength: 2550
       code:
         description: 'The code of this scope'
         type: string
@@ -14117,6 +14114,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       application:
         description: 'application this scope belongs to.'
         type: \Application
@@ -14231,6 +14229,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       username:
         description: 'A unique visual identifier that represents this user.'
         type: string
@@ -14241,6 +14240,7 @@ definitions:
         description: 'A iso code reprecenting theusers language'
         type: string
         example: en
+        maxLength: 7
       person:
         description: 'A contact component person'
         type: string
@@ -14274,6 +14274,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       username:
         description: 'A unique visual identifier that represents this user.'
         type: string
@@ -14284,6 +14285,7 @@ definitions:
         description: 'A iso code reprecenting theusers language'
         type: string
         example: en
+        maxLength: 7
       person:
         description: 'A contact component person'
         type: string
@@ -14303,6 +14305,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       username:
         description: 'A unique visual identifier that represents this user.'
         type: string
@@ -14313,6 +14316,7 @@ definitions:
         description: 'A iso code reprecenting theusers language'
         type: string
         example: en
+        maxLength: 7
       person:
         description: 'A contact component person'
         type: string
@@ -14432,12 +14436,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-08-05 10:00:16'
+        example: '2021-09-30 14:40:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-08-05 10:00:16'
+        example: '2021-09-30 14:40:33'
     required: []
   AuditTrail-write:
     properties:
@@ -14485,12 +14489,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-08-05 10:00:16'
+        example: '2021-09-30 14:40:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-08-05 10:00:16'
+        example: '2021-09-30 14:40:33'
     required: []
   ChangeLog-write:
     properties:

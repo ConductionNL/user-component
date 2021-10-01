@@ -114,21 +114,22 @@ class Application
      * @example This application allows users to manage data in several components
      *
      * @Gedmo\Versioned
-     * @Assert\NotNull
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2550, nullable=true)
      */
     private $description;
 
     /**
      * @var Scope[] A list of scopes that are posible on this application.
      *
+     * @Assert\Valid()
+     *
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity="App\Entity\Scope", mappedBy="application", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Scope", mappedBy="application", orphanRemoval=true, cascade={"persist"})
      */
     private $scopes;
 

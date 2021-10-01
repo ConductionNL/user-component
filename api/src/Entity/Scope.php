@@ -98,10 +98,10 @@ class Scope
      *
      * @Gedmo\Versioned
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=2550, nullable=true)
      */
     private $description;
 
@@ -112,7 +112,7 @@ class Scope
      *
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $code;
 
@@ -125,23 +125,29 @@ class Scope
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     max = 255
+     * )
      */
     private $organization;
 
     /**
      * @var Application application this scope belongs to.
      *
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes", cascade={"persist"})
      */
     private $application;
 
     /**
      * @var Group[] User groups that give this scope.
      *
+     * @Assert\Valid()
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes", cascade={"persist"})
      */
     private $userGroups;
 
