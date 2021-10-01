@@ -7,14 +7,10 @@ config:
   debug: 0
   cache: true
   internal: false
-  passwordStrength: 4
-  expirationTime: "1 hour"
 
 security:
   applicationKey: "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
   secret: ""
-  publicKey: ""
-  privateKey: ""
   jwt:
     id:
     privateKey:
