@@ -5,27 +5,21 @@ namespace App\Subscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
-//use App\Service\MailService;
-//use App\Service\MessageService;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DuplicateUsernameSubscriber implements EventSubscriberInterface
 {
-    private $params;
     private $em;
     private $encoder;
     private $request;
 
-    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
+    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $encoder)
     {
-        $this->params = $params;
         $this->em = $em;
         $this->encoder = $encoder;
         $this->request = Request::createFromGlobals();
@@ -41,10 +35,9 @@ class DuplicateUsernameSubscriber implements EventSubscriberInterface
     public function checkUsername(ViewEvent $event)
     {
         $user = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
         $route = $event->getRequest()->attributes->get('_route');
 
-        if (($route != 'api_users_post_collection' && $route != 'api_users_put_item') || (Request::METHOD_POST !== $method && Request::METHOD_PUT !== $method)) {
+        if (($route != 'api_users_post_collection' && $route != 'api_users_put_item') || (Request::METHOD_POST !== $event->getRequest()->getMethod() && Request::METHOD_PUT !== $event->getRequest()->getMethod())) {
             return;
         }
 

@@ -58,7 +58,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"organization":"partial", "code":"exact"})
+ * @ApiFilter(SearchFilter::class, properties={"organization":"partial", "code":"exact", "name":"exact"})
  */
 class Group
 {
@@ -81,11 +81,13 @@ class Group
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @Assert\NotNull
      * @Assert\Url
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255
+     * )
      */
     private $organization;
 
@@ -110,12 +112,11 @@ class Group
      * @example This group holds all the Admin members
      *
      * @Gedmo\Versioned
-     * @Assert\NotNull
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2550, nullable=true)
      */
     private $description;
 
@@ -158,36 +159,40 @@ class Group
     /**
      * @var Group The group that this group is part of
      *
+     * @Assert\Valid()
      * @MaxDepth(1)
      * @Groups({"write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="children", cascade={"persist"})
      */
     private $parent;
 
     /**
      * @var ArrayCollection Groups that are a part of this group
      *
+     * @Assert\Valid()
      * @MaxDepth(1)
      * @Groups({"read"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="parent", cascade={"persist"})
      */
     private $children;
 
     /**
      * @var Scope[] The scopes that members of this group have
      *
+     * @Assert\Valid()
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups", fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Scope", inversedBy="userGroups", fetch="EAGER", cascade={"persist"})
      */
     private $scopes;
 
     /**
      * @var User[] The users that belong to this group
      *
+     * @Assert\Valid()
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userGroups")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userGroups", cascade={"persist"})
      */
     private $users;
 
@@ -354,6 +359,7 @@ class Group
     {
         if (!$this->scopes->contains($scope)) {
             $this->scopes[] = $scope;
+            $scope->addUserGroup($this);
         }
 
         return $this;
@@ -363,6 +369,7 @@ class Group
     {
         if ($this->scopes->contains($scope)) {
             $this->scopes->removeElement($scope);
+            $scope->removeUserGroup($this);
         }
 
         return $this;

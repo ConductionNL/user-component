@@ -9,15 +9,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\DefaultController;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * All properties that the entity User holds.
@@ -36,6 +37,22 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *          "get",
  *          "put",
  *          "delete",
+ *          "get_scopes"={
+ *              "path"="/users/{id}/scopes",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Scopes",
+ *                  "description"="Gets al the scopes linked to this user"
+ *              }
+ *          },
+ *          "get_token"={
+ *              "path"="/users/{id}/token",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Token",
+ *                  "description"="Gets a signing token for this user"
+ *              }
+ *          },
  *          "get_change_logs"={
  *              "path"="/users/{id}/change_log",
  *              "method"="get",
@@ -54,15 +71,68 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *          }
  *     },
  *     collectionOperations={
- * 	   "get",
- * 	   "post",
- *     "login"={
- *         "method"="post",
- *         "path"="login",
- *         "controller"=DefaultController::class,
- *         "read"=false
- *     		}
- * 		}
+ *  	   "get",
+ *  	   "post",
+ *          "use_token"={
+ *              "path"="/users/token",
+ *              "method"="post",
+ *              "swagger_context" = {
+ *                  "summary"="Token",
+ *                  "description"="Process a signing token"
+ *              }
+ *          },
+ *          "login"={
+ *              "summary"="Login a user with a username and password.",
+ *              "description"="Login a user with a username and password.",
+ *              "method"="post",
+ *              "path"="login",
+ *              "controller"=DefaultController::class,
+ *              "read"=false,
+ *              "requestBody" = {
+ *                  "content" = {
+ *                      "application/json" = {
+ *                          "schema" = {
+ *                              "type" = "object",
+ *                              "properties" =
+ *                                  {
+ *                                      "username" = {"type" = "string"},
+ *                                      "password" = {"type" = "string"},
+ *                                  },
+ *                          },
+ *                          "example" = {
+ *                              "username" = "JohnDoe@gmail.com",
+ *                              "password" = "n$5Ssqs]eCDT!$})",
+ *                          },
+ *                      },
+ *                  },
+ *              },
+ *           },
+ *          "logout"={
+ *              "summary"="Login a user with a username and password.",
+ *              "description"="Login a user with a username and password.",
+ *              "method"="post",
+ *              "path"="logout",
+ *              "controller"=DefaultController::class,
+ *              "read"=false,
+ *              "requestBody" = {
+ *                  "content" = {
+ *                      "application/json" = {
+ *                          "schema" = {
+ *                              "type" = "object",
+ *                              "properties" =
+ *                                  {
+ *                                      "jwtToken" = {"type" = "string"},
+ *                                  },
+ *                          },
+ *                          "example" = {
+ *                              "jwtToken" = "eyJhbGciOiJSUzUxMiJ9.eyJ1c2VySWQiOiIwNTFiNTM0MS00MzNiLTQ1ODAtYTFiOC03ZWU0NTBjZmZkNDgiLCJ1c2VybmFtZSI6Im1haW4rdGVzdGFkbWluQGNvbmR1Y3Rpb24ubmwiLCJyb2xlcyI6WyJ1c2VyIl0sInNlc3Npb24iOiJhMmY3ZTAzMy00OGRkLTRhMjUtODI1Mi0wOTllNGYzNzFmMmEiLCJjc3JmVG9rZW4iOiJiOGY5YzM0ZDhiMGIxOTQ2ZWUuY1dTMTFKa1BfMHAxdXg3SzVFSjgyaGJrTUdGdldKWXhOZ3FsMU0tQU5OOC5HeWZSb1BoZXIzc045RlNhZ3hJcnRselhXUTRPRy1SbFJWLWRzcERTYnJKRUxkMnM0VmV0R2lYSVR3IiwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0IiwiaWFzIjoxNjI3OTA2ODY2LCJleHAiOjE2MjgzMzg4NjV9.VbdkuKY9C_Ru92iQ7n607sNdwcGdRu61pyUnTe-g4o9DQcYLvfA-NRQIe13s4hALkHG94Wb9JVeETkvfIY9F1zFvcksmocmiU6RkTpFKPz_m9rTH8nlLT4oLNVMvFhU-47Byea4zxNAf8cu_nH_41Ff0L81H2fsJi3XoANy1mP_subxhvxnqNMGwy6EFja1xlOtMBLReDVCLC_6WN3NUAgwvfSCOckxjJ0-bsJUpUV9ZsjYUgkaVepX4ERYDKtRCigrTl98HU5T-lu0VuLd25Kx0qrj4WxIDWutlgQmClfC_6XHRcOItr9bv-H3H_TzdtaAVI2_aIza9Wgea64NkhoD8BfvC0RmUYfclVLcoWMfcfYPDi3XebAjmdL9CuWU2AST9Xp8gFZeVKcleXNy92a7sey0CS5OpfAxCl8K-WOlZ85SdJb5fvPoTKXl4hzbW7YcCzI-ULXhE6CQebrcLL9Ok5NeGSn9R0KMf-Uhc5VGxd9vguBoIwcCbojSPw6EduMMNQGPrOTY-XjyfBA6luvQlC8SyI_Yf4QpylHLoui1NcmGTNamk-nevffWqQO715wy_q6GZQTh9cv5wRUdv8O2hbQTZCGrmlSdZ3E4JobTcdAV-BJodwwn3l_4DYi2BDYVoaefTww842EZHOqzlxix_1f95sIkrpjJPWjH5Zg0",
+ *                          },
+ *                      },
+ *                  },
+ *              },
+ *      	}
+ *  	}
+ *
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
@@ -74,14 +144,14 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class, properties={"username": "iexact", "organization": "partial", "person": "partial"})
  */
-class User implements UserInterface
+class User implements PasswordAuthenticatedUserInterface
 {
     /**
      * @var UuidInterface The (uu)id of this group
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
-     * @Groups({"read"})
+     * @Groups({"read", "login"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -98,8 +168,11 @@ class User implements UserInterface
      *
      * @Assert\Url
      * @Gedmo\Versioned
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255
+     * )
      */
     private $organization;
 
@@ -114,7 +187,7 @@ class User implements UserInterface
      *      min = 8,
      *      max = 255
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, unique = true)
      */
     private $username;
@@ -127,8 +200,11 @@ class User implements UserInterface
      * @Gedmo\Versioned
      * @Assert\NotNull
      * @Assert\Language
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=7)
+     * @Assert\Length(
+     *      max = 7
+     * )
      */
     private $locale = 'en';
 
@@ -142,13 +218,13 @@ class User implements UserInterface
      * @Assert\Length(
      *      max = 255
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"read", "write", "login"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $person;
 
     /**
-     * @Groups({"read"})
+     * @Groups({"read", "login"})
      */
     private $roles = [];
 
@@ -163,15 +239,16 @@ class User implements UserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
-     * @Groups({"read", "write"})
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER")
+     * @Groups({"read", "write", "login"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER", cascade={"persist"})
      */
     private $userGroups;
 
     /**
      * @var array A list of tokens created for this user
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
+     * @Assert\Valid()
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true, cascade={"persist"})
      */
     private $tokens;
 
@@ -193,10 +270,42 @@ class User implements UserInterface
      */
     private $dateModified;
 
+    /**
+     * @var string|null The JWT token granted on login
+     *
+     * @Groups({"login"})
+     */
+    private ?string $jwtToken = null;
+
+    /**
+     * @var string|null The CSRF token granted on login
+     *
+     * @Groups({"login"})
+     */
+    private ?string $csrfToken = null;
+
+    /**
+     * @var Datetime|null The moment this user validated their email
+     *
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?DateTime $emailValidated = null;
+
+    /**
+     * @var Collection Signing Tokens related to this user
+     *
+     * @Assert\Valid()
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\SigningToken", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")
+     */
+    private Collection $signingTokens;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
         $this->tokens = new ArrayCollection();
+        $this->signingTokens = new ArrayCollection();
     }
 
     public function getId()
@@ -388,6 +497,73 @@ class User implements UserInterface
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getJwtToken(): ?string
+    {
+        return $this->jwtToken;
+    }
+
+    public function setJwtToken(?string $jwtToken): self
+    {
+        $this->jwtToken = $jwtToken;
+
+        return $this;
+    }
+
+    public function getCsrfToken(): ?string
+    {
+        return $this->csrfToken;
+    }
+
+    public function setCsrfToken(?string $csrfToken): self
+    {
+        $this->csrfToken = $csrfToken;
+
+        return $this;
+    }
+
+    public function getEmailValidated(): ?\DateTimeInterface
+    {
+        return $this->emailValidated;
+    }
+
+    public function setEmailValidated(?\DateTimeInterface $emailValidated): self
+    {
+        $this->emailValidated = $emailValidated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SigningToken[]
+     */
+    public function getSigningTokens(): Collection
+    {
+        return $this->tokens;
+    }
+
+    public function addSigningToken(SigningToken $signingToken): self
+    {
+        if (!$this->signingTokens->contains($signingToken)) {
+            $this->signingTokens[] = $signingToken;
+            $signingToken->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSigningToken(SigningToken $signingToken): self
+    {
+        if ($this->signingTokens->contains($signingToken)) {
+            $this->signingTokens->removeElement($signingToken);
+            // set the owning side to null (unless already changed)
+            if ($signingToken->getUser() === $this) {
+                $signingToken->setUser(null);
+            }
+        }
 
         return $this;
     }

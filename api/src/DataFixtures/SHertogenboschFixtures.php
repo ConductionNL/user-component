@@ -9,14 +9,14 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SHertogenboschFixtures extends Fixture
 {
     private $params;
     private $encoder;
 
-    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    public function __construct(ParameterBagInterface $params, UserPasswordHasherInterface $encoder)
     {
         $this->params = $params;
         $this->encoder = $encoder;
@@ -45,13 +45,13 @@ class SHertogenboschFixtures extends Fixture
         $userBalie = new User();
         $userBalie->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
         $userBalie->setUsername('balie@s-hertogenbosch.nl');
-        $userBalie->setPassword($this->encoder->encodePassword($userBalie, 'test1234'));
+        $userBalie->setPassword($this->encoder->hashPassword($userBalie, 'test1234'));
         $manager->persist($userBalie);
 
         $userBeheer = new User();
         $userBeheer->setOrganization('https://wrc.dev.begraven.zaakonline.nl/organizations/d736013f-ad6d-4885-b816-ce72ac3e1384'); // Hoorn
         $userBeheer->setUsername('beheer@s-hertogenbosch.nl');
-        $userBeheer->setPassword($this->encoder->encodePassword($userBeheer, 'test1234'));
+        $userBeheer->setPassword($this->encoder->hashPassword($userBeheer, 'test1234'));
         $manager->persist($userBeheer);
 
         // Vortex Adventures

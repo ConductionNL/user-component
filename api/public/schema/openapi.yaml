@@ -1,19 +1,18 @@
 openapi: 3.0.2
 info:
   title: ''
-  version: V1.0
+  version: V2.0
   description: |
     API Details
     - Component: 
     - Reference: user-component
     - Enviroment: dev
-    - Version: V1.0
+    - Version: V2.0
     - Repository: [online](https://github.com/ConductionNL/user-component) / [zip](https://github.com/ConductionNL/user-component/archive/master.zip)
     - Docker Image: [online]() 
     - Datamodel: [postman](schema/user-component.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
-    
+
     Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
-    
 paths:
   /alerts:
     get:
@@ -4411,6 +4410,22 @@ paths:
           style: form
           explode: true
         -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -6364,6 +6379,137 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /logout:
+    post:
+      tags:
+        - User
+      operationId: logoutUserCollection
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+          links:
+            GetUserItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getUserItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-write'
+        description: 'The new User resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   /providers:
     get:
       tags:
@@ -8217,9 +8363,9 @@ paths:
   '/scopes/{id}/audit_trail':
     get:
       tags:
-        - Scope
-      operationId: get_audit_trailScopeItem
-      summary: 'Retrieves a Scope resource.'
+        - Session
+      operationId: get_audit_trailSessionItem
+      summary: 'Retrieves a Session resource.'
       parameters:
         -
           name: id
@@ -8300,47 +8446,47 @@ paths:
           in: query
       responses:
         200:
-          description: 'Scope resource response'
+          description: 'Session resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
         404:
           description: 'Resource not found'
       produces:
@@ -8348,9 +8494,9 @@ paths:
   '/scopes/{id}/change_log':
     get:
       tags:
-        - Scope
-      operationId: get_change_logsScopeItem
-      summary: 'Retrieves a Scope resource.'
+        - Session
+      operationId: get_change_logsSessionItem
+      summary: 'Retrieves a Session resource.'
       parameters:
         -
           name: id
@@ -8431,51 +8577,618 @@ paths:
           in: query
       responses:
         200:
-          description: 'Scope resource response'
+          description: 'Session resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Scope:jsonld-read'
+                $ref: '#/components/schemas/Session:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Scope-read'
+                $ref: '#/components/schemas/Session-read'
         404:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /sessions:
+    get:
+      tags:
+        - Session
+      operationId: getSessionCollection
+      summary: 'Retrieves the collection of Session resources.'
+      responses:
+        200:
+          description: 'Session collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Session:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Session:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Session
+      operationId: postSessionCollection
+      summary: 'Creates a Session resource.'
+      responses:
+        201:
+          description: 'Session resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+          links:
+            GetSessionItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getSessionItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /sessions/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+        description: 'The new Session resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/sessions/{id}':
+    get:
+      tags:
+        - Session
+      operationId: getSessionItem
+      summary: 'Retrieves a Session resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Session resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    put:
+      tags:
+        - Session
+      operationId: putSessionItem
+      summary: 'Replaces the Session resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Session resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Session:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Session-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Session:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Session-write'
+        description: 'The updated Session resource'
   /tokens:
     get:
       tags:
@@ -9739,6 +10452,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[emailValidated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -9787,21 +10509,35 @@ paths:
           schema:
             type: string
         -
-          name: username
+          name: 'emailValidated[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'username[]'
+          name: 'emailValidated[strictly_before]'
           in: query
           required: false
           schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
+            type: string
+        -
+          name: 'emailValidated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'emailValidated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: username
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: organization
           in: query
@@ -9908,6 +10644,137 @@ paths:
       tags:
         - User
       operationId: postUserCollection
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+          links:
+            GetUserItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getUserItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/User-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-write'
+        description: 'The new User resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  /users/token:
+    post:
+      tags:
+        - User
+      operationId: use_tokenUserCollection
       summary: 'Creates a User resource.'
       responses:
         201:
@@ -10603,6 +11470,268 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  '/users/{id}/scopes':
+    get:
+      tags:
+        - User
+      operationId: get_scopesUserItem
+      summary: 'Retrieves a User resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'User resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/users/{id}/token':
+    get:
+      tags:
+        - User
+      operationId: get_tokenUserItem
+      summary: 'Retrieves a User resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'User resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/User:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/User-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
 components:
   schemas:
     Alert-read:
@@ -10805,6 +11934,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -10823,14 +11953,12 @@ components:
       required:
         - organization
         - name
-        - description
     Application-write:
       type: object
       description: 'All properties that the entity Application holds.'
       required:
         - organization
         - name
-        - description
       properties:
         organization:
           description: 'The RSIN of the organization that owns this application'
@@ -10841,6 +11969,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -10875,6 +12004,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -10893,14 +12023,12 @@ components:
       required:
         - organization
         - name
-        - description
     'Application:jsonld-write':
       type: object
       description: 'All properties that the entity Application holds.'
       required:
         - organization
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -10920,6 +12048,7 @@ components:
         description:
           description: 'The description of this application.'
           type: string
+          nullable: true
         scopes:
           description: 'A list of scopes that are posible on this application.'
           type: array
@@ -11331,12 +12460,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -11374,28 +12505,24 @@ components:
           format: date-time
           nullable: true
       required:
-        - organization
         - name
-        - description
     Group-write:
       type: object
       description: 'A user Group.'
-      required:
-        - organization
-        - name
-        - description
       properties:
         organization:
           description: 'A specific commonground organization'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -11420,6 +12547,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User-write'
+      required:
+        - name
     'Group:jsonld-read':
       type: object
       description: 'A user Group.'
@@ -11445,12 +12574,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -11488,16 +12619,10 @@ components:
           format: date-time
           nullable: true
       required:
-        - organization
         - name
-        - description
     'Group:jsonld-write':
       type: object
       description: 'A user Group.'
-      required:
-        - organization
-        - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -11513,12 +12638,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         name:
           description: 'The name of this group'
           type: string
         description:
           description: 'The description of this group.'
           type: string
+          nullable: true
         title:
           description: 'The title of this group'
           type: string
@@ -11543,6 +12670,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User:jsonld-write'
+      required:
+        - name
     LoginLog-read:
       type: object
       description: 'An entity representing an login log.'
@@ -11738,7 +12867,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
     Provider-write:
@@ -11747,7 +12875,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
       properties:
@@ -11834,7 +12961,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
     'Provider:jsonld-write':
@@ -11843,7 +12969,6 @@ components:
       required:
         - organization
         - name
-        - description
         - type
         - application
       properties:
@@ -11902,6 +13027,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -11931,14 +13057,17 @@ components:
           nullable: true
       required:
         - name
-        - organization
     Scope-write:
       type: object
       description: 'All properties that the entity User holds.'
-      required:
-        - name
-        - organization
       properties:
+        id:
+          readOnly: true
+          description: 'The (uu)id of this scope'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
         name:
           description: 'The name of this scope'
           type: string
@@ -11949,6 +13078,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -11966,6 +13096,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group-write'
+      required:
+        - name
     'Scope:jsonld-read':
       type: object
       description: 'All properties that the entity User holds.'
@@ -11996,6 +13128,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -12025,13 +13158,9 @@ components:
           nullable: true
       required:
         - name
-        - organization
     'Scope:jsonld-write':
       type: object
       description: 'All properties that the entity User holds.'
-      required:
-        - name
-        - organization
       properties:
         '@context':
           readOnly: true
@@ -12042,6 +13171,13 @@ components:
         '@type':
           readOnly: true
           type: string
+        id:
+          readOnly: true
+          description: 'The (uu)id of this scope'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
         name:
           description: 'The name of this scope'
           type: string
@@ -12052,6 +13188,7 @@ components:
         code:
           description: 'The code of this scope'
           type: string
+          nullable: true
         organization:
           description: 'A specific commonground organization'
           externalDocs:
@@ -12069,6 +13206,106 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
+      required:
+        - name
+    Session-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          type: string
+          format: uuid
+        user:
+          description: 'The identifier of the user in this session'
+          type: string
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
+        dateCreated:
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
+          nullable: true
+    Session-write:
+      type: object
+      description: ''
+      properties:
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
+    'Session:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          type: string
+          format: uuid
+        user:
+          description: 'The identifier of the user in this session'
+          type: string
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
+        dateCreated:
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
+          nullable: true
+    'Session:jsonld-write':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        expiry:
+          description: 'The expiration moment for the session'
+          type: string
+          format: date-time
+        valid:
+          description: 'whether or not the session is valid'
+          type: boolean
     Token-read:
       type: object
       description: 'A token from an external identity profider (like facebook).'
@@ -12280,6 +13517,11 @@ components:
           type: string
           format: date-time
           nullable: true
+        emailValidated:
+          description: 'The moment this user validated their email'
+          type: string
+          format: date-time
+          nullable: true
       required:
         - username
         - locale
@@ -12374,6 +13616,11 @@ components:
           type: string
           format: date-time
           nullable: true
+        emailValidated:
+          description: 'The moment this user validated their email'
+          type: string
+          format: date-time
+          nullable: true
       required:
         - username
         - locale
@@ -12420,162 +13667,6 @@ components:
         - username
         - locale
 definitions:
-  Scope-read:
-    properties:
-      id:
-        description: 'The (uu)id of this scope'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'The name of this scope'
-        type: string
-        example: 'Write on contact'
-        maxLength: 255
-      description:
-        description: 'The description of this scope.'
-        type: string
-        example: 'This scope allows users to change contact objects'
-        maxLength: 255
-      code:
-        description: 'The code of this scope'
-        type: string
-        example: contact.write
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-      application:
-        description: 'application this scope belongs to.'
-        type: \Application
-      userGroups:
-        description: 'User groups that give this scope.'
-        type: '\Group[]'
-    required:
-      - name
-      - organization
-  Scope-write:
-    properties:
-      name:
-        description: 'The name of this scope'
-        type: string
-        example: 'Write on contact'
-        maxLength: 255
-      description:
-        description: 'The description of this scope.'
-        type: string
-        example: 'This scope allows users to change contact objects'
-        maxLength: 255
-      code:
-        description: 'The code of this scope'
-        type: string
-        example: contact.write
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      application:
-        description: 'application this scope belongs to.'
-        type: \Application
-      userGroups:
-        description: 'User groups that give this scope.'
-        type: '\Group[]'
-    required:
-      - name
-      - organization
-  Provider-read:
-    properties:
-      id:
-        description: 'The (uu)id of this profider'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      name:
-        description: 'The name of this Provider'
-        type: string
-        example: Facebook
-        maxLength: 255
-      description:
-        description: 'The description of this provider.'
-        type: string
-        example: 'The facebook provider allows users to login with facebook'
-        maxLength: 255
-      type:
-        description: 'The type of this Provider'
-        type: string
-        example: Facebook
-        maxLength: 255
-      application:
-        description: 'The Uri of the application this provider supports'
-        type: string
-        example: wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc
-        format: url
-        maxLength: 255
-      configuration:
-        description: 'A list of configurations that apply to this provider'
-        type: array
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-    required:
-      - organization
-      - name
-      - description
-      - type
-      - application
-  Provider-write:
-    properties:
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      name:
-        description: 'The name of this Provider'
-        type: string
-        example: Facebook
-        maxLength: 255
-      description:
-        description: 'The description of this provider.'
-        type: string
-        example: 'The facebook provider allows users to login with facebook'
-        maxLength: 255
-      type:
-        description: 'The type of this Provider'
-        type: string
-        example: Facebook
-        maxLength: 255
-      application:
-        description: 'The Uri of the application this provider supports'
-        type: string
-        example: wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc
-        format: url
-        maxLength: 255
-      configuration:
-        description: 'A list of configurations that apply to this provider'
-        type: array
-    required:
-      - organization
-      - name
-      - description
-      - type
-      - application
   Alert-read:
     properties:
       id:
@@ -12592,7 +13683,7 @@ definitions:
         description: 'The description of this Alert.'
         type: string
         example: 'This alert is used for warning the user when he is not logged in'
-        maxLength: 255
+        maxLength: 2550
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -12631,7 +13722,7 @@ definitions:
         description: 'The description of this Alert.'
         type: string
         example: 'This alert is used for warning the user when he is not logged in'
-        maxLength: 255
+        maxLength: 2550
       type:
         description: 'The type of this Alert.'
         type: string
@@ -12653,78 +13744,6 @@ definitions:
         type: \Datetime
     required:
       - name
-  User-read:
-    properties:
-      id:
-        description: 'The (uu)id of this group'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      username:
-        description: 'A unique visual identifier that represents this user.'
-        type: string
-        example: '002851234'
-        maxLength: 255
-        minLength: 8
-      locale:
-        description: 'A iso code reprecenting theusers language'
-        type: string
-        example: en
-      person:
-        description: 'A contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
-        format: url
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-      userGroups:
-        description: 'A list of groups to wichs this user belongs'
-        type: array
-    required:
-      - username
-      - locale
-  User-write:
-    properties:
-      organization:
-        description: 'A specific commonground organization'
-        type: string
-        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      username:
-        description: 'A unique visual identifier that represents this user.'
-        type: string
-        example: '002851234'
-        maxLength: 255
-        minLength: 8
-      locale:
-        description: 'A iso code reprecenting theusers language'
-        type: string
-        example: en
-      person:
-        description: 'A contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
-        format: url
-        maxLength: 255
-      password:
-        description: 'The hashed password'
-        type: string
-      userGroups:
-        description: 'A list of groups to wichs this user belongs'
-        type: array
-    required:
-      - username
-      - locale
   Application-read:
     properties:
       id:
@@ -12747,7 +13766,7 @@ definitions:
         description: 'The description of this application.'
         type: string
         example: 'This application allows users to manage data in several components'
-        maxLength: 255
+        maxLength: 2550
       dateCreated:
         description: 'The moment this request was created'
         type: \Datetime
@@ -12760,7 +13779,6 @@ definitions:
     required:
       - organization
       - name
-      - description
   Application-write:
     properties:
       organization:
@@ -12778,78 +13796,13 @@ definitions:
         description: 'The description of this application.'
         type: string
         example: 'This application allows users to manage data in several components'
-        maxLength: 255
+        maxLength: 2550
       scopes:
         description: 'A list of scopes that are posible on this application.'
         type: '\Scope[]'
     required:
       - organization
       - name
-      - description
-  Token-read:
-    properties:
-      id:
-        description: 'The (uu)id of this token'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      token:
-        description: 'The actual token.'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-      duration:
-        description: 'Duration the token is active for in minutes'
-        type: string
-        example: '4'
-      validTill:
-        description: 'The moment this token expires'
-        type: \DateTime
-      dateAccepted:
-        description: 'The moment the invite was accepted by the user'
-        type: \DateTime
-        example: '20190101'
-      dateCreated:
-        description: 'The moment this request was created by the submitter'
-        type: \DateTime
-        example: '20190101'
-      dateModified:
-        description: 'The moment this request was created by the submitter'
-        type: \DateTime
-        example: '20190101'
-      user:
-        description: 'The user that this token belongs to.'
-        type: \User
-      provider:
-        description: 'The provider that this scope belongs to.'
-        type: \Provider
-    required:
-      - token
-      - user
-      - provider
-  Token-write:
-    properties:
-      token:
-        description: 'The actual token.'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-      duration:
-        description: 'Duration the token is active for in minutes'
-        type: string
-        example: '4'
-      dateAccepted:
-        description: 'The moment the invite was accepted by the user'
-        type: \DateTime
-        example: '20190101'
-      user:
-        description: 'The user that this token belongs to.'
-        type: \User
-      provider:
-        description: 'The provider that this scope belongs to.'
-        type: \Provider
-    required:
-      - token
-      - user
-      - provider
   Group-read:
     properties:
       id:
@@ -12861,6 +13814,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       name:
         description: 'The name of this group'
         type: string
@@ -12870,7 +13824,7 @@ definitions:
         description: 'The description of this group.'
         type: string
         example: 'This group holds all the Admin members'
-        maxLength: 255
+        maxLength: 2550
       title:
         description: 'The title of this group'
         type: string
@@ -12900,9 +13854,7 @@ definitions:
         description: 'The users that belong to this group'
         type: '\User[]'
     required:
-      - organization
       - name
-      - description
   Group-write:
     properties:
       organization:
@@ -12910,6 +13862,7 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+        maxLength: 255
       name:
         description: 'The name of this group'
         type: string
@@ -12919,7 +13872,7 @@ definitions:
         description: 'The description of this group.'
         type: string
         example: 'This group holds all the Admin members'
-        maxLength: 255
+        maxLength: 2550
       title:
         description: 'The title of this group'
         type: string
@@ -12939,9 +13892,7 @@ definitions:
         description: 'The users that belong to this group'
         type: '\User[]'
     required:
-      - organization
       - name
-      - description
   LoginLog-read:
     properties:
       id:
@@ -13011,59 +13962,376 @@ definitions:
       - method
       - application
       - status
-  ChangeLog-read:
+  Provider-read:
     properties:
       id:
-        description: 'The UUID identifier of this object'
+        description: 'The (uu)id of this profider'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      organization:
+        description: 'A specific commonground organization'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+        maxLength: 255
+      name:
+        description: 'The name of this Provider'
         type: string
-      objectId:
-        description: ''
+        example: Facebook
+        maxLength: 255
+      description:
+        description: 'The description of this provider.'
         type: string
-      objectClass:
-        description: ''
+        example: 'The facebook provider allows users to login with facebook'
+        maxLength: 2550
+      type:
+        description: 'The type of this Provider'
         type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
+        example: Facebook
+        maxLength: 255
+      application:
+        description: 'The Uri of the application this provider supports'
+        type: string
+        example: wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc
+        format: url
+        maxLength: 255
+      configuration:
+        description: 'A list of configurations that apply to this provider'
         type: array
-      username:
-        description: ''
-        type: string
-      session:
+      dateCreated:
         description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+    required:
+      - organization
+      - name
+      - type
+      - application
+  Provider-write:
+    properties:
+      organization:
+        description: 'A specific commonground organization'
         type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+        maxLength: 255
+      name:
+        description: 'The name of this Provider'
+        type: string
+        example: Facebook
+        maxLength: 255
+      description:
+        description: 'The description of this provider.'
+        type: string
+        example: 'The facebook provider allows users to login with facebook'
+        maxLength: 2550
+      type:
+        description: 'The type of this Provider'
+        type: string
+        example: Facebook
+        maxLength: 255
+      application:
+        description: 'The Uri of the application this provider supports'
+        type: string
+        example: wrc.dev.zuid-drecht.nl/applications/31a2ad29-ee03-4aa9-be81-abf1fda7bbcc
+        format: url
+        maxLength: 255
+      configuration:
+        description: 'A list of configurations that apply to this provider'
+        type: array
+    required:
+      - organization
+      - name
+      - type
+      - application
+  Scope-read:
+    properties:
+      id:
+        description: 'The (uu)id of this scope'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this scope'
+        type: string
+        example: 'Write on contact'
+        maxLength: 255
+      description:
+        description: 'The description of this scope.'
+        type: string
+        example: 'This scope allows users to change contact objects'
+        maxLength: 2550
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
         maxLength: 255
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2021-03-04 13:36:39'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2021-03-04 13:36:39'
-    required: []
-  ChangeLog-write:
+        type: \Datetime
+      application:
+        description: 'application this scope belongs to.'
+        type: \Application
+      userGroups:
+        description: 'User groups that give this scope.'
+        type: '\Group[]'
+    required:
+      - name
+  Scope-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      id:
+        description: 'The (uu)id of this scope'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this scope'
+        type: string
+        example: 'Write on contact'
+        maxLength: 255
+      description:
+        description: 'The description of this scope.'
+        type: string
+        example: 'This scope allows users to change contact objects'
+        maxLength: 2550
+      code:
+        description: 'The code of this scope'
+        type: string
+        example: contact.write
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+        maxLength: 255
+      application:
+        description: 'application this scope belongs to.'
+        type: \Application
+      userGroups:
+        description: 'User groups that give this scope.'
+        type: '\Group[]'
+    required:
+      - name
+  Session-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: \UuidInterface
+      user:
+        description: 'The identifier of the user in this session'
+        type: string
+      expiry:
+        description: 'The expiration moment for the session'
+        type: \DateTimeInterface
+      valid:
+        description: 'whether or not the session is valid'
+        type: bool
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
     required: []
+  Session-write:
+    properties:
+      expiry:
+        description: 'The expiration moment for the session'
+        type: \DateTimeInterface
+      valid:
+        description: 'whether or not the session is valid'
+        type: bool
+    required: []
+  Token-read:
+    properties:
+      id:
+        description: 'The (uu)id of this token'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      token:
+        description: 'The actual token.'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+      duration:
+        description: 'Duration the token is active for in minutes'
+        type: string
+        example: '4'
+      validTill:
+        description: 'The moment this token expires'
+        type: \DateTime
+      dateAccepted:
+        description: 'The moment the invite was accepted by the user'
+        type: \DateTime
+        example: '20190101'
+      dateCreated:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      dateModified:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      user:
+        description: 'The user that this token belongs to.'
+        type: \User
+      provider:
+        description: 'The provider that this scope belongs to.'
+        type: \Provider
+    required:
+      - token
+      - user
+      - provider
+  Token-write:
+    properties:
+      token:
+        description: 'The actual token.'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+      duration:
+        description: 'Duration the token is active for in minutes'
+        type: string
+        example: '4'
+      dateAccepted:
+        description: 'The moment the invite was accepted by the user'
+        type: \DateTime
+        example: '20190101'
+      user:
+        description: 'The user that this token belongs to.'
+        type: \User
+      provider:
+        description: 'The provider that this scope belongs to.'
+        type: \Provider
+    required:
+      - token
+      - user
+      - provider
+  User-read:
+    properties:
+      id:
+        description: 'The (uu)id of this group'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+        maxLength: 255
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
+        maxLength: 7
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+      emailValidated:
+        description: 'The moment this user validated their email'
+        type: \Datetime|null
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
+    required:
+      - username
+      - locale
+  User-login:
+    properties:
+      id:
+        description: 'The (uu)id of this group'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+        maxLength: 255
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
+        maxLength: 7
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
+    required:
+      - username
+      - locale
+  User-write:
+    properties:
+      organization:
+        description: 'A specific commonground organization'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+        maxLength: 255
+      username:
+        description: 'A unique visual identifier that represents this user.'
+        type: string
+        example: '002851234'
+        maxLength: 255
+        minLength: 8
+      locale:
+        description: 'A iso code reprecenting theusers language'
+        type: string
+        example: en
+        maxLength: 7
+      person:
+        description: 'A contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/06cd0132-5b39-44cb-b320-a9531b2c4ac7'
+        format: url
+        maxLength: 255
+      password:
+        description: 'The hashed password'
+        type: string
+      userGroups:
+        description: 'A list of groups to wichs this user belongs'
+        type: array
+    required:
+      - username
+      - locale
   AuditTrail-read:
     properties:
       id:
@@ -13168,12 +14436,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-03-04 13:36:39'
+        example: '2021-09-30 14:40:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-03-04 13:36:39'
+        example: '2021-09-30 14:40:33'
     required: []
   AuditTrail-write:
     properties:
@@ -13183,66 +14451,118 @@ definitions:
         example: 'This log line looks suspicius'
         maxLength: 2555
     required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2021-09-30 14:40:33'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2021-09-30 14:40:33'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
 tags:
   -
-    name: Scope
-    description: |
-      All properties that the entity User holds.
-      
-      
-  -
-    name: Provider
-    description: |
-      An external identity provider (like facebook).
-      
-      
-  -
     name: Alert
-    description: |
+    description: |+
       All properties that the entity Alert holds.
-      
-      
-  -
-    name: User
-    description: |
-      All properties that the entity User holds.
-      
-      Entity User exists of an id, a name, a password, a email and has zero or more roles.
+
   -
     name: Application
-    description: |
+    description: |+
       All properties that the entity Application holds.
-      
-      
-  -
-    name: Token
-    description: |
-      A token from an external identity profider (like facebook).
-      
-      
+
   -
     name: Group
-    description: |
+    description: |+
       A user Group.
-      
-      
+
   -
     name: LoginLog
-    description: |
+    description: |-
       An entity representing an login log.
-      
+
       This entity logs all the login attempts
   -
-    name: ChangeLog
-    description: |
-      An resource representing a log line.
-      
-      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+    name: Provider
+    description: |+
+      An external identity provider (like facebook).
+
+  -
+    name: Scope
+    description: |+
+      All properties that the entity User holds.
+
+  -
+    name: Session
+    description: |+
+
+
+  -
+    name: Token
+    description: |+
+      A token from an external identity profider (like facebook).
+
+  -
+    name: User
+    description: |-
+      All properties that the entity User holds.
+
+      Entity User exists of an id, a name, a password, a email and has zero or more roles.
   -
     name: AuditTrail
-    description: |
+    description: |-
       An resource representing a log line.
-      
+
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+  -
+    name: ChangeLog
+    description: |-
+      An resource representing a log line.
+
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
 securityDefinitions:
   JWT-Oauth:
@@ -13250,15 +14570,17 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
+      login: 'login right to the User resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
+      login: 'login right to the User resource'
 host: irc.zaakonline.nl
 servers:
   -

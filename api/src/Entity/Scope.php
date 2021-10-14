@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -66,7 +67,7 @@ class Scope
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -97,10 +98,10 @@ class Scope
      *
      * @Gedmo\Versioned
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=2550, nullable=true)
      */
     private $description;
 
@@ -111,7 +112,7 @@ class Scope
      *
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $code;
 
@@ -120,28 +121,33 @@ class Scope
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
-     * @Assert\NotNull
      * @Assert\Url
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     max = 255
+     * )
      */
     private $organization;
 
     /**
      * @var Application application this scope belongs to.
      *
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes")
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Application", inversedBy="scopes", cascade={"persist"})
      */
     private $application;
 
     /**
      * @var Group[] User groups that give this scope.
      *
+     * @Assert\Valid()
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes", cascade={"persist"})
      */
     private $userGroups;
 
@@ -168,9 +174,16 @@ class Scope
         $this->userGroups = new ArrayCollection();
     }
 
-    public function getId()
+    public function getId(): Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getOrganization(): ?string

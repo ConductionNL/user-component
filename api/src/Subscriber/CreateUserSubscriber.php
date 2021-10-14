@@ -3,29 +3,20 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use App\Service\UserService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
-//use App\Service\MailService;
-//use App\Service\MessageService;
 
 class CreateUserSubscriber implements EventSubscriberInterface
 {
-    private $params;
-    private $em;
-    private $encoder;
-    private $request;
+    private UserService $userService;
+    private Request $request;
 
-    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
+    public function __construct(UserService $userService)
     {
-        $this->params = $params;
-        $this->em = $em;
-        $this->encoder = $encoder;
+        $this->userService = $userService;
         $this->request = Request::createFromGlobals();
     }
 
@@ -39,21 +30,18 @@ class CreateUserSubscriber implements EventSubscriberInterface
     public function createUser(ViewEvent $event)
     {
         $user = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
         $route = $event->getRequest()->attributes->get('_route');
 
-        if (($route != 'api_users_post_collection' && $route != 'api_users_put_item') || (Request::METHOD_POST !== $method && Request::METHOD_PUT !== $method)) {
+        if (($route != 'api_users_post_collection' && $route != 'api_users_put_item')) {
             return;
         }
 
         try {
             if ($event->getRequest()->get('previous_data')->getPassword() !== $event->getRequest()->get('data')->getPassword()) {
-                $encoded = $this->encoder->encodePassword($user, $user->getPassword());
-                $user->setPassword($encoded);
+                $user = $this->userService->setPassword($user, $user->getPassword());
             }
         } catch (\Throwable $e) {
-            $encoded = $this->encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($encoded);
+            $user = $this->userService->setPassword($user, $user->getPassword());
         }
 
         return $user;
