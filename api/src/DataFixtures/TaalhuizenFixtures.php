@@ -60,7 +60,7 @@ class TaalhuizenFixtures extends Fixture
 
         $user = new User();
         $user->setUsername('rick@lifely.nl');
-        $user->setPassword('f8&VA!l14Vzj');
+        $user->setPassword('CHANGEME!!!');
         $user->setPerson('https://taalhuizen-bisc.commonground.nu/api/v1/cc/people/62bc09d3-2f34-4fa4-880c-da6adec9569f');
         $user->addUserGroup($admin);
         $manager->persist($user);
@@ -68,7 +68,7 @@ class TaalhuizenFixtures extends Fixture
 
         $user = new User();
         $user->setUsername('main+testadmin@conduction.nl');
-        $user->setPassword('Test1234');
+        $user->setPassword('CHANGEME!!!');
         $user->setPerson('https://taalhuizen-bisc.commonground.nu/api/v1/cc/people/8001c512-e65a-480d-8f2f-84ca3a6a07ce');
         $user->addUserGroup($admin);
         $manager->persist($user);
