@@ -32,6 +32,13 @@ spec:
           secret:
             secretName: {{ .Chart.Name }}-dependencies
             defaultMode: 420
+        {{- if .Values.fixtures }}
+        - name: fixtures
+          configMap:
+              name: {{ include "template.fullname" . }}-fixtures
+              defaultMode: 420
+        {{- end }}
+
       containers:
         - name: {{ .Chart.Name }}-php
           securityContext:
@@ -45,6 +52,11 @@ spec:
               subPath: dependencies.yaml
               name: dependencies
               readOnly: true
+            {{- if .Values.fixtures }}
+            - mountPath: /srv/api/fixtures
+              name: fixtures
+              readOnly: true
+            {{- end }}
           env:
             - name: JWT_SECRET_KEY
               value: '%kernel.project_dir%/config/jwt/private.pem'
