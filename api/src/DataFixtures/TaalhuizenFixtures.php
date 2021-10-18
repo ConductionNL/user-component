@@ -45,6 +45,17 @@ class TaalhuizenFixtures extends Fixture
         $manager->flush();
         $admin = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
 
+        $id = Uuid::fromString('8e90f9f0-acb7-406d-9550-be614040effd');
+        $bisc = new Group();
+        $bisc->setName('bisc');
+        $bisc->setDescription('bisc group');
+        $bisc->setOrganization('https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe');
+        $manager->persist($bisc);
+        $bisc->setId($id);
+        $manager->persist($bisc);
+        $manager->flush();
+        $bisc = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
+
         //users
 
         $user = new User();

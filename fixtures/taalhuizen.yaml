@@ -1,0 +1,945 @@
+# --- Scopes ---
+App\Entity\Scope:
+    # - User_groups -
+    # User_groups read
+    user_groups_read:
+        name: 'Read user_groups'
+        code: 'GET.user_groups'
+    # We do not wan't people to edit user_groups!
+    
+    # - Users -
+    # Users create
+    users_create:
+        name: 'Create users'
+        code: 'POST.users'
+    # Users update
+    users_update:
+        name: 'Update users'
+        code: 'PUT.users'
+    # Users remove
+    users_remove:
+        name: 'Remove users'
+        code: 'DELETE.users'
+    # Users read
+    users_read:
+        name: 'Read users'
+        code: 'GET.users'
+        
+    # - Employees -
+    # Employees create
+    employees_create:
+        name: 'Create employees'
+        code: 'POST.employees'
+    # Employees update
+    employees_update:
+        name: 'Update employees'
+        code: 'PUT.employees'
+    # Employees remove
+    employees_remove:
+        name: 'Remove employees'
+        code: 'DELETE.employees'
+    # Employees read
+    employees_read:
+        name: 'Read employees'
+        code: 'GET.employees'
+        
+    # - Employee_intake -
+    # Employee_intake create
+    employee_intake_create:
+        name: 'Create employee_intake'
+        code: 'POST.employee_intake'
+    # Employee_intake update
+    employee_intake_update:
+        name: 'Update employee_intake'
+        code: 'PUT.employee_intake'
+    # Employee_intake remove
+    employee_intake_remove:
+        name: 'Remove employee_intake'
+        code: 'DELETE.employee_intake'
+    # Employee_intake read
+    employee_intake_read:
+        name: 'Read employee_intake'
+        code: 'GET.employee_intake'
+        
+    # - Students -
+    # Students create
+    students_create:
+        name: 'Create students'
+        code: 'POST.students'
+    # Students update
+    students_update:
+        name: 'Update students'
+        code: 'PUT.students'
+    # Students remove
+    students_remove:
+        name: 'Remove students'
+        code: 'DELETE.students'
+    # Students read
+    students_read:
+        name: 'Read students'
+        code: 'GET.students'
+        
+    # - Student_intake -
+    # Student_intake create
+    student_intake_create:
+        name: 'Create student_intake'
+        code: 'POST.student_intake'
+    # Student_intake update
+    student_intake_update:
+        name: 'Update student_intake'
+        code: 'PUT.student_intake'
+    # Student_intake remove
+    student_intake_remove:
+        name: 'Remove student_intake'
+        code: 'DELETE.student_intake'
+    # Student_intake read
+    student_intake_read:
+        name: 'Read student_intake'
+        code: 'GET.student_intake'
+
+    # - Civicintegration -
+    # Civicintegration create
+    civicintegration_create:
+        name: 'Create civicintegration'
+        code: 'POST.civicintegration'
+    # Civicintegration update
+    civicintegration_update:
+        name: 'Update civicintegration'
+        code: 'PUT.civicintegration'
+    # Civicintegration remove
+    civicintegration_remove:
+        name: 'Remove civicintegration'
+        code: 'DELETE.civicintegration'
+    # Civicintegration read
+    civicintegration_read:
+        name: 'Read civicintegration'
+        code: 'GET.civicintegration'
+        
+    # - Education -
+    # Education create
+    education_create:
+        name: 'Create education'
+        code: 'POST.education'
+    # Education update
+    education_update:
+        name: 'Update education'
+        code: 'PUT.education'
+    # Education remove
+    education_remove:
+        name: 'Remove education'
+        code: 'DELETE.education'
+    # Education read
+    education_read:
+        name: 'Read education'
+        code: 'GET.education'
+
+    # - ContactMoment -
+    # ContactMoment create
+    contactMoment_create:
+        name: 'Create contactMoment'
+        code: 'POST.contactMoment'
+    # ContactMoment update
+    contactMoment_update:
+        name: 'Update contactMoment'
+        code: 'PUT.contactMoment'
+    # ContactMoment remove
+    contactMoment_remove:
+        name: 'Remove contactMoment'
+        code: 'DELETE.contactMoment'
+    # ContactMoment read
+    contactMoment_read:
+        name: 'Read contactMoment'
+        code: 'GET.contactMoment'
+
+    # - Organizations -
+    # Organizations create
+    organizations_create:
+        name: 'Create organizations'
+        code: 'POST.organizations'
+    # Organizations update
+    organizations_update:
+        name: 'Update organizations'
+        code: 'PUT.organizations'
+    # Organizations remove
+    organizations_remove:
+        name: 'Remove organizations'
+        code: 'DELETE.organizations'
+    # Organizations read
+    organizations_read:
+        name: 'Read organizations'
+        code: 'GET.organizations'
+        
+    # - Persons -
+    # Persons create
+    persons_create:
+        name: 'Create persons'
+        code: 'POST.persons'
+    # Persons update
+    persons_update:
+        name: 'Update persons'
+        code: 'PUT.persons'
+    # Persons remove
+    persons_remove:
+        name: 'Remove persons'
+        code: 'DELETE.persons'
+    # Persons read
+    persons_read:
+        name: 'Read persons'
+        code: 'GET.persons'
+        
+    # - Email -
+    # Email create
+    email_create:
+        name: 'Create email'
+        code: 'POST.email'
+    # Email update
+    email_update:
+        name: 'Update email'
+        code: 'PUT.email'
+    # Email remove
+    email_remove:
+        name: 'Remove email'
+        code: 'DELETE.email'
+    # Email read
+    email_read:
+        name: 'Read email'
+        code: 'GET.email'
+        
+    # - Telephone -
+    # Telephone create
+    telephone_create:
+        name: 'Create telephone'
+        code: 'POST.telephone'
+    # Telephone update
+    telephone_update:
+        name: 'Update telephone'
+        code: 'PUT.telephone'
+    # Telephone remove
+    telephone_remove:
+        name: 'Remove telephone'
+        code: 'DELETE.telephone'
+    # Telephone read
+    telephone_read:
+        name: 'Read telephone'
+        code: 'GET.telephone'
+        
+    # - Address -
+    # Address create
+    address_create:
+        name: 'Create address'
+        code: 'POST.address'
+    # Address update
+    address_update:
+        name: 'Update address'
+        code: 'PUT.address'
+    # Address remove
+    address_remove:
+        name: 'Remove address'
+        code: 'DELETE.address'
+    # Address read
+    address_read:
+        name: 'Read address'
+        code: 'GET.address'
+        
+    # - LearningNeed -
+    # LearningNeed create
+    LearningNeed_create:
+        name: 'Create LearningNeed'
+        code: 'POST.LearningNeed'
+    # LearningNeed update
+    LearningNeed_update:
+        name: 'Update LearningNeed'
+        code: 'PUT.LearningNeed'
+    # LearningNeed remove
+    LearningNeed_remove:
+        name: 'Remove LearningNeed'
+        code: 'DELETE.LearningNeed'
+    # LearningNeed read
+    LearningNeed_read:
+        name: 'Read LearningNeed'
+        code: 'GET.LearningNeed'
+        
+    # - LearningResult -
+    # LearningResult create
+    LearningResult_create:
+        name: 'Create LearningResult'
+        code: 'POST.LearningResult'
+    # LearningResult update
+    LearningResult_update:
+        name: 'Update LearningResult'
+        code: 'PUT.LearningResult'
+    # LearningResult remove
+    LearningResult_remove:
+        name: 'Remove LearningResult'
+        code: 'DELETE.LearningResult'
+    # LearningResult read
+    LearningResult_read:
+        name: 'Read LearningResult'
+        code: 'GET.LearningResult'
+        
+    # - Participation -
+    # Participation create
+    participation_create:
+        name: 'Create participation'
+        code: 'POST.participation'
+    # Participation update
+    participation_update:
+        name: 'Update participation'
+        code: 'PUT.participation'
+    # Participation remove
+    participation_remove:
+        name: 'Remove participation'
+        code: 'DELETE.participation'
+    # Participation read
+    participation_read:
+        name: 'Read participation'
+        code: 'GET.participation'
+        
+    # - Program -
+    # Program create
+    program_create:
+        name: 'Create program'
+        code: 'POST.program'
+    # Program update
+    program_update:
+        name: 'Update program'
+        code: 'PUT.program'
+    # Program remove
+    program_remove:
+        name: 'Remove program'
+        code: 'DELETE.program'
+    # Program read
+    program_read:
+        name: 'Read program'
+        code: 'GET.program'
+        
+    # - Course -
+    # Course create
+    course_create:
+        name: 'Create course'
+        code: 'POST.course'
+    # Course update
+    course_update:
+        name: 'Update course'
+        code: 'PUT.course'
+    # Course remove
+    course_remove:
+        name: 'Remove course'
+        code: 'DELETE.course'
+    # Course read
+    course_read:
+        name: 'Read course'
+        code: 'GET.course'
+        
+    # - CourseGroup -
+    # CourseGroup create
+    courseGroup_create:
+        name: 'Create courseGroup'
+        code: 'POST.courseGroup'
+    # CourseGroup update
+    courseGroup_update:
+        name: 'Update courseGroup'
+        code: 'PUT.courseGroup'
+    # CourseGroup remove
+    courseGroup_remove:
+        name: 'Remove courseGroup'
+        code: 'DELETE.courseGroup'
+    # CourseGroup read
+    courseGroup_read:
+        name: 'Read courseGroup'
+        code: 'GET.courseGroup'
+
+
+# --- Groups ---
+App\Entity\Group:
+    # Admin group (Any)
+    admin:
+        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef'
+        name: admin
+        description: Admin group (Any)
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@user_groups_read'
+            - '@users_create'
+            - '@users_update'
+            - '@users_remove'
+            - '@users_read'
+            - '@employees_create'
+            - '@employees_update'
+            - '@employees_remove'
+            - '@employees_read'
+            - '@employee_intake_create'
+            - '@employee_intake_update'
+            - '@employee_intake_remove'
+            - '@employee_intake_read'
+            - '@students_create'
+            - '@students_update'
+            - '@students_remove'
+            - '@students_read'
+            - '@student_intake_create'
+            - '@student_intake_update'
+            - '@student_intake_remove'
+            - '@student_intake_read'
+            - '@civicintegration_create'
+            - '@civicintegration_update'
+            - '@civicintegration_remove'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
+            - '@organizations_create'
+            - '@organizations_update'
+            - '@organizations_remove'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_create'
+            - '@LearningNeed_update'
+            - '@LearningNeed_remove'
+            - '@LearningNeed_read'
+            - '@LearningResult_create'
+            - '@LearningResult_update'
+            - '@LearningResult_remove'
+            - '@LearningResult_read'
+            - '@participation_create'
+            - '@participation_update'
+            - '@participation_remove'
+            - '@participation_read'
+            - '@program_create'
+            - '@program_update'
+            - '@program_remove'
+            - '@program_read'
+            - '@course_create'
+            - '@course_update'
+            - '@course_remove'
+            - '@course_read'
+            - '@courseGroup_create'
+            - '@courseGroup_update'
+            - '@courseGroup_remove'
+            - '@courseGroup_read'
+            
+    # BISC group
+    bisc:
+        id: '8e90f9f0-acb7-406d-9550-be614040effd'
+        name: bisc
+        description: BISC group
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_create'
+            - '@users_update'
+            - '@users_remove'
+            - '@users_read'
+            - '@employees_create'
+            - '@employees_update'
+            - '@employees_remove'
+            - '@employees_read'
+            - '@employee_intake_create'
+            - '@employee_intake_update'
+            - '@employee_intake_remove'
+            - '@employee_intake_read'
+            - '@students_read'
+            - '@student_intake_read'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_read'
+            - '@organizations_create'
+            - '@organizations_update'
+            - '@organizations_remove'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_read'
+            - '@LearningResult_read'
+            - '@participation_read'
+            - '@program_read'
+            - '@course_read'
+            - '@courseGroup_read'
+                
+    # Taalhuis group (TH (*) )
+    taalhuis:
+        id: 'efa3b8a5-49e4-46a8-86c2-6769b726b42a'
+        name: taalhuis
+        description: Taalhuis group (TH (*) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_create'
+            - '@users_update'
+            - '@users_remove'
+            - '@users_read'
+            - '@employees_create'
+            - '@employees_update'
+            - '@employees_remove'
+            - '@employees_read'
+            - '@employee_intake_create'
+            - '@employee_intake_update'
+            - '@employee_intake_remove'
+            - '@employee_intake_read'
+            - '@students_create'
+            - '@students_update'
+            - '@students_remove'
+            - '@students_read'
+            - '@student_intake_create'
+            - '@student_intake_update'
+            - '@student_intake_remove'
+            - '@student_intake_read'
+            - '@civicintegration_create'
+            - '@civicintegration_update'
+            - '@civicintegration_remove'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
+            - '@organizations_create'
+            - '@organizations_update'
+            - '@organizations_remove'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_create'
+            - '@LearningNeed_update'
+            - '@LearningNeed_remove'
+            - '@LearningNeed_read'
+            - '@LearningResult_create'
+            - '@LearningResult_update'
+            - '@LearningResult_remove'
+            - '@LearningResult_read'
+            - '@participation_create'
+            - '@participation_update'
+            - '@participation_remove'
+            - '@participation_read'
+            - '@program_create'
+            - '@program_update'
+            - '@program_remove'
+            - '@program_read'
+            - '@course_create'
+            - '@course_update'
+            - '@course_remove'
+            - '@course_read'
+            - '@courseGroup_create'
+            - '@courseGroup_update'
+            - '@courseGroup_remove'
+            - '@courseGroup_read'
+            
+    # Taalhuis employee group (TH (employee) )
+    taalhuis_employee:
+        id: 'f88efb3f-5a88-475d-b7b0-8865028487e2'
+        name: taalhuis_employee
+        description: Taalhuis employee group (TH (employee) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_read'
+            - '@employees_read'
+            - '@employee_intake_read'
+            - '@students_create'
+            - '@students_update'
+            - '@students_remove'
+            - '@students_read'
+            - '@student_intake_create'
+            - '@student_intake_update'
+            - '@student_intake_remove'
+            - '@student_intake_read'
+            - '@civicintegration_create'
+            - '@civicintegration_update'
+            - '@civicintegration_remove'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_create'
+            - '@LearningNeed_update'
+            - '@LearningNeed_remove'
+            - '@LearningNeed_read'
+            - '@LearningResult_create'
+            - '@LearningResult_update'
+            - '@LearningResult_remove'
+            - '@LearningResult_read'
+            - '@participation_create'
+            - '@participation_update'
+            - '@participation_remove'
+            - '@participation_read'
+            - '@program_create'
+            - '@program_update'
+            - '@program_remove'
+            - '@program_read'
+            - '@course_create'
+            - '@course_update'
+            - '@course_remove'
+            - '@course_read'
+            - '@courseGroup_create'
+            - '@courseGroup_update'
+            - '@courseGroup_remove'
+            - '@courseGroup_read'
+                
+    # Taalhuis coordinator group (TH (coordinator) )
+    taalhuis_coordinator:
+        id: '6c01ae98-5c9c-49e3-b99f-d74ad96074ab'
+        name: taalhuis_coordinator
+        description: Taalhuis coordinator group (TH (coordinator) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_create'
+            - '@users_update'
+            - '@users_remove'
+            - '@users_read'
+            - '@employees_create'
+            - '@employees_update'
+            - '@employees_remove'
+            - '@employees_read'
+            - '@employee_intake_create'
+            - '@employee_intake_update'
+            - '@employee_intake_remove'
+            - '@employee_intake_read'
+            - '@students_create'
+            - '@students_update'
+            - '@students_remove'
+            - '@students_read'
+            - '@student_intake_create'
+            - '@student_intake_update'
+            - '@student_intake_remove'
+            - '@student_intake_read'
+            - '@civicintegration_create'
+            - '@civicintegration_update'
+            - '@civicintegration_remove'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
+            - '@organizations_create'
+            - '@organizations_update'
+            - '@organizations_remove'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_create'
+            - '@LearningNeed_update'
+            - '@LearningNeed_remove'
+            - '@LearningNeed_read'
+            - '@LearningResult_create'
+            - '@LearningResult_update'
+            - '@LearningResult_remove'
+            - '@LearningResult_read'
+            - '@participation_create'
+            - '@participation_update'
+            - '@participation_remove'
+            - '@participation_read'
+            - '@program_create'
+            - '@program_update'
+            - '@program_remove'
+            - '@program_read'
+            - '@course_create'
+            - '@course_update'
+            - '@course_remove'
+            - '@course_read'
+            - '@courseGroup_create'
+            - '@courseGroup_update'
+            - '@courseGroup_remove'
+            - '@courseGroup_read'
+                
+    # Aanbieder group (AB (*) )
+    aanbieder:
+        id: '836c6034-9932-450c-9f16-526286799074'
+        name: aanbieder
+        description: Aanbieder group (AB (*) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_create'
+            - '@users_update'
+            - '@users_remove'
+            - '@users_read'
+            - '@employees_create'
+            - '@employees_update'
+            - '@employees_remove'
+            - '@employees_read'
+            - '@employee_intake_create'
+            - '@employee_intake_update'
+            - '@employee_intake_remove'
+            - '@employee_intake_read'
+            - '@students_create'
+            - '@students_update'
+            - '@students_remove'
+            - '@students_read'
+            - '@student_intake_create'
+            - '@student_intake_update'
+            - '@student_intake_remove'
+            - '@student_intake_read'
+            - '@civicintegration_create'
+            - '@civicintegration_update'
+            - '@civicintegration_remove'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
+            - '@organizations_create'
+            - '@organizations_update'
+            - '@organizations_remove'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_create'
+            - '@LearningNeed_update'
+            - '@LearningNeed_remove'
+            - '@LearningNeed_read'
+            - '@LearningResult_create'
+            - '@LearningResult_update'
+            - '@LearningResult_remove'
+            - '@LearningResult_read'
+            - '@participation_create'
+            - '@participation_update'
+            - '@participation_remove'
+            - '@participation_read'
+            - '@program_create'
+            - '@program_update'
+            - '@program_remove'
+            - '@program_read'
+            - '@course_create'
+            - '@course_update'
+            - '@course_remove'
+            - '@course_read'
+            - '@courseGroup_create'
+            - '@courseGroup_update'
+            - '@courseGroup_remove'
+            - '@courseGroup_read'
+                
+    # Aanbieder volunteer group (AB (volunteer) )
+    aanbieder_volunteer:
+        id: 'a4c7de5b-be1b-4dda-9b37-62e5938ffe7b'
+        name: aanbieder_volunteer
+        description: Aanbieder volunteer group (AB (volunteer) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_read'
+            - '@employees_read'
+            - '@employee_intake_read'
+            - '@students_read'
+            - '@student_intake_read'
+            - '@civicintegration_read'
+            - '@education_read'
+            - '@contactMoment_read'
+            - '@organizations_read'
+            - '@persons_read'
+            - '@email_read'
+            - '@telephone_read'
+            - '@address_read'
+            - '@LearningNeed_read'
+            - '@LearningResult_read'
+            - '@participation_read'
+            - '@program_read'
+            - '@course_read'
+            - '@courseGroup_read'
+
+    # Aanbieder mentor group (AB (mentor) )
+    aanbieder_mentor:
+        id: '6e6bf779-2505-4dff-be47-94a45d65f64e'
+        name: aanbieder_mentor
+        description: Aanbieder mentor group (AB (mentor) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_read'
+            - '@employees_read'
+            - '@employee_intake_read'
+            - '@students_read'
+            - '@student_intake_read'
+            - '@civicintegration_read'
+            - '@education_read'
+            - '@contactMoment_read'
+            - '@organizations_read'
+            - '@persons_read'
+            - '@email_read'
+            - '@telephone_read'
+            - '@address_read'
+            - '@LearningNeed_read'
+            - '@LearningResult_read'
+            - '@participation_read'
+            - '@program_read'
+            - '@course_read'
+            - '@courseGroup_read'
+                
+    # Aanbieder coordinator group (AB (coordinator) )
+    aanbieder_coordinator:
+        id: '7ac8ff69-ed2f-42d6-9838-c1cdba19455d'
+        name: aanbieder_coordinator
+        description: Aanbieder coordinator group (AB (coordinator) )
+        organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
+        scopes:
+            - '@users_create'
+            - '@users_update'
+            - '@users_remove'
+            - '@users_read'
+            - '@employees_create'
+            - '@employees_update'
+            - '@employees_remove'
+            - '@employees_read'
+            - '@employee_intake_create'
+            - '@employee_intake_update'
+            - '@employee_intake_remove'
+            - '@employee_intake_read'
+            - '@students_read'
+            - '@student_intake_read'
+            - '@civicintegration_read'
+            - '@education_create'
+            - '@education_update'
+            - '@education_remove'
+            - '@education_read'
+            - '@contactMoment_read'
+            - '@organizations_create'
+            - '@organizations_update'
+            - '@organizations_remove'
+            - '@organizations_read'
+            - '@persons_create'
+            - '@persons_update'
+            - '@persons_remove'
+            - '@persons_read'
+            - '@email_create'
+            - '@email_update'
+            - '@email_remove'
+            - '@email_read'
+            - '@telephone_create'
+            - '@telephone_update'
+            - '@telephone_remove'
+            - '@telephone_read'
+            - '@address_create'
+            - '@address_update'
+            - '@address_remove'
+            - '@address_read'
+            - '@LearningNeed_read'
+            - '@LearningResult_read'
+            - '@participation_read'
+            - '@program_read'
+            - '@course_read'
+            - '@courseGroup_read'
+
+
+# --- Users ---
+App\Entity\User:
+    # User rick lifely
+    rick_lifely:
+        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef'
+        username: 'rick@lifely.nl'
+        password: 'f8&VA!l14Vzj'
+        person: 'https://taalhuizen-bisc.commonground.nu/api/v1/cc/people/62bc09d3-2f34-4fa4-880c-da6adec9569f'
+        userGroups:
+            - '@admin'
+
+    # User test admin conduction
+    test_admin:
+        id: '8e90f9f0-acb7-406d-9550-be614040effd'
+        username: 'main+testadmin@conduction.nl'
+        password: 'kXoTXzgZ6toaP8U(uwp$'
+        person: 'https://taalhuizen-bisc.commonground.nu/api/v1/cc/people/8001c512-e65a-480d-8f2f-84ca3a6a07ce'
+        userGroups:
+            - '@admin'
