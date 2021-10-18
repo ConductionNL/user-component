@@ -45,11 +45,22 @@ class TaalhuizenFixtures extends Fixture
         $manager->flush();
         $admin = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
 
+        $id = Uuid::fromString('8e90f9f0-acb7-406d-9550-be614040effd');
+        $bisc = new Group();
+        $bisc->setName('bisc');
+        $bisc->setDescription('bisc group');
+        $bisc->setOrganization('https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe');
+        $manager->persist($bisc);
+        $bisc->setId($id);
+        $manager->persist($bisc);
+        $manager->flush();
+        $bisc = $manager->getRepository('App:Group')->findOneBy(['id'=> $id]);
+
         //users
 
         $user = new User();
         $user->setUsername('rick@lifely.nl');
-        $user->setPassword('f8&VA!l14Vzj');
+        $user->setPassword('CHANGEME!!!');
         $user->setPerson('https://taalhuizen-bisc.commonground.nu/api/v1/cc/people/62bc09d3-2f34-4fa4-880c-da6adec9569f');
         $user->addUserGroup($admin);
         $manager->persist($user);
@@ -57,7 +68,7 @@ class TaalhuizenFixtures extends Fixture
 
         $user = new User();
         $user->setUsername('main+testadmin@conduction.nl');
-        $user->setPassword('Test1234');
+        $user->setPassword('CHANGEME!!!');
         $user->setPerson('https://taalhuizen-bisc.commonground.nu/api/v1/cc/people/8001c512-e65a-480d-8f2f-84ca3a6a07ce');
         $user->addUserGroup($admin);
         $manager->persist($user);
