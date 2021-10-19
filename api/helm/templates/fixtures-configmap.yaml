@@ -1,0 +1,13 @@
+{{- if .Values.fixtures }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "template.fullname" . }}-fixtures
+  labels:
+    {{- include "template.labels" . | nindent 4 }}
+data:
+  {{- range $file, $values := .Values.fixtures }}
+  {{ $file }}: |
+{{ $values | toYaml | indent 6 }}
+  {{- end }}
+{{- end }}
