@@ -1,9 +1,7 @@
-{{- $redisServiceName := include "redis.fullname" . -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{- include "template.fullname" }}
-  #namespace: {{ .Values.config.env }}
+  name: {{ include "template.fullname" . }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
 data:
@@ -15,7 +13,7 @@ data:
   trusted-hosts: {{ .Values.config.trustedHosts | quote }}
   url: {{ printf "https://%s%s" .Values.ingress.hostname .Values.ingress.path | quote }}
   {{- if .Values.redis.enabled }}
-  redis-host: {{ printf "%s-headless" $redisServiceName | quote }}
+  redis-host: {{ printf "%s-headless" include "redis.fullname" . | quote }}
   redis-port: {{ .Values.redis.redisPort | toString | quote }}
   {{- end }}
   {{- if .Values.config.expirationTime }}

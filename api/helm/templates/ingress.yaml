@@ -15,10 +15,10 @@ apiVersion: extensions/v1beta1
     {{- end }}
 kind: Ingress
 metadata:
-    name: {{ $fullName }}
-    labels:
+  name: {{ $fullName }}
+  labels:
     {{- include "template.labels" . | nindent 4 }}
-    annotations:
+  annotations:
         {{ if eq .Values.ingress.className "nginx" }}
         nginx.ingress.kubernetes.io/rewrite-target: {{ if eq .Values.ingress.path "/" }}/$1{{ else }}/$2{{ end }}
         {{ end }}

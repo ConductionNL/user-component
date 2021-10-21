@@ -24,6 +24,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      serviceAccountName: {{ include "template.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
@@ -42,7 +43,7 @@ spec:
         - name: {{ .Chart.Name }}-php
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.php.repository }}:{{ .Values.php.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.php.image }}:{{ .Values.php.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.php.pullPolicy }}
           ports:
             - containerPort: 9000
@@ -151,7 +152,7 @@ spec:
         - name: {{ .Chart.Name }}-nginx
           securityContext:
           {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.nginx.repository }}:{{ .Values.nginx.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.nginx.image }}:{{ .Values.nginx.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.nginx.pullPolicy }}
           env:
             - name: PHP_SERVICE
