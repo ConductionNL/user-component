@@ -2,8 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{- include "template.fullname" . }}
-  #namespace: {{ .Values.config.env }}
+  name: {{ include "template.fullname" . }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
 data:

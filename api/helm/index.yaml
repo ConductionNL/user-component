@@ -5,7 +5,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.13.0
-    created: "2021-10-21T09:45:22.512575215+02:00"
+    created: "2021-10-21T09:51:27.055106785+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -39,7 +39,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 6.2.5
-    created: "2021-10-21T09:45:22.521018763+02:00"
+    created: "2021-10-21T09:51:27.064294912+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -73,7 +73,7 @@ entries:
       artifacthub.io/containsSecurityUpdates: "true"
     apiVersion: v2
     appVersion: V2.0
-    created: "2021-10-21T09:45:22.502959854+02:00"
+    created: "2021-10-21T09:51:27.046106329+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -85,7 +85,7 @@ entries:
       version: 15.3.2
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: ec3af1b202a69904f632532111a5d1007520f17df313297b5de5dd67d9192ef7
+    digest: 869aa7c7fead71ce9c5b35cc520e64a030cf5016e00b825234d6de187bc403ef
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -109,7 +109,7 @@ entries:
       artifacthub.io/containsSecurityUpdates: "true"
     apiVersion: v2
     appVersion: V2.0
-    created: "2021-10-21T09:45:22.490370317+02:00"
+    created: "2021-10-21T09:51:27.031595366+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -143,7 +143,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-10-21T09:45:22.476179161+02:00"
+    created: "2021-10-21T09:51:27.019857147+02:00"
     description: Het User Component voert het beheer over een gebruikersaccount en
       hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan
       een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken
@@ -171,4 +171,4 @@ entries:
     urls:
     - user-component-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-21T09:45:22.468465399+02:00"
+generated: "2021-10-21T09:51:27.009570572+02:00"
