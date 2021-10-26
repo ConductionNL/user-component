@@ -444,6 +444,7 @@ App\Entity\Group:
         description: BISC group
         organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
         scopes:
+            - '@user_groups_read'
             - '@users_create'
             - '@users_update'
             - '@users_remove'
@@ -498,6 +499,7 @@ App\Entity\Group:
         description: Taalhuis group (TH (*) )
         organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
         scopes:
+            - '@user_groups_read'
             - '@users_create'
             - '@users_update'
             - '@users_remove'
@@ -654,6 +656,7 @@ App\Entity\Group:
         description: Taalhuis coordinator group (TH (coordinator) )
         organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
         scopes:
+            - '@user_groups_read'
             - '@users_create'
             - '@users_update'
             - '@users_remove'
@@ -738,6 +741,7 @@ App\Entity\Group:
         description: Aanbieder group (AB (*) )
         organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
         scopes:
+            - '@user_groups_read'
             - '@users_create'
             - '@users_update'
             - '@users_remove'
@@ -876,6 +880,7 @@ App\Entity\Group:
         description: Aanbieder coordinator group (AB (coordinator) )
         organization: 'https://taalhuizen-bisc.commonground.nu/api/v1/wrc/organizations/008750e5-0424-440e-aea0-443f7875fbfe'
         scopes:
+            - '@user_groups_read'
             - '@users_create'
             - '@users_update'
             - '@users_remove'
