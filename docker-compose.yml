@@ -29,7 +29,7 @@ services:
     environment:
       - CONTAINER_REGISTRY_BASE=${CONTAINER_REGISTRY_BASE}
       - CONTAINER_PROJECT_NAME=${CONTAINER_PROJECT_NAME}
-      #- DATABASE_URL=postgres://api-platform:!ChangeMe!@db/api?serverVersion=10.1
+#      - DATABASE_URL=postgres://api-platform:!ChangeMe!@db/api?serverVersion=10.1
       - DATABASE_URL=mysql://api-platform:!ChangeMe!@db/api?serverVersion=10.1
       - APP_ENV=${APP_ENV}
       - APP_CONTAINER=${APP_CONTAINER}
@@ -165,16 +165,16 @@ services:
         #  command: /usr/local/bin/upgrade-db.sh
         #  networks:
         #    - nlx
-
-        #db:
-        #  image: postgres:10-alpine
-        #  environment:
-        #    - POSTGRES_DB=api
-      #    - POSTGRES_USER=api-platform
-      # You should definitely change the password in production
-  #    - POSTGRES_PASSWORD=!ChangeMe!
-  #  volumes:
-  #    - db-data:/var/lib/postgresql/data:rw
+#
+#  db:
+#    image: postgres:10-alpine
+#    environment:
+#      - POSTGRES_DB=api
+#      - POSTGRES_USER=api-platform
+##       You should definitely change the password in production
+#      - POSTGRES_PASSWORD=!ChangeMe!
+#    volumes:
+#      - db-data:/var/lib/postgresql/data:rw
 
   # From: https://hub.docker.com/r/phpdoc/phpdoc/
   phpDocumentor:
