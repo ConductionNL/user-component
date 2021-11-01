@@ -135,21 +135,21 @@ App\Entity\Scope:
 
     # - ContactMoment -
     # ContactMoment create
-    contactMoment_create:
+    contactmoment_create:
         name: 'Create contactMoment'
-        code: 'POST.contactMoment'
+        code: 'POST.contactmoment'
     # ContactMoment update
-    contactMoment_update:
+    contactmoment_update:
         name: 'Update contactMoment'
-        code: 'PUT.contactMoment'
+        code: 'PUT.contactmoment'
     # ContactMoment remove
-    contactMoment_remove:
+    contactmoment_remove:
         name: 'Remove contactMoment'
-        code: 'DELETE.contactMoment'
+        code: 'DELETE.contactmoment'
     # ContactMoment read
-    contactMoment_read:
+    contactmoment_read:
         name: 'Read contactMoment'
-        code: 'GET.contactMoment'
+        code: 'GET.contactmoment'
 
     # - Organizations -
     # Organizations create
@@ -388,10 +388,10 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactMoment_create'
-            - '@contactMoment_update'
-            - '@contactMoment_remove'
-            - '@contactMoment_read'
+            - '@contactmoment_create'
+            - '@contactmoment_update'
+            - '@contactmoment_remove'
+            - '@contactmoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_remove'
@@ -464,7 +464,7 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactMoment_read'
+            - '@contactmoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_remove'
@@ -528,10 +528,10 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactMoment_create'
-            - '@contactMoment_update'
-            - '@contactMoment_remove'
-            - '@contactMoment_read'
+            - '@contactmoment_create'
+            - '@contactmoment_update'
+            - '@contactmoment_remove'
+            - '@contactmoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_remove'
@@ -599,10 +599,10 @@ App\Entity\Group:
             - '@education_create'
             - '@education_update'
             - '@education_read'
-            - '@contactMoment_create'
-            - '@contactMoment_update'
-            - '@contactMoment_remove'
-            - '@contactMoment_read'
+            - '@contactmoment_create'
+            - '@contactmoment_update'
+            - '@contactmoment_remove'
+            - '@contactmoment_read'
             - '@organizations_read'
             - '@persons_create'
             - '@persons_update'
@@ -677,10 +677,10 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactMoment_create'
-            - '@contactMoment_update'
-            - '@contactMoment_remove'
-            - '@contactMoment_read'
+            - '@contactmoment_create'
+            - '@contactmoment_update'
+            - '@contactmoment_remove'
+            - '@contactmoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_remove'
@@ -745,7 +745,7 @@ App\Entity\Group:
             - '@education_create'
             - '@education_update'
             - '@education_read'
-            - '@contactMoment_read'
+            - '@contactmoment_read'
             - '@organizations_update'
             - '@organizations_read'
             - '@persons_create'
@@ -781,7 +781,7 @@ App\Entity\Group:
             - '@student_intake_read'
             - '@civicintegration_read'
             - '@education_read'
-            - '@contactMoment_read'
+            - '@contactmoment_read'
             - '@organizations_read'
             - '@persons_read'
             - '@email_read'
@@ -808,7 +808,7 @@ App\Entity\Group:
             - '@student_intake_read'
             - '@civicintegration_read'
             - '@education_read'
-            - '@contactMoment_read'
+            - '@contactmoment_read'
             - '@organizations_read'
             - '@persons_read'
             - '@email_read'
@@ -840,7 +840,7 @@ App\Entity\Group:
             - '@education_create'
             - '@education_update'
             - '@education_read'
-            - '@contactMoment_read'
+            - '@contactmoment_read'
             - '@organizations_update'
             - '@organizations_read'
             - '@persons_create'
