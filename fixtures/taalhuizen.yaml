@@ -243,39 +243,39 @@ App\Entity\Scope:
         
     # - LearningNeed -
     # LearningNeed create
-    LearningNeed_create:
+    learningneed_create:
         name: 'Create LearningNeed'
-        code: 'POST.LearningNeed'
+        code: 'POST.learningneed'
     # LearningNeed update
-    LearningNeed_update:
+    learningneed_update:
         name: 'Update LearningNeed'
-        code: 'PUT.LearningNeed'
+        code: 'PUT.learningneed'
     # LearningNeed remove
-    LearningNeed_remove:
+    learningneed_remove:
         name: 'Remove LearningNeed'
-        code: 'DELETE.LearningNeed'
+        code: 'DELETE.learningneed'
     # LearningNeed read
-    LearningNeed_read:
+    learningneed_read:
         name: 'Read LearningNeed'
-        code: 'GET.LearningNeed'
+        code: 'GET.learningneed'
         
     # - LearningResult -
     # LearningResult create
-    LearningResult_create:
+    learningresult_create:
         name: 'Create LearningResult'
-        code: 'POST.LearningResult'
+        code: 'POST.learningresult'
     # LearningResult update
-    LearningResult_update:
+    learningresult_update:
         name: 'Update LearningResult'
-        code: 'PUT.LearningResult'
+        code: 'PUT.learningresult'
     # LearningResult remove
-    LearningResult_remove:
+    learningresult_remove:
         name: 'Remove LearningResult'
-        code: 'DELETE.LearningResult'
+        code: 'DELETE.learningresult'
     # LearningResult read
-    LearningResult_read:
+    learningresult_read:
         name: 'Read LearningResult'
-        code: 'GET.LearningResult'
+        code: 'GET.learningresult'
         
     # - Participation -
     # Participation create
@@ -412,14 +412,14 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@LearningNeed_create'
-            - '@LearningNeed_update'
-            - '@LearningNeed_remove'
-            - '@LearningNeed_read'
-            - '@LearningResult_create'
-            - '@LearningResult_update'
-            - '@LearningResult_remove'
-            - '@LearningResult_read'
+            - '@learningneed_create'
+            - '@learningneed_update'
+            - '@learningneed_remove'
+            - '@learningneed_read'
+            - '@learningresult_create'
+            - '@learningresult_update'
+            - '@learningresult_remove'
+            - '@learningresult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
@@ -485,8 +485,8 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@LearningNeed_read'
-            - '@LearningResult_read'
+            - '@learningneed_read'
+            - '@learningresult_read'
             - '@participation_read'
             - '@program_read'
             - '@course_read'
@@ -552,14 +552,14 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@LearningNeed_create'
-            - '@LearningNeed_update'
-            - '@LearningNeed_remove'
-            - '@LearningNeed_read'
-            - '@LearningResult_create'
-            - '@LearningResult_update'
-            - '@LearningResult_remove'
-            - '@LearningResult_read'
+            - '@learningneed_create'
+            - '@learningneed_update'
+            - '@learningneed_remove'
+            - '@learningneed_read'
+            - '@learningresult_create'
+            - '@learningresult_update'
+            - '@learningresult_remove'
+            - '@learningresult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
@@ -616,14 +616,14 @@ App\Entity\Group:
             - '@address_create'
             - '@address_update'
             - '@address_read'
-            - '@LearningNeed_create'
-            - '@LearningNeed_update'
-            - '@LearningNeed_remove'
-            - '@LearningNeed_read'
-            - '@LearningResult_create'
-            - '@LearningResult_update'
-            - '@LearningResult_remove'
-            - '@LearningResult_read'
+            - '@learningneed_create'
+            - '@learningneed_update'
+            - '@learningneed_remove'
+            - '@learningneed_read'
+            - '@learningresult_create'
+            - '@learningresult_update'
+            - '@learningresult_remove'
+            - '@learningresult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
@@ -701,14 +701,14 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@LearningNeed_create'
-            - '@LearningNeed_update'
-            - '@LearningNeed_remove'
-            - '@LearningNeed_read'
-            - '@LearningResult_create'
-            - '@LearningResult_update'
-            - '@LearningResult_remove'
-            - '@LearningResult_read'
+            - '@learningneed_create'
+            - '@learningneed_update'
+            - '@learningneed_remove'
+            - '@learningneed_read'
+            - '@learningresult_create'
+            - '@learningresult_update'
+            - '@learningresult_remove'
+            - '@learningresult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
@@ -760,8 +760,8 @@ App\Entity\Group:
             - '@address_create'
             - '@address_update'
             - '@address_read'
-            - '@LearningNeed_read'
-            - '@LearningResult_read'
+            - '@learningneed_read'
+            - '@learningresult_read'
             - '@participation_read'
             - '@program_read'
             - '@course_read'
@@ -787,8 +787,8 @@ App\Entity\Group:
             - '@email_read'
             - '@telephone_read'
             - '@address_read'
-            - '@LearningNeed_read'
-            - '@LearningResult_read'
+            - '@learningneed_read'
+            - '@learningresult_read'
             - '@participation_read'
             - '@program_read'
             - '@course_read'
@@ -814,8 +814,8 @@ App\Entity\Group:
             - '@email_read'
             - '@telephone_read'
             - '@address_read'
-            - '@LearningNeed_read'
-            - '@LearningResult_read'
+            - '@learningneed_read'
+            - '@learningresult_read'
             - '@participation_read'
             - '@program_read'
             - '@course_read'
@@ -855,8 +855,8 @@ App\Entity\Group:
             - '@address_create'
             - '@address_update'
             - '@address_read'
-            - '@LearningNeed_read'
-            - '@LearningResult_read'
+            - '@learningneed_read'
+            - '@learningresult_read'
             - '@participation_read'
             - '@program_read'
             - '@course_read'
