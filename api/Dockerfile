@@ -50,6 +50,8 @@ RUN set -eux; \
 	composer run-script --no-dev post-install-cmd; \
 	chmod +x bin/console; sync
 
+RUN echo "php_admin_value[memory_limit] = 256M" >> /usr/local/etc/php-fpm.d/www.conf
+
 VOLUME /srv/api/var
 
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
