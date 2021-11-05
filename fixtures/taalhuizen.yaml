@@ -884,7 +884,7 @@ App\Entity\User:
         organization: "https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f"
         userGroups:
             - '@aanbieder'
-
+ 
     # User test admin conduction
     test_admin:
         id: '8e90f9f0-acb7-406d-9550-be614040effd' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
