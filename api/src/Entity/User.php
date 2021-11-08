@@ -19,6 +19,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -240,6 +241,7 @@ class User implements PasswordAuthenticatedUserInterface
     /**
      * @var array A list of groups to wichs this user belongs
      *
+     * @MaxDepth(1)
      * @Groups({"read", "write", "login"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users", fetch="EAGER", cascade={"persist"})
      */
@@ -248,6 +250,7 @@ class User implements PasswordAuthenticatedUserInterface
     /**
      * @var array A list of tokens created for this user
      *
+     * @MaxDepth(1)
      * @Assert\Valid()
      * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true, cascade={"persist"})
      */
@@ -296,6 +299,7 @@ class User implements PasswordAuthenticatedUserInterface
     /**
      * @var Collection Signing Tokens related to this user
      *
+     * @MaxDepth(1)
      * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="App\Entity\SigningToken", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")

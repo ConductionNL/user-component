@@ -145,9 +145,9 @@ class Scope
      * @var Group[] User groups that give this scope.
      *
      * @Assert\Valid()
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="scopes", cascade={"persist"},fetch="EXTRA_LAZY")
      */
     private $userGroups;
 
