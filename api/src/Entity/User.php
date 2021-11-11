@@ -306,6 +306,13 @@ class User implements PasswordAuthenticatedUserInterface
      */
     private Collection $signingTokens;
 
+    /**
+     * @var string|null The current password of the user. Used when PUT variable contains a new password to validate the user
+     *
+     * @Groups({"write"})
+     */
+    private ?string $currentPassword = null;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
@@ -578,5 +585,17 @@ class User implements PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function setCurrentPassword(?string $currentPassword): self
+    {
+        $this->currentPassword = $currentPassword;
+
+        return $this;
+    }
+
+    public function getCurrentPassword(): ?string
+    {
+        return $this->currentPassword;
     }
 }
