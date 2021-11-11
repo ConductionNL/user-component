@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class CreateUserSubscriber implements EventSubscriberInterface
 {
@@ -46,7 +45,7 @@ class CreateUserSubscriber implements EventSubscriberInterface
 
         if (($route != 'api_users_post_collection' && $route != 'api_users_put_item')) {
             return;
-        } elseif(
+        } elseif (
             $route == 'api_users_put_item' &&
             $user instanceof User &&
             $this->parameterBag->get('validate_current_password') &&
@@ -54,7 +53,7 @@ class CreateUserSubscriber implements EventSubscriberInterface
         ) {
             $check['password'] = $user->getCurrentPassword();
             $this->loginService->passwordCheck($event->getRequest()->get('previous_data'), $check);
-        } elseif(
+        } elseif (
             $this->parameterBag->get('validate_current_password') &&
             !$user->getCurrentPassword()
         ) {
