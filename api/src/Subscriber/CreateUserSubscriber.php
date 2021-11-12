@@ -54,6 +54,7 @@ class CreateUserSubscriber implements EventSubscriberInterface
             $check['password'] = $user->getCurrentPassword();
             $this->loginService->passwordCheck($event->getRequest()->get('previous_data'), $check);
         } elseif (
+            $route == 'api_users_put_item' &&
             $this->parameterBag->get('validate_current_password') &&
             !$user->getCurrentPassword()
         ) {
