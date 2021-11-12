@@ -3,8 +3,13 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use App\Entity\User;
+use App\Service\LoginService;
 use App\Service\UserService;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -12,12 +17,18 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class CreateUserSubscriber implements EventSubscriberInterface
 {
     private UserService $userService;
+    private LoginService $loginService;
     private Request $request;
+    private ParameterBagInterface $parameterBag;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, LoginService $loginService, ParameterBagInterface $parameterBag, EntityManagerInterface $entityManager)
     {
         $this->userService = $userService;
         $this->request = Request::createFromGlobals();
+        $this->loginService = $loginService;
+        $this->parameterBag = $parameterBag;
+        $this->entityManager = $entityManager;
     }
 
     public static function getSubscribedEvents()
@@ -34,6 +45,19 @@ class CreateUserSubscriber implements EventSubscriberInterface
 
         if (($route != 'api_users_post_collection' && $route != 'api_users_put_item')) {
             return;
+        } elseif (
+            $route == 'api_users_put_item' &&
+            $user instanceof User &&
+            $this->parameterBag->get('validate_current_password') &&
+            $user->getCurrentPassword()
+        ) {
+            $check['password'] = $user->getCurrentPassword();
+            $this->loginService->passwordCheck($event->getRequest()->get('previous_data'), $check);
+        } elseif (
+            $this->parameterBag->get('validate_current_password') &&
+            !$user->getCurrentPassword()
+        ) {
+            throw new BadRequestException("The field 'currentPassword' is required");
         }
 
         try {

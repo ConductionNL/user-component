@@ -147,6 +147,11 @@ spec:
                       key: password-strength
                       name: {{ include "template.fullname" . }}
             {{- end }}
+            - name: VALIDATE_CURRENT_PASSWORD
+              valueFrom:
+                  configMapKeyRef:
+                      key: validate-current-password
+                      name: {{ include "template.fullname" . }}
           resources:
             {{- toYaml .Values.php.resources | nindent 12 }}
         - name: {{ .Chart.Name }}-nginx

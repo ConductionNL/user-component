@@ -2,9 +2,11 @@ parameters:
 
     env(EXPIRATION_TIME): "1 hour"
     env(PASSWORD_STRENGTH): "4"
+    env(VALIDATE_CURRENT_PASSWORD): "false"
 
     private_key: "%env(PRIVATE_KEY)%"
     public_key: "%env(PUBLIC_KEY)%"
 
     expiration_time: "%env(EXPIRATION_TIME)%"
     password_strength: "%env(int:PASSWORD_STRENGTH)%"
+    validate_current_password: "%env(bool:VALIDATE_CURRENT_PASSWORD)%"
