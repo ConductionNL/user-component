@@ -22,3 +22,4 @@ data:
   {{- if .Values.config.passwordStrength }}
   password-strength: {{ .Values.config.passwordStrength | quote }}
   {{- end }}
+  validate-current-password: {{ .Values.config.validateCurrentPassword | quote }}
