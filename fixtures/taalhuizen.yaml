@@ -294,6 +294,42 @@ App\Entity\Scope:
     participation_read:
         name: 'Read participation'
         code: 'GET.participation'
+
+    # - TestResult -
+    # Test Result create
+    testresult_create:
+        name: 'Create testResult'
+        code: 'POST.testresult'
+    # TestResult update
+    testresult_update:
+        name: 'Update testResult'
+        code: 'PUT.testresult'
+    # TestResult remove
+    testresult_remove:
+        name: 'Remove testResult'
+        code: 'DELETE.testresult'
+    # TestResult read
+    testresult_read:
+        name: 'Read testResult'
+        code: 'GET.testresult'
+        
+    # - Document -
+    # Document create
+    document_create:
+        name: 'Create document'
+        code: 'POST.document'
+    # Document update
+    document_update:
+        name: 'Update document'
+        code: 'PUT.document'
+    # Document remove
+    document_remove:
+        name: 'Remove document'
+        code: 'DELETE.document'
+    # Document read
+    document_read:
+        name: 'Read document'
+        code: 'GET.document'
         
     # - Program -
     # Program create
@@ -354,7 +390,7 @@ App\Entity\Scope:
 App\Entity\Group:
     # Admin group (Any)
     admin:
-        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef' 
         name: admin
         description: Admin group (Any)
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
@@ -447,7 +483,7 @@ App\Entity\Group:
             
     # BISC group
     bisc:
-        id: '8e90f9f0-acb7-406d-9550-be614040effd' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '8e90f9f0-acb7-406d-9550-be614040effd' 
         name: bisc
         description: BISC group
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
@@ -504,7 +540,7 @@ App\Entity\Group:
                 
     # Taalhuis group (TH (*) )
     taalhuis:
-        id: 'efa3b8a5-49e4-46a8-86c2-6769b726b42a' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: 'efa3b8a5-49e4-46a8-86c2-6769b726b42a' 
         name: taalhuis
         description: Taalhuis group (TH (*) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c'
@@ -596,7 +632,7 @@ App\Entity\Group:
             
     # Taalhuis employee group (TH (employee) )
     taalhuis_employee:
-        id: 'f88efb3f-5a88-475d-b7b0-8865028487e2' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: 'f88efb3f-5a88-475d-b7b0-8865028487e2' 
         name: taalhuis_employee
         description: Taalhuis employee group (TH (employee) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c'
@@ -668,7 +704,7 @@ App\Entity\Group:
                 
     # Taalhuis coordinator group (TH (coordinator) )
     taalhuis_coordinator:
-        id: '6c01ae98-5c9c-49e3-b99f-d74ad96074ab' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '6c01ae98-5c9c-49e3-b99f-d74ad96074ab' 
         name: taalhuis_coordinator
         description: Taalhuis coordinator group (TH (coordinator) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c'
@@ -760,7 +796,7 @@ App\Entity\Group:
                 
     # Aanbieder group (AB (*) )
     aanbieder:
-        id: '836c6034-9932-450c-9f16-526286799074' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '836c6034-9932-450c-9f16-526286799074' 
         name: aanbieder
         description: Aanbieder group (AB (*) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
@@ -803,7 +839,7 @@ App\Entity\Group:
                 
     # Aanbieder volunteer group (AB (volunteer) )
     aanbieder_volunteer:
-        id: 'a4c7de5b-be1b-4dda-9b37-62e5938ffe7b' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: 'a4c7de5b-be1b-4dda-9b37-62e5938ffe7b' 
         name: aanbieder_volunteer
         description: Aanbieder volunteer group (AB (volunteer) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
@@ -832,7 +868,7 @@ App\Entity\Group:
 
     # Aanbieder mentor group (AB (mentor) )
     aanbieder_mentor:
-        id: '6e6bf779-2505-4dff-be47-94a45d65f64e' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '6e6bf779-2505-4dff-be47-94a45d65f64e' 
         name: aanbieder_mentor
         description: Aanbieder mentor group (AB (mentor) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
@@ -861,7 +897,7 @@ App\Entity\Group:
                 
     # Aanbieder coordinator group (AB (coordinator) )
     aanbieder_coordinator:
-        id: '7ac8ff69-ed2f-42d6-9838-c1cdba19455d' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '7ac8ff69-ed2f-42d6-9838-c1cdba19455d' 
         name: aanbieder_coordinator
         description: Aanbieder coordinator group (AB (coordinator) )
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
@@ -907,7 +943,7 @@ App\Entity\Group:
 App\Entity\User:
     # User test taalhuis
     test_taalhuis:
-        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef' 
         username: 'test+taalhuisuser+scenario@conduction.nl'
         password: '\$2y\$13\$1oe6eLlj9.EjziRaqO5whOwE4WVyglrlgWCHV3L4pSZvpv4VaAyk2'
         person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/b2347ffb-8312-437c-adcf-4a25ead29773'
@@ -917,7 +953,7 @@ App\Entity\User:
 
     # User test_aanbiederaanbieder
     test_aanbieder:
-        id: 'f8488acc-9fdb-49ec-91f7-4615d7b79143' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: 'f8488acc-9fdb-49ec-91f7-4615d7b79143' 
         username: 'test+aanbiederuser+scenario@conduction.nl'
         password: '\$2y\$13\$1oe6eLlj9.EjziRaqO5whOwE4WVyglrlgWCHV3L4pSZvpv4VaAyk2'
         person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/b2347ffb-8312-437c-adcf-4a25ead29773'
@@ -927,7 +963,7 @@ App\Entity\User:
  
     # User test admin conduction
     test_admin:
-        id: '8e90f9f0-acb7-406d-9550-be614040effd' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '8e90f9f0-acb7-406d-9550-be614040effd' 
         username: 'test+biscadmin+scenario@conduction.nl'
         password: '\$2y\$13\$1oe6eLlj9.EjziRaqO5whOwE4WVyglrlgWCHV3L4pSZvpv4VaAyk2'
         person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/b2347ffb-8312-437c-adcf-4a25ead29773'
@@ -937,7 +973,7 @@ App\Entity\User:
                 
     # User test admin conduction
     jesse_lifely:
-        id: '85b1251c-25c4-4aac-9733-3fcd77124ddb' # TODO, this does not work yet for hautelook/alice-bundle see: https://stackoverflow.com/questions/36942619/can-i-override-auto-increment-id-with-alice-fixtures
+        id: '85b1251c-25c4-4aac-9733-3fcd77124ddb' 
         username: 'jesse+topemployee@lifely.nl'
         password: '\$2y\$13\$TSPvP2dYD0.IyTIDWqhF4.NNpshvtWIBt7hfbi8jc/vqz.Xja/Ohu'
         person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/782ea75b-0625-4c1e-b944-5c1737f17664'
