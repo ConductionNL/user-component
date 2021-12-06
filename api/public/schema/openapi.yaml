@@ -13040,11 +13040,6 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Application-read'
-        userGroups:
-          description: 'User groups that give this scope.'
-          type: array
-          items:
-            $ref: '#/components/schemas/Group-read'
         dateCreated:
           description: 'The moment this request was created'
           type: string
@@ -13141,11 +13136,6 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Application:jsonld-read'
-        userGroups:
-          description: 'User groups that give this scope.'
-          type: array
-          items:
-            $ref: '#/components/schemas/Group:jsonld-read'
         dateCreated:
           description: 'The moment this request was created'
           type: string
@@ -13555,6 +13545,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group-write'
+        currentPassword:
+          description: 'The current password of the user. Used when PUT variable contains a new password to validate the user'
+          type: string
+          nullable: true
       required:
         - username
         - locale
@@ -13663,6 +13657,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
+        currentPassword:
+          description: 'The current password of the user. Used when PUT variable contains a new password to validate the user'
+          type: string
+          nullable: true
       required:
         - username
         - locale
@@ -14083,9 +14081,6 @@ definitions:
       application:
         description: 'application this scope belongs to.'
         type: \Application
-      userGroups:
-        description: 'User groups that give this scope.'
-        type: '\Group[]'
     required:
       - name
   Scope-write:
@@ -14436,12 +14431,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-10-25 11:01:15'
+        example: '2021-12-06 09:50:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-10-25 11:01:15'
+        example: '2021-12-06 09:50:14'
     required: []
   AuditTrail-write:
     properties:
@@ -14489,12 +14484,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-10-25 11:01:15'
+        example: '2021-12-06 09:50:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-10-25 11:01:15'
+        example: '2021-12-06 09:50:14'
     required: []
   ChangeLog-write:
     properties:
