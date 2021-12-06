@@ -300,7 +300,6 @@ class User implements PasswordAuthenticatedUserInterface
      * @var Collection Signing Tokens related to this user
      *
      * @MaxDepth(1)
-     * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="App\Entity\SigningToken", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")
      */

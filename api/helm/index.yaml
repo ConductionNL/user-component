@@ -5,7 +5,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.13.0
-    created: "2021-11-11T16:15:32.723486083+01:00"
+    created: "2021-12-06T09:48:27.0344157Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -39,7 +39,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 6.2.5
-    created: "2021-11-11T16:15:32.732101629+01:00"
+    created: "2021-12-06T09:48:27.0490155Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -73,7 +73,7 @@ entries:
       artifacthub.io/containsSecurityUpdates: "true"
     apiVersion: v2
     appVersion: V2.0
-    created: "2021-11-11T16:15:32.715001251+01:00"
+    created: "2021-12-06T09:48:27.0216939Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -85,7 +85,7 @@ entries:
       version: 12.7.7
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: ddde75cf9827a5c2ca0dd4df7143de2b71fa80d9c4a8354fbfdfd5bd867eb7b5
+    digest: a2e8199604c0368f1bb0139773a7774a0cba0fcf4b04f671c634054c57f7e71b
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -109,7 +109,7 @@ entries:
       artifacthub.io/containsSecurityUpdates: "true"
     apiVersion: v2
     appVersion: V2.0
-    created: "2021-11-11T16:15:32.701005103+01:00"
+    created: "2021-12-06T09:48:26.9990679Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -121,7 +121,7 @@ entries:
       version: 12.7.7
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 6f922e371e60f207b60a6b6019a128d32d8466b0a2f1ce4e3ad9975e71ef3381
+    digest: 343098ee840688d81f80e554b165039fdbde0ea7c671bf733e187730bc19e4be
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -143,7 +143,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-11-11T16:15:32.683882433+01:00"
+    created: "2021-12-06T09:48:26.9757244Z"
     description: Het User Component voert het beheer over een gebruikersaccount en
       hun autorisaties. Hierbij kan in de traditionele zin worden gedacht aan aan
       een gebruiker die behoort tot bepaalde groepen die op hun beurt weer beschikken
@@ -171,4 +171,4 @@ entries:
     urls:
     - user-component-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-11T16:15:32.671636991+01:00"
+generated: "2021-12-06T09:48:26.9631558Z"

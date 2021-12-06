@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1635159693">
-  <project timestamp="1635159693">
+<coverage generated="1638784232">
+  <project timestamp="1638784232">
     <file name="/srv/api/src/Controller/DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
@@ -2622,118 +2622,123 @@
     </file>
     <file name="/srv/api/src/Entity/User.php">
       <class name="App\Entity\User" namespace="global">
-        <metrics complexity="45" methods="35" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="74" coveredstatements="0" elements="109" coveredelements="0"/>
+        <metrics complexity="47" methods="37" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="0" elements="114" coveredelements="0"/>
       </class>
-      <line num="305" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="307" type="stmt" count="0"/>
-      <line num="308" type="stmt" count="0"/>
-      <line num="309" type="stmt" count="0"/>
-      <line num="310" type="stmt" count="0"/>
-      <line num="312" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="314" type="stmt" count="0"/>
-      <line num="317" type="method" name="setId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="316" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="318" type="stmt" count="0"/>
       <line num="319" type="stmt" count="0"/>
+      <line num="320" type="stmt" count="0"/>
       <line num="321" type="stmt" count="0"/>
-      <line num="324" type="method" name="getOrganization" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="326" type="stmt" count="0"/>
-      <line num="329" type="method" name="setOrganization" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="331" type="stmt" count="0"/>
-      <line num="333" type="stmt" count="0"/>
-      <line num="336" type="method" name="getPerson" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="338" type="stmt" count="0"/>
-      <line num="341" type="method" name="setPerson" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="343" type="stmt" count="0"/>
-      <line num="345" type="stmt" count="0"/>
-      <line num="353" type="method" name="getUsername" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="355" type="stmt" count="0"/>
-      <line num="358" type="method" name="setUsername" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="360" type="stmt" count="0"/>
-      <line num="362" type="stmt" count="0"/>
-      <line num="368" type="method" name="getLocale" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="370" type="stmt" count="0"/>
-      <line num="373" type="method" name="setLocale" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="375" type="stmt" count="0"/>
-      <line num="377" type="stmt" count="0"/>
-      <line num="383" type="method" name="getRoles" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="385" type="stmt" count="0"/>
-      <line num="387" type="stmt" count="0"/>
+      <line num="323" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="325" type="stmt" count="0"/>
+      <line num="328" type="method" name="setId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="330" type="stmt" count="0"/>
+      <line num="332" type="stmt" count="0"/>
+      <line num="335" type="method" name="getOrganization" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="337" type="stmt" count="0"/>
+      <line num="340" type="method" name="setOrganization" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="342" type="stmt" count="0"/>
+      <line num="344" type="stmt" count="0"/>
+      <line num="347" type="method" name="getPerson" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="349" type="stmt" count="0"/>
+      <line num="352" type="method" name="setPerson" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="354" type="stmt" count="0"/>
+      <line num="356" type="stmt" count="0"/>
+      <line num="364" type="method" name="getUsername" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="366" type="stmt" count="0"/>
+      <line num="369" type="method" name="setUsername" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="371" type="stmt" count="0"/>
+      <line num="373" type="stmt" count="0"/>
+      <line num="379" type="method" name="getLocale" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="381" type="stmt" count="0"/>
+      <line num="384" type="method" name="setLocale" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="386" type="stmt" count="0"/>
       <line num="388" type="stmt" count="0"/>
-      <line num="389" type="stmt" count="0"/>
-      <line num="390" type="stmt" count="0"/>
-      <line num="394" type="stmt" count="0"/>
-      <line num="400" type="method" name="getPassword" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="402" type="stmt" count="0"/>
-      <line num="405" type="method" name="setPassword" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="407" type="stmt" count="0"/>
-      <line num="409" type="stmt" count="0"/>
-      <line num="415" type="method" name="getSalt" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="394" type="method" name="getRoles" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="396" type="stmt" count="0"/>
+      <line num="398" type="stmt" count="0"/>
+      <line num="399" type="stmt" count="0"/>
+      <line num="400" type="stmt" count="0"/>
+      <line num="401" type="stmt" count="0"/>
+      <line num="405" type="stmt" count="0"/>
+      <line num="411" type="method" name="getPassword" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="413" type="stmt" count="0"/>
+      <line num="416" type="method" name="setPassword" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="418" type="stmt" count="0"/>
-      <line num="423" type="method" name="eraseCredentials" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="427" type="stmt" count="0"/>
-      <line num="432" type="method" name="getUserGroups" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="434" type="stmt" count="0"/>
-      <line num="437" type="method" name="addUserGroup" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="439" type="stmt" count="0"/>
-      <line num="440" type="stmt" count="0"/>
-      <line num="441" type="stmt" count="0"/>
-      <line num="444" type="stmt" count="0"/>
-      <line num="447" type="method" name="removeUserGroup" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="449" type="stmt" count="0"/>
+      <line num="420" type="stmt" count="0"/>
+      <line num="426" type="method" name="getSalt" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="429" type="stmt" count="0"/>
+      <line num="434" type="method" name="eraseCredentials" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="438" type="stmt" count="0"/>
+      <line num="443" type="method" name="getUserGroups" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="445" type="stmt" count="0"/>
+      <line num="448" type="method" name="addUserGroup" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="450" type="stmt" count="0"/>
       <line num="451" type="stmt" count="0"/>
-      <line num="454" type="stmt" count="0"/>
-      <line num="460" type="method" name="getTokens" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="452" type="stmt" count="0"/>
+      <line num="455" type="stmt" count="0"/>
+      <line num="458" type="method" name="removeUserGroup" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="460" type="stmt" count="0"/>
+      <line num="461" type="stmt" count="0"/>
       <line num="462" type="stmt" count="0"/>
-      <line num="465" type="method" name="addToken" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="467" type="stmt" count="0"/>
-      <line num="468" type="stmt" count="0"/>
-      <line num="469" type="stmt" count="0"/>
-      <line num="472" type="stmt" count="0"/>
-      <line num="475" type="method" name="removeToken" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="477" type="stmt" count="0"/>
+      <line num="465" type="stmt" count="0"/>
+      <line num="471" type="method" name="getTokens" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="473" type="stmt" count="0"/>
+      <line num="476" type="method" name="addToken" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="478" type="stmt" count="0"/>
+      <line num="479" type="stmt" count="0"/>
       <line num="480" type="stmt" count="0"/>
-      <line num="481" type="stmt" count="0"/>
-      <line num="485" type="stmt" count="0"/>
-      <line num="488" type="method" name="getDateCreated" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="490" type="stmt" count="0"/>
-      <line num="493" type="method" name="setDateCreated" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="495" type="stmt" count="0"/>
-      <line num="497" type="stmt" count="0"/>
-      <line num="500" type="method" name="getDateModified" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="502" type="stmt" count="0"/>
-      <line num="505" type="method" name="setDateModified" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="507" type="stmt" count="0"/>
-      <line num="509" type="stmt" count="0"/>
-      <line num="512" type="method" name="getJwtToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="514" type="stmt" count="0"/>
-      <line num="517" type="method" name="setJwtToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="519" type="stmt" count="0"/>
-      <line num="521" type="stmt" count="0"/>
-      <line num="524" type="method" name="getCsrfToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="526" type="stmt" count="0"/>
-      <line num="529" type="method" name="setCsrfToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="531" type="stmt" count="0"/>
-      <line num="533" type="stmt" count="0"/>
-      <line num="536" type="method" name="getEmailValidated" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="538" type="stmt" count="0"/>
-      <line num="541" type="method" name="setEmailValidated" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="543" type="stmt" count="0"/>
-      <line num="545" type="stmt" count="0"/>
-      <line num="551" type="method" name="getSigningTokens" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="553" type="stmt" count="0"/>
-      <line num="556" type="method" name="addSigningToken" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="558" type="stmt" count="0"/>
-      <line num="559" type="stmt" count="0"/>
-      <line num="560" type="stmt" count="0"/>
-      <line num="563" type="stmt" count="0"/>
-      <line num="566" type="method" name="removeSigningToken" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="568" type="stmt" count="0"/>
+      <line num="483" type="stmt" count="0"/>
+      <line num="486" type="method" name="removeToken" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="488" type="stmt" count="0"/>
+      <line num="489" type="stmt" count="0"/>
+      <line num="491" type="stmt" count="0"/>
+      <line num="492" type="stmt" count="0"/>
+      <line num="496" type="stmt" count="0"/>
+      <line num="499" type="method" name="getDateCreated" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="501" type="stmt" count="0"/>
+      <line num="504" type="method" name="setDateCreated" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="506" type="stmt" count="0"/>
+      <line num="508" type="stmt" count="0"/>
+      <line num="511" type="method" name="getDateModified" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="513" type="stmt" count="0"/>
+      <line num="516" type="method" name="setDateModified" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="518" type="stmt" count="0"/>
+      <line num="520" type="stmt" count="0"/>
+      <line num="523" type="method" name="getJwtToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="525" type="stmt" count="0"/>
+      <line num="528" type="method" name="setJwtToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="530" type="stmt" count="0"/>
+      <line num="532" type="stmt" count="0"/>
+      <line num="535" type="method" name="getCsrfToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="537" type="stmt" count="0"/>
+      <line num="540" type="method" name="setCsrfToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="542" type="stmt" count="0"/>
+      <line num="544" type="stmt" count="0"/>
+      <line num="547" type="method" name="getEmailValidated" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="549" type="stmt" count="0"/>
+      <line num="552" type="method" name="setEmailValidated" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="554" type="stmt" count="0"/>
+      <line num="556" type="stmt" count="0"/>
+      <line num="562" type="method" name="getSigningTokens" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="564" type="stmt" count="0"/>
+      <line num="567" type="method" name="addSigningToken" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="569" type="stmt" count="0"/>
+      <line num="570" type="stmt" count="0"/>
       <line num="571" type="stmt" count="0"/>
-      <line num="572" type="stmt" count="0"/>
-      <line num="576" type="stmt" count="0"/>
-      <metrics loc="578" ncloc="298" classes="1" methods="35" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="74" coveredstatements="0" elements="109" coveredelements="0"/>
+      <line num="574" type="stmt" count="0"/>
+      <line num="577" type="method" name="removeSigningToken" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="579" type="stmt" count="0"/>
+      <line num="580" type="stmt" count="0"/>
+      <line num="582" type="stmt" count="0"/>
+      <line num="583" type="stmt" count="0"/>
+      <line num="587" type="stmt" count="0"/>
+      <line num="590" type="method" name="setCurrentPassword" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="592" type="stmt" count="0"/>
+      <line num="594" type="stmt" count="0"/>
+      <line num="597" type="method" name="getCurrentPassword" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="599" type="stmt" count="0"/>
+      <metrics loc="601" ncloc="313" classes="1" methods="37" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="0" elements="114" coveredelements="0"/>
     </file>
     <file name="/srv/api/src/Kernel.php">
       <class name="App\Kernel" namespace="global">
@@ -3063,25 +3068,38 @@
     </file>
     <file name="/srv/api/src/Subscriber/CreateUserSubscriber.php">
       <class name="App\Subscriber\CreateUserSubscriber" namespace="global">
-        <metrics complexity="7" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
+        <metrics complexity="14" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="0" elements="29" coveredelements="0"/>
       </class>
-      <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="23" type="method" name="getSubscribedEvents" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="30" type="method" name="createUser" visibility="public" complexity="5" crap="30" count="0"/>
+      <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="0"/>
       <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
+      <line num="34" type="method" name="getSubscribedEvents" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="41" type="method" name="createUser" visibility="public" complexity="12" crap="156" count="0"/>
       <line num="43" type="stmt" count="0"/>
       <line num="44" type="stmt" count="0"/>
+      <line num="46" type="stmt" count="0"/>
       <line num="47" type="stmt" count="0"/>
-      <metrics loc="49" ncloc="49" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="51" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="55" type="stmt" count="0"/>
+      <line num="57" type="stmt" count="0"/>
+      <line num="58" type="stmt" count="0"/>
+      <line num="59" type="stmt" count="0"/>
+      <line num="61" type="stmt" count="0"/>
+      <line num="65" type="stmt" count="0"/>
+      <line num="66" type="stmt" count="0"/>
+      <line num="68" type="stmt" count="0"/>
+      <line num="69" type="stmt" count="0"/>
+      <line num="72" type="stmt" count="0"/>
+      <metrics loc="74" ncloc="74" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="0" elements="29" coveredelements="0"/>
     </file>
     <file name="/srv/api/src/Subscriber/DuplicateUsernameSubscriber.php">
       <class name="App\Subscriber\DuplicateUsernameSubscriber" namespace="global">
@@ -3215,6 +3233,6 @@
       <line num="62" type="stmt" count="0"/>
       <metrics loc="63" ncloc="63" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="25" coveredelements="0"/>
     </file>
-    <metrics files="47" loc="7145" ncloc="5217" classes="47" methods="281" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2652" coveredstatements="0" elements="2933" coveredelements="0"/>
+    <metrics files="47" loc="7193" ncloc="5257" classes="47" methods="283" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2668" coveredstatements="0" elements="2951" coveredelements="0"/>
   </project>
 </coverage>
