@@ -135,19 +135,19 @@ App\Entity\Scope:
 
     # - ContactMoment -
     # ContactMoment create
-    contactmoment_create:
+    contactMoment_create:
         name: 'Create contactMoment'
         code: 'POST.contactmoment'
     # ContactMoment update
-    contactmoment_update:
+    contactMoment_update:
         name: 'Update contactMoment'
         code: 'PUT.contactmoment'
     # ContactMoment remove
-    contactmoment_remove:
+    contactMoment_remove:
         name: 'Remove contactMoment'
         code: 'DELETE.contactmoment'
     # ContactMoment read
-    contactmoment_read:
+    contactMoment_read:
         name: 'Read contactMoment'
         code: 'GET.contactmoment'
 
@@ -243,37 +243,37 @@ App\Entity\Scope:
         
     # - LearningNeed -
     # LearningNeed create
-    learningneed_create:
+    learningNeed_create:
         name: 'Create LearningNeed'
         code: 'POST.learningneed'
     # LearningNeed update
-    learningneed_update:
+    learningNeed_update:
         name: 'Update LearningNeed'
         code: 'PUT.learningneed'
     # LearningNeed remove
-    learningneed_remove:
+    learningNeed_remove:
         name: 'Remove LearningNeed'
         code: 'DELETE.learningneed'
     # LearningNeed read
-    learningneed_read:
+    learningNeed_read:
         name: 'Read LearningNeed'
         code: 'GET.learningneed'
         
     # - LearningResult -
     # LearningResult create
-    learningresult_create:
+    learningResult_create:
         name: 'Create LearningResult'
         code: 'POST.learningresult'
     # LearningResult update
-    learningresult_update:
+    learningResult_update:
         name: 'Update LearningResult'
         code: 'PUT.learningresult'
     # LearningResult remove
-    learningresult_remove:
+    learningResult_remove:
         name: 'Remove LearningResult'
         code: 'DELETE.learningresult'
     # LearningResult read
-    learningresult_read:
+    learningResult_read:
         name: 'Read LearningResult'
         code: 'GET.learningresult'
         
@@ -297,19 +297,19 @@ App\Entity\Scope:
 
     # - TestResult -
     # Test Result create
-    testresult_create:
+    testResult_create:
         name: 'Create testResult'
         code: 'POST.testresult'
     # TestResult update
-    testresult_update:
+    testResult_update:
         name: 'Update testResult'
         code: 'PUT.testresult'
     # TestResult remove
-    testresult_remove:
+    testResult_remove:
         name: 'Remove testResult'
         code: 'DELETE.testresult'
     # TestResult read
-    testresult_read:
+    testResult_read:
         name: 'Read testResult'
         code: 'GET.testresult'
         
@@ -330,6 +330,24 @@ App\Entity\Scope:
     document_read:
         name: 'Read document'
         code: 'GET.document'
+        
+    # - PostalCode -
+    # PostalCode create
+    postalCode_create:
+        name: 'Create postalCode'
+        code: 'POST.postalcode'
+    # PostalCode update
+    postalCode_update:
+        name: 'Update postalCode'
+        code: 'PUT.postalcode'
+    # PostalCode remove
+    postalCode_remove:
+        name: 'Remove postalCode'
+        code: 'DELETE.postalcode'
+    # PostalCode read
+    postalCode_read:
+        name: 'Read postalCode'
+        code: 'GET.postalcode'
         
     # - Program -
     # Program create
@@ -424,10 +442,10 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactmoment_create'
-            - '@contactmoment_update'
-            - '@contactmoment_remove'
-            - '@contactmoment_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_remove'
@@ -448,26 +466,30 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@learningneed_create'
-            - '@learningneed_update'
-            - '@learningneed_remove'
-            - '@learningneed_read'
-            - '@learningresult_create'
-            - '@learningresult_update'
-            - '@learningresult_remove'
-            - '@learningresult_read'
+            - '@learningNeed_create'
+            - '@learningNeed_update'
+            - '@learningNeed_remove'
+            - '@learningNeed_read'
+            - '@learningResult_create'
+            - '@learningResult_update'
+            - '@learningResult_remove'
+            - '@learningResult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
             - '@participation_read'
-            - '@testresult_create'
-            - '@testresult_update'
-            - '@testresult_remove'
-            - '@testresult_read'
+            - '@testResult_create'
+            - '@testResult_update'
+            - '@testResult_remove'
+            - '@testResult_read'
             - '@document_create'
             - '@document_update'
             - '@document_remove'
             - '@document_read'
+            - '@postalCode_create'
+            - '@postalCode_update'
+            - '@postalCode_remove'
+            - '@postalCode_read'
             - '@program_create'
             - '@program_update'
             - '@program_remove'
@@ -508,7 +530,7 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactmoment_read'
+            - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_remove'
@@ -529,11 +551,15 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@learningneed_read'
-            - '@learningresult_read'
+            - '@learningNeed_read'
+            - '@learningResult_read'
             - '@participation_read'
-            - '@testresult_read'
+            - '@testResult_read'
             - '@document_read'
+            - '@postalCode_create'
+            - '@postalCode_update'
+            - '@postalCode_remove'
+            - '@postalCode_read'
             - '@program_read'
             - '@course_read'
             - '@courseGroup_read'
@@ -574,10 +600,10 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactmoment_create'
-            - '@contactmoment_update'
-            - '@contactmoment_remove'
-            - '@contactmoment_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_read'
@@ -597,22 +623,22 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@learningneed_create'
-            - '@learningneed_update'
-            - '@learningneed_remove'
-            - '@learningneed_read'
-            - '@learningresult_create'
-            - '@learningresult_update'
-            - '@learningresult_remove'
-            - '@learningresult_read'
+            - '@learningNeed_create'
+            - '@learningNeed_update'
+            - '@learningNeed_remove'
+            - '@learningNeed_read'
+            - '@learningResult_create'
+            - '@learningResult_update'
+            - '@learningResult_remove'
+            - '@learningResult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
             - '@participation_read'
-            - '@testresult_create'
-            - '@testresult_update'
-            - '@testresult_remove'
-            - '@testresult_read'
+            - '@testResult_create'
+            - '@testResult_update'
+            - '@testResult_remove'
+            - '@testResult_read'
             - '@document_create'
             - '@document_update'
             - '@document_remove'
@@ -652,10 +678,10 @@ App\Entity\Group:
             - '@education_create'
             - '@education_update'
             - '@education_read'
-            - '@contactmoment_create'
-            - '@contactmoment_update'
-            - '@contactmoment_remove'
-            - '@contactmoment_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
             - '@organizations_read'
             - '@persons_create'
             - '@persons_update'
@@ -669,22 +695,22 @@ App\Entity\Group:
             - '@address_create'
             - '@address_update'
             - '@address_read'
-            - '@learningneed_create'
-            - '@learningneed_update'
-            - '@learningneed_remove'
-            - '@learningneed_read'
-            - '@learningresult_create'
-            - '@learningresult_update'
-            - '@learningresult_remove'
-            - '@learningresult_read'
+            - '@learningNeed_create'
+            - '@learningNeed_update'
+            - '@learningNeed_remove'
+            - '@learningNeed_read'
+            - '@learningResult_create'
+            - '@learningResult_update'
+            - '@learningResult_remove'
+            - '@learningResult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
             - '@participation_read'
-            - '@testresult_create'
-            - '@testresult_update'
-            - '@testresult_remove'
-            - '@testresult_read'
+            - '@testResult_create'
+            - '@testResult_update'
+            - '@testResult_remove'
+            - '@testResult_read'
             - '@document_create'
             - '@document_update'
             - '@document_remove'
@@ -738,10 +764,10 @@ App\Entity\Group:
             - '@education_update'
             - '@education_remove'
             - '@education_read'
-            - '@contactmoment_create'
-            - '@contactmoment_update'
-            - '@contactmoment_remove'
-            - '@contactmoment_read'
+            - '@contactMoment_create'
+            - '@contactMoment_update'
+            - '@contactMoment_remove'
+            - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
             - '@organizations_read'
@@ -761,22 +787,22 @@ App\Entity\Group:
             - '@address_update'
             - '@address_remove'
             - '@address_read'
-            - '@learningneed_create'
-            - '@learningneed_update'
-            - '@learningneed_remove'
-            - '@learningneed_read'
-            - '@learningresult_create'
-            - '@learningresult_update'
-            - '@learningresult_remove'
-            - '@learningresult_read'
+            - '@learningNeed_create'
+            - '@learningNeed_update'
+            - '@learningNeed_remove'
+            - '@learningNeed_read'
+            - '@learningResult_create'
+            - '@learningResult_update'
+            - '@learningResult_remove'
+            - '@learningResult_read'
             - '@participation_create'
             - '@participation_update'
             - '@participation_remove'
             - '@participation_read'
-            - '@testresult_create'
-            - '@testresult_update'
-            - '@testresult_remove'
-            - '@testresult_read'
+            - '@testResult_create'
+            - '@testResult_update'
+            - '@testResult_remove'
+            - '@testResult_read'
             - '@document_create'
             - '@document_update'
             - '@document_remove'
@@ -813,7 +839,7 @@ App\Entity\Group:
             - '@education_create'
             - '@education_update'
             - '@education_read'
-            - '@contactmoment_read'
+            - '@contactMoment_read'
             - '@organizations_update'
             - '@organizations_read'
             - '@persons_create'
@@ -828,10 +854,10 @@ App\Entity\Group:
             - '@address_create'
             - '@address_update'
             - '@address_read'
-            - '@learningneed_read'
-            - '@learningresult_read'
+            - '@learningNeed_read'
+            - '@learningResult_read'
             - '@participation_read'
-            - '@testresult_read'
+            - '@testResult_read'
             - '@document_read'
             - '@program_read'
             - '@course_read'
@@ -851,16 +877,16 @@ App\Entity\Group:
             - '@student_intake_read'
             - '@civicintegration_read'
             - '@education_read'
-            - '@contactmoment_read'
+            - '@contactMoment_read'
             - '@organizations_read'
             - '@persons_read'
             - '@email_read'
             - '@telephone_read'
             - '@address_read'
-            - '@learningneed_read'
-            - '@learningresult_read'
+            - '@learningNeed_read'
+            - '@learningResult_read'
             - '@participation_read'
-            - '@testresult_read'
+            - '@testResult_read'
             - '@document_read'
             - '@program_read'
             - '@course_read'
@@ -880,16 +906,16 @@ App\Entity\Group:
             - '@student_intake_read'
             - '@civicintegration_read'
             - '@education_read'
-            - '@contactmoment_read'
+            - '@contactMoment_read'
             - '@organizations_read'
             - '@persons_read'
             - '@email_read'
             - '@telephone_read'
             - '@address_read'
-            - '@learningneed_read'
-            - '@learningresult_read'
+            - '@learningNeed_read'
+            - '@learningResult_read'
             - '@participation_read'
-            - '@testresult_read'
+            - '@testResult_read'
             - '@document_read'
             - '@program_read'
             - '@course_read'
@@ -914,7 +940,7 @@ App\Entity\Group:
             - '@education_create'
             - '@education_update'
             - '@education_read'
-            - '@contactmoment_read'
+            - '@contactMoment_read'
             - '@organizations_update'
             - '@organizations_read'
             - '@persons_create'
@@ -929,10 +955,10 @@ App\Entity\Group:
             - '@address_create'
             - '@address_update'
             - '@address_read'
-            - '@learningneed_read'
-            - '@learningresult_read'
+            - '@learningNeed_read'
+            - '@learningResult_read'
             - '@participation_read'
-            - '@testresult_read'
+            - '@testResult_read'
             - '@document_read'
             - '@program_read'
             - '@course_read'
