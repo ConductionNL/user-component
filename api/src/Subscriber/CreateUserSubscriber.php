@@ -42,6 +42,7 @@ class CreateUserSubscriber implements EventSubscriberInterface
     {
         $user = $event->getControllerResult();
         $route = $event->getRequest()->attributes->get('_route');
+        $data = json_decode($event->getRequest()->getContent(), true);
 
         if (($route != 'api_users_post_collection' && $route != 'api_users_put_item')) {
             return;
@@ -56,7 +57,8 @@ class CreateUserSubscriber implements EventSubscriberInterface
         } elseif (
             $route == 'api_users_put_item' &&
             $this->parameterBag->get('validate_current_password') &&
-            !$user->getCurrentPassword()
+            !$user->getCurrentPassword() &&
+            (key_exists('password', $data) || !$user->getUsername() || $event->getRequest()->get('previous_data')->getUsername() !== $event->getRequest()->get('data')->getUsername())
         ) {
             throw new BadRequestException("The field 'currentPassword' is required");
         }
