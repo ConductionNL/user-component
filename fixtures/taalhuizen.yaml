@@ -84,6 +84,38 @@ App\Entity\Scope:
     student_intake_create:
         name: 'Create student_intake'
         code: 'POST.student_intake'
+    # Student_intake create referringOrganization
+    student_intake_create_referringOrganization:
+        name: 'Create student_intake referringOrganization'
+        code: 'POST.student_intake.referringOrganization'
+    # Student_intake create referringOrganizationOther
+    student_intake_create_referringOrganizationOther:
+        name: 'Create student_intake referringOrganizationOther'
+        code: 'POST.student_intake.referringOrganizationOther'
+    # Student_intake create referringOrganizationEmail
+    student_intake_create_referringOrganizationEmail:
+        name: 'Create student_intake referringOrganizationEmail'
+        code: 'POST.student_intake.referringOrganizationEmail'
+    # Student_intake create remarks
+    student_intake_create_remarks:
+        name: 'Create student_intake remarks'
+        code: 'POST.student_intake.remarks'
+    # Student_intake create didSignPermissionForm
+    student_intake_create_didSignPermissionForm:
+        name: 'Create student_intake didSignPermissionForm'
+        code: 'POST.student_intake.didSignPermissionForm'
+    # Student_intake create hasPermissionToShareDataWithProviders
+    student_intake_create_hasPermissionToShareDataWithProviders:
+        name: 'Create student_intake hasPermissionToShareDataWithProviders'
+        code: 'POST.student_intake.hasPermissionToShareDataWithProviders'
+    # Student_intake create hasPermissionToShareDataWithLibraries
+    student_intake_create_hasPermissionToShareDataWithLibraries:
+        name: 'Create student_intake hasPermissionToShareDataWithLibraries'
+        code: 'POST.student_intake.hasPermissionToShareDataWithLibraries'
+    # Student_intake create hasPermissionToSendInformationAboutLibraries
+    student_intake_create_hasPermissionToSendInformationAboutLibraries:
+        name: 'Create student_intake hasPermissionToSendInformationAboutLibraries'
+        code: 'POST.student_intake.hasPermissionToSendInformationAboutLibraries'
     # Student_intake update
     student_intake_update:
         name: 'Update student_intake'
@@ -168,11 +200,11 @@ App\Entity\Scope:
     organizations_read:
         name: 'Read organizations'
         code: 'GET.organizations'
-    # Organizations read
+    # Organizations read ids
     organizations_read_id:
         name: 'Read organization ids'
         code: 'GET.organizations.id'
-    # Organizations read
+    # Organizations read names
     organizations_read_name:
         name: 'Read organization names'
         code: 'GET.organizations.name'
@@ -182,6 +214,30 @@ App\Entity\Scope:
     persons_create:
         name: 'Create persons'
         code: 'POST.persons'
+    # Persons create givenName
+    persons_create_givenName:
+        name: 'Create person givenName'
+        code: 'POST.persons.givenName'
+    # Persons create additionalName
+    persons_create_additionalName:
+        name: 'Create person additionalName'
+        code: 'POST.persons.additionalName'
+    # Persons create familyName
+    persons_create_familyName:
+        name: 'Create person familyName'
+        code: 'POST.persons.familyName'
+    # Persons create
+    persons_create_addresses:
+        name: 'Create person addresses'
+        code: 'POST.persons.addresses'
+    # Persons create telephones
+    persons_create_telephones:
+        name: 'Create person telephones'
+        code: 'POST.persons.telephones'
+    # Persons create emails
+    persons_create_emails:
+        name: 'Create person emails'
+        code: 'POST.persons.emails'
     # Persons update
     persons_update:
         name: 'Update persons'
@@ -422,10 +478,20 @@ App\Entity\Group:
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
         scopes:
             - '@students_create'
-            - '@student_intake_create'
-            - '@civicintegration_create'
-            - '@education_create'
-            - '@persons_create'
+            - '@student_intake_create_referringOrganization'
+            - '@student_intake_create_referringOrganizationOther'
+            - '@student_intake_create_referringOrganizationEmail'
+            - '@student_intake_create_remarks'
+            - '@student_intake_create_didSignPermissionForm'
+            - '@student_intake_create_hasPermissionToShareDataWithProviders'
+            - '@student_intake_create_hasPermissionToShareDataWithLibraries'
+            - '@student_intake_create_hasPermissionToSendInformationAboutLibraries'
+            - '@persons_create_givenName'
+            - '@persons_create_additionalName'
+            - '@persons_create_familyName'
+            - '@persons_create_addresses'
+            - '@persons_create_telephones'
+            - '@persons_create_emails'
             - '@email_create'
             - '@telephone_create'
             - '@address_create'
