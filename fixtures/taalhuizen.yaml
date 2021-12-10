@@ -417,7 +417,7 @@ App\Entity\Group:
     # Anonymous group
     anonymous:
         id: '2542d783-db69-4732-98c6-f7d40a685eaf'
-        name: anonymous
+        name: ANONYMOUS
         description: Anonymous group
         organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
         scopes:
