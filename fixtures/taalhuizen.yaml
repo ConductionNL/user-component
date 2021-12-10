@@ -168,6 +168,14 @@ App\Entity\Scope:
     organizations_read:
         name: 'Read organizations'
         code: 'GET.organizations'
+    # Organizations read
+    organizations_read_id:
+        name: 'Read organization ids'
+        code: 'GET.organizations.id'
+    # Organizations read
+    organizations_read_name:
+        name: 'Read organization names'
+        code: 'GET.organizations.name'
         
     # - Persons -
     # Persons create
@@ -406,6 +414,23 @@ App\Entity\Scope:
 
 # --- Groups ---
 App\Entity\Group:
+    # Anonymous group
+    anonymous:
+        id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef'
+        name: anonymous
+        description: Anonymous group
+        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
+        scopes:
+            - '@students_create'
+            - '@student_intake_create'
+            - '@civicintegration_create'
+            - '@education_create'
+            - '@persons_create'
+            - '@email_create'
+            - '@telephone_create'
+            - '@address_create'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
     # Admin group (Any)
     admin:
         id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef' 
