@@ -475,7 +475,7 @@ App\Entity\Group:
         id: '2542d783-db69-4732-98c6-f7d40a685eaf'
         name: ANONYMOUS
         description: Anonymous group
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/9da48ecd-3a83-490d-87d6-4c036ebf90d2'
         scopes:
             - '@students_create'
             - '@student_intake_create_referringOrganization'
@@ -502,7 +502,7 @@ App\Entity\Group:
         id: '4bb4d846-a263-45c7-8cb7-4e88c81a01ef' 
         name: admin
         description: Admin group (Any)
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/9da48ecd-3a83-490d-87d6-4c036ebf90d2'
         scopes:
             - '@user_groups_read'
             - '@users_create'
@@ -599,7 +599,7 @@ App\Entity\Group:
         id: '8e90f9f0-acb7-406d-9550-be614040effd' 
         name: bisc
         description: BISC group
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/9da48ecd-3a83-490d-87d6-4c036ebf90d2'
         scopes:
             - '@user_groups_read'
             - '@users_create'
@@ -660,7 +660,7 @@ App\Entity\Group:
         id: 'efa3b8a5-49e4-46a8-86c2-6769b726b42a' 
         name: taalhuis
         description: Taalhuis group (TH (*) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e'
         scopes:
             - '@user_groups_read'
             - '@users_create'
@@ -697,7 +697,8 @@ App\Entity\Group:
             - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_create'
             - '@persons_update'
             - '@persons_remove'
@@ -752,7 +753,7 @@ App\Entity\Group:
         id: 'f88efb3f-5a88-475d-b7b0-8865028487e2' 
         name: taalhuis_employee
         description: Taalhuis employee group (TH (employee) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e'
         scopes:
             - '@users_read'
             - '@employees_read'
@@ -773,7 +774,8 @@ App\Entity\Group:
             - '@contactMoment_update'
             - '@contactMoment_remove'
             - '@contactMoment_read'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
@@ -824,7 +826,7 @@ App\Entity\Group:
         id: '6c01ae98-5c9c-49e3-b99f-d74ad96074ab' 
         name: taalhuis_coordinator
         description: Taalhuis coordinator group (TH (coordinator) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e'
         scopes:
             - '@user_groups_read'
             - '@users_create'
@@ -861,7 +863,8 @@ App\Entity\Group:
             - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_create'
             - '@persons_update'
             - '@persons_remove'
@@ -916,7 +919,7 @@ App\Entity\Group:
         id: '836c6034-9932-450c-9f16-526286799074' 
         name: aanbieder
         description: Aanbieder group (AB (*) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/f6629783-3130-4c64-8b29-c3b1428676a0'
         scopes:
             - '@users_update'
             - '@users_read'
@@ -932,7 +935,8 @@ App\Entity\Group:
             - '@education_read'
             - '@contactMoment_read'
             - '@organizations_update'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
@@ -959,7 +963,7 @@ App\Entity\Group:
         id: 'a4c7de5b-be1b-4dda-9b37-62e5938ffe7b' 
         name: aanbieder_volunteer
         description: Aanbieder volunteer group (AB (volunteer) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/f6629783-3130-4c64-8b29-c3b1428676a0'
         scopes:
             - '@users_read'
             - '@employees_read'
@@ -969,7 +973,8 @@ App\Entity\Group:
             - '@civicintegration_read'
             - '@education_read'
             - '@contactMoment_read'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_read'
             - '@email_read'
             - '@telephone_read'
@@ -988,7 +993,7 @@ App\Entity\Group:
         id: '6e6bf779-2505-4dff-be47-94a45d65f64e' 
         name: aanbieder_mentor
         description: Aanbieder mentor group (AB (mentor) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/f6629783-3130-4c64-8b29-c3b1428676a0'
         scopes:
             - '@users_read'
             - '@employees_read'
@@ -998,7 +1003,8 @@ App\Entity\Group:
             - '@civicintegration_read'
             - '@education_read'
             - '@contactMoment_read'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_read'
             - '@email_read'
             - '@telephone_read'
@@ -1017,7 +1023,7 @@ App\Entity\Group:
         id: '7ac8ff69-ed2f-42d6-9838-c1cdba19455d' 
         name: aanbieder_coordinator
         description: Aanbieder coordinator group (AB (coordinator) )
-        organization: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f'
+        organization: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/f6629783-3130-4c64-8b29-c3b1428676a0'
         scopes:
             - '@users_update'
             - '@users_read'
@@ -1033,7 +1039,8 @@ App\Entity\Group:
             - '@education_read'
             - '@contactMoment_read'
             - '@organizations_update'
-            - '@organizations_read'
+            - '@organizations_read_id'
+            - '@organizations_read_name'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
@@ -1063,8 +1070,8 @@ App\Entity\User:
         id: 'c449d910-37a9-42f7-a7cd-a48fd6fec080' 
         username: 'test+taalhuisuser+scenario@conduction.nl'
         password: '\$2y\$13\$1oe6eLlj9.EjziRaqO5whOwE4WVyglrlgWCHV3L4pSZvpv4VaAyk2'
-        person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/b2347ffb-8312-437c-adcf-4a25ead29773'
-        organization: "https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c"
+        person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/c7a7bb5c-cd39-4e8f-97e9-f7ff8b0392f9'
+        organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e"
         userGroups:
             - '@taalhuis'
 
@@ -1073,8 +1080,8 @@ App\Entity\User:
         id: 'f8488acc-9fdb-49ec-91f7-4615d7b79143' 
         username: 'test+aanbiederuser+scenario@conduction.nl'
         password: '\$2y\$13\$1oe6eLlj9.EjziRaqO5whOwE4WVyglrlgWCHV3L4pSZvpv4VaAyk2'
-        person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/b2347ffb-8312-437c-adcf-4a25ead29773'
-        organization: "https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/5dce246b-c7ee-4a98-8f2b-2f854c85a71f"
+        person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/c7a7bb5c-cd39-4e8f-97e9-f7ff8b0392f9'
+        organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/f6629783-3130-4c64-8b29-c3b1428676a0"
         userGroups:
             - '@aanbieder'
  
@@ -1083,8 +1090,8 @@ App\Entity\User:
         id: 'c4705f25-7c73-4647-8a4f-b28cfcac9027' 
         username: 'test+biscadmin+scenario@conduction.nl'
         password: '\$2y\$13\$1oe6eLlj9.EjziRaqO5whOwE4WVyglrlgWCHV3L4pSZvpv4VaAyk2'
-        person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/b2347ffb-8312-437c-adcf-4a25ead29773'
-        organization: "https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/ec666d36-e605-4cde-92ab-aaf4ca63029a"
+        person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/c7a7bb5c-cd39-4e8f-97e9-f7ff8b0392f9'
+        organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/9da48ecd-3a83-490d-87d6-4c036ebf90d2"
         userGroups:
             - '@admin'
                 
@@ -1093,7 +1100,7 @@ App\Entity\User:
         id: '85b1251c-25c4-4aac-9733-3fcd77124ddb' 
         username: 'jesse+topemployee@lifely.nl'
         password: '\$2y\$13\$TSPvP2dYD0.IyTIDWqhF4.NNpshvtWIBt7hfbi8jc/vqz.Xja/Ohu'
-        person: 'https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/people/782ea75b-0625-4c1e-b944-5c1737f17664'
-        organization: "https://acceptatietaalhuizen-bisc.commonground.nu/api/v1/cc/organizations/4811de1e-35c5-46c4-8f1f-0b935a3e736c"
+        person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/adc4130b-f871-4dfb-ae0a-9fc086eccde3'
+        organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e"
         userGroups:
             - '@taalhuis'
