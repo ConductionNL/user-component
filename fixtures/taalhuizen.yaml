@@ -697,6 +697,7 @@ App\Entity\Group:
             - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
+            # TODO: alleen eigen taalhuis organisatie alle informatie, dus daarvoor niet alleen id+name, alle andere organisaties wel
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -774,6 +775,7 @@ App\Entity\Group:
             - '@contactMoment_update'
             - '@contactMoment_remove'
             - '@contactMoment_read'
+            # TODO: alleen eigen taalhuis organisatie alle informatie, dus daarvoor niet alleen id+name, alle andere organisaties wel
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -863,6 +865,7 @@ App\Entity\Group:
             - '@contactMoment_read'
             - '@organizations_create'
             - '@organizations_update'
+            # TODO: alleen eigen taalhuis organisatie alle informatie, dus daarvoor niet alleen id+name, alle andere organisaties wel
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -935,6 +938,7 @@ App\Entity\Group:
             - '@education_read'
             - '@contactMoment_read'
             - '@organizations_update'
+            # TODO: alleen eigen aanbieder organisatie (alle informatie, dus niet alleen id+name maar ook geen andere organisaties)
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -973,8 +977,6 @@ App\Entity\Group:
             - '@civicintegration_read'
             - '@education_read'
             - '@contactMoment_read'
-            - '@organizations_read_id'
-            - '@organizations_read_name'
             - '@persons_read'
             - '@email_read'
             - '@telephone_read'
@@ -1003,8 +1005,6 @@ App\Entity\Group:
             - '@civicintegration_read'
             - '@education_read'
             - '@contactMoment_read'
-            - '@organizations_read_id'
-            - '@organizations_read_name'
             - '@persons_read'
             - '@email_read'
             - '@telephone_read'
@@ -1039,6 +1039,7 @@ App\Entity\Group:
             - '@education_read'
             - '@contactMoment_read'
             - '@organizations_update'
+            # TODO: alleen eigen aanbieder organisatie (alle informatie, dus niet alleen id+name maar ook geen andere organisaties)
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
