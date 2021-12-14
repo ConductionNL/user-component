@@ -208,6 +208,43 @@ App\Entity\Scope:
     organizations_read_name:
         name: 'Read organization names'
         code: 'GET.organizations.name'
+
+    # - Organizations type=taalhuis-
+    # create
+    organizations_create_type_taalhuis:
+        name: 'only Create organization if type = taalhuis'
+        code: 'POST.organizations.type=taalhuis'
+#        code: 'POST.organizations.type=taalhuis,optie2,optie3' #example
+    # update
+    organizations_update_type_taalhuis:
+        name: 'only Update organization if type = taalhuis'
+        code: 'PUT.organizations.type=taalhuis'
+    # remove
+#    organizations_remove_type_taalhuis:
+#        name: 'only Remove organization if type = taalhuis'
+#        code: 'DELETE.organizations.type=taalhuis'
+    # read
+    organizations_read_type_taalhuis:
+        name: 'only Read organization if type = taalhuis'
+        code: 'GET.organizations.type=taalhuis'
+        
+    # - Organizations type=aanbieder-
+    # create
+    organizations_create_type_aanbieder:
+        name: 'only Create organization if type = aanbieder'
+        code: 'POST.organizations.type=aanbieder'
+    # update
+    organizations_update_type_aanbieder:
+        name: 'only Update organization if type = aanbieder'
+        code: 'PUT.organizations.type=aanbieder'
+    # remove
+#    organizations_remove_type_aanbieder:
+#        name: 'only Remove organization if type = aanbieder'
+#        code: 'DELETE.organizations.type=aanbieder'
+    # read
+    organizations_read_type_aanbieder:
+        name: 'only Read organization if type = aanbieder'
+        code: 'GET.organizations.type=aanbieder'
         
     # - Persons -
     # Persons create
@@ -495,6 +532,7 @@ App\Entity\Group:
             - '@email_create'
             - '@telephone_create'
             - '@address_create'
+            - '@organizations_read_type_taalhuis'
             - '@organizations_read_id'
             - '@organizations_read_name'
     # Admin group (Any)
@@ -695,9 +733,11 @@ App\Entity\Group:
             - '@contactMoment_update'
             - '@contactMoment_remove'
             - '@contactMoment_read'
+            #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
             - '@organizations_create'
+            - '@organizations_create_type_taalhuis'
             - '@organizations_update'
-            # TODO: alleen eigen taalhuis organisatie alle informatie, dus daarvoor niet alleen id+name, alle andere organisaties wel
+            - '@organizations_update_type_taalhuis'
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -775,8 +815,7 @@ App\Entity\Group:
             - '@contactMoment_update'
             - '@contactMoment_remove'
             - '@contactMoment_read'
-            # TODO: alleen eigen taalhuis organisatie alle informatie, dus daarvoor niet alleen id+name, alle andere organisaties wel
-            - '@organizations_read'
+            #TODO: alle informatie lezen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -864,10 +903,11 @@ App\Entity\Group:
             - '@contactMoment_update'
             - '@contactMoment_remove'
             - '@contactMoment_read'
+            #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
             - '@organizations_create'
+            - '@organizations_create_type_taalhuis'
             - '@organizations_update'
-            # TODO: alleen eigen taalhuis organisatie alle informatie, dus daarvoor niet alleen id+name, alle andere organisaties wel
-            - '@organizations_read'
+            - '@organizations_update_type_taalhuis'
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -940,10 +980,12 @@ App\Entity\Group:
             - '@education_read'
             - '@contactMoment_read'
             - '@organizations_update'
-            # TODO: alleen eigen aanbieder organisatie (alle informatie, dus niet alleen id+name maar ook geen andere organisaties)
-            - '@organizations_read'
-            - '@organizations_read_id'
-            - '@organizations_read_name'
+            # TODO: alleen eigen aanbieder organisatie (alle informatie maar geen andere organisaties)
+            - '@organizations_create'
+            - '@organizations_create_type_aanbieder'
+            - '@organizations_update'
+            - '@organizations_update_type_aanbieder'
+            - '@organizations_read_type_aanbieder'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
@@ -1042,9 +1084,12 @@ App\Entity\Group:
             - '@education_read'
             - '@contactMoment_read'
             - '@organizations_update'
-            # TODO: alleen eigen aanbieder organisatie (alle informatie, dus niet alleen id+name maar ook geen andere organisaties)
-            - '@organizations_read_id'
-            - '@organizations_read_name'
+            # TODO: alleen eigen aanbieder organisatie (alle informatie maar geen andere organisaties)
+            - '@organizations_create'
+            - '@organizations_create_type_aanbieder'
+            - '@organizations_update'
+            - '@organizations_update_type_aanbieder'
+            - '@organizations_read_type_aanbieder'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
