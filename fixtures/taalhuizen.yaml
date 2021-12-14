@@ -96,6 +96,10 @@ App\Entity\Scope:
     student_intake_create_referringOrganizationEmail:
         name: 'Create student_intake referringOrganizationEmail'
         code: 'POST.student_intake.referringOrganizationEmail'
+    # Student_intake create referringPerson
+    student_intake_create_referringPerson:
+        name: 'Create student_intake referringPerson'
+        code: 'POST.student_intake.referringPerson'
     # Student_intake create remarks
     student_intake_create_remarks:
         name: 'Create student_intake remarks'
@@ -518,6 +522,7 @@ App\Entity\Group:
             - '@student_intake_create_referringOrganization'
             - '@student_intake_create_referringOrganizationOther'
             - '@student_intake_create_referringOrganizationEmail'
+            - '@student_intake_create_referringPerson'
             - '@student_intake_create_remarks'
             - '@student_intake_create_didSignPermissionForm'
             - '@student_intake_create_hasPermissionToShareDataWithProviders'
