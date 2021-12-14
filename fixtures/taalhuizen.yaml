@@ -1122,9 +1122,9 @@ App\Entity\User:
         person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/c7a7bb5c-cd39-4e8f-97e9-f7ff8b0392f9'
         organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e"
         userGroups:
-            - '@taalhuis'
+            - '@taalhuis_coordinator'
 
-    # User test_aanbiederaanbieder
+    # User test aanbieder
     test_aanbieder:
         id: 'f8488acc-9fdb-49ec-91f7-4615d7b79143' 
         username: 'test+aanbiederuser+scenario@conduction.nl'
@@ -1132,7 +1132,7 @@ App\Entity\User:
         person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/c7a7bb5c-cd39-4e8f-97e9-f7ff8b0392f9'
         organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/f6629783-3130-4c64-8b29-c3b1428676a0"
         userGroups:
-            - '@aanbieder'
+            - '@aanbieder_coordinator'
  
     # User test admin conduction
     test_admin:
@@ -1144,7 +1144,7 @@ App\Entity\User:
         userGroups:
             - '@admin'
                 
-    # User test admin conduction
+    # User Jesse
     jesse_lifely:
         id: '85b1251c-25c4-4aac-9733-3fcd77124ddb' 
         username: 'jesse+topemployee@lifely.nl'
@@ -1152,4 +1152,4 @@ App\Entity\User:
         person: 'https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/people/adc4130b-f871-4dfb-ae0a-9fc086eccde3'
         organization: "https://staging.taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/80ca3e6b-a0e5-40d8-847a-a0195fbb382e"
         userGroups:
-            - '@taalhuis'
+            - '@taalhuis_coordinator'
