@@ -132,6 +132,24 @@ App\Entity\Scope:
     student_intake_read:
         name: 'Read student_intake'
         code: 'GET.student_intake'
+        
+    # - ReferringPerson -
+    # ReferringPerson create
+    referringPerson_create:
+        name: 'Create referringPerson'
+        code: 'POST.referringperson'
+    # ReferringPerson update
+    referringPerson_update:
+        name: 'Update referringPerson'
+        code: 'PUT.referringperson'
+    # ReferringPerson remove
+    referringPerson_remove:
+        name: 'Remove referringPerson'
+        code: 'DELETE.referringperson'
+    # ReferringPerson read
+    referringPerson_read:
+        name: 'Read referringPerson'
+        code: 'GET.referringperson'
 
     # - Civicintegration -
     # Civicintegration create
@@ -523,6 +541,7 @@ App\Entity\Group:
             - '@student_intake_create_referringOrganizationOther'
             - '@student_intake_create_referringOrganizationEmail'
             - '@student_intake_create_referringPerson'
+            - '@referringPerson_create'
             - '@student_intake_create_remarks'
             - '@student_intake_create_didSignPermissionForm'
             - '@student_intake_create_hasPermissionToShareDataWithProviders'
@@ -537,7 +556,7 @@ App\Entity\Group:
             - '@email_create'
             - '@telephone_create'
             - '@address_create'
-            - '@organizations_read_type_taalhuis'
+#            - '@organizations_read_type_taalhuis'
             - '@organizations_read_id'
             - '@organizations_read_name'
     # Admin group (Any)
@@ -568,6 +587,8 @@ App\Entity\Group:
             - '@student_intake_update'
             - '@student_intake_remove'
             - '@student_intake_read'
+            - '@referringPerson_remove'
+            - '@referringPerson_read'
             - '@civicintegration_create'
             - '@civicintegration_update'
             - '@civicintegration_remove'
@@ -659,6 +680,7 @@ App\Entity\Group:
             - '@employee_intake_read'
             - '@students_read'
             - '@student_intake_read'
+            - '@referringPerson_read'
             - '@civicintegration_read'
             - '@education_create'
             - '@education_update'
@@ -726,6 +748,8 @@ App\Entity\Group:
             - '@student_intake_update'
             - '@student_intake_remove'
             - '@student_intake_read'
+            - '@referringPerson_remove'
+            - '@referringPerson_read'
             - '@civicintegration_create'
             - '@civicintegration_update'
             - '@civicintegration_remove'
@@ -740,9 +764,10 @@ App\Entity\Group:
             - '@contactMoment_read'
             #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
             - '@organizations_create'
-            - '@organizations_create_type_taalhuis'
+#            - '@organizations_create_type_taalhuis'
             - '@organizations_update'
-            - '@organizations_update_type_taalhuis'
+#            - '@organizations_update_type_taalhuis'
+            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -810,6 +835,8 @@ App\Entity\Group:
             - '@student_intake_create'
             - '@student_intake_update'
             - '@student_intake_read'
+            - '@referringPerson_remove'
+            - '@referringPerson_read'
             - '@civicintegration_create'
             - '@civicintegration_update'
             - '@civicintegration_read'
@@ -821,6 +848,7 @@ App\Entity\Group:
             - '@contactMoment_remove'
             - '@contactMoment_read'
             #TODO: alle informatie lezen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
+            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -896,6 +924,8 @@ App\Entity\Group:
             - '@student_intake_update'
             - '@student_intake_remove'
             - '@student_intake_read'
+            - '@referringPerson_remove'
+            - '@referringPerson_read'
             - '@civicintegration_create'
             - '@civicintegration_update'
             - '@civicintegration_remove'
@@ -910,9 +940,10 @@ App\Entity\Group:
             - '@contactMoment_read'
             #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
             - '@organizations_create'
-            - '@organizations_create_type_taalhuis'
+#            - '@organizations_create_type_taalhuis'
             - '@organizations_update'
-            - '@organizations_update_type_taalhuis'
+#            - '@organizations_update_type_taalhuis'
+            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@organizations_read_id'
             - '@organizations_read_name'
             - '@persons_create'
@@ -979,6 +1010,7 @@ App\Entity\Group:
             - '@employee_intake_read'
             - '@students_read'
             - '@student_intake_read'
+            - '@referringPerson_read'
             - '@civicintegration_read'
             - '@education_create'
             - '@education_update'
@@ -987,10 +1019,11 @@ App\Entity\Group:
             - '@organizations_update'
             # TODO: alleen eigen aanbieder organisatie (alle informatie maar geen andere organisaties)
             - '@organizations_create'
-            - '@organizations_create_type_aanbieder'
+#            - '@organizations_create_type_aanbieder'
             - '@organizations_update'
-            - '@organizations_update_type_aanbieder'
-            - '@organizations_read_type_aanbieder'
+#            - '@organizations_update_type_aanbieder'
+#            - '@organizations_read_type_aanbieder'
+            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
@@ -1023,7 +1056,8 @@ App\Entity\Group:
             - '@employees_read'
             - '@employee_intake_read'
             - '@students_read'
-            - '@student_intake_read'
+            - '@student_intake_read'            
+            - '@referringPerson_read' 
             - '@civicintegration_read'
             - '@education_read'
             - '@contactMoment_read'
@@ -1052,6 +1086,7 @@ App\Entity\Group:
             - '@employee_intake_read'
             - '@students_read'
             - '@student_intake_read'
+            - '@referringPerson_read'
             - '@civicintegration_read'
             - '@education_read'
             - '@contactMoment_read'
@@ -1083,6 +1118,7 @@ App\Entity\Group:
             - '@employee_intake_read'
             - '@students_read'
             - '@student_intake_read'
+            - '@referringPerson_read'
             - '@civicintegration_read'
             - '@education_create'
             - '@education_update'
@@ -1091,10 +1127,11 @@ App\Entity\Group:
             - '@organizations_update'
             # TODO: alleen eigen aanbieder organisatie (alle informatie maar geen andere organisaties)
             - '@organizations_create'
-            - '@organizations_create_type_aanbieder'
+#            - '@organizations_create_type_aanbieder'
             - '@organizations_update'
-            - '@organizations_update_type_aanbieder'
-            - '@organizations_read_type_aanbieder'
+#            - '@organizations_update_type_aanbieder'
+#            - '@organizations_read_type_aanbieder'
+            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
