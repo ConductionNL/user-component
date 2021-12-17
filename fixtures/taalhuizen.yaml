@@ -472,6 +472,24 @@ App\Entity\Scope:
         name: 'Read postalCode'
         code: 'GET.postalcode'
         
+    # - ShareStudent -
+    # ShareStudent create
+    shareStudent_create:
+        name: 'Create shareStudent'
+        code: 'POST.sharestudent'
+    # ShareStudent update
+    shareStudent_update:
+        name: 'Update shareStudent'
+        code: 'PUT.sharestudent'
+    # ShareStudent remove
+    shareStudent_remove:
+        name: 'Remove shareStudent'
+        code: 'DELETE.sharestudent'
+    # ShareStudent read
+    shareStudent_read:
+        name: 'Read shareStudent'
+        code: 'GET.sharestudent'
+        
     # - Program -
     # Program create
     program_create:
@@ -647,6 +665,10 @@ App\Entity\Group:
             - '@postalCode_update'
             - '@postalCode_remove'
             - '@postalCode_read'
+            - '@shareStudent_create'
+            - '@shareStudent_update'
+            - '@shareStudent_remove'
+            - '@shareStudent_read'
             - '@program_create'
             - '@program_update'
             - '@program_remove'
@@ -718,6 +740,10 @@ App\Entity\Group:
             - '@postalCode_update'
             - '@postalCode_remove'
             - '@postalCode_read'
+            - '@shareStudent_create'
+            - '@shareStudent_update'
+            - '@shareStudent_remove'
+            - '@shareStudent_read'
             - '@program_read'
             - '@course_read'
             - '@courseGroup_read'
