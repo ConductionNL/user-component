@@ -1,3 +1,5 @@
+# todo: WARNING!!! Read before deploying: when UC fixtures are reloaded the test+biscadmin+scenario@conduction.nl user uuid will change, the the resource of the main application in the gateway is a reference to this user object (/admin/applications), so when the uuid is changed this resource uri needs to be updated as well!!! otherwise the taalhuizen-logic service wont be able to communicate with the gateway!
+
 # --- Scopes ---
 App\Entity\Scope:
     # - User_groups -
