@@ -71,7 +71,7 @@ class CreateUserSubscriber implements EventSubscriberInterface
             $user = $this->userService->setPassword($user, $user->getPassword());
         }
 
-        if($this->parameterBag->has('case_insensitive_username') && $this->parameterBag->get('case_insensitive_username')){
+        if ($this->parameterBag->has('case_insensitive_username') && $this->parameterBag->get('case_insensitive_username')) {
             $user = $user->setUsername(strtolower($user->getUsername()));
         }
 
