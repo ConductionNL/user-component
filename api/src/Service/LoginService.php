@@ -98,8 +98,20 @@ class LoginService
 
     public function userCheck(array $data): User
     {
-        if (!$user = $this->entityManager->getRepository('App\Entity\User')->findOneBy(['username' => $data['username']])) {
-            throw new AccessDeniedHttpException('The username/password combination is invalid');
+        if ($this->parameterBag->has('case_insensitive_username') && $this->parameterBag->get('case_insensitive_username')) {
+            if (!$user = $this->entityManager
+                ->getRepository('App\Entity\User')
+                ->createQueryBuilder('a')
+                ->where('upper(a.username) = upper(:username)')
+                ->setParameter('username', $data['username'])
+                ->getQuery()
+                ->execute()[0]) {
+                throw new AccessDeniedHttpException('The username/password combination is invalid');
+            }
+        } else {
+            if (!$user = $this->entityManager->getRepository('App\Entity\User')->findOneBy(['username' => $data['username']])) {
+                throw new AccessDeniedHttpException('The username/password combination is invalid');
+            }
         }
 
         if ($user instanceof User) {

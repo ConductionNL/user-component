@@ -152,6 +152,8 @@ spec:
                   configMapKeyRef:
                       key: validate-current-password
                       name: {{ include "template.fullname" . }}
+            - name: CASE_INSENSITIVE_USERNAME
+              value: {{ .Values.security.caseInsensitiveUsername }}
           resources:
             {{- toYaml .Values.php.resources | nindent 12 }}
         - name: {{ .Chart.Name }}-nginx
