@@ -105,8 +105,7 @@ class LoginService
                 ->where('upper(a.username) = upper(:username)')
                 ->setParameter('username', $data['username'])
                 ->getQuery()
-                ->execute()[0])
-            {
+                ->execute()[0]) {
                 throw new AccessDeniedHttpException('The username/password combination is invalid');
             }
         } else {
