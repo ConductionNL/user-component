@@ -67,7 +67,8 @@ redis:
 
 postgresql:
   enabled: true
-  imageTag: 10-alpine
+  image:
+    tag: 10-alpine
   # If bringing your own PostgreSQL, the full uri to use
   url: "psql://a:b@example.com/c"
   postgresqlUsername: "example"
