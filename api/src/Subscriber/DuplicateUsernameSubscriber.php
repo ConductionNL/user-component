@@ -60,8 +60,7 @@ class DuplicateUsernameSubscriber implements EventSubscriberInterface
                 ->where('upper(a.username) = upper(:username)')
                 ->setParameter('username', $user->getUsername())
                 ->getQuery()
-                ->execute())
-        {
+                ->execute()) {
             throw new HttpException(409, 'Username is unavailable');
         } elseif ($route == 'api_users_put_item' && $event->getRequest()->get('previous_data')->getUsername() !== $event->getRequest()->get('data')->getUsername()) {
             if ($newUser = $this->em->getRepository(User::class)->findOneBy(['username' => $event->getRequest()->get('data')->getUsername()])) {
