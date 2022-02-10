@@ -23,3 +23,5 @@ data:
   password-strength: {{ .Values.config.passwordStrength | quote }}
   {{- end }}
   validate-current-password: {{ .Values.config.validateCurrentPassword | quote }}
+
+  caseInsensitiveUsername: {{ .Values.security.caseInsensitiveUsername | quote }}
