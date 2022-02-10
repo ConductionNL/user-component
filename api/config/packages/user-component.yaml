@@ -3,6 +3,7 @@ parameters:
     env(EXPIRATION_TIME): "1 hour"
     env(PASSWORD_STRENGTH): "4"
     env(VALIDATE_CURRENT_PASSWORD): "false"
+    env(CASE_INSENSITIVE_USERNAME): "false"
 
     private_key: "%env(PRIVATE_KEY)%"
     public_key: "%env(PUBLIC_KEY)%"
@@ -10,3 +11,4 @@ parameters:
     expiration_time: "%env(EXPIRATION_TIME)%"
     password_strength: "%env(int:PASSWORD_STRENGTH)%"
     validate_current_password: "%env(bool:VALIDATE_CURRENT_PASSWORD)%"
+    case_insensitive_username: "%env(bool:CASE_INSENSITIVE_USERNAME)%"
