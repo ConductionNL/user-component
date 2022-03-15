@@ -1209,6 +1209,9 @@ App\Entity\Group:
         organization: "https://taalhuizen-bisc.commonground.nu/api/v1/cc/organizations/a0dc8cdc-c637-46b9-be8d-9103edc1e951"
         scopes:
             - '@persons_read'
+            - '@email_read'
+            - '@telephone_read'
+            - '@address_read'
 
 # --- Users ---
 App\Entity\User:
