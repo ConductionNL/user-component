@@ -9196,6 +9196,21 @@ paths:
           explode: false
           allowReserved: false
         -
+          name: 'order[blocked]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          style: form
+          explode: false
+          allowReserved: false
+        -
           name: 'dateCreated[before]'
           in: query
           description: ''
@@ -9329,6 +9344,54 @@ paths:
           allowReserved: false
         -
           name: 'emailValidated[strictly_after]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        -
+          name: 'blocked[before]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        -
+          name: 'blocked[strictly_before]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        -
+          name: 'blocked[after]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        -
+          name: 'blocked[strictly_after]'
           in: query
           description: ''
           required: false
@@ -12276,6 +12339,11 @@ components:
           type: string
           format: date-time
           nullable: true
+        blocked:
+          description: 'from this date it is no longer allowed to log in with this user.'
+          type: string
+          format: date-time
+          nullable: true
       required:
         - username
         - locale
@@ -12319,6 +12387,11 @@ components:
         currentPassword:
           description: 'The current password of the user. Used when PUT variable contains a new password to validate the user'
           type: string
+          nullable: true
+        blocked:
+          description: 'from this date it is no longer allowed to log in with this user.'
+          type: string
+          format: date-time
           nullable: true
       required:
         - username
@@ -12407,6 +12480,11 @@ components:
           type: string
           format: date-time
           nullable: true
+        blocked:
+          description: 'from this date it is no longer allowed to log in with this user.'
+          type: string
+          format: date-time
+          nullable: true
       required:
         - username
         - locale
@@ -12473,6 +12551,11 @@ components:
         currentPassword:
           description: 'The current password of the user. Used when PUT variable contains a new password to validate the user'
           type: string
+          nullable: true
+        blocked:
+          description: 'from this date it is no longer allowed to log in with this user.'
+          type: string
+          format: date-time
           nullable: true
       required:
         - username
