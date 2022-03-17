@@ -118,6 +118,7 @@ class LoginService
             if ($user->getBlocked() && new DateTime() >= $user->getBlocked()) {
                 throw new AccessDeniedHttpException('This user is blocked, you are not allowed to log in');
             }
+
             return $user;
         } else {
             throw new AccessDeniedHttpException('The username/password combination is invalid');
