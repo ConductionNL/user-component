@@ -312,6 +312,14 @@ class User implements PasswordAuthenticatedUserInterface
      */
     private ?string $currentPassword = null;
 
+    /**
+     * @var DateTime|null from this date it is no longer allowed to log in with this user.
+     *
+     * @Groups({"write", "read"})
+     * @ORM\Column(type="datetime", nullable=true, options={"default":null})
+     */
+    private ?Datetime $blocked = null;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
@@ -596,5 +604,17 @@ class User implements PasswordAuthenticatedUserInterface
     public function getCurrentPassword(): ?string
     {
         return $this->currentPassword;
+    }
+
+    public function setBlocked(?DateTime $blocked): self
+    {
+        $this->blocked = $blocked;
+
+        return $this;
+    }
+
+    public function getBlocked(): ?DateTime
+    {
+        return $this->blocked;
     }
 }

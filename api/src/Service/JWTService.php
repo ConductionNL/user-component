@@ -45,6 +45,6 @@ class JWTService
 
     public function verifyJWTToken(string $token): array
     {
-        return $this->authenticationService->verifyJWTToken($token, $this->parameterBag->get('public_key'));
+        return $this->authenticationService->verifyJWTToken($token, base64_decode($this->parameterBag->get('public_key')));
     }
 }
