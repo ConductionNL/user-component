@@ -11,21 +11,13 @@ FROM conduction/pc-php:prod AS api_platform_php
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-		gmp-dev \
-	; \
-	\
-	docker-php-ext-install -j$(nproc) \
-		gmp \
-	;
-
 
 # install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
 RUN set -eux; \
-	composer global require "symfony/flex" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
+	composer global require "symfony/flex:1.18.5" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
+
 
 WORKDIR /srv/api
 
@@ -50,7 +42,9 @@ COPY templates templates/
 COPY translations translations/
 
 RUN apk add --no-cache $PHPIZE_DEPS \
-    && pecl install xdebug-2.9.2 \
+    gmp-dev; \
+    docker-php-ext-install -j$(nproc) gmp;\
+    pecl install xdebug-2.9.2 \
     && docker-php-ext-enable xdebug;\
     echo -e "xdebug.overload_var_dump=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
