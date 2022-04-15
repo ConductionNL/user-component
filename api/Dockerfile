@@ -11,6 +11,16 @@ FROM conduction/pc-php:prod AS api_platform_php
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps \
+		gmp-dev \
+	; \
+	\
+	docker-php-ext-install -j$(nproc) \
+		gmp \
+	;
+
+
 # install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
 RUN set -eux; \
 	composer global require "symfony/flex" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
