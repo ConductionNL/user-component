@@ -56,7 +56,7 @@ class Session
     /**
      * @var string The identifier of the user in this session
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, name="user_identifier")
      */
     private string $user;
@@ -71,6 +71,7 @@ class Session
     /**
      * @var string|null The CSRF token belonging to the session
      *
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *     max = 255

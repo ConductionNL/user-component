@@ -235,22 +235,75 @@ App\Entity\Scope:
 
     # - Organizations type=taalhuis-
     # create
-    organizations_create_type_taalhuis:
-        name: 'only Create organization if type = taalhuis'
-        code: 'POST.organizations.type=taalhuis'
-#        code: 'POST.organizations.type=taalhuis,optie2,optie3' #example
+#    organizations_create_type_taalhuis:
+#        name: 'only Create organization if type = taalhuis'
+#        code: 'POST.organizations.type=taalhuis'
     # update
-    organizations_update_type_taalhuis:
-        name: 'only Update organization if type = taalhuis'
-        code: 'PUT.organizations.type=taalhuis'
+#    organizations_update_type_taalhuis:
+#        name: 'only Update organization if type = taalhuis'
+#        code: 'PUT.organizations.type=taalhuis'
     # remove
 #    organizations_remove_type_taalhuis:
 #        name: 'only Remove organization if type = taalhuis'
 #        code: 'DELETE.organizations.type=taalhuis'
     # read
-    organizations_read_type_taalhuis:
-        name: 'only Read organization if type = taalhuis'
-        code: 'GET.organizations.type=taalhuis'
+#    organizations_read_type_taalhuis:
+#        name: 'only Read organization if type = taalhuis'
+#        code: 'GET.organizations.type=taalhuis'
+        
+    # - Organizations type=taalhuis,team-
+    # create
+    organizations_create_type_taalhuis_team:
+        name: 'only Create organization if type = taalhuis,team'
+        code: 'POST.organizations.type=taalhuis,team'
+    # update
+    organizations_update_type_taalhuis_team:
+        name: 'only Update organization if type = taalhuis,team'
+        code: 'PUT.organizations.type=taalhuis,team'
+    # remove
+#    organizations_remove_type_taalhuis_team:
+#        name: 'only Remove organization if type = taalhuis,team'
+#        code: 'DELETE.organizations.type=taalhuis,team'
+    # read
+    organizations_read_type_taalhuis_team:
+        name: 'only Read organization if type = taalhuis,team'
+        code: 'GET.organizations.type=taalhuis,team'
+        
+    # - Organizations type=taalhuis,aanbieder-
+    # create
+    organizations_create_type_taalhuis_aanbieder:
+        name: 'only Create organization if type = taalhuis,aanbieder'
+        code: 'POST.organizations.type=taalhuis,aanbieder'
+    # update
+#    organizations_update_type_taalhuis_aanbieder:
+#        name: 'only Update organization if type = taalhuis,aanbieder'
+#        code: 'PUT.organizations.type=taalhuis,aanbieder'
+    # remove
+    organizations_remove_type_taalhuis_aanbieder:
+        name: 'only Remove organization if type = taalhuis,aanbieder'
+        code: 'DELETE.organizations.type=taalhuis,aanbieder'
+    # read
+#    organizations_read_type_taalhuis_aanbieder:
+#        name: 'only Read organization if type = taalhuis,aanbieder'
+#        code: 'GET.organizations.type=taalhuis,aanbieder'
+        
+    # - Organizations type=taalhuis,aanbieder,bisc-
+    # create
+#    organizations_create_type_taalhuis_aanbieder_bisc:
+#        name: 'only Create organization if type = taalhuis,aanbieder,bisc'
+#        code: 'POST.organizations.type=taalhuis,aanbieder,bisc'
+    # update
+    organizations_update_type_taalhuis_aanbieder_bisc:
+        name: 'only Update organization if type = taalhuis,aanbieder,bisc'
+        code: 'PUT.organizations.type=taalhuis,aanbieder,bisc'
+    # remove
+#    organizations_remove_type_taalhuis_aanbieder_bisc:
+#        name: 'only Remove organization if type = taalhuis,aanbieder,bisc'
+#        code: 'DELETE.organizations.type=taalhuis,aanbieder,bisc'
+    # read
+    organizations_read_type_taalhuis_aanbieder_bisc:
+        name: 'only Read organization if type = taalhuis,aanbieder,bisc'
+        code: 'GET.organizations.type=taalhuis,aanbieder,bisc'
         
     # - Organizations type=aanbieder-
     # create
@@ -269,6 +322,24 @@ App\Entity\Scope:
     organizations_read_type_aanbieder:
         name: 'only Read organization if type = aanbieder'
         code: 'GET.organizations.type=aanbieder'
+        
+    # - Organizations type=team-
+    # create
+#    organizations_create_type_team:
+#        name: 'only Create organization if type = team'
+#        code: 'POST.organizations.type=team'
+    # update
+#    organizations_update_type_team:
+#        name: 'only Update organization if type = team'
+#        code: 'PUT.organizations.type=team'
+    # remove
+#    organizations_remove_type_team:
+#        name: 'only Remove organization if type = team'
+#        code: 'DELETE.organizations.type=team'
+    # read
+#    organizations_read_type_team:
+#        name: 'only Read organization if type = team'
+#        code: 'GET.organizations.type=team'
         
     # - Persons -
     # Persons create
@@ -576,7 +647,7 @@ App\Entity\Group:
             - '@email_create'
             - '@telephone_create'
             - '@address_create'
-#            - '@organizations_read_type_taalhuis'
+            - '@organizations_read_type_taalhuis_team'
             - '@organizations_read_id'
             - '@organizations_read_name'
     # Admin group (Any)
@@ -713,10 +784,10 @@ App\Entity\Group:
             - '@education_remove'
             - '@education_read'
             - '@contactMoment_read'
-            - '@organizations_create'
-            - '@organizations_update'
-            - '@organizations_remove'
-            - '@organizations_read'
+            - '@organizations_create_type_taalhuis_aanbieder'
+            - '@organizations_update_type_taalhuis_aanbieder_bisc'
+            - '@organizations_remove_type_taalhuis_aanbieder'
+            - '@organizations_read_type_taalhuis_aanbieder_bisc'
             - '@persons_create'
             - '@persons_update'
             - '@persons_remove'
@@ -795,10 +866,8 @@ App\Entity\Group:
             - '@contactMoment_remove'
             - '@contactMoment_read'
             #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
-            - '@organizations_create'
-#            - '@organizations_create_type_taalhuis'
-            - '@organizations_update'
-#            - '@organizations_update_type_taalhuis'
+            - '@organizations_create_type_taalhuis_team'
+            - '@organizations_update_type_taalhuis_team'
             - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@organizations_read_id'
             - '@organizations_read_name'
@@ -982,10 +1051,8 @@ App\Entity\Group:
             - '@contactMoment_remove'
             - '@contactMoment_read'
             #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
-            - '@organizations_create'
-#            - '@organizations_create_type_taalhuis' #Todo en teams
-            - '@organizations_update'
-#            - '@organizations_update_type_taalhuis' #Todo en teams
+            - '@organizations_create_type_taalhuis_team'
+            - '@organizations_update_type_taalhuis_team'
             - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@organizations_read_id'
             - '@organizations_read_name'
@@ -1065,12 +1132,9 @@ App\Entity\Group:
             - '@contactMoment_read'
             - '@organizations_update'
             # TODO: alleen eigen aanbieder organisatie (alle informatie maar geen andere organisaties)
-            - '@organizations_create'
-#            - '@organizations_create_type_aanbieder'
-            - '@organizations_update'
-#            - '@organizations_update_type_aanbieder'
-#            - '@organizations_read_type_aanbieder'
-            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
+            - '@organizations_create_type_aanbieder'
+            - '@organizations_update_type_aanbieder'
+            - '@organizations_read_type_aanbieder'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
@@ -1173,12 +1237,9 @@ App\Entity\Group:
             - '@contactMoment_read'
             - '@organizations_update'
             # TODO: alleen eigen aanbieder organisatie (alle informatie maar geen andere organisaties)
-            - '@organizations_create'
-#            - '@organizations_create_type_aanbieder'
-            - '@organizations_update'
-#            - '@organizations_update_type_aanbieder'
-#            - '@organizations_read_type_aanbieder'
-            - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
+            - '@organizations_create_type_aanbieder'            
+            - '@organizations_update_type_aanbieder'
+            - '@organizations_read_type_aanbieder'
             - '@persons_create'
             - '@persons_update'
             - '@persons_read'
