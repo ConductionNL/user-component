@@ -235,13 +235,13 @@ App\Entity\Scope:
 
     # - Organizations type=taalhuis-
     # create
-    organizations_create_type_taalhuis:
-        name: 'only Create organization if type = taalhuis'
-        code: 'POST.organizations.type=taalhuis'
+#    organizations_create_type_taalhuis:
+#        name: 'only Create organization if type = taalhuis'
+#        code: 'POST.organizations.type=taalhuis'
     # update
-    organizations_update_type_taalhuis:
-        name: 'only Update organization if type = taalhuis'
-        code: 'PUT.organizations.type=taalhuis'
+#    organizations_update_type_taalhuis:
+#        name: 'only Update organization if type = taalhuis'
+#        code: 'PUT.organizations.type=taalhuis'
     # remove
 #    organizations_remove_type_taalhuis:
 #        name: 'only Remove organization if type = taalhuis'
@@ -866,8 +866,8 @@ App\Entity\Group:
             - '@contactMoment_remove'
             - '@contactMoment_read'
             #TODO: alle informatie lezen&wijzigen van eigen taalhuis, maar alleen name en id lezen van alle andere organisaties
-            - '@organizations_create_type_taalhuis'
-            - '@organizations_update_type_taalhuis'
+            - '@organizations_create_type_taalhuis_team'
+            - '@organizations_update_type_taalhuis_team'
             - '@organizations_read' #TODO: needs to be removed/replaced somehow, see todo above^
             - '@organizations_read_id'
             - '@organizations_read_name'
