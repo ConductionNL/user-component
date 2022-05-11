@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Session;
 use App\Entity\User;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -80,7 +81,7 @@ class LoginService
         return true;
     }
 
-    private function getOrganizations(array $userGroups, array $organizations): array
+    private function getOrganizations(Collection $userGroups, array $organizations): array
     {
         foreach($userGroups as $userGroup) {
             if (!in_array($userGroup->getOrganization(), $organizations)) {
