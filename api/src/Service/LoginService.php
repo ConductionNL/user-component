@@ -80,17 +80,33 @@ class LoginService
         return true;
     }
 
+    private function getOrganizations(array $userGroups, array $organizations): array
+    {
+        foreach($userGroups as $userGroup) {
+            if (!in_array($userGroup->getOrganization(), $organizations)) {
+                $organizations[] = $userGroup->getOrganization();
+            }
+        }
+        return $organizations;
+    }
+
     public function getJWTToken(User $user, Session $session): string
     {
+
         $time = new DateTime();
         $jwtBody = [
-            'userId'    => $user->getId(),
-            'roles'     => $user->getRoles(),
-            'session'   => $session->getId(),
-            'csrfToken' => $session->getCSRFToken(),
-            'iss'       => $this->parameterBag->get('app_url'),
-            'ias'       => $time->getTimestamp(),
-            'exp'       => $session->getExpiry()->getTimestamp(),
+            'userId'        => $user->getId(),
+            'username'      => $user->getUsername(),
+            'organization'  => $user->getOrganization(),
+            'organizations' => $this->getOrganizations($user->getUserGroups(), [$user->getOrganization()]),
+            'person'        => $user->getPerson(),
+            'locale'        => $user->getLocale(),
+            'roles'         => $user->getRoles(),
+            'session'       => $session->getId(),
+            'csrfToken'     => $session->getCSRFToken(),
+            'iss'           => $this->parameterBag->get('app_url'),
+            'ias'           => $time->getTimestamp(),
+            'exp'           => $session->getExpiry()->getTimestamp(),
         ];
 
         return $this->jwtService->createJWTToken($jwtBody);
