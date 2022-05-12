@@ -83,17 +83,17 @@ class LoginService
 
     private function getOrganizations(Collection $userGroups, array $organizations): array
     {
-        foreach($userGroups as $userGroup) {
+        foreach ($userGroups as $userGroup) {
             if (!in_array($userGroup->getOrganization(), $organizations)) {
                 $organizations[] = $userGroup->getOrganization();
             }
         }
+
         return $organizations;
     }
 
     public function getJWTToken(User $user, Session $session): string
     {
-
         $time = new DateTime();
         $jwtBody = [
             'userId'        => $user->getId(),
